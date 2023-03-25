@@ -1,6 +1,6 @@
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/core/service/snack_bar/snack_bar_service.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

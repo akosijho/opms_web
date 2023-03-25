@@ -1,4 +1,4 @@
-import 'package:opmsapp/models/procedure/procedure.dart';
+import 'package:opmswebstaff/models/procedure/procedure.dart';
 
 class DentalNotes {
   final String selectedTooth;

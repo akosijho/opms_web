@@ -1,9 +1,9 @@
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/app/app.logger.dart';
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/core/service/session_service/session_service.dart';
-import 'package:opmsapp/models/get_started_model/get_started_model.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/app/app.logger.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/session_service/session_service.dart';
+import 'package:opmswebstaff/models/get_started_model/get_started_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 

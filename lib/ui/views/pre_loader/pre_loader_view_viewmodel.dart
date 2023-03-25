@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/core/service/connectivity/connectivity_service.dart';
-import 'package:opmsapp/core/service/firebase_auth/firebase_auth_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/core/service/session_service/session_service.dart';
-import 'package:opmsapp/core/service/snack_bar/snack_bar_service.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/core/service/connectivity/connectivity_service.dart';
+import 'package:opmswebstaff/core/service/firebase_auth/firebase_auth_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/session_service/session_service.dart';
+import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:stacked/stacked.dart';
 

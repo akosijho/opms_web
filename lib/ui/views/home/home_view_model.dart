@@ -1,18 +1,18 @@
 import 'dart:async';
 
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/app/app.logger.dart';
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/bottom_sheet/bottom_sheet_service.dart';
-import 'package:opmsapp/core/service/dialog/dialog_service.dart';
-import 'package:opmsapp/core/service/firebase_auth/firebase_auth_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/core/service/snack_bar/snack_bar_service.dart';
-import 'package:opmsapp/core/service/toast/toast_service.dart';
-import 'package:opmsapp/enums/appointment_status.dart';
-import 'package:opmsapp/models/appointment_model/appointment_model.dart';
-import 'package:opmsapp/models/user_model/user_model.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/app/app.logger.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/bottom_sheet/bottom_sheet_service.dart';
+import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
+import 'package:opmswebstaff/core/service/firebase_auth/firebase_auth_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
+import 'package:opmswebstaff/core/service/toast/toast_service.dart';
+import 'package:opmswebstaff/enums/appointment_status.dart';
+import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
+import 'package:opmswebstaff/models/user_model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stacked/stacked.dart';
 
@@ -29,6 +29,8 @@ class HomePageViewModel extends BaseViewModel {
   final bottomSheetService = locator<BottomSheetService>();
   final connectivityService = locator<ConnectivityService>();
   final snackBarService = locator<SnackBarService>();
+
+  int totalPatients = 0;
 
   StreamSubscription? userSubscription;
   StreamSubscription? appointmentSubscription;

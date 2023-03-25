@@ -1,9 +1,9 @@
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/validator/validator_service.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/dental_notes/dental_notes.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/validator/validator_service.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

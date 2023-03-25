@@ -1,6 +1,6 @@
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_border_styles.dart';
-import 'package:opmsapp/ui/views/add_prescription_item/add_prescription_iteme_view_model.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_border_styles.dart';
+import 'package:opmswebstaff/ui/views/add_prescription_item/add_prescription_iteme_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

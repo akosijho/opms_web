@@ -1,10 +1,10 @@
-import 'package:opmsapp/constants/font_name/font_name.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_border_styles.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/core/service/validator/validator_service.dart';
-import 'package:opmsapp/ui/views/register/register_view.form.dart';
-import 'package:opmsapp/ui/views/register/register_view_viewmodel.dart';
+import 'package:opmswebstaff/constants/font_name/font_name.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_border_styles.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/core/service/validator/validator_service.dart';
+import 'package:opmswebstaff/ui/views/register/register_view.form.dart';
+import 'package:opmswebstaff/ui/views/register/register_view_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -38,89 +38,91 @@ class RegisterView extends StatelessWidget with $RegisterView {
               color: Palettes.kcBlueMain1,
               child: Stack(
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      model.navigationService.pop();
-                    },
-                    color: Colors.white,
-                    icon: SvgPicture.asset(
-                      'assets/icons/arrow-back-white.svg',
-                      height: 24,
-                      width: 24,
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: double.infinity,
-                    margin: EdgeInsets.only(top: 150.h),
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(65),
+                  // IconButton(
+                  //   onPressed: () {
+                  //     model.navigationService.pop();
+                  //   },
+                  //   color: Colors.white,
+                  //   icon: SvgPicture.asset(
+                  //     'assets/icons/arrow-back-white.svg',
+                  //     height: 24,
+                  //     width: 24,
+                  //   ),
+                  // ),
+                  Center(
+                    child: Container(
+                      width: 600,
+                      height: double.infinity,
+                      margin: EdgeInsets.only(top: 50, bottom: 50),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(65),
+                        ),
                       ),
-                    ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          SizedBox(height: 15.h),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Image.asset(
-                              'assets/icons/logo-blue-circle.png',
-                              height: 80,
-                              width: 80,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'EyeChoice Optical Shop',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: FontNames.gilRoy,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.sp,
-                                letterSpacing: 1,
-                                wordSpacing: 1,
-                                color: Palettes.kcBlueMain1,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SizedBox(height: 15.h),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Image.asset(
+                                'assets/icons/logo_opms_circle.png',
+                                height: 80,
+                                width: 80,
                               ),
                             ),
-                          ),
-                          SizedBox(height: 10),
-                          RegisterFields(
-                            emailController: emailController,
-                            passwordController: passwordController,
-                            confirmPassController: confirmPassController,
-                            emailFNode: emailFocusNode,
-                            passFNode: passwordFocusNode,
-                            confirmPassFNode: confirmPassFocusNode,
-                            validatorService: model.validatorService,
-                            formKey: model.registerFormKey,
-                            setShowIconVisibility: model.setShowIconVisibility,
-                            isVisible: model.isShowIconVisible,
-                            isObscure: model.isObscure,
-                            showHidePassword: model.showHidePassword,
-                            autoValidate: model.autoValidate,
-                            register: () {
-                              if (model.registerFormKey.currentState!
-                                  .validate()) {
-                                model.registerAccount();
-                              } else {
-                                model.setAutoValidate();
-                              }
-                            },
-                          ),
-                          SocialLogin(
-                            goToRegister: model.goToLogin,
-                          ),
-                        ],
+                            SizedBox(height: 4),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'EyeChoice Optical Shop',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: FontNames.gilRoy,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                  letterSpacing: 1,
+                                  wordSpacing: 1,
+                                  color: Palettes.kcBlueMain1,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            RegisterFields(
+                              emailController: emailController,
+                              passwordController: passwordController,
+                              confirmPassController: confirmPassController,
+                              emailFNode: emailFocusNode,
+                              passFNode: passwordFocusNode,
+                              confirmPassFNode: confirmPassFocusNode,
+                              validatorService: model.validatorService,
+                              formKey: model.registerFormKey,
+                              setShowIconVisibility: model.setShowIconVisibility,
+                              isVisible: model.isShowIconVisible,
+                              isObscure: model.isObscure,
+                              showHidePassword: model.showHidePassword,
+                              autoValidate: model.autoValidate,
+                              register: () {
+                                if (model.registerFormKey.currentState!
+                                    .validate()) {
+                                  model.registerAccount();
+                                } else {
+                                  model.setAutoValidate();
+                                }
+                              },
+                            ),
+                            SocialLogin(
+                              goToRegister: model.goToLogin,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                  LoginOverlay()
+                  // LoginOverlay()
                 ],
               ),
             ),
@@ -202,8 +204,7 @@ class RegisterFields extends StatelessWidget {
               prefixIconConstraints: BoxConstraints(minWidth: 20),
               prefixIcon: Container(
                 margin: EdgeInsets.only(right: 10),
-                height: 24.h,
-                width: 24.w,
+
                 child: SvgPicture.asset(
                   'assets/icons/Message.svg',
                   color: emailFNode.hasFocus
@@ -237,8 +238,8 @@ class RegisterFields extends StatelessWidget {
               prefixIconConstraints: BoxConstraints(minWidth: 20),
               prefixIcon: Container(
                 margin: EdgeInsets.only(right: 10),
-                height: 25.h,
-                width: 25.w,
+                // height: 25.h,
+                // width: 25.w,
                 child: SvgPicture.asset(
                   'assets/icons/Lock.svg',
                   color: passFNode.hasFocus
@@ -284,8 +285,8 @@ class RegisterFields extends StatelessWidget {
               prefixIconConstraints: BoxConstraints(minWidth: 20),
               prefixIcon: Container(
                 margin: EdgeInsets.only(right: 10),
-                height: 25.h,
-                width: 25.w,
+                // height: 25.h,
+                // width: 25.w,
                 child: SvgPicture.asset(
                   'assets/icons/Lock.svg',
                   color: confirmPassFNode.hasFocus
@@ -311,11 +312,14 @@ class RegisterFields extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           Container(
-            height: 45.sp,
+            // height: 45,
             width: screenWidth(context),
             child: ElevatedButton(
               onPressed: () => register(),
-              child: Text('Register'),
+              child: Text('Register',
+                  style: TextStyle(
+                  fontSize: 30
+              )),
             ),
           ),
         ],
@@ -361,7 +365,7 @@ class SocialLogin extends StatelessWidget {
             ],
           ),
           // SizedBox(height: 15.h),
-          Row(
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
@@ -382,7 +386,7 @@ class SocialLogin extends StatelessWidget {
                       style: TextStyle(
                           fontFamily: FontNames.gilRoy,
                           fontWeight: FontWeight.w600,
-                          fontSize: kfsHeading5.sp,
+                          fontSize: 20,
                           color: Palettes.kcBlueMain2),
                     ),
                   ),

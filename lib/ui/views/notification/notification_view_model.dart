@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/models/notification/notification_model.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/models/notification/notification_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';

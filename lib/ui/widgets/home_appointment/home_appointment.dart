@@ -1,15 +1,14 @@
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/constants/font_name/font_name.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/enums/appointment_status.dart';
-import 'package:opmsapp/extensions/date_format_extension.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/appointment_model/appointment_model.dart';
-import 'package:opmsapp/ui/widgets/appointment_card/appointment_card.dart';
-import 'package:opmsapp/ui/widgets/custom_shimmer/custom_shimmer.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/constants/font_name/font_name.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/enums/appointment_status.dart';
+import 'package:opmswebstaff/extensions/date_format_extension.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
+import 'package:opmswebstaff/ui/widgets/appointment_card/appointment_card.dart';
+import 'package:opmswebstaff/ui/widgets/custom_shimmer/custom_shimmer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -68,7 +67,7 @@ class HomeAppointment extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: FontNames.gilRoy,
                             fontWeight: FontWeight.w600,
-                            fontSize: kfsHeading5.sp,
+                            fontSize: kfsHeading5,
                             color: Palettes.kcBlueMain2),
                       ),
                       SvgPicture.asset(
@@ -113,7 +112,7 @@ class HomeAppointment extends StatelessWidget {
                                 Routes.PatientInfoView,
                                 arguments: PatientInfoViewArguments(
                                     patient: myAppointments[i].patient)),
-                            imageUrl: myAppointments[i].patient.image,
+                            // imageUrl: myAppointments[i].patient.image,
                             serviceTitle:
                                 myAppointments[i].procedures![0].procedureName,
                             doctor: myAppointments[i].dentist,

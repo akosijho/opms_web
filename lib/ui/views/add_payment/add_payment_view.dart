@@ -1,14 +1,13 @@
 import 'package:age_calculator/age_calculator.dart';
-import 'package:opmsapp/constants/font_name/font_name.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/ui/widgets/patient_card/patient_card.dart';
-import 'package:opmsapp/ui/widgets/payment_dental_note_card/payment_dental_note_card.dart';
-import 'package:opmsapp/ui/widgets/payment_medicine_card/payment_medicine_card.dart';
+import 'package:opmswebstaff/constants/font_name/font_name.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/ui/widgets/patient_card/patient_card.dart';
+import 'package:opmswebstaff/ui/widgets/payment_dental_note_card/payment_dental_note_card.dart';
+import 'package:opmswebstaff/ui/widgets/payment_medicine_card/payment_medicine_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
-
 import '../../../constants/styles/palette_color.dart';
 import '../../../constants/styles/text_border_styles.dart';
 import '../../../models/patient_model/patient_model.dart';
@@ -113,7 +112,7 @@ class AddPaymentView extends StatelessWidget {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     child: PatientCard(
-                      image: patient.image,
+                      // image: patient.image,
                       name: patient.fullName,
                       phone: patient.phoneNum,
                       address: patient.address,
@@ -161,8 +160,8 @@ class AddPaymentView extends StatelessWidget {
                                 errorBorder: TextBorderStyles.errorBorder,
                                 errorStyle: TextStyles.errorTextStyle,
                                 disabledBorder: TextBorderStyles.normalBorder,
-                                hintText: 'Select Dentist',
-                                labelText: 'Dentist In-Charge*',
+                                hintText: 'Select Optometrist',
+                                labelText: 'Optometrist In-Charge*',
                                 labelStyle: TextStyles.tsBody1(
                                     color: Palettes.kcNeutral1),
                                 floatingLabelBehavior:
@@ -248,21 +247,47 @@ class AddPaymentView extends StatelessWidget {
                           height: 10,
                           color: Colors.grey.shade200,
                         ),
+                        GestureDetector(
+                          onTap: () => model.goToSelectProcedure(patient.id),
+                          child: TextFormField(
+                            controller: model.procedureTxtController,
+                            validator: (value) =>
+                                model.validatorService.validateProcedureName(value!),
+                            textInputAction: TextInputAction.next,
+                            enabled: false,
+                            keyboardType: TextInputType.datetime,
+                            decoration: InputDecoration(
+                                errorBorder: TextBorderStyles.errorBorder,
+                                errorStyle: TextStyles.errorTextStyle,
+                                disabledBorder: TextBorderStyles.normalBorder,
+                                hintText: 'Select Service Rendered',
+                                labelText: 'Service*',
+                                labelStyle:
+                                TextStyle(fontSize: 21, color: Palettes.kcNeutral1),
+                                floatingLabelBehavior: FloatingLabelBehavior.always,
+                                suffixIcon: Icon(
+                                  Icons.arrow_drop_down,
+                                  size: 24,
+                                  color: Palettes.kcBlueMain1,
+                                )),
+                          ),
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Notes or Procedures',
+                              'Notes or Services',
                               style: TextStyles.tsButton1(),
                             ),
+
                             ActionChip(
                               label: Text(
-                                  0 <= 0 ? 'Select Dental Note' : 'Add more'),
+                                  0 <= 0 ? 'Select Optical Service' : 'Add more'),
                               labelPadding: EdgeInsets.symmetric(horizontal: 8),
                               labelStyle:
                                   TextStyles.tsBody2(color: Colors.white),
                               backgroundColor: Palettes.kcBlueMain1,
-                              tooltip: 'Select Dental Note',
+                              tooltip: 'Select Optical Service',
                               onPressed: () =>
                                   model.selectDentalNote(patient.id),
                             )
@@ -295,17 +320,17 @@ class AddPaymentView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Medicine',
+                              'Product',
                               style: TextStyles.tsButton1(),
                             ),
                             ActionChip(
                               label:
-                                  Text(0 <= 0 ? 'Select Medicine' : 'Add more'),
+                                  Text(0 <= 0 ? 'Select Product' : 'Add more'),
                               labelPadding: EdgeInsets.symmetric(horizontal: 8),
                               labelStyle:
                                   TextStyles.tsBody2(color: Colors.white),
                               backgroundColor: Palettes.kcBlueMain1,
-                              tooltip: 'Select Medicine',
+                              tooltip: 'Select Product',
                               onPressed: () =>
                                   model.selectMedicines(patient.id),
                             ),
@@ -334,7 +359,7 @@ class AddPaymentView extends StatelessWidget {
                                 width: double.maxFinite,
                                 color: Colors.grey.shade200,
                                 alignment: Alignment.center,
-                                child: Text('No Medicine Selected'),
+                                child: Text('No Product Selected'),
                               ),
                         SizedBox(height: 6),
                         Container(
@@ -352,12 +377,13 @@ class AddPaymentView extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      'Dental Note Sub Total:',
+                                      'Optical Note Sub Total:',
                                       style: TextStyles.tsHeading5(),
                                     ),
                                   ),
                                   Text(
-                                    '${model.dentalNoteSubTotal.toString().toCurrency}',
+                                    // '${model.dentalNoteSubTotal.toString().toCurrency}',
+                                    '${model.serviceSubTotal.toString().toCurrency}',
                                     style: TextStyle(
                                       color: Colors.deepOrangeAccent,
                                       fontWeight: FontWeight.bold,
@@ -374,7 +400,7 @@ class AddPaymentView extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      'Medicine Sub Total:',
+                                      'Product Sub Total:',
                                       style: TextStyles.tsHeading5(),
                                     ),
                                   ),
@@ -408,7 +434,10 @@ class AddPaymentView extends StatelessWidget {
                                           fontWeight: FontWeight.bold,
                                         ),
                                         enabled:
-                                            model.dentalNoteSubTotal == 0 &&
+
+                                      //   model.dentalNoteSubTotal == 0 &&
+                                      // model.medicineSubTotal == 0,
+                                            model.serviceSubTotal == 0 &&
                                                 model.medicineSubTotal == 0,
                                         controller:
                                             model.totalAmountTxtController,

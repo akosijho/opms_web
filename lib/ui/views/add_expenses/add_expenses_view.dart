@@ -1,5 +1,5 @@
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/ui/views/add_expenses/add_expenses_view_model.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/ui/views/add_expenses/add_expenses_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

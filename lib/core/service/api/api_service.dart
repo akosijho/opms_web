@@ -1,20 +1,20 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:opmsapp/models/appointment_model/appointment_model.dart';
-import 'package:opmsapp/models/dental_notes/dental_notes.dart';
-import 'package:opmsapp/models/expense/expense.dart';
-import 'package:opmsapp/models/medical_history/medical_history.dart';
-import 'package:opmsapp/models/medicine/medicine.dart';
-import 'package:opmsapp/models/notification/notification_model.dart';
-import 'package:opmsapp/models/notification_token/notification_token_model.dart';
-import 'package:opmsapp/models/patient_model/patient_model.dart';
-import 'package:opmsapp/models/prescription/prescription.dart';
-import 'package:opmsapp/models/procedure/procedure.dart';
-import 'package:opmsapp/models/query_result/query_result.dart';
-import 'package:opmsapp/models/tooth_condition/tooth_condition.dart';
-import 'package:opmsapp/models/upload_results/image_upload_result.dart';
-import 'package:opmsapp/models/user_model/user_model.dart';
+import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
+import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
+import 'package:opmswebstaff/models/expense/expense.dart';
+import 'package:opmswebstaff/models/medical_history/medical_history.dart';
+import 'package:opmswebstaff/models/medicine/medicine.dart';
+import 'package:opmswebstaff/models/notification/notification_model.dart';
+import 'package:opmswebstaff/models/notification_token/notification_token_model.dart';
+import 'package:opmswebstaff/models/patient_model/patient_model.dart';
+import 'package:opmswebstaff/models/prescription/prescription.dart';
+import 'package:opmswebstaff/models/procedure/procedure.dart';
+import 'package:opmswebstaff/models/query_result/query_result.dart';
+import 'package:opmswebstaff/models/tooth_condition/tooth_condition.dart';
+import 'package:opmswebstaff/models/upload_results/image_upload_result.dart';
+import 'package:opmswebstaff/models/user_model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../models/dental_certificate/dental_certificate.dart';

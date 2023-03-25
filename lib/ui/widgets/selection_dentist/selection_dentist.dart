@@ -1,8 +1,8 @@
-import 'package:opmsapp/constants/font_name/font_name.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/models/user_model/user_model.dart';
-import 'package:opmsapp/ui/widgets/selection_dentist/selection_dentist_view_model.dart';
-import 'package:opmsapp/ui/widgets/user_card/user_card.dart';
+import 'package:opmswebstaff/constants/font_name/font_name.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/models/user_model/user_model.dart';
+import 'package:opmswebstaff/ui/widgets/selection_dentist/selection_dentist_view_model.dart';
+import 'package:opmswebstaff/ui/widgets/user_card/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
@@ -27,7 +27,7 @@ class SelectionDentist extends StatelessWidget {
                 children: [
                   SizedBox(height: 10),
                   Text(
-                    'Select Dentist',
+                    'Select Optometrist',
                     style: TextStyle(
                       fontSize: 28,
                       fontFamily: FontNames.gilRoy,
@@ -67,13 +67,13 @@ class SelectionDentist extends StatelessWidget {
                         ),
                       ),
                       constraints: BoxConstraints(maxHeight: 43),
-                      hintText: 'Search Dentist...',
+                      hintText: 'Search Optometrist...',
                     ),
                   ),
                   SizedBox(height: 8),
                   Row(
                     children: [
-                      Text('List of Dentist'),
+                      Text('List of Optometrist'),
                       Expanded(child: Divider())
                     ],
                   ),
@@ -81,14 +81,26 @@ class SelectionDentist extends StatelessWidget {
               ),
             ),
           ),
-          body: Scrollbar(
-            thickness: 7,
-            hoverThickness: 2,
-            showTrackOnHover: true,
-            child: setDentistSelectionBody(
-              isBusy: model.isBusy,
-              dentistList: model.isBusy ? null : model.dentistList,
-              onTap: (user) => model.setReturnDentist(user),
+          body: Center(
+            child: Scrollbar(
+              thickness: 7,
+              hoverThickness: 2,
+              showTrackOnHover: true,
+              child: Container(
+                width: 600,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                    BorderRadius.all( Radius.circular(30)),
+                    border: Border.all(color: Colors.grey)
+                ),
+                child: setDentistSelectionBody(
+                  isBusy: model.isBusy,
+                  dentistList: model.isBusy ? null : model.dentistList,
+                  onTap: (user) => model.setReturnDentist(user),
+                ),
+              ),
             ),
           ),
         ),

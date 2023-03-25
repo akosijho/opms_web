@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:opmsapp/models/medicine/medicine.dart';
+import 'package:opmswebstaff/models/medicine/medicine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_network/image_network.dart';
@@ -77,7 +77,7 @@ class PaymentMedicineCard extends StatelessWidget {
           height: 75,
           width: 87,
           child: SvgPicture.asset(
-            'assets/icons/Pills.svg',
+            'assets/icons/eyeglass.svg',
             color: Colors.purple,
             height: 50,
             width: 50,

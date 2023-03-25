@@ -1,10 +1,8 @@
-import 'dart:ui';
 
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/ui/views/notification/notification_view_model.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/ui/views/notification/notification_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:image_network/image_network.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 

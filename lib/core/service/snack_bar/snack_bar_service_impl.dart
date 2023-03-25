@@ -1,4 +1,4 @@
-import 'package:opmsapp/core/service/snack_bar/snack_bar_service.dart';
+import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,4 +1,4 @@
-import 'package:opmsapp/ui/views/view_patient_payments/view_payment_patient_view_model.dart';
+import 'package:opmswebstaff/ui/views/view_patient_payments/view_payment_patient_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';

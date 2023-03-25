@@ -1,12 +1,11 @@
 import 'dart:io';
 
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_border_styles.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/ui/views/add_patient/add_patient_view_model.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_border_styles.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/ui/views/add_patient/add_patient_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
 
 class AddPatientView extends StatefulWidget {
@@ -88,9 +87,30 @@ class _AddPatientViewState extends State<AddPatientView> {
             key: addPatientFormKey,
             child: Column(
               children: [
-                AddPatientHeader(
-                  onTap: () => model.selectPatientImage(),
-                  filePath: model.patientSelectedImage?.path,
+                // AddPatientHeader(
+                //   onTap: () => model.selectPatientImage(),
+                //   filePath: model.patientSelectedImage?.path,
+                // ),
+                Container(
+                  height: 110,
+                  width: 110,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    shape: BoxShape.circle,
+                  ),
+                  child: CircleAvatar(
+                    backgroundImage:
+                    AssetImage('assets/images/optical_avatar.png'),
+                  ),
+                  // child: filePath != null
+                  //     ? CircleAvatar(
+                  //         backgroundImage: FileImage(File(filePath!)),
+                  //       )
+                  //     : CircleAvatar(
+                  //         backgroundImage:
+                  //             AssetImage('assets/images/optical_avatar.png'),
+                  //       ),
+
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -461,39 +481,44 @@ class AddPatientHeader extends StatelessWidget {
                         height: 110,
                         width: 110,
                         decoration: BoxDecoration(
-                          color: Color(0xff00E1F0),
+                          color: Colors.blue,
                           shape: BoxShape.circle,
                         ),
-                        child: filePath != null
-                            ? CircleAvatar(
-                                backgroundImage: FileImage(File(filePath!)),
-                              )
-                            : CircleAvatar(
-                                backgroundImage:
-                                    AssetImage('assets/images/avatar.png'),
-                              ),
+                        child: CircleAvatar(
+                          backgroundImage:
+                          AssetImage('assets/images/optical_avatar.png'),
+                        ),
+                        // child: filePath != null
+                        //     ? CircleAvatar(
+                        //         backgroundImage: FileImage(File(filePath!)),
+                        //       )
+                        //     : CircleAvatar(
+                        //         backgroundImage:
+                        //             AssetImage('assets/images/optical_avatar.png'),
+                        //       ),
+
                       ),
                     ),
                   ),
-                  Positioned(
-                    right: 0,
-                    bottom: 5,
-                    child: GestureDetector(
-                      onTap: () => this.onTap(),
-                      child: Container(
-                        height: 35,
-                        width: 35,
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Colors.grey.shade50, width: 2),
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade300,
-                        ),
-                        child: SvgPicture.asset('assets/icons/Camera.svg'),
-                      ),
-                    ),
-                  )
+                  // Positioned(
+                  //   right: 0,
+                  //   bottom: 5,
+                  //   child: GestureDetector(
+                  //     onTap: () => this.onTap(),
+                  //     child: Container(
+                  //       height: 35,
+                  //       width: 35,
+                  //       padding: EdgeInsets.all(5),
+                  //       decoration: BoxDecoration(
+                  //         border:
+                  //             Border.all(color: Colors.grey.shade50, width: 2),
+                  //         shape: BoxShape.circle,
+                  //         color: Colors.grey.shade300,
+                  //       ),
+                  //       child: SvgPicture.asset('assets/icons/Camera.svg'),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ],

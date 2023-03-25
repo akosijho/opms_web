@@ -1,7 +1,7 @@
-import 'package:opmsapp/constants/styles/button_style.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/ui/views/get_started/get_started_viewmodel.dart';
+import 'package:opmswebstaff/constants/styles/button_style.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/ui/views/get_started/get_started_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';

@@ -1,4 +1,4 @@
-import 'package:opmsapp/extensions/string_extension.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
 
 class NotificationModel {
   dynamic id;

@@ -1,8 +1,7 @@
-import 'package:opmsapp/ui/views/expenses_report/expenses_report_view.dart';
-import 'package:opmsapp/ui/views/finance/reports_view_model.dart';
-import 'package:opmsapp/ui/views/numeric_report/numeric_report.dart';
-import 'package:opmsapp/ui/views/patient_report/patient_report_view.dart';
-import 'package:opmsapp/ui/views/sales_report/sales_report_view.dart';
+import 'package:opmswebstaff/ui/views/expenses_report/expenses_report_view.dart';
+import 'package:opmswebstaff/ui/views/finance/reports_view_model.dart';
+import 'package:opmswebstaff/ui/views/patient_report/patient_report_view.dart';
+import 'package:opmswebstaff/ui/views/sales_report/sales_report_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -32,7 +31,7 @@ class ReportView extends StatelessWidget {
         body: IndexedStack(
           index: model.currentIndex,
           children: [
-            PatientReportView(),
+            PatientReportView(showAppBar: true),
             SalesReportsView(),
             ExpensesReportView(),
           ],

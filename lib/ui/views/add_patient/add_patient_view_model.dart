@@ -1,22 +1,22 @@
 import 'dart:io';
 
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/app/app.logger.dart';
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/bottom_sheet/bottom_sheet_service.dart';
-import 'package:opmsapp/core/service/dialog/dialog_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/core/service/search_index/search_index.dart';
-import 'package:opmsapp/core/service/snack_bar/snack_bar_service.dart';
-import 'package:opmsapp/core/service/validator/validator_service.dart';
-import 'package:opmsapp/core/utility/image_selector.dart';
-import 'package:opmsapp/models/medical_history/medical_history.dart';
-import 'package:opmsapp/models/patient_model/patient_model.dart';
-import 'package:opmsapp/models/upload_results/medical_history_upload_result.dart';
-import 'package:opmsapp/ui/views/main_body/main_body_view_model.dart';
-import 'package:opmsapp/ui/views/update_user_info/setup_user_viewmodel.dart';
-import 'package:opmsapp/ui/widgets/selection_date/selection_date.dart';
-import 'package:opmsapp/ui/widgets/selection_list/selection_option.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/app/app.logger.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/bottom_sheet/bottom_sheet_service.dart';
+import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/search_index/search_index.dart';
+import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
+import 'package:opmswebstaff/core/service/validator/validator_service.dart';
+import 'package:opmswebstaff/core/utility/image_selector.dart';
+import 'package:opmswebstaff/models/medical_history/medical_history.dart';
+import 'package:opmswebstaff/models/patient_model/patient_model.dart';
+import 'package:opmswebstaff/models/upload_results/medical_history_upload_result.dart';
+import 'package:opmswebstaff/ui/views/main_body/main_body_view_model.dart';
+import 'package:opmswebstaff/ui/views/update_user_info/setup_user_viewmodel.dart';
+import 'package:opmswebstaff/ui/widgets/selection_date/selection_date.dart';
+import 'package:opmswebstaff/ui/widgets/selection_list/selection_option.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
@@ -36,7 +36,7 @@ class AddPatientViewModel extends BaseViewModel {
 
   bool haveAllergies = false;
   bool isMinor = false;
-  XFile? patientSelectedImage;
+  // XFile? patientSelectedImage;
   String? tempGender;
   DateTime? tempBirthDate;
   List<XFile> listOfMedicalHistory = [];
@@ -80,28 +80,28 @@ class AddPatientViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> selectPatientImage() async {
-    dynamic tempImage;
-    var selectedImageSource =
-        await bottomSheetService.openBottomSheet(SelectionOption(
-      options: SetupUserViewModel().imageSourceOptions,
-      title: 'Select Image Source',
-    ));
-    //Condition to select Image Source
-    if (selectedImageSource == SetupUserViewModel().imageSourceOptions[0]) {
-      tempImage = await imageSelectorService.selectImageWithGallery();
-    } else if (selectedImageSource ==
-        SetupUserViewModel().imageSourceOptions[1]) {
-      tempImage = await imageSelectorService.selectImageWithCamera();
-    }
-    if (tempImage != null) {
-      patientSelectedImage = tempImage;
-      setBusy(false);
-      logger.i('image selected');
-    }
-    imageCache.clear();
-    logger.i('image cache cleared');
-  }
+  // Future<void> selectPatientImage() async {
+  //   dynamic tempImage;
+  //   var selectedImageSource =
+  //       await bottomSheetService.openBottomSheet(SelectionOption(
+  //     options: SetupUserViewModel().imageSourceOptions,
+  //     title: 'Select Image Source',
+  //   ));
+  //   //Condition to select Image Source
+  //   if (selectedImageSource == SetupUserViewModel().imageSourceOptions[0]) {
+  //     tempImage = await imageSelectorService.selectImageWithGallery();
+  //   } else if (selectedImageSource ==
+  //       SetupUserViewModel().imageSourceOptions[1]) {
+  //     tempImage = await imageSelectorService.selectImageWithCamera();
+  //   }
+  //   if (tempImage != null) {
+  //     patientSelectedImage = tempImage;
+  //     setBusy(false);
+  //     logger.i('image selected');
+  //   }
+  //   imageCache.clear();
+  //   logger.i('image cache cleared');
+  // }
 
   Future<void> savePatient({
     required String firstName,
@@ -115,23 +115,23 @@ class AddPatientViewModel extends BaseViewModel {
     String? emergencyContactName,
     String? emergencyContactNumber,
   }) async {
-    if (patientSelectedImage != null) {
+    // if (patientSelectedImage != null) {
       final patientRef = await apiService.createPatientID();
-      dialogService.showDefaultLoadingDialog(barrierDismissible: false);
-      final imageUploadResult = await apiService.uploadPatientProfileImage(
-          patientId: patientRef.id,
-          imageToUpload: File(patientSelectedImage!.path));
+    //   dialogService.showDefaultLoadingDialog(barrierDismissible: false);
+      // final imageUploadResult = await apiService.uploadPatientProfileImage(
+      //     patientId: patientRef.id,
+      //     imageToUpload: File(patientSelectedImage!.path));
 
       final medHistoryUploadResult = await uploadMedicalHistory(
           patientId: patientRef.id, listOfMedicalHistory: listOfMedicalHistory);
 
-      if (imageUploadResult.isUploaded && medHistoryUploadResult.isUploaded) {
+      if (medHistoryUploadResult.isUploaded) {
         final patientSearchIndex = await searchIndexService.setSearchIndex(
             string: '$firstName $lastName');
         final result = await apiService.addPatient(
           patientRef: patientRef,
           patient: Patient(
-              image: imageUploadResult.imageUrl ?? '',
+            // image: imageUploadResult.imageUrl ?? '',
               firstName: firstName,
               lastName: lastName,
               gender: gender,
@@ -164,12 +164,13 @@ class AddPatientViewModel extends BaseViewModel {
             title: 'Error',
             message: "There's an error encountered with adding new patient!");
       }
-    } else {
-      snackBarService.showSnackBar(
-          message: 'Patient profile image is not set',
-          title: 'Missing required Data');
     }
-  }
+    // } else {
+    //   snackBarService.showSnackBar(
+    //       message: 'Patient profile image is not set',
+    //       title: 'Missing required Data');
+    // }
+  // }
 
   void selectMedicalHistoryFile() async {
     dynamic tempImage;

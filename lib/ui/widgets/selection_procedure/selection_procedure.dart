@@ -1,9 +1,9 @@
-import 'package:opmsapp/constants/font_name/font_name.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/main.dart';
-import 'package:opmsapp/models/procedure/procedure.dart';
-import 'package:opmsapp/ui/widgets/procedure_card/procedure_card.dart';
-import 'package:opmsapp/ui/widgets/selection_procedure/selection_procedure_view_model.dart';
+import 'package:opmswebstaff/constants/font_name/font_name.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/main.dart';
+import 'package:opmswebstaff/models/procedure/procedure.dart';
+import 'package:opmswebstaff/ui/widgets/procedure_card/procedure_card.dart';
+import 'package:opmswebstaff/ui/widgets/selection_procedure/selection_procedure_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';

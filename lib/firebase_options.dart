@@ -17,16 +17,19 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for android - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -49,21 +52,13 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAG4PwY4WWwh1uKwVYteqXNsak_ztW3G7M',
-    appId: '1:697732616282:android:01acfb36587e1b59ba0863',
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyCmiOreQT-nFhZD4KT54Iu328224HW8z00',
+    appId: '1:697732616282:web:971924c6830911d1ba0863',
     messagingSenderId: '697732616282',
     projectId: 'opms-project',
+    authDomain: 'opms-project.firebaseapp.com',
     storageBucket: 'opms-project.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA-v0ZD5LUfVaIYK-y1vcaACuEDQenAwdM',
-    appId: '1:697732616282:ios:c0ad5397daa9c64bba0863',
-    messagingSenderId: '697732616282',
-    projectId: 'opms-project',
-    storageBucket: 'opms-project.appspot.com',
-    iosClientId: '697732616282-9g9tqret2jvoh5h4heb0qag79vsh5vbs.apps.googleusercontent.com',
-    iosBundleId: 'com.cagape.opmsapp',
+    measurementId: 'G-CGT4YDTXRQ',
   );
 }

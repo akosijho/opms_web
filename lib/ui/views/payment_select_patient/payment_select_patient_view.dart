@@ -1,6 +1,6 @@
 import 'package:age_calculator/age_calculator.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/ui/views/payment_select_patient/payment_select_patient_view_model.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/ui/views/payment_select_patient/payment_select_patient_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
@@ -126,8 +126,8 @@ class PaymentSelectPatientView extends StatelessWidget {
                                                   model.patientList[index].id),
                                               name: model
                                                   .patientList[index].fullName,
-                                              image: model
-                                                  .patientList[index].image,
+                                              // image: model
+                                              //     .patientList[index].image,
                                               phone: model
                                                   .patientList[index].phoneNum,
                                               address: model

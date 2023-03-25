@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/models/medicine/medicine.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/models/medicine/medicine.dart';
 import 'package:stacked/stacked.dart';
 
 class MedicineViewModel extends BaseViewModel {

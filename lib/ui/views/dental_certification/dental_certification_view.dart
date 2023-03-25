@@ -1,4 +1,4 @@
-import 'package:opmsapp/ui/widgets/certificate_card/certificate_card.dart';
+import 'package:opmswebstaff/ui/widgets/certificate_card/certificate_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
@@ -23,7 +23,7 @@ class DentalCertificationView extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton.extended(
             onPressed: () => model.goToAddCertificate(patient),
-            label: Text('Add Dental Certificate')),
+            label: Text('Add Optical Certificate')),
         body: ListView(
           padding: EdgeInsets.all(8),
           children: [
@@ -31,7 +31,7 @@ class DentalCertificationView extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'List Of Patient Dental Certificates',
+                  'List Of Patient Optical Certificates',
                   style: GoogleFonts.roboto(
                       color: Colors.black,
                       fontSize: 18,
@@ -62,7 +62,7 @@ class DentalCertificationView extends StatelessWidget {
                   )
                 : Container(
                     height: 500,
-                    child: Center(child: Text('No Saved Dental Certification')),
+                    child: Center(child: Text('No Saved Optical Certification')),
                   ),
             SizedBox(height: 100),
           ],

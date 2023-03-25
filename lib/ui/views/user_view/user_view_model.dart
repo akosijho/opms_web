@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/bottom_sheet/bottom_sheet_service.dart';
-import 'package:opmsapp/core/service/firebase_auth/firebase_auth_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/core/service/search_index/search_index.dart';
-import 'package:opmsapp/core/service/toast/toast_service.dart';
-import 'package:opmsapp/core/service/validator/validator_service.dart';
-import 'package:opmsapp/core/utility/image_selector.dart';
-import 'package:opmsapp/extensions/date_format_extension.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/user_model/user_model.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/bottom_sheet/bottom_sheet_service.dart';
+import 'package:opmswebstaff/core/service/firebase_auth/firebase_auth_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/search_index/search_index.dart';
+import 'package:opmswebstaff/core/service/toast/toast_service.dart';
+import 'package:opmswebstaff/core/service/validator/validator_service.dart';
+import 'package:opmswebstaff/core/utility/image_selector.dart';
+import 'package:opmswebstaff/extensions/date_format_extension.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/user_model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -146,7 +146,8 @@ class UserViewModel extends BaseViewModel {
                 email: currentUser!.email,
                 image: currentUser!.image,
                 position: positionController.text,
-                dateOfBirth: birthDate.toString() ?? currentUser!.dateOfBirth,
+                dateOfBirth: birthDate.toString(),
+                // dateOfBirth: birthDate.toString() ?? currentUser!.dateOfBirth,
                 gender: genderController.text,
                 appointments: [],
                 fcmToken: [],

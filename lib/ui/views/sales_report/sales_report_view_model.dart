@@ -1,6 +1,6 @@
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/extensions/date_format_extension.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/extensions/date_format_extension.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import "package:charts_flutter/flutter.dart" as charts;

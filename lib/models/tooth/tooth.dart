@@ -1,5 +1,5 @@
-import 'package:opmsapp/models/procedure/procedure.dart';
-import 'package:opmsapp/models/tooth_condition/tooth_condition.dart';
+import 'package:opmswebstaff/models/procedure/procedure.dart';
+import 'package:opmswebstaff/models/tooth_condition/tooth_condition.dart';
 
 class Tooth {
   final dynamic id;

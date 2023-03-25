@@ -1,8 +1,8 @@
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/dialog/dialog_service.dart';
-import 'package:opmsapp/core/service/search_index/search_index.dart';
-import 'package:opmsapp/core/service/validator/validator_service.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
+import 'package:opmswebstaff/core/service/search_index/search_index.dart';
+import 'package:opmswebstaff/core/service/validator/validator_service.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

@@ -1,9 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/extensions/date_format_extension.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/ui/views/patient_info/patient_info_view_model.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/extensions/date_format_extension.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/ui/views/patient_info/patient_info_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
@@ -30,7 +29,7 @@ class PatientInfoView extends StatelessWidget {
                   'Patient Info',
                   style: TextStyle(color: Colors.white, fontSize: 21),
                 ),
-                centerTitle: true,
+                // centerTitle: true,
               ),
               body: Scrollbar(
                 thickness: 6,
@@ -47,10 +46,11 @@ class PatientInfoView extends StatelessWidget {
                             height: 100,
                             color: Palettes.kcBlueMain1,
                           ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: InkWell(
-                              onTap: () => model.updatePatientImage(),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 12),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
                               child: Stack(
                                 children: [
                                   Container(
@@ -62,8 +62,8 @@ class PatientInfoView extends StatelessWidget {
                                         border: Border.all(
                                             color: Colors.white, width: 3)),
                                     child: Container(
-                                      height: 200,
-                                      width: 200,
+                                      height: 180,
+                                      width: 180,
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           border: Border.all(
@@ -78,35 +78,42 @@ class PatientInfoView extends StatelessWidget {
                                                 color: Colors.white, width: 3)),
                                         child: ClipRRect(
                                           borderRadius:
-                                              BorderRadius.circular(200),
-                                          child: CachedNetworkImage(
-                                            imageUrl: model.patient?.image,
-                                            height: 200,
-                                            width: 200,
-                                            fit: BoxFit.cover,
+                                              BorderRadius.circular(180),
+                                          child: Image.asset(
+                                            "assets/images/optical_avatar.png",
+                                            // imageUrl: image,
+                                            fit: BoxFit.fill,
+                                            filterQuality:  FilterQuality.high,
+                                            // progressIndicatorBuilder: (context, url, progress) =>
+                                            //     CircularProgressIndicator(
+                                            //       value: progress.progress,
+                                            //       valueColor: AlwaysStoppedAnimation(
+                                            //         Colors.white,
+                                            //       ),
+                                            //     )
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Positioned(
-                                      right: 20,
-                                      bottom: 0,
-                                      child: Container(
-                                        height: 40,
-                                        width: 40,
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey.shade300,
-                                          border: Border.all(
-                                              color: Colors.grey, width: 1),
-                                          borderRadius:
-                                              BorderRadius.circular(40),
-                                        ),
-                                        child: Icon(
-                                          Icons.camera_alt_outlined,
-                                          size: 25,
-                                        ),
-                                      ))
+                                  // Positioned(
+                                  //     right: 20,
+                                  //     bottom: 0,
+                                  //     child: Container(
+                                  //       height: 40,
+                                  //       width: 40,
+                                  //       decoration: BoxDecoration(
+                                  //         color: Colors.grey.shade300,
+                                  //         border: Border.all(
+                                  //             color: Colors.grey, width: 1),
+                                  //         borderRadius:
+                                  //             BorderRadius.circular(40),
+                                  //       ),
+                                  //       child: Icon(
+                                  //         Icons.camera_alt_outlined,
+                                  //         size: 25,
+                                  //       ),
+                                  //     ))
                                 ],
                               ),
                             ),
@@ -115,19 +122,25 @@ class PatientInfoView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 8),
-                    Center(
-                      child: Column(
-                        children: [
-                          Text(
-                            '${model.patient?.firstName} ${model.patient?.lastName}, ${model.age}',
-                            style: TextStyles.tsHeading3(),
-                          ),
-                          Text(
-                            'Patient Name',
-                            style:
-                                TextStyles.tsBody2(color: Colors.grey.shade900),
-                          ),
-                        ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 12),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${model.patient?.firstName} ${model.patient?.lastName}, ${model.age}',
+                              style: TextStyles.tsHeading3(),
+                            ),
+                            Text(
+                              'Patient Name',
+                              style:
+                                  TextStyles.tsBody2(color: Colors.grey.shade900),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 5),
@@ -140,7 +153,8 @@ class PatientInfoView extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Expanded(
+                              SizedBox(
+                                width: 80,
                                 child: ElevatedButton.icon(
                                   onPressed: () => model
                                       .callPatient(model.patient!.phoneNum),
@@ -158,7 +172,8 @@ class PatientInfoView extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(width: 8),
-                              Expanded(
+                              SizedBox(
+                                width: 80,
                                   child: ElevatedButton.icon(
                                 onPressed: () =>
                                     model.textPatient(model.patient!.phoneNum),
@@ -338,27 +353,27 @@ class PatientInfoView extends StatelessWidget {
                           // ),
                           // SizedBox(height: 8),
                           Divider(),
-                          // Card(
-                          //   shadowColor: Colors.grey.shade500,
-                          //   child: ListTile(
-                          //     onTap: () => model.goToMedicalHistoryView(
-                          //         patientId: patient.id),
-                          //     leading: Icon(
-                          //       Icons.history,
-                          //       color: Colors.black,
-                          //     ),
-                          //     title: Text(
-                          //       'Medical History',
-                          //       style: TextStyle(
-                          //           fontWeight: FontWeight.bold, fontSize: 17),
-                          //     ),
-                          //     trailing: Icon(
-                          //       Icons.arrow_right,
-                          //       size: 35,
-                          //       color: Colors.blue,
-                          //     ),
-                          //   ),
-                          // ),
+                          Card(
+                            shadowColor: Colors.grey.shade500,
+                            child: ListTile(
+                              onTap: () => model.goToMedicalHistoryView(
+                                  patientId: patient.id),
+                              leading: Icon(
+                                Icons.history,
+                                color: Colors.black,
+                              ),
+                              title: Text(
+                                'Medical History',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 17),
+                              ),
+                              trailing: Icon(
+                                Icons.arrow_right,
+                                size: 35,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
                           SizedBox(height: 4),
                           Card(
                             shadowColor: Colors.grey.shade500,
@@ -370,7 +385,7 @@ class PatientInfoView extends StatelessWidget {
                                 color: Colors.black,
                               ),
                               title: Text(
-                                'Dental Chart',
+                                'Optical Chart',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 17),
                               ),
@@ -458,7 +473,7 @@ class PatientInfoView extends StatelessWidget {
                                 color: Colors.black,
                               ),
                               title: Text(
-                                'Dental Certificate',
+                                'Optical Certificate',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 17),
                               ),

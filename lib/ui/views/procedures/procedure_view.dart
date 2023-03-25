@@ -1,8 +1,8 @@
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/ui/views/procedures/procedure_view_model.dart';
-import 'package:opmsapp/ui/widgets/procedure_card/procedure_card.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/ui/views/procedures/procedure_view_model.dart';
+import 'package:opmswebstaff/ui/widgets/procedure_card/procedure_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
@@ -37,7 +37,7 @@ class _ProceduresViewState extends State<ProceduresView> {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              'Dental Procedures',
+              'Optical Services',
               style: TextStyles.tsHeading3(color: Colors.white),
             ),
           ),
@@ -49,7 +49,7 @@ class _ProceduresViewState extends State<ProceduresView> {
               isExtended: model.isScrolledUp,
               onPressed: () =>
                   model.navigationService.pushNamed(Routes.AddProcedureView),
-              label: Text('Add Procedure'),
+              label: Text('Add Service'),
               icon: Icon(Icons.add),
             ),
           ),
@@ -160,7 +160,7 @@ class _ProceduresViewState extends State<ProceduresView> {
                           : Container(
                               height: 500,
                               child: Center(
-                                child: Text('No Procedures found...'),
+                                child: Text('No Service found...'),
                               ),
                             )
                 ],

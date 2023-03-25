@@ -1,4 +1,4 @@
-import 'package:opmsapp/ui/views/edit_patient/edit_patient_view_model.dart';
+import 'package:opmswebstaff/ui/views/edit_patient/edit_patient_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
@@ -36,7 +36,7 @@ class _EditPatientViewModelState extends State<EditPatientView> {
             width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
               onPressed: () => model.performUpdate(widget.patient),
-              child: Text('Update'),
+              child: Text('Update', style: TextStyle(fontSize: 16)),
             ),
           ),
         ],

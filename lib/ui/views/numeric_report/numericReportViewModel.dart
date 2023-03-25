@@ -1,8 +1,8 @@
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/dialog/dialog_service.dart';
-import 'package:opmsapp/extensions/date_format_extension.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/payment/payment.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
+import 'package:opmswebstaff/extensions/date_format_extension.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/payment/payment.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/app.locator.dart';

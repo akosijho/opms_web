@@ -1,6 +1,6 @@
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/enums/enum_tooth_condition.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/enums/enum_tooth_condition.dart';
 import 'package:stacked/stacked.dart';
 
 class SelectionToothConditionViewModel extends BaseViewModel {

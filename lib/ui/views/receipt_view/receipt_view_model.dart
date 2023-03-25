@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:opmsapp/core/service/snack_bar/snack_bar_service.dart';
-import 'package:opmsapp/core/service/toast/toast_service.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/medicine/medicine.dart';
+import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
+import 'package:opmswebstaff/core/service/toast/toast_service.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/medicine/medicine.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';

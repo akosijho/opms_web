@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/models/user_model/user_model.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/models/user_model/user_model.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../core/service/snack_bar/snack_bar_service.dart';

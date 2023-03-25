@@ -1,5 +1,5 @@
-import 'package:opmsapp/models/patient_model/patient_model.dart';
-import 'package:opmsapp/models/procedure/procedure.dart';
+import 'package:opmswebstaff/models/patient_model/patient_model.dart';
+import 'package:opmswebstaff/models/procedure/procedure.dart';
 
 class AppointmentModel {
   final String? appointment_id;

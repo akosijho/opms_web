@@ -1,7 +1,7 @@
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/core/service/firebase_auth/firebase_auth_service.dart';
-import 'package:opmsapp/core/service/session_service/session_service.dart';
-import 'package:opmsapp/models/response_model/auth_response_model.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/core/service/firebase_auth/firebase_auth_service.dart';
+import 'package:opmswebstaff/core/service/session_service/session_service.dart';
+import 'package:opmswebstaff/models/response_model/auth_response_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';

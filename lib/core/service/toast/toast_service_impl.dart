@@ -1,4 +1,4 @@
-import 'package:opmsapp/core/service/toast/toast_service.dart';
+import 'package:opmswebstaff/core/service/toast/toast_service.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

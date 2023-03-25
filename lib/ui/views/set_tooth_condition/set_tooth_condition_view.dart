@@ -1,7 +1,7 @@
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_border_styles.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/ui/views/set_tooth_condition/set_tooth_condition_view_model.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_border_styles.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/ui/views/set_tooth_condition/set_tooth_condition_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';

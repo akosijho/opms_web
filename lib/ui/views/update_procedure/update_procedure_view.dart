@@ -1,5 +1,5 @@
-import 'package:opmsapp/models/procedure/procedure.dart';
-import 'package:opmsapp/ui/views/update_procedure/update_procedure_view_model.dart';
+import 'package:opmswebstaff/models/procedure/procedure.dart';
+import 'package:opmswebstaff/ui/views/update_procedure/update_procedure_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

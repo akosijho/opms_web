@@ -1,5 +1,5 @@
-import 'package:opmsapp/ui/views/view_dental_notes_by_tooth/view_dental_note_by_tooth_view_model.dart';
-import 'package:opmsapp/ui/widgets/dental_note_card/dental_note_card.dart';
+import 'package:opmswebstaff/ui/views/view_dental_notes_by_tooth/view_dental_note_by_tooth_view_model.dart';
+import 'package:opmswebstaff/ui/widgets/dental_note_card/dental_note_card.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

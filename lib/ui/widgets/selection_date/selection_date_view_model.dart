@@ -1,5 +1,5 @@
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:stacked/stacked.dart';
 
 class SelectionDateViewModel extends BaseViewModel {

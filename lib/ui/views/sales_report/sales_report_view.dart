@@ -1,4 +1,4 @@
-import 'package:opmsapp/ui/views/sales_report/sales_report_view_model.dart';
+import 'package:opmswebstaff/ui/views/sales_report/sales_report_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
@@ -17,75 +17,72 @@ class SalesReportsView extends StatelessWidget {
           appBar: AppBar(
             title: Text('Sales Report'),
           ),
-          body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  SizedBox(height: 10),
-                  Text(
-                    'Sales Report',
-                    style: GoogleFonts.quicksand(
-                      fontSize: 28,
-                      color: Colors.grey.shade900,
-                      fontWeight: FontWeight.bold,
-                    ),
+          body: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.all(10),
+            child: Column(
+              children: [
+                SizedBox(height: 10),
+                Text(
+                  'Sales Report',
+                  style: GoogleFonts.quicksand(
+                    fontSize: 28,
+                    color: Colors.grey.shade900,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(
-                    'Scroll horizontally to show more',
-                    style: TextStyle(color: Colors.grey.shade700),
-                  ),
-                  SizedBox(height: 10),
-                  model.isBusy
-                      ? Container(
-                          height: 500,
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                CircularProgressIndicator(),
-                                SizedBox(height: 5),
-                                Text("Loading Data. Please wait...")
-                              ],
-                            ),
+                ),
+                Text(
+                  'Scroll horizontally to show more',
+                  style: TextStyle(color: Colors.grey.shade700),
+                ),
+                SizedBox(height: 10),
+                model.isBusy
+                    ? Container(
+                        height: 500,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(),
+                              SizedBox(height: 5),
+                              Text("Loading Data. Please wait...")
+                            ],
                           ),
-                        )
-                      : Expanded(
-                          child: Scrollbar(
-                            thickness: 10,
-                            isAlwaysShown: true,
+                        ),
+                      )
+                    : Expanded(
+                        child: Scrollbar(
+                          thickness: 10,
+                          isAlwaysShown: true,
 
-                            controller: null,
-                            radius: Radius.circular(20),
-                            child: Card(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ListView(
-                                  primary: true,
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    SizedBox(
-                                      width: 880,
-                                      child: charts.BarChart(
-                                        model.setSeriesList(),
-                                        animate: true,
-                                        barRendererDecorator: new charts
-                                            .BarLabelDecorator<String>(),
-                                        domainAxis: new charts.OrdinalAxisSpec(),
-                                      ),
+                          controller: null,
+                          radius: Radius.circular(20),
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ListView(
+                                primary: true,
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  SizedBox(
+                                    width: 880,
+                                    child: charts.BarChart(
+                                      model.setSeriesList(),
+                                      animate: true,
+                                      barRendererDecorator: new charts
+                                          .BarLabelDecorator<String>(),
+                                      domainAxis: new charts.OrdinalAxisSpec(),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ),
-                ],
-              ),
+                      ),
+              ],
             ),
           ),
         );

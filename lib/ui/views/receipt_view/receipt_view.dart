@@ -1,6 +1,6 @@
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/ui/views/receipt_view/receipt_view_model.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/ui/views/receipt_view/receipt_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:screenshot/screenshot.dart';
@@ -98,7 +98,7 @@ class ReceiptView extends StatelessWidget {
                                     thickness: 1,
                                     color: Colors.grey,
                                   ),
-                                  Text('Dental Notes'),
+                                  Text('Optical Notes'),
                                   ListView.separated(
                                       shrinkWrap: true,
                                       primary: false,
@@ -148,7 +148,7 @@ class ReceiptView extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Medicines'),
+                                  Text('Products'),
                                   ListView.separated(
                                       shrinkWrap: true,
                                       primary: false,
@@ -205,7 +205,7 @@ class ReceiptView extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Dental Note SubTotal: '),
+                            Text('Optical Note SubTotal: '),
                             Text(payment.dentalNoteSubTotal
                                 .toString()
                                 .toCurrency!),
@@ -214,7 +214,7 @@ class ReceiptView extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Medicine SubTotal: '),
+                            Text('Product SubTotal: '),
                             Text(payment.medicineSubTotal
                                 .toString()
                                 .toCurrency!),

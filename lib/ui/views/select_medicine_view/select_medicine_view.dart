@@ -1,4 +1,4 @@
-import 'package:opmsapp/ui/views/select_medicine_view/select_medicine_view_model.dart';
+import 'package:opmswebstaff/ui/views/select_medicine_view/select_medicine_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';

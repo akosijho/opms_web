@@ -1,6 +1,6 @@
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/ui/views/numeric_report/numericReportViewModel.dart';
-import 'package:opmsapp/ui/widgets/sales_date_card/sales_date_card.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/ui/views/numeric_report/numericReportViewModel.dart';
+import 'package:opmswebstaff/ui/widgets/sales_date_card/sales_date_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';

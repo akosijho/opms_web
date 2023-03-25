@@ -1,8 +1,8 @@
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/core/service/dialog/dialog_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/core/service/snack_bar/snack_bar_service.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';

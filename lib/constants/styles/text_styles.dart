@@ -1,7 +1,6 @@
-import 'package:opmsapp/constants/font_name/font_name.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/font_name/font_name.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 //Screen Size
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
@@ -28,80 +27,80 @@ class TextStyles {
   static TextStyle tsHeading1({Color? color}) => TextStyle(
       fontFamily: FontNames.gilRoy,
       fontWeight: FontWeight.w600,
-      fontSize: kfsHeading1.sp,
+      fontSize: kfsHeading1,
       color: color ?? Colors.black);
 
   static TextStyle tsHeading2({Color? color}) => TextStyle(
       fontFamily: FontNames.gilRoy,
       fontWeight: FontWeight.w600,
-      fontSize: kfsHeading2.sp,
+      fontSize: kfsHeading2,
       color: color ?? Colors.black);
 
   static TextStyle tsHeading3({Color? color}) => TextStyle(
       fontFamily: FontNames.gilRoy,
       fontWeight: FontWeight.w600,
-      fontSize: kfsHeading3.sp,
+      fontSize: kfsHeading3,
       color: color ?? Colors.black);
 
   static TextStyle tsHeading4({Color? color}) => TextStyle(
       fontFamily: FontNames.gilRoy,
       fontWeight: FontWeight.w600,
-      fontSize: kfsHeading4.sp,
+      fontSize: kfsHeading4,
       color: color ?? Colors.black);
 
   static TextStyle tsHeading5({Color? color}) => TextStyle(
       fontFamily: FontNames.gilRoy,
       fontWeight: FontWeight.w600,
-      fontSize: kfsHeading5.sp,
+      fontSize: kfsHeading5,
       color: color ?? Colors.black);
 
   static TextStyle tsButton1({Color? color}) => TextStyle(
       fontWeight: FontWeight.w600,
-      fontSize: kfsButton1.sp,
+      fontSize: kfsButton1,
       color: color ?? Colors.black);
 
   static TextStyle tsButton2({Color? color}) => TextStyle(
       fontWeight: FontWeight.w600,
-      fontSize: kfsButton2.sp,
+      fontSize: kfsButton2,
       color: color ?? Colors.black);
 
   static TextStyle tsCaption1({Color? color}) => TextStyle(
       fontWeight: FontWeight.w500,
-      fontSize: kfsCaption1.sp,
+      fontSize: kfsCaption1,
       color: color ?? Colors.black);
 
   static TextStyle tsCaption2({Color? color}) => TextStyle(
       fontWeight: FontWeight.w500,
-      fontSize: kfsCaption2.sp,
+      fontSize: kfsCaption2,
       color: color ?? Colors.black);
 
   static TextStyle tsBody1({Color? color}) => TextStyle(
       fontWeight: FontWeight.w400,
-      fontSize: kfsBody1.sp,
+      fontSize: kfsBody1,
       letterSpacing: 0.5,
       color: color ?? Colors.black);
 
   static TextStyle tsBody2({Color? color}) => TextStyle(
       fontWeight: FontWeight.w400,
-      fontSize: kfsBody2.sp,
+      fontSize: kfsBody2,
       letterSpacing: 0.5,
       color: color ?? Colors.black);
 
   static TextStyle tsBody3({Color? color}) => TextStyle(
       fontWeight: FontWeight.w400,
-      fontSize: kfsBody3.sp,
+      fontSize: kfsBody3,
       letterSpacing: 0.5,
       color: color ?? Colors.black);
 
   static TextStyle tsBody4({Color? color}) => TextStyle(
       fontWeight: FontWeight.w400,
-      fontSize: kfsSmall.sp,
+      fontSize: kfsSmall,
       letterSpacing: 0.5,
       color: color ?? Colors.black);
 
   static TextStyle ktsHintTextStyle = TextStyle(
       fontFamily: FontNames.gilRoy,
-      fontSize: kfsBody2.sp,
+      fontSize: kfsBody2,
       color: Palettes.kcHintColor);
 
   static const errorTextStyle = TextStyle(color: Color(0xFFD32F2F));

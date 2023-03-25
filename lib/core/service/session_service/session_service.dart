@@ -1,4 +1,4 @@
-import 'package:opmsapp/models/session/session_model.dart';
+import 'package:opmswebstaff/models/session/session_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class SessionService {

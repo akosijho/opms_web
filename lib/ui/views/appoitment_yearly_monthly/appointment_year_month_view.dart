@@ -1,5 +1,5 @@
-import 'package:opmsapp/ui/views/appoitment_yearly_monthly/appointment_year_month_view_model.dart';
-import 'package:opmsapp/ui/views/week_appointment/week_appointment_view.dart';
+import 'package:opmswebstaff/ui/views/appoitment_yearly_monthly/appointment_year_month_view_model.dart';
+import 'package:opmswebstaff/ui/views/week_appointment/week_appointment_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

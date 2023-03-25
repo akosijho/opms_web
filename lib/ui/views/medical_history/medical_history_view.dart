@@ -1,4 +1,4 @@
-import 'package:opmsapp/ui/views/medical_history/medical_history_view_model.dart';
+import 'package:opmswebstaff/ui/views/medical_history/medical_history_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

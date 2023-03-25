@@ -1,14 +1,14 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/enums/appointment_status.dart';
-import 'package:opmsapp/extensions/date_format_extension.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/appointment_model/appointment_model.dart';
-import 'package:opmsapp/ui/views/appointment/appointment_view_model.dart';
-import 'package:opmsapp/ui/widgets/appointment_card/appointment_card.dart';
-import 'package:opmsapp/ui/widgets/custom_shimmer/custom_shimmer.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/enums/appointment_status.dart';
+import 'package:opmswebstaff/extensions/date_format_extension.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
+import 'package:opmswebstaff/ui/views/appointment/appointment_view_model.dart';
+import 'package:opmswebstaff/ui/widgets/appointment_card/appointment_card.dart';
+import 'package:opmswebstaff/ui/widgets/custom_shimmer/custom_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
@@ -233,7 +233,7 @@ class AppointmentView extends StatelessWidget {
                       Routes.PatientInfoView,
                       arguments: PatientInfoViewArguments(
                           patient: appointmentList[i].patient)),
-                  imageUrl: appointmentList[i].patient.image,
+                  // imageUrl: appointmentList[i].patient.image,
                   serviceTitle: appointmentList[i].procedures![0].procedureName,
                   doctor: appointmentList[i].dentist,
                   patient: appointmentList[i].patient,

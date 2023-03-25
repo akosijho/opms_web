@@ -1,12 +1,16 @@
-import 'package:opmsapp/ui/views/appointment/appointment_view.dart';
-import 'package:opmsapp/ui/views/home/home_view.dart';
-import 'package:opmsapp/ui/views/main_body/main_body_view_model.dart';
-import 'package:opmsapp/ui/views/medicine/medicine_view.dart';
-import 'package:opmsapp/ui/views/patients/patients_view.dart';
-import 'package:opmsapp/ui/views/procedures/procedure_view.dart';
-import 'package:opmsapp/ui/widgets/bottom_navigation/bottom_navigation.dart';
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/ui/views/add_expenses/add_expenses_view.dart';
+import 'package:opmswebstaff/ui/views/appointment/appointment_view.dart';
+import 'package:opmswebstaff/ui/views/home/home_view.dart';
+import 'package:opmswebstaff/ui/views/main_body/main_body_view_model.dart';
+import 'package:opmswebstaff/ui/views/medicine/medicine_view.dart';
+import 'package:opmswebstaff/ui/views/patient_report/patient_report_view.dart';
+import 'package:opmswebstaff/ui/views/patients/patients_view.dart';
+import 'package:opmswebstaff/ui/views/payment_select_patient/payment_select_patient_view.dart';
+import 'package:opmswebstaff/ui/views/procedures/procedure_view.dart';
+import 'package:opmswebstaff/ui/widgets/bottom_navigation/bottom_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:opmswebstaff/ui/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:stacked/stacked.dart';
 
 class MainBodyView extends StatelessWidget {
@@ -15,30 +19,71 @@ class MainBodyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MainBodyViewModel>.reactive(
+      onModelReady: (model) {
+        model.init();
+        model.getAppointment();
+      },
       viewModelBuilder: () => MainBodyViewModel(),
       builder: (context, model, child) => Scaffold(
           extendBody: true,
-          bottomNavigationBar: CustomBottomNavigation(
+          drawer: CustomBottomNavigation(
             setSelectedIndex: (index) => model.setSelectedIndex(index),
             selectedIndex: model.selectedIndex,
           ),
-          body: DoubleBackToCloseApp(
-            snackBar: SnackBar(
-              content: Text('Press back again to exit'),
-              duration: Duration(seconds: 1),
+          backgroundColor: Colors.grey.shade50,
+          appBar: CustomHomePageAppBar(
+            image: model.currentUser?.image ?? '',
+            name: model.currentUser?.fullName ?? '',
+            position: model.currentUser?.position ?? '',
+            onTapUser: () => model.goToUserView(model.currentUser!),
+            onNotificationTap: () => model.goToNotificationView(),
+            onLogOutTap: () => model.logOut(),
+            hasNotification: model.notificationCount > 0,
+          ),
+
+          body: RefreshIndicator(
+            color: Palettes.kcBlueMain1,
+            onRefresh: () async {
+              model.init();
+            },
+            child: Row(
+              children: [
+                CustomBottomNavigation(
+                  setSelectedIndex: (index) => model.setSelectedIndex(index),
+                  selectedIndex: model.selectedIndex,
+                ),
+                Expanded(
+                  child: IndexStackBody(
+                    index: model.selectedIndex,
+                  ),
+                )
+              ],
             ),
-            child: SafeArea(
-              child: IndexStackBody(
-                index: model.selectedIndex,
-              ),
-            ),
-          )),
+          )
+
+          // body: Row(
+          //   key: UniqueKey(),
+          //   children: [
+          //     Drawer(
+          //       elevation: 1,
+          //   child: IndexStackBody(
+          //           index: model.selectedIndex,
+          //         ),
+          //     ),
+          //     // Expanded(
+          //     //   child: Center(
+          //     //       child: RouteHandeler().getRouteWidget(widget.routeName)),
+          //     // ),
+          //   ],
+          // ),
+          ),
     );
   }
 }
 
 class IndexStackBody extends StatelessWidget {
   final index;
+
   IndexStackBody({Key? key, required this.index}) : super(key: key);
 
   @override
@@ -51,6 +96,9 @@ class IndexStackBody extends StatelessWidget {
         PatientsView(),
         ProceduresView(),
         MedicineView(),
+        PaymentSelectPatientView(),
+        AddExpenseView(),
+        PatientReportView(showAppBar: true)
       ],
     );
   }

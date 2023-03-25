@@ -1,8 +1,8 @@
 import 'package:age_calculator/age_calculator.dart';
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/ui/widgets/patient_card/patient_card.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/ui/widgets/patient_card/patient_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
@@ -143,7 +143,7 @@ class AppointmentSelectPatientView extends StatelessWidget {
                                         key: ObjectKey(
                                             model.patientList[index].id),
                                         name: model.patientList[index].fullName,
-                                        image: model.patientList[index].image,
+                                        // image: model.patientList[index].image,
                                         phone:
                                             model.patientList[index].phoneNum,
                                         address:

@@ -1,11 +1,11 @@
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/patient_model/patient_model.dart';
-import 'package:opmsapp/ui/views/patient_dental_chart/patient_dental_chart_view_model.dart';
-import 'package:opmsapp/ui/widgets/patient_card/patient_card.dart';
-import 'package:opmsapp/ui/widgets/tooth/tooth_widget.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/patient_model/patient_model.dart';
+import 'package:opmswebstaff/ui/views/patient_dental_chart/patient_dental_chart_view_model.dart';
+import 'package:opmswebstaff/ui/widgets/patient_card/patient_card.dart';
+import 'package:opmswebstaff/ui/widgets/tooth/tooth_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -86,7 +86,7 @@ class PatientDentalChartView extends StatelessWidget {
             physics: BouncingScrollPhysics(),
             children: [
               PatientCard(
-                image: patient.image,
+                // image: patient.image,
                 name: patient.fullName,
                 phone: patient.phoneNum,
                 address: patient.address,

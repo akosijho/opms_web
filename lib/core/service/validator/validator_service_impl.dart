@@ -1,4 +1,4 @@
-import 'package:opmsapp/core/service/validator/validator_service.dart';
+import 'package:opmswebstaff/core/service/validator/validator_service.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 

@@ -1,4 +1,4 @@
-import 'package:opmsapp/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

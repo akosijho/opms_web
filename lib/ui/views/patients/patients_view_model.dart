@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/core/service/toast/toast_service.dart';
-import 'package:opmsapp/core/service/url_launcher/url_launcher_service.dart';
-import 'package:opmsapp/models/patient_model/patient_model.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/toast/toast_service.dart';
+import 'package:opmswebstaff/core/service/url_launcher/url_launcher_service.dart';
+import 'package:opmswebstaff/models/patient_model/patient_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:stacked/stacked.dart';

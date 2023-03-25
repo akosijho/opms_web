@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/core/service/pdf_service/pdf_service.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/pdf_service/pdf_service.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/app.locator.dart';

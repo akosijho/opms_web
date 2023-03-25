@@ -1,6 +1,6 @@
-import 'package:opmsapp/constants/font_name/font_name.dart';
-import 'package:opmsapp/constants/styles/button_style.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/constants/font_name/font_name.dart';
+import 'package:opmswebstaff/constants/styles/button_style.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
 import 'package:flutter/material.dart';
 
 import 'palette_color.dart';

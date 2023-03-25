@@ -1,24 +1,24 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/core/service/url_launcher/url_launcher_service.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/core/service/url_launcher/url_launcher_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
 class PatientCard extends StatelessWidget {
-  final String image;
+  // final String image;
   final String name;
   final String phone;
   final String address;
   final String? age;
   final String? birthDate;
   final DateTime dateCreated;
+
   PatientCard(
       {Key? key,
-      required this.image,
+      // required this.image,
       required this.name,
       required this.phone,
       required this.address,
@@ -40,8 +40,8 @@ class PatientCard extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 120,
-            height: 120,
+            width: 100,
+            height: 100,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.grey,
@@ -55,19 +55,27 @@ class PatientCard extends StatelessWidget {
                       blurRadius: 1.5,
                       offset: Offset(0, 2)),
                 ]),
-            child:  ClipRRect(
+            // child:  ClipRRect(
+            //   borderRadius: BorderRadius.circular(120),
+            //   child: CachedNetworkImage(
+            //       imageUrl: image,
+            //       fit: BoxFit.cover,
+            //       filterQuality:  FilterQuality.high,
+            //       progressIndicatorBuilder: (context, url, progress) =>
+            //           CircularProgressIndicator(
+            //             value: progress.progress,
+            //             valueColor: AlwaysStoppedAnimation(
+            //               Colors.white,
+            //             ),
+            //           )),
+            // ),
+            child: ClipRRect(
               borderRadius: BorderRadius.circular(120),
-              child: CachedNetworkImage(
-                  imageUrl: image,
-                  fit: BoxFit.cover,
-                  filterQuality:  FilterQuality.high,
-                  progressIndicatorBuilder: (context, url, progress) =>
-                      CircularProgressIndicator(
-                        value: progress.progress,
-                        valueColor: AlwaysStoppedAnimation(
-                          Colors.white,
-                        ),
-                      )),
+              child: Image.asset(
+                "assets/images/optical_avatar.png",
+                // imageUrl: image,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           SizedBox(width: 10),

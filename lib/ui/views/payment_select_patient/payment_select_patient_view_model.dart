@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/app.locator.dart';

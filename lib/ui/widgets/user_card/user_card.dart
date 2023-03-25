@@ -1,8 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/models/user_model/user_model.dart';
+import 'package:image_network/image_network.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/models/user_model/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UserCard extends StatelessWidget {
   final VoidCallback? onTap;
@@ -29,10 +28,12 @@ class UserCard extends StatelessWidget {
                       topLeft: Radius.circular(4),
                       bottomLeft: Radius.circular(4),
                     ),
-                    child: CachedNetworkImage(
-                      imageUrl: user.image,
-                      filterQuality: FilterQuality.high,
-                      fit: BoxFit.cover,
+                    child: ImageNetwork(
+                      image: user.image,
+                      height: 130,
+                      width: 130,
+                      // filterQuality: FilterQuality.high,
+                      fitWeb: BoxFitWeb.cover,
                     ),
                   ),
                 ),
@@ -51,10 +52,10 @@ class UserCard extends StatelessWidget {
                                 style: TextStyles.tsHeading4(),
                               ),
                             ),
-                            SizedBox(width: 4),
+                            SizedBox(width: 2),
                             user.active_status == 'active'
                                 ? Container(
-                                    width: 53.sp,
+                                    // width: 53.sp,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -88,7 +89,7 @@ class UserCard extends StatelessWidget {
                         Text(
                           user.position,
                           style: TextStyle(
-                              fontSize: kfsBody3.sp,
+                              fontSize: kfsBody3,
                               letterSpacing: 0.5,
                               fontWeight: FontWeight.bold),
                         ),

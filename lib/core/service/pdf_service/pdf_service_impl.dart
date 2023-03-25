@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:opmsapp/core/service/pdf_service/pdf_service.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/payment/payment.dart';
-import 'package:opmsapp/models/prescription/prescription.dart';
+import 'package:opmswebstaff/core/service/pdf_service/pdf_service.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/payment/payment.dart';
+import 'package:opmswebstaff/models/prescription/prescription.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
@@ -32,7 +32,7 @@ class PdfServiceImp extends PdfService {
                   fontWeight: pw.FontWeight.bold,
                   fontSize: 14,
                 )),
-            pw.Text('Poblacion, Bilar, Bohol',
+            pw.Text('Tagbilaran City, Bohol',
                 style: pw.TextStyle(
                   fontSize: 13,
                 )),
@@ -46,13 +46,13 @@ class PdfServiceImp extends PdfService {
                   pw.Row(
                       mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                       children: [
-                        pw.Text('Dr. Lister Anthony Maglinte',
+                        pw.Text('Dr. Rica Angelique Plaza',
                             style: pw.TextStyle(
                               fontWeight: pw.FontWeight.bold,
                               fontSize: 13,
                             )),
                       ]),
-                  pw.Text('Dental Surgeon',
+                  pw.Text('Optometrist',
                       style: pw.TextStyle(
                         fontSize: 12,
                       )),
@@ -66,7 +66,7 @@ class PdfServiceImp extends PdfService {
             ),
             pw.SizedBox(height: 20),
             pw.Align(
-                child: pw.Text('DENTAL CERTIFICATE',
+                child: pw.Text('OPTICAL CERTIFICATE',
                     style: pw.TextStyle(
                       fontSize: 14,
                       fontWeight: pw.FontWeight.bold,
@@ -95,7 +95,7 @@ class PdfServiceImp extends PdfService {
                               fontSize: 12,
                               fontWeight: pw.FontWeight.bold,
                             )),
-                        pw.Text('has undergone the procedure - ',
+                        pw.Text('has undergone the service - ',
                             style: pw.TextStyle(
                               fontSize: 12,
                             )),
@@ -133,7 +133,7 @@ class PdfServiceImp extends PdfService {
                                 bottom: pw.BorderSide(
                                     width: 1,
                                     color: PdfColor.fromHex("#000000")))),
-                        child: pw.Text('DR. LISTER ANTHONY MAGLINTE'),
+                        child: pw.Text('DR. RICA ANGELIQUE PLAZA'),
                       ),
                       pw.Text('SIGNATURE')
                     ])),
@@ -171,7 +171,7 @@ class PdfServiceImp extends PdfService {
                       fontWeight: pw.FontWeight.bold,
                       fontSize: 14,
                     )),
-                pw.Text('Poblacion, Bilar, Bohol',
+                pw.Text('Tagbilaran City, Bohol',
                     style: pw.TextStyle(
                       fontSize: 13,
                     )),
@@ -186,13 +186,13 @@ class PdfServiceImp extends PdfService {
                             mainAxisAlignment:
                                 pw.MainAxisAlignment.spaceBetween,
                             children: [
-                              pw.Text('Dr. Lister Anthony Maglinte',
+                              pw.Text('Dr. Rica Angelique Plaza',
                                   style: pw.TextStyle(
                                     fontWeight: pw.FontWeight.bold,
                                     fontSize: 13,
                                   )),
                             ]),
-                        pw.Text('Dental Surgeon',
+                        pw.Text('Optometrist',
                             style: pw.TextStyle(
                               fontSize: 12,
                             )),
@@ -274,7 +274,7 @@ class PdfServiceImp extends PdfService {
                                     bottom: pw.BorderSide(
                                         width: 1,
                                         color: PdfColor.fromHex("#000000")))),
-                            child: pw.Text('DR. LISTER ANTHONY MAGLINTE'),
+                            child: pw.Text('DR. RICA ANGELIQUE PLAZA'),
                           ),
                           pw.Text('SIGNATURE')
                         ]))

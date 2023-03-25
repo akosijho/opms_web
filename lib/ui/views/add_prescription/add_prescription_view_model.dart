@@ -1,8 +1,8 @@
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/core/service/bottom_sheet/bottom_sheet_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/core/service/snack_bar/snack_bar_service.dart';
-import 'package:opmsapp/core/service/validator/validator_service.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/core/service/bottom_sheet/bottom_sheet_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
+import 'package:opmswebstaff/core/service/validator/validator_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';

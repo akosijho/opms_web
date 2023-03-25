@@ -1,7 +1,7 @@
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/extensions/date_format_extension.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/ui/views/view_patient_appointment/view_patient_appointment_view_model.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/extensions/date_format_extension.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/ui/views/view_patient_appointment/view_patient_appointment_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -62,8 +62,8 @@ class ViewPatientAppointment extends StatelessWidget {
                     itemBuilder: (context, i) => AppointmentCard(
                           key: ObjectKey(model.patientListOfAppointments[i]),
                           onPatientTap: () {},
-                          imageUrl:
-                              model.patientListOfAppointments[i].patient.image,
+                          // imageUrl:
+                          //     model.patientListOfAppointments[i].patient.image,
                           serviceTitle: model.patientListOfAppointments[i]
                               .procedures![0].procedureName,
                           doctor: model.patientListOfAppointments[i].dentist,

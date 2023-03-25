@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/connectivity/connectivity_service.dart';
-import 'package:opmsapp/core/service/dialog/dialog_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/models/appointment_model/appointment_model.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/connectivity/connectivity_service.dart';
+import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/app.locator.dart';

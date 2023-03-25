@@ -1,6 +1,6 @@
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/extensions/date_format_extension.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/extensions/date_format_extension.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -65,7 +65,7 @@ class WeekAppointmentView extends StatelessWidget {
                     child: AppointmentCard(
                       key: ObjectKey(model.appointments[i]),
                       onPatientTap: () {},
-                      imageUrl: model.appointments[i].patient.image,
+                      // imageUrl: model.appointments[i].patient.image,
                       serviceTitle:
                           model.appointments[i].procedures![0].procedureName,
                       doctor: model.appointments[i].dentist,

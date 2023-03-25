@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/dental_notes/dental_notes.dart';
+import 'package:image_network/image_network.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,11 +36,11 @@ class DentalNoteCard extends StatelessWidget {
                   border: Border.all(color: Colors.grey.shade200, width: 2)),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                child: CachedNetworkImage(
-                  imageUrl: patient.image,
+                child: ImageNetwork(
+                  image: patient.image,
                   height: 50,
                   width: 50,
-                  fit: BoxFit.cover,
+                  fitWeb: BoxFitWeb.cover,
                 ),
               ),
             ),

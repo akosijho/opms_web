@@ -1,5 +1,5 @@
-import 'package:opmsapp/ui/views/prescription_view/prescription_view_model.dart';
-import 'package:opmsapp/ui/widgets/prescription_card/prescription_card.dart';
+import 'package:opmswebstaff/ui/views/prescription_view/prescription_view_model.dart';
+import 'package:opmswebstaff/ui/widgets/prescription_card/prescription_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';

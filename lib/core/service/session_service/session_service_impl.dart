@@ -1,5 +1,5 @@
-import 'package:opmsapp/core/service/session_service/session_service.dart';
-import 'package:opmsapp/models/session/session_model.dart';
+import 'package:opmswebstaff/core/service/session_service/session_service.dart';
+import 'package:opmswebstaff/models/session/session_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart';
 

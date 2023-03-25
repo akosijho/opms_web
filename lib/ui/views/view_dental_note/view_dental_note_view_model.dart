@@ -1,7 +1,7 @@
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/models/dental_notes/dental_notes.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
 import 'package:stacked/stacked.dart';
 
 class ViewDentalNoteViewModel extends BaseViewModel {

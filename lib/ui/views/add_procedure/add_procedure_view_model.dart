@@ -1,11 +1,11 @@
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/dialog/dialog_service.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/core/service/search_index/search_index.dart';
-import 'package:opmsapp/core/service/toast/toast_service.dart';
-import 'package:opmsapp/core/service/validator/validator_service.dart';
-import 'package:opmsapp/models/procedure/procedure.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/search_index/search_index.dart';
+import 'package:opmswebstaff/core/service/toast/toast_service.dart';
+import 'package:opmswebstaff/core/service/validator/validator_service.dart';
+import 'package:opmswebstaff/models/procedure/procedure.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 

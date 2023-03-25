@@ -1,13 +1,13 @@
 import 'package:age_calculator/age_calculator.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_border_styles.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/enums/appointment_status.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/appointment_model/appointment_model.dart';
-import 'package:opmsapp/models/patient_model/patient_model.dart';
-import 'package:opmsapp/ui/views/create_appointment/create_appointment_view_model.dart';
-import 'package:opmsapp/ui/widgets/patient_card/patient_card.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_border_styles.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/enums/appointment_status.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
+import 'package:opmswebstaff/models/patient_model/patient_model.dart';
+import 'package:opmswebstaff/ui/views/create_appointment/create_appointment_view_model.dart';
+import 'package:opmswebstaff/ui/widgets/patient_card/patient_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
@@ -118,7 +118,7 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                             textAlign: TextAlign.center,
                           )),
                       PatientCard(
-                        image: widget.patient.image,
+                        // image: widget.patient.image,
                         name: widget.patient.fullName,
                         phone: widget.patient.phoneNum,
                         address: widget.patient.address,
@@ -172,7 +172,7 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Procedure*',
+                                  'Service*',
                                 ),
                                 ActionChip(
                                   label: Text(
@@ -286,8 +286,8 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                                     errorStyle: TextStyles.errorTextStyle,
                                     disabledBorder:
                                         TextBorderStyles.normalBorder,
-                                    hintText: 'Select Dentist',
-                                    labelText: 'Dentist*',
+                                    hintText: 'Select Optometrist',
+                                    labelText: 'Optometrist*',
                                     labelStyle: TextStyles.tsBody1(
                                         color: Palettes.kcNeutral1),
                                     floatingLabelBehavior:

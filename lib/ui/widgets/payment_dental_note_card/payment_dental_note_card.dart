@@ -1,5 +1,5 @@
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/dental_notes/dental_notes.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

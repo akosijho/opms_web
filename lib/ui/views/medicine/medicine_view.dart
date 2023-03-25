@@ -1,8 +1,8 @@
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/ui/views/medicine/medicine_view_model.dart';
-import 'package:opmsapp/ui/widgets/medicine_card/medicine_card.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/ui/views/medicine/medicine_view_model.dart';
+import 'package:opmswebstaff/ui/widgets/medicine_card/medicine_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -37,7 +37,7 @@ class _MedicineViewState extends State<MedicineView> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            'Medicine List',
+            'Product List',
             style: TextStyles.tsHeading3(color: Colors.white),
           ),
         ),
@@ -49,7 +49,7 @@ class _MedicineViewState extends State<MedicineView> {
             isExtended: model.isScrolledUp,
             onPressed: () =>
                 model.navigationService.pushNamed(Routes.AddMedicineView),
-            label: Text('Add Medicine'),
+            label: Text('Add Product'),
             icon: Icon(Icons.add),
           ),
         ),
@@ -109,7 +109,7 @@ class _MedicineViewState extends State<MedicineView> {
                               ),
                             ),
                             constraints: BoxConstraints(maxHeight: 43),
-                            hintText: 'Search Medicine...',
+                            hintText: 'Search Product...',
                           ),
                         ),
                       ),
@@ -127,7 +127,7 @@ class _MedicineViewState extends State<MedicineView> {
                     child: Row(
                       children: [
                         Text(
-                          'Drugs List',
+                          'Product List',
                           style:
                               TextStyles.tsBody4(color: Colors.grey.shade800),
                         ),

@@ -1,4 +1,4 @@
-import 'package:opmsapp/models/response_model/auth_response_model.dart';
+import 'package:opmswebstaff/models/response_model/auth_response_model.dart';
 
 abstract class FirebaseAuthService {
   Future<AuthResponse> loginWithEmail(

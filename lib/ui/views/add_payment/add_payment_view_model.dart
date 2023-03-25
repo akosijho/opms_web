@@ -1,13 +1,14 @@
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/core/service/api/api_service.dart';
-import 'package:opmsapp/core/service/bottom_sheet/bottom_sheet_service.dart';
-import 'package:opmsapp/core/service/dialog/dialog_service.dart';
-import 'package:opmsapp/core/service/snack_bar/snack_bar_service.dart';
-import 'package:opmsapp/core/service/validator/validator_service.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/dental_notes/dental_notes.dart';
-import 'package:opmsapp/models/payment/payment.dart';
-import 'package:opmsapp/ui/widgets/select_payment_type/select_payment_type.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/core/service/bottom_sheet/bottom_sheet_service.dart';
+import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
+import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
+import 'package:opmswebstaff/core/service/validator/validator_service.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
+import 'package:opmswebstaff/models/payment/payment.dart';
+import 'package:opmswebstaff/models/procedure/procedure.dart';
+import 'package:opmswebstaff/ui/widgets/select_payment_type/select_payment_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -32,15 +33,20 @@ class AddPaymentViewModel extends BaseViewModel {
   final dateTxtController = TextEditingController();
   final totalAmountTxtController = TextEditingController();
   final remarksTxtController = TextEditingController();
+  final procedureTxtController = TextEditingController();
 
   String selectedPaymentType = "";
   DateTime? selectedPaymentDate;
   List<DentalNotes> selectedDentalNotes = [];
   List<Medicine> selectedMedicines = [];
+  // List<Procedure> selectedServices = [];
   final addPaymentFormKey = GlobalKey<FormState>();
   double dentalNoteSubTotal = 0.00;
   double medicineSubTotal = 0.00;
+  double serviceSubTotal = 0.00;
   double totalAmountFinal = 0.00;
+
+  Procedure? selectedProcedure;
 
   @override
   void dispose() {
@@ -102,6 +108,22 @@ class AddPaymentViewModel extends BaseViewModel {
     computeMedicineSubTotal();
   }
 
+  // void selectServices(String patientId) async {
+  //   selectedServices =
+  //       await navigationService.pushNamed(Routes.SelectionProcedure) ?? [];
+  //   notifyListeners();
+  //   computeServiceSubTotal();
+  // }
+
+  void goToSelectProcedure(String patientId) async {
+    selectedProcedure =
+    await navigationService.pushNamed(Routes.SelectionProcedure) ?? [];
+    procedureTxtController.text = selectedProcedure?.procedureName ?? '';
+    notifyListeners();
+      computeServiceSubTotal();
+  }
+
+
   void computeDentalNoteSubTotal() {
     dentalNoteSubTotal = 0;
     for (DentalNotes dentalNote in selectedDentalNotes) {
@@ -121,9 +143,30 @@ class AddPaymentViewModel extends BaseViewModel {
     computeTotalAmountFinal();
   }
 
+  void computeServiceSubTotal() {
+    serviceSubTotal = 0;
+
+      serviceSubTotal +=
+      double.parse(selectedProcedure!.price!);
+      notifyListeners();
+
+    computeTotalAmountFinal();
+  }
+  // double serviceTotal = service.price * service.quantity;
+  //
+  // List<Service> services = getServices();
+  // double subtotal = 0.0;
+  //
+  // for (Service service in services) {
+  // subtotal += service.price * service.quantity;
+  // }
+  //
+  // print('Subtotal: \$${subtotal.toStringAsFixed(2)}');
+
   void computeTotalAmountFinal() {
     totalAmountFinal = 0;
-    totalAmountFinal = dentalNoteSubTotal + medicineSubTotal;
+    // totalAmountFinal = dentalNoteSubTotal + medicineSubTotal;
+    totalAmountFinal = serviceSubTotal + medicineSubTotal;
     totalAmountTxtController.text = totalAmountFinal.toString();
     notifyListeners();
   }

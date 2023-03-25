@@ -1,4 +1,4 @@
-import 'package:opmsapp/ui/widgets/select_payment_type/select_payment_type_view_model.dart';
+import 'package:opmswebstaff/ui/widgets/select_payment_type/select_payment_type_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';

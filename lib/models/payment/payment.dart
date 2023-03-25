@@ -1,4 +1,4 @@
-import 'package:opmsapp/models/medicine/medicine.dart';
+import 'package:opmswebstaff/models/medicine/medicine.dart';
 
 import '../dental_notes/dental_notes.dart';
 

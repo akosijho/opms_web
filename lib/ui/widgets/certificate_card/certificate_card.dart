@@ -1,5 +1,5 @@
-import 'package:opmsapp/extensions/string_extension.dart';
-import 'package:opmsapp/models/dental_certificate/dental_certificate.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/dental_certificate/dental_certificate.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -30,7 +30,7 @@ class CertificateCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Dental Certificate on: ',
+                    'Optical Certificate on: ',
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       color: Colors.grey.shade900,

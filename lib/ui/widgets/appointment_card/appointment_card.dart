@@ -1,11 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:opmsapp/constants/font_name/font_name.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/core/service/toast/toast_service.dart';
-import 'package:opmsapp/enums/appointment_status.dart';
+import 'package:opmswebstaff/constants/font_name/font_name.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/core/service/toast/toast_service.dart';
+import 'package:opmswebstaff/enums/appointment_status.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 
@@ -30,7 +28,7 @@ class AppointmentCard extends StatefulWidget {
   final Function onPatientTap;
   final String serviceTitle;
   final String? time;
-  final dynamic imageUrl;
+  // final dynamic imageUrl;
 
   const AppointmentCard({
     required this.key,
@@ -41,7 +39,7 @@ class AppointmentCard extends StatefulWidget {
     required this.patient,
     required this.appointmentStatus,
     required this.serviceTitle,
-    required this.imageUrl,
+    // required this.imageUrl,
     this.time,
   }) : super(key: key);
 
@@ -221,9 +219,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                     flex: 3,
                     child: Row(
                       children: [
-                        DateWidget(
-                          imageUrl: widget.imageUrl,
-                        ),
+                        DateWidget(),
                         SizedBox(width: 10),
                         Expanded(
                             child: InfoWidget(
@@ -285,23 +281,35 @@ class _AppointmentCardState extends State<AppointmentCard> {
 }
 
 class DateWidget extends StatelessWidget {
-  final dynamic imageUrl;
+  // final dynamic imageUrl;
 
-  const DateWidget({Key? key, required this.imageUrl}) : super(key: key);
+  const DateWidget({Key? key}) : super(key: key);
+  // const DateWidget({Key? key, required this.imageUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // return ClipRRect(
+    //   borderRadius: BorderRadius.circular(8),
+    //   child: CachedNetworkImage(
+    //     width: 75,
+    //     height: double.maxFinite,
+    //     alignment: Alignment.center,
+    //     imageUrl: imageUrl,
+    //     fit: BoxFit.cover,
+    //     progressIndicatorBuilder: (context, url, progress) => Container(
+    //       color: Colors.grey.shade400,
+    //     ),
+    //   ),
+    // );
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
-      child: CachedNetworkImage(
-        width: 75,
+      child: Image.asset(
+        "assets/images/optical_avatar.png",
         height: double.maxFinite,
+        width: 75,
         alignment: Alignment.center,
-        imageUrl: imageUrl,
         fit: BoxFit.cover,
-        progressIndicatorBuilder: (context, url, progress) => Container(
-          color: Colors.grey.shade400,
-        ),
+
       ),
     );
   }
@@ -341,7 +349,7 @@ class InfoWidget extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontFamily: FontNames.sfPro,
-                      fontSize: 13.sp,
+                      fontSize: 13,
                       color: Palettes.kcNeutral1,
                       overflow: TextOverflow.ellipsis,
                       leadingDistribution: TextLeadingDistribution.proportional,
@@ -387,7 +395,7 @@ class InfoWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Dentist: ',
+                'Optometrist: ',
                 style: TextStyles.tsHeading5(color: Palettes.kcNeutral1),
               ),
               Text(

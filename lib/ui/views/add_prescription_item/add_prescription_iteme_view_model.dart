@@ -1,7 +1,7 @@
-import 'package:opmsapp/app/app.locator.dart';
-import 'package:opmsapp/core/service/navigation/navigation_service.dart';
-import 'package:opmsapp/core/service/validator/validator_service.dart';
-import 'package:opmsapp/models/prescription/prescription.dart';
+import 'package:opmswebstaff/app/app.locator.dart';
+import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/core/service/validator/validator_service.dart';
+import 'package:opmswebstaff/models/prescription/prescription.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 

@@ -1,5 +1,5 @@
-import 'package:opmsapp/app/app.router.dart';
-import 'package:opmsapp/extensions/string_extension.dart';
+import 'package:opmswebstaff/app/app.router.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';

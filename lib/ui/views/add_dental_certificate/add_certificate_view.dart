@@ -1,5 +1,5 @@
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/ui/views/add_dental_certificate/add_certicate_view_model.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/ui/views/add_dental_certificate/add_certicate_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -18,7 +18,7 @@ class AddCertificateView extends StatelessWidget {
       viewModelBuilder: () => AddCertificateViewModel(),
       builder: (context, model, widget) => Scaffold(
         appBar: AppBar(
-          title: Text('Add Dental Certificate'),
+          title: Text('Add Optical Certificate'),
         ),
         persistentFooterButtons: [
           Row(

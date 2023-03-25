@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/ui/views/user_view/user_view_model.dart';
+import 'package:image_network/image_network.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/ui/views/user_view/user_view_model.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -59,6 +59,8 @@ class _UserViewState extends State<UserView> {
                         child: Stack(
                           children: [
                             Container(
+                              width: 100,
+                              height: 100,
                               decoration: BoxDecoration(
                                   border:
                                       Border.all(color: Colors.white, width: 2),
@@ -71,11 +73,11 @@ class _UserViewState extends State<UserView> {
                                   ]),
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
-                                  child: CachedNetworkImage(
-                                    imageUrl: model.currentUser!.image,
+                                  child: ImageNetwork(
+                                    image: model.currentUser!.image,
                                     height: 100,
                                     width: 100,
-                                    fit: BoxFit.cover,
+                                    fitWeb: BoxFitWeb.cover,
                                   )),
                             ),
                             Positioned(
@@ -303,12 +305,16 @@ class _UserViewState extends State<UserView> {
                               child: ElevatedButton.icon(
                                   onPressed: () => model.updateUserInfo(),
                                   icon: Icon(Icons.update),
-                                  label: Text('Update'))),
+                                  label: Text('Update',
+                                  style: TextStyle(
+                                    fontSize: 14
+                                  )
+                                  ))),
                           SizedBox(width: 10),
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                   ],
                 ),
               )

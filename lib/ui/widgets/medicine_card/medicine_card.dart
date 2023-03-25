@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
+import 'package:image_network/image_network.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -77,22 +77,28 @@ class MedicineCard extends StatelessWidget {
           height: 50,
           width: 50,
           child: SvgPicture.asset(
-            'assets/icons/Pills.svg',
+            'assets/icons/eyeglass.svg',
             color: Colors.purple,
           ),
         ),
       );
     } else {
-      return CachedNetworkImage(
-        imageUrl: image,
-        fit: BoxFit.cover,
-        filterQuality: FilterQuality.high,
-        progressIndicatorBuilder: (context, url, progress) =>
-            LinearProgressIndicator(
-          color: Colors.grey.shade100,
-          value: progress.progress,
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
+      return ImageNetwork(
+        image: image,
+        fitWeb: BoxFitWeb.cover,
+        onLoading: LinearProgressIndicator(
+            color: Colors.grey.shade100,
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.grey)
         ),
+        height: 50,
+        width: 50,
+        // filterQuality: FilterQuality.high,
+        // progressIndicatorBuilder: (context, url, progress) =>
+        //     LinearProgressIndicator(
+        //   color: Colors.grey.shade100,
+        //   value: progress.progress,
+        //   valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
+        // ),
       );
     }
   }

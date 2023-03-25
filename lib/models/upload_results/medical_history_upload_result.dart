@@ -1,4 +1,4 @@
-import 'package:opmsapp/models/medical_history/medical_history.dart';
+import 'package:opmswebstaff/models/medical_history/medical_history.dart';
 
 class MedHistoryUploadResult {
   final List<MedicalHistory>? medHistory;

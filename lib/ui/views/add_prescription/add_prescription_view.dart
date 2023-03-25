@@ -1,6 +1,6 @@
-import 'package:opmsapp/models/patient_model/patient_model.dart';
-import 'package:opmsapp/ui/views/add_prescription/add_prescription_view_model.dart';
-import 'package:opmsapp/ui/widgets/prescription_item_card/prescription_item_card.dart';
+import 'package:opmswebstaff/models/patient_model/patient_model.dart';
+import 'package:opmswebstaff/ui/views/add_prescription/add_prescription_view_model.dart';
+import 'package:opmswebstaff/ui/widgets/prescription_item_card/prescription_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

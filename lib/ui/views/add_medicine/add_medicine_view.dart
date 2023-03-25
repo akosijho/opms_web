@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:opmsapp/constants/styles/palette_color.dart';
-import 'package:opmsapp/constants/styles/text_border_styles.dart';
-import 'package:opmsapp/constants/styles/text_styles.dart';
-import 'package:opmsapp/ui/views/add_medicine/add_medicine_view_model.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
+import 'package:opmswebstaff/constants/styles/text_border_styles.dart';
+import 'package:opmswebstaff/constants/styles/text_styles.dart';
+import 'package:opmswebstaff/ui/views/add_medicine/add_medicine_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
@@ -36,7 +36,7 @@ class _AddMedicineViewState extends State<AddMedicineView> {
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Add Medicine'),
+          title: Text('Add Product'),
         ),
         persistentFooterButtons: [
           Row(
@@ -111,8 +111,8 @@ class _AddMedicineViewState extends State<AddMedicineView> {
                 decoration: InputDecoration(
                   errorBorder: TextBorderStyles.errorBorder,
                   errorStyle: TextStyles.errorTextStyle,
-                  hintText: 'Medicine Name',
-                  labelText: 'Generic Name*',
+                  hintText: 'Product Name',
+                  labelText: 'Product Name*',
                   // disabledBorder: ,
                   labelStyle: TextStyles.tsBody1(color: Palettes.kcNeutral1),
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -146,7 +146,7 @@ class _AddMedicineViewState extends State<AddMedicineView> {
                   errorBorder: TextBorderStyles.errorBorder,
                   errorStyle: TextStyles.errorTextStyle,
                   hintText: 'Type Amount',
-                  labelText: 'Amount Per Tab/bottle*',
+                  labelText: 'Amount',
                   // disabledBorder: ,
                   labelStyle: TextStyles.tsBody1(color: Palettes.kcNeutral1),
                   floatingLabelBehavior: FloatingLabelBehavior.always,
