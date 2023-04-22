@@ -95,6 +95,17 @@ class LoginViewModel extends FormViewModel {
       notifyListeners();
     }
   }
+  // void listenToConnectivityChanges() {
+  //   connectivitySub =
+  //       InternetConnectionChecker().onStatusChange.listen((event) async {
+  //         if (event == InternetConnectionStatus.connected) {
+  //           await getSessionInfo();
+  //         } else {
+  //           snackBarService.showSnackBar(
+  //               message: 'No Internet Connection, Retrying...');
+  //         }
+  //       });
+  // }
 
   @override
   void setFormStatus() {}

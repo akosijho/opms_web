@@ -1,6 +1,7 @@
 import 'package:opmswebstaff/constants/styles/palette_color.dart';
 import 'package:opmswebstaff/ui/views/add_expenses/add_expenses_view.dart';
 import 'package:opmswebstaff/ui/views/appointment/appointment_view.dart';
+import 'package:opmswebstaff/ui/views/finance/reports_view.dart';
 import 'package:opmswebstaff/ui/views/home/home_view.dart';
 import 'package:opmswebstaff/ui/views/main_body/main_body_view_model.dart';
 import 'package:opmswebstaff/ui/views/medicine/medicine_view.dart';
@@ -61,21 +62,7 @@ class MainBodyView extends StatelessWidget {
             ),
           )
 
-          // body: Row(
-          //   key: UniqueKey(),
-          //   children: [
-          //     Drawer(
-          //       elevation: 1,
-          //   child: IndexStackBody(
-          //           index: model.selectedIndex,
-          //         ),
-          //     ),
-          //     // Expanded(
-          //     //   child: Center(
-          //     //       child: RouteHandeler().getRouteWidget(widget.routeName)),
-          //     // ),
-          //   ],
-          // ),
+
           ),
     );
   }
@@ -98,7 +85,8 @@ class IndexStackBody extends StatelessWidget {
         MedicineView(),
         PaymentSelectPatientView(),
         AddExpenseView(),
-        PatientReportView(showAppBar: true)
+        // PatientReportView(showAppBar: true)
+        ReportView()
       ],
     );
   }

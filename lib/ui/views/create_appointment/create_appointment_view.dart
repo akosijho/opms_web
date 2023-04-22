@@ -63,7 +63,11 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                     Expanded(
                         child: ElevatedButton(
                       onPressed: model.navigationService.pop,
-                      child: Text('Cancel'),
+                      child: Text('Cancel',
+                      style: TextStyle(
+                        fontSize: 16
+                      ),
+                      ),
                       style: ElevatedButton.styleFrom(
                           primary: Colors.red.shade700),
                     )),
@@ -99,7 +103,10 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                                 }
                               }
                             },
-                            child: Text('Save'))),
+                            child: Text('Save',
+                              style: TextStyle(
+                                fontSize: 16
+                            ),))),
                   ],
                 )
               ],

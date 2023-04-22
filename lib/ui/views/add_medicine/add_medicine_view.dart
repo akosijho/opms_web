@@ -51,7 +51,10 @@ class _AddMedicineViewState extends State<AddMedicineView> {
                               price: medicinePrice.text);
                         }
                       },
-                      child: Text('Save'))),
+                      child: Text('Save',
+                        style: TextStyle(
+                          fontSize: 16
+                      ),))),
             ],
           )
         ],

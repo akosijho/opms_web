@@ -6,7 +6,6 @@
 
 // ignore_for_file: public_member_api_docs
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -17,6 +16,7 @@ import '../models/patient_model/patient_model.dart';
 import '../models/payment/payment.dart';
 import '../models/procedure/procedure.dart';
 import '../models/user_model/user_model.dart';
+import '../ui/views/add%20rx/rx_view.dart';
 import '../ui/views/add_dental_certificate/add_certificate_view.dart';
 import '../ui/views/add_expense_item/add_expense_item_view.dart';
 import '../ui/views/add_expenses/add_expenses_view.dart';
@@ -34,7 +34,6 @@ import '../ui/views/dental_certification/dental_certification_view.dart';
 import '../ui/views/dental_chart_legend/dental_chart_legend.dart';
 import '../ui/views/edit_patient/edit_patient_view.dart';
 import '../ui/views/finance/reports_view.dart';
-import '../ui/views/get_started/get_started_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/login/login_view.dart';
 import '../ui/views/main_body/main_body_view.dart';
@@ -47,7 +46,6 @@ import '../ui/views/patient_info/patient_info_view.dart';
 import '../ui/views/patients/patients_view.dart';
 import '../ui/views/payment_select_dental_note/payment_select_dental_note_view.dart';
 import '../ui/views/payment_select_patient/payment_select_patient_view.dart';
-import '../ui/views/pre_loader/pre_loader_view.dart';
 import '../ui/views/prescription_view/prescription_view.dart';
 import '../ui/views/procedures/procedure_view.dart';
 import '../ui/views/receipt_view/receipt_view.dart';
@@ -69,8 +67,6 @@ import '../ui/widgets/selection_procedure/selection_procedure.dart';
 import '../ui/widgets/success_view/success.dart';
 
 class Routes {
-  static const String PreLoader = '/pre-loader-view';
-  static const String GetStarted = '/get-started-view';
   static const String Login = '/login-view';
   static const String Register = '/register-view';
   static const String VerifyEmail = '/verify-email-view';
@@ -115,6 +111,7 @@ class Routes {
       '/payment-select-dental-note-view';
   static const String SelectMedicineView = '/select-medicine-view';
   static const String ReceiptView = '/receipt-view';
+  static const String RxView = '/rx-view';
   static const String AddExpenseItemView = '/add-expense-item-view';
   static const String AddPrescriptionItemView = '/add-prescription-item-view';
   static const String AddCertificateView = '/add-certificate-view';
@@ -123,8 +120,6 @@ class Routes {
       '/view-dental-note-by-tooth-view';
   static const String UpdateProcedureViews = '/update-procedure-view';
   static const all = <String>{
-    PreLoader,
-    GetStarted,
     Login,
     Register,
     VerifyEmail,
@@ -167,6 +162,7 @@ class Routes {
     PaymentSelectDentalNoteView,
     SelectMedicineView,
     ReceiptView,
+    RxView,
     AddExpenseItemView,
     AddPrescriptionItemView,
     AddCertificateView,
@@ -180,8 +176,6 @@ class StackedRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(Routes.PreLoader, page: PreLoaderView),
-    RouteDef(Routes.GetStarted, page: GetStartedView),
     RouteDef(Routes.Login, page: LoginView),
     RouteDef(Routes.Register, page: RegisterView),
     RouteDef(Routes.VerifyEmail, page: VerifyEmailView),
@@ -226,6 +220,7 @@ class StackedRouter extends RouterBase {
         page: PaymentSelectDentalNoteView),
     RouteDef(Routes.SelectMedicineView, page: SelectMedicineView),
     RouteDef(Routes.ReceiptView, page: ReceiptView),
+    RouteDef(Routes.RxView, page: RxView),
     RouteDef(Routes.AddExpenseItemView, page: AddExpenseItemView),
     RouteDef(Routes.AddPrescriptionItemView, page: AddPrescriptionItemView),
     RouteDef(Routes.AddCertificateView, page: AddCertificateView),
@@ -236,18 +231,6 @@ class StackedRouter extends RouterBase {
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
-    PreLoaderView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const PreLoaderView(),
-        settings: data,
-      );
-    },
-    GetStartedView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const GetStartedView(),
-        settings: data,
-      );
-    },
     LoginView: (data) {
       var args = data.getArgs<LoginViewArguments>(
         orElse: () => LoginViewArguments(),
@@ -371,7 +354,7 @@ class StackedRouter extends RouterBase {
     },
     PatientInfoView: (data) {
       var args = data.getArgs<PatientInfoViewArguments>(nullOk: false);
-      return CupertinoPageRoute<dynamic>(
+      return MaterialPageRoute<dynamic>(
         builder: (context) => PatientInfoView(
           key: args.key,
           patient: args.patient,
@@ -612,6 +595,18 @@ class StackedRouter extends RouterBase {
         transitionDuration: const Duration(milliseconds: 300),
       );
     },
+    RxView: (data) {
+      var args = data.getArgs<RxViewArguments>(nullOk: false);
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) => RxView(
+          key: args.key,
+          payment: args.payment,
+        ),
+        settings: data,
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        transitionDuration: const Duration(milliseconds: 300),
+      );
+    },
     AddExpenseItemView: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
@@ -844,6 +839,13 @@ class ReceiptViewArguments {
   final Key? key;
   final Payment payment;
   ReceiptViewArguments({this.key, required this.payment});
+}
+
+/// RxView arguments holder class
+class RxViewArguments {
+  final Key? key;
+  final Payment payment;
+  RxViewArguments({this.key, required this.payment});
 }
 
 /// AddCertificateView arguments holder class

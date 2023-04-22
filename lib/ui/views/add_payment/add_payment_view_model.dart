@@ -233,35 +233,35 @@ class AddPaymentViewModel extends BaseViewModel {
                 remarks: remarksTxtController.text,
               ),
             );
-            if (paymentQueryRes.success) {
-              updateDentalNotePaidStatusOnDB(
-                  patientId: patientId, selectedNotes: selectedNotes);
-              final paymentRec = await apiService.getPaymentInfo(
-                  paymentId: paymentQueryRes.returnValue);
-              navigationService.popUntilFirstAndPushNamed(Routes.ReceiptView,
-                  arguments: ReceiptViewArguments(payment: paymentRec));
-              final notification = NotificationModel(
-                user_id: patientId,
-                notification_title:
-                    'Payment Record ${paymentRec.totalAmount.toCurrency}',
-                notification_msg: 'Your payment on date'
-                    ' ${DateFormat.yMMMd().add_jm().format(paymentRec.paymentDate.toDateTime()!)} was saved',
-                notification_type: 'payment',
-                isRead: false,
-              );
-              await apiService.saveNotification(
-                  notification: notification,
-                  typeId: paymentRec.payment_id ?? 'paymentId');
-              snackBarService.showSnackBar(
-                  message: paymentQueryRes.errorMessage ?? 'Payment Saved',
-                  title: 'SUCCESS!');
-            } else {
-              navigationService.popRepeated(1);
-              snackBarService.showSnackBar(
-                  message:
-                      paymentQueryRes.errorMessage ?? 'Something Went Wrong',
-                  title: 'Error');
-            }
+            // if (paymentQueryRes.success) {
+            //   updateDentalNotePaidStatusOnDB(
+            //       patientId: patientId, selectedNotes: selectedNotes);
+            //   final paymentRec = await apiService.getPaymentInfo(
+            //       paymentId: paymentQueryRes.returnValue);
+            //   navigationService.popUntilFirstAndPushNamed(Routes.ReceiptView,
+            //       arguments: ReceiptViewArguments(payment: paymentRec));
+            //   final notification = NotificationModel(
+            //     user_id: patientId,
+            //     notification_title:
+            //         'Payment Record ${paymentRec.totalAmount.toCurrency}',
+            //     notification_msg: 'Your payment on date'
+            //         ' ${DateFormat.yMMMd().add_jm().format(paymentRec.paymentDate.toDateTime()!)} was saved',
+            //     notification_type: 'payment',
+            //     isRead: false,
+            //   );
+            //   await apiService.saveNotification(
+            //       notification: notification,
+            //       typeId: paymentRec.payment_id ?? 'paymentId');
+            //   snackBarService.showSnackBar(
+            //       message: paymentQueryRes.errorMessage ?? 'Payment Saved',
+            //       title: 'SUCCESS!');
+            // } else {
+            //   navigationService.popRepeated(1);
+            //   snackBarService.showSnackBar(
+            //       message:
+            //           paymentQueryRes.errorMessage ?? 'Something Went Wrong',
+            //       title: 'Error');
+            // }
           });
     }
   }

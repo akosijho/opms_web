@@ -7,8 +7,9 @@ import 'package:intl/intl.dart';
 class PaymentCard extends StatelessWidget {
   final Payment payment;
   final VoidCallback onViewReceiptTap;
+  final VoidCallback onViewRxTap;
   const PaymentCard(
-      {Key? key, required this.payment, required this.onViewReceiptTap})
+      {Key? key, required this.payment, required this.onViewReceiptTap, required this.onViewRxTap})
       : super(key: key);
 
   @override
@@ -33,7 +34,7 @@ class PaymentCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Procedure Subtotal: ',
+                        'Service Subtotal: ',
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           color: Colors.grey.shade900,
@@ -53,7 +54,7 @@ class PaymentCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Medicine Subtotal: ',
+                        'Product Subtotal: ',
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           color: Colors.grey.shade900,
@@ -131,7 +132,7 @@ class PaymentCard extends StatelessWidget {
               color: Colors.grey.shade300,
             ),
             InkWell(
-              onTap: () => onViewReceiptTap(),
+              onTap: () => onViewRxTap(),
               child: Container(
                 height: 40,
                 padding: EdgeInsets.all(8),
@@ -139,13 +140,33 @@ class PaymentCard extends StatelessWidget {
                 color: Colors.grey.shade100,
                 alignment: Alignment.centerRight,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  // mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('View Receipt'),
-                    Icon(
-                      Icons.arrow_forward,
-                      size: 20,
-                    )
+                    InkWell(
+                      onTap: () => onViewRxTap(),
+                      child: Row(
+                        children: [
+                          Text('View Px History'),
+                          Icon(
+                            Icons.arrow_forward,
+                            size: 20,
+                          )
+                        ],
+                      ),
+                    ),
+                    InkWell(
+                        onTap: () => onViewReceiptTap(),
+                        child: Row(
+                          children: [
+                            Text('View Receipt'),
+                            Icon(
+                              Icons.arrow_forward,
+                              size: 20,
+                            )
+                          ],
+                        )),
+
                   ],
                 ),
               ),

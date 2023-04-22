@@ -24,6 +24,7 @@ import 'package:opmswebstaff/core/service/validator/validator_service.dart';
 import 'package:opmswebstaff/core/service/validator/validator_service_impl.dart';
 import 'package:opmswebstaff/core/utility/connectivity_state.dart';
 import 'package:opmswebstaff/core/utility/image_selector.dart';
+import 'package:opmswebstaff/ui/views/add%20rx/rx_view.dart';
 import 'package:opmswebstaff/ui/views/add_dental_certificate/add_certificate_view.dart';
 import 'package:opmswebstaff/ui/views/add_expense_item/add_expense_item_view.dart';
 import 'package:opmswebstaff/ui/views/add_expenses/add_expenses_view.dart';
@@ -80,8 +81,8 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
 
 @StackedApp(
   routes: [
-    MaterialRoute(page: PreLoaderView, name: 'PreLoader'),
-    MaterialRoute(page: GetStartedView, name: 'GetStarted'),
+    // MaterialRoute(page: PreLoaderView, name: 'PreLoader'),
+    // MaterialRoute(page: GetStartedView, name: 'GetStarted'),
     MaterialRoute(page: LoginView, name: 'Login'),
     MaterialRoute(page: RegisterView, name: 'Register'),
     MaterialRoute(page: VerifyEmailView, name: 'VerifyEmail'),
@@ -100,7 +101,7 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
     MaterialRoute(page: CreateAppointmentView, name: 'CreateAppointmentView'),
     MaterialRoute(page: AddMedicineView, name: 'AddMedicineView'),
     MaterialRoute(page: AddProcedureView, name: 'AddProcedureView'),
-    CupertinoRoute(page: PatientInfoView, name: 'PatientInfoView'),
+    MaterialRoute(page: PatientInfoView, name: 'PatientInfoView'),
     MaterialRoute(page: MedicalHistoryView, name: 'MedicalHistoryView'),
     MaterialRoute(page: MedHistoryPhotoView, name: 'MedHistoryPhotoView'),
     MaterialRoute(page: PatientDentalChartView, name: 'PatientDentalChartView'),
@@ -156,6 +157,11 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
     CustomRoute(
         page: ReceiptView,
         name: 'ReceiptView',
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        durationInMilliseconds: 300),
+    CustomRoute(
+        page: RxView,
+        name: 'RxView',
         transitionsBuilder: TransitionsBuilders.slideRight,
         durationInMilliseconds: 300),
     CustomRoute(

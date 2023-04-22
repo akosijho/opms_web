@@ -1,7 +1,8 @@
-import 'package:opmswebstaff/extensions/string_extension.dart';
-import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
 
 import '../../../constants/styles/palette_color.dart';
 import '../../../constants/styles/text_styles.dart';
@@ -43,34 +44,34 @@ class PaymentDentalNoteCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 28,
-                        child: Row(
-                          children: [
-                            Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  'Tooth Number : ',
-                                  style: TextStyles.tsButton1(),
-                                )),
-                            Container(
-                              height: 28,
-                              width: 28,
-                              decoration: BoxDecoration(
-                                  color: Palettes.kcBlueMain1,
-                                  borderRadius: BorderRadius.circular(2)),
-                              child: Center(
-                                child: Text(
-                                  dentalNote.selectedTooth,
-                                  softWrap: true,
-                                  style: TextStyles.tsHeading4(
-                                      color: Colors.white),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: 28,
+                      //   // child: Row(
+                      //   //   children: [
+                      //   //     Align(
+                      //   //         alignment: Alignment.bottomCenter,
+                      //   //         child: Text(
+                      //   //           'Tooth Number : ',
+                      //   //           style: TextStyles.tsButton1(),
+                      //   //         )),
+                      //   //     Container(
+                      //   //       height: 28,
+                      //   //       width: 28,
+                      //   //       decoration: BoxDecoration(
+                      //   //           color: Palettes.kcBlueMain1,
+                      //   //           borderRadius: BorderRadius.circular(2)),
+                      //   //       child: Center(
+                      //   //         child: Text(
+                      //   //           dentalNote.selectedTooth,
+                      //   //           softWrap: true,
+                      //   //           style: TextStyles.tsHeading4(
+                      //   //               color: Colors.white),
+                      //   //         ),
+                      //   //       ),
+                      //   //     )
+                      //   //   ],
+                      //   // ),
+                      // ),
                       SizedBox(height: 8),
                       RichText(
                           text: TextSpan(

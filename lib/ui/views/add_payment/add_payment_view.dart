@@ -247,31 +247,31 @@ class AddPaymentView extends StatelessWidget {
                           height: 10,
                           color: Colors.grey.shade200,
                         ),
-                        GestureDetector(
-                          onTap: () => model.goToSelectProcedure(patient.id),
-                          child: TextFormField(
-                            controller: model.procedureTxtController,
-                            validator: (value) =>
-                                model.validatorService.validateProcedureName(value!),
-                            textInputAction: TextInputAction.next,
-                            enabled: false,
-                            keyboardType: TextInputType.datetime,
-                            decoration: InputDecoration(
-                                errorBorder: TextBorderStyles.errorBorder,
-                                errorStyle: TextStyles.errorTextStyle,
-                                disabledBorder: TextBorderStyles.normalBorder,
-                                hintText: 'Select Service Rendered',
-                                labelText: 'Service*',
-                                labelStyle:
-                                TextStyle(fontSize: 21, color: Palettes.kcNeutral1),
-                                floatingLabelBehavior: FloatingLabelBehavior.always,
-                                suffixIcon: Icon(
-                                  Icons.arrow_drop_down,
-                                  size: 24,
-                                  color: Palettes.kcBlueMain1,
-                                )),
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () => model.goToSelectProcedure(patient.id),
+                        //   child: TextFormField(
+                        //     controller: model.procedureTxtController,
+                        //     validator: (value) =>
+                        //         model.validatorService.validateProcedureName(value!),
+                        //     textInputAction: TextInputAction.next,
+                        //     enabled: false,
+                        //     keyboardType: TextInputType.datetime,
+                        //     decoration: InputDecoration(
+                        //         errorBorder: TextBorderStyles.errorBorder,
+                        //         errorStyle: TextStyles.errorTextStyle,
+                        //         disabledBorder: TextBorderStyles.normalBorder,
+                        //         hintText: 'Select Service Rendered',
+                        //         labelText: 'Service*',
+                        //         labelStyle:
+                        //         TextStyle(fontSize: 21, color: Palettes.kcNeutral1),
+                        //         floatingLabelBehavior: FloatingLabelBehavior.always,
+                        //         suffixIcon: Icon(
+                        //           Icons.arrow_drop_down,
+                        //           size: 24,
+                        //           color: Palettes.kcBlueMain1,
+                        //         )),
+                        //   ),
+                        // ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

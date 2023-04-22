@@ -31,6 +31,8 @@ class HomePageViewModel extends BaseViewModel {
   final snackBarService = locator<SnackBarService>();
 
   int totalPatients = 0;
+  int totalMalePatients = 0;
+  int totalFemalePatients = 0;
 
   StreamSubscription? userSubscription;
   StreamSubscription? appointmentSubscription;
@@ -45,14 +47,37 @@ class HomePageViewModel extends BaseViewModel {
     setBusy(true);
     getCurrentUser();
     getNotifications();
+    await getTotalFemalePatients();
+    await getTotalMalePatients();
+    computeTotalPatient();
     listenToNotificationChanges();
     setBusy(false);
+
   }
 
   @override
   void dispose() {
     userSubscription?.cancel();
     super.dispose();
+  }
+  Future<void> getTotalMalePatients() async {
+    final numMale = await apiService.getTotalMalePatient();
+    if (numMale != null) {
+      totalMalePatients = numMale;
+      notifyListeners();
+    }
+  }
+
+  Future<void> getTotalFemalePatients() async {
+    final numFemale = await apiService.getTotalFeMalePatient();
+    if (numFemale != null) {
+      totalFemalePatients = numFemale;
+      notifyListeners();
+    }
+  }
+  void computeTotalPatient() {
+    totalPatients = totalFemalePatients + totalMalePatients;
+    notifyListeners();
   }
 
   void computeTotalNotif() {

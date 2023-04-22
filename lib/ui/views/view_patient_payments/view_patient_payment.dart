@@ -20,7 +20,7 @@ class ViewPatientPayment extends StatelessWidget {
       },
       builder: (context, model, widget) => Scaffold(
         appBar: AppBar(
-          title: Text("Patient's Payments Record"),
+          title: Text("Patient's Record"),
         ),
         floatingActionButton: FloatingActionButton.extended(
             onPressed: () => model.goToAddBilling(patient),
@@ -32,7 +32,7 @@ class ViewPatientPayment extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'List Of Patient Payments',
+                  'List Of Patient Records',
                   style: GoogleFonts.roboto(
                       color: Colors.black,
                       fontSize: 18,
@@ -51,21 +51,22 @@ class ViewPatientPayment extends StatelessWidget {
             SizedBox(height: 10),
             model.patientPaymentList.isNotEmpty
                 ? ListView.separated(
-                    shrinkWrap: true,
-                    primary: false,
-                    itemBuilder: (context, index) => PaymentCard(
-                          onViewReceiptTap: () => model.goToReceipt(index),
-                          payment: model.patientPaymentList[index],
-                        ),
-                    separatorBuilder: (context, index) => SizedBox(height: 8),
-                    itemCount: model.patientPaymentList.length)
+                shrinkWrap: true,
+                primary: false,
+                itemBuilder: (context, index) => PaymentCard(
+                  onViewReceiptTap: () => model.goToReceipt(index),
+                  onViewRxTap: () => model.goToRx(index),
+                  payment: model.patientPaymentList[index],
+                ),
+                separatorBuilder: (context, index) => SizedBox(height: 8),
+                itemCount: model.patientPaymentList.length)
                 : Container(
-                    height: 500,
-                    color: Colors.grey.shade100,
-                    child: Center(
-                      child: Text('No Payment record'),
-                    ),
-                  ),
+              height: 500,
+              color: Colors.grey.shade100,
+              child: Center(
+                child: Text('No Payment record'),
+              ),
+            ),
             SizedBox(height: 100),
           ],
         ),

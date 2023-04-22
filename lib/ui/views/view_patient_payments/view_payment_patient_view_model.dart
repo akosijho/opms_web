@@ -6,6 +6,7 @@ import 'package:opmswebstaff/core/service/connectivity/connectivity_service.dart
 import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
+import 'package:opmswebstaff/ui/views/add%20rx/rx_view.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/app.locator.dart';
@@ -49,6 +50,10 @@ class ViewPatientPaymentViewModel extends BaseViewModel {
   void goToReceipt(int index) {
     navigationService.pushNamed(Routes.ReceiptView,
         arguments: ReceiptViewArguments(payment: patientPaymentList[index]));
+  }
+  void goToRx(int index) {
+    navigationService.pushNamed(Routes.RxView,
+        arguments: RxViewArguments(payment: patientPaymentList[index]));
   }
 
   void goToAddBilling(Patient patient) {

@@ -244,7 +244,7 @@ class _CartMedicineCardState extends State<CartMedicineCard> {
           width: 87,
           child: SvgPicture.asset(
             'assets/icons/eyeglass.svg',
-            color: Colors.purple,
+            color: Colors.black,
             height: 50,
             width: 50,
             alignment: Alignment.center,

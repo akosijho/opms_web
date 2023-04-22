@@ -1,11 +1,12 @@
+
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:opmswebstaff/constants/styles/palette_color.dart';
 import 'package:opmswebstaff/constants/styles/text_styles.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
 import 'package:opmswebstaff/core/service/validator/validator_service.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../../app/app.locator.dart';
 
@@ -98,38 +99,39 @@ class _SelectDentalNoteCardState extends State<SelectDentalNoteCard> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 25,
-                      child: Row(
-                        children: [
-                          Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Text('Tooth Number : ')),
-                          Container(
-                            height: 25,
-                            width: 25,
-                            decoration: BoxDecoration(
-                                color: Palettes.kcPurpleMain,
-                                borderRadius: BorderRadius.circular(2)),
-                            child: Center(
-                              child: Text(
-                                widget.dentalNote.selectedTooth,
-                                softWrap: true,
-                                style:
-                                    TextStyles.tsHeading5(color: Colors.white),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    // SizedBox(
+                    //   height: 25,
+                    //   child: Row(
+                    //     children: [
+                    //       // Align(
+                    //       //     alignment: Alignment.bottomCenter,
+                    //       //     child: Text('Tooth Number : ')),
+                    //       Container(
+                    //         height: 25,
+                    //         width: 25,
+                    //         decoration: BoxDecoration(
+                    //             color: Palettes.kcPurpleMain,
+                    //             borderRadius: BorderRadius.circular(2)),
+                    //         child: Center(
+                    //           child: Text(
+                    //             widget.dentalNote.sphere,
+                    //             // widget.dentalNote.selectedTooth,
+                    //             softWrap: true,
+                    //             style:
+                    //                 TextStyles.tsHeading5(color: Colors.white),
+                    //           ),
+                    //         ),
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
                     Divider(
                       height: 10,
                       color: Colors.grey,
                     ),
                     RichText(
                         text: TextSpan(
-                            text: 'Procedure:\n',
+                            text: 'Service:\n',
                             style: TextStyles.tsBody2(),
                             children: [
                           TextSpan(

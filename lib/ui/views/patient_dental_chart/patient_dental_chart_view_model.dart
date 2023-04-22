@@ -1,13 +1,11 @@
 import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:opmswebstaff/app/app.locator.dart';
 import 'package:opmswebstaff/app/app.router.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
 import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
-import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
 import 'package:opmswebstaff/models/tooth_condition/tooth_condition.dart';
-import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../models/patient_model/patient_model.dart';
@@ -16,6 +14,44 @@ final GlobalKey<RefreshIndicatorState> refreshKey =
     new GlobalKey<RefreshIndicatorState>();
 
 class PatientDentalChartViewModel extends BaseViewModel {
+  // Patient? patientList;
+
+  TextEditingController frameBrand = TextEditingController(),
+      sphere = TextEditingController(),
+      cylinder = TextEditingController(),
+      axis = TextEditingController(),
+      specr4 = TextEditingController(),
+      specr5 = TextEditingController(),
+      specr6 = TextEditingController(),
+      specl1 = TextEditingController(),
+      specl2 = TextEditingController(),
+      specl3 = TextEditingController(),
+      specl4 = TextEditingController(),
+      specl5 = TextEditingController(),
+      specl6 = TextEditingController(),
+      lensr1 = TextEditingController(),
+      lensr2 = TextEditingController(),
+      lensr3 = TextEditingController(),
+      lensr4 = TextEditingController(),
+      lensr5 = TextEditingController(),
+      lensr6 = TextEditingController(),
+      lensl1 = TextEditingController(),
+      lensl2 = TextEditingController(),
+      lensl3 = TextEditingController(),
+      lensl4 = TextEditingController(),
+      lensl5 = TextEditingController(),
+      lensl6 = TextEditingController();
+
+  // void getPatientList() {
+  //   apiService.getPatients().listen((event) {
+  //     patientSub?.cancel();
+  //     patientSub = apiService.getPatients().listen((myPatientList) {
+  //       // patientList = myPatientList;
+  //       notifyListeners();
+  //     });
+  //   });
+  // }
+
   final centerTooth1 = ['E', 'F', 'P', 'O'];
   final centerTooth2 = ['8', '9', '25', '24'];
 
@@ -136,12 +172,12 @@ class PatientDentalChartViewModel extends BaseViewModel {
     var dentalNotes = await apiService.getDentalNotesList(
         patientId: patientId, toothId: toothId);
 
-    for (DentalNotes i in dentalNotes ?? []) {
-      if (!toothWithTransactionHistory.contains(i.selectedTooth)) {
-        toothWithTransactionHistory.add(i.selectedTooth);
-        notifyListeners();
-      }
-    }
+    // for (DentalNotes i in dentalNotes ?? []) {
+    //   if (!toothWithTransactionHistory.contains(i.selectedTooth)) {
+    //     toothWithTransactionHistory.add(i.selectedTooth);
+    //     notifyListeners();
+    //   }
+    // }
   }
 
   Future<void> init(String patientId) async {
@@ -179,6 +215,10 @@ class PatientDentalChartViewModel extends BaseViewModel {
     navigationService.pushNamed(Routes.SetDentalNoteView,
         arguments: SetDentalNoteViewArguments(
             selectedTeeth: selectedTooth, patientId: patientId));
+  }
+
+  void goToSetOpticalNote(String patientId){
+
   }
 
   void goToChartLegend() {

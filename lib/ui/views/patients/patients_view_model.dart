@@ -61,4 +61,12 @@ class PatientsViewModel extends BaseViewModel {
     navigationService.pushNamed(Routes.PatientInfoView,
         arguments: PatientInfoViewArguments(patient: patientList[index]));
   }
+
+  int currentIndex = 0;
+
+  changeIndex(int index) {
+    currentIndex = navigationService.pushNamed(Routes.PatientInfoView,
+        arguments: PatientInfoViewArguments(patient: patientList[index])) as int;
+    notifyListeners();
+  }
 }

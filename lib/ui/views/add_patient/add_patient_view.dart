@@ -78,7 +78,10 @@ class _AddPatientViewState extends State<AddPatientView> {
                   model.notifyListeners();
                 }
               },
-              child: Text('Save'),
+              child: Text('Save',
+                style: TextStyle(
+                  fontSize: 16
+              ),),
             ),
           ),
         ],

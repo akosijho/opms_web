@@ -77,7 +77,8 @@ class AppointmentView extends StatelessWidget {
                       firstDate: DateTime.utc(2021, 12),
                       lastDate: DateTime(2026, 12),
                       onDateSelected: (date) {
-                        model.getAppointmentByDate(date!);
+                        model.getAppointmentByDate(date);
+                        // model.getAppointmentByDate(date!);
                       },
                       monthColor: Colors.white,
                       activeBackgroundDayColor: Colors.white,
@@ -208,43 +209,41 @@ class AppointmentView extends StatelessWidget {
     if (isBusy) {
       return MyShimmer();
     } else {
-      return AnimationLimiter(
-        child: ListView.builder(
-          shrinkWrap: true,
-          primary: false,
-          // physics: NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.all(5),
-          itemCount: appointmentList.length,
-          itemBuilder: (context, i) => AnimationConfiguration.staggeredList(
-            position: i,
-            duration: Duration(milliseconds: 500),
-            child: SlideAnimation(
-              verticalOffset: 90.0,
-              // horizontalOffset: 300,
+      return ListView.builder(
+        shrinkWrap: true,
+        primary: false,
+        // physics: NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.all(5),
+        itemCount: appointmentList.length,
+        itemBuilder: (context, i) => AnimationConfiguration.staggeredList(
+          position: i,
+          duration: Duration(milliseconds: 500),
+          child: SlideAnimation(
+            verticalOffset: 90.0,
+            // horizontalOffset: 300,
+            curve: Curves.easeInOut,
+            duration: Duration(milliseconds: 850),
+            child: FadeInAnimation(
               curve: Curves.easeInOut,
-              duration: Duration(milliseconds: 850),
-              child: FadeInAnimation(
-                curve: Curves.easeInOut,
-                delay: Duration(milliseconds: 350),
-                duration: Duration(milliseconds: 1000),
-                child: AppointmentCard(
-                  key: ObjectKey(appointmentList[i]),
-                  onPatientTap: () => navigator.pushNamed(
-                      Routes.PatientInfoView,
-                      arguments: PatientInfoViewArguments(
-                          patient: appointmentList[i].patient)),
-                  // imageUrl: appointmentList[i].patient.image,
-                  serviceTitle: appointmentList[i].procedures![0].procedureName,
-                  doctor: appointmentList[i].dentist,
-                  patient: appointmentList[i].patient,
-                  appointmentDate: DateFormat.yMMMd()
-                      .format(appointmentList[i].date.toDateTime()!),
-                  time:
-                      '${appointmentList[i].startTime.toDateTime()!.toTime()}-${appointmentList[i].endTime.toDateTime()!.toTime()}',
-                  appointmentStatus: getAppointmentStatus(
-                      appointmentList[i].appointment_status),
-                  appointmentId: appointmentList[i].appointment_id,
-                ),
+              delay: Duration(milliseconds: 350),
+              duration: Duration(milliseconds: 1000),
+              child: AppointmentCard(
+                key: ObjectKey(appointmentList[i]),
+                onPatientTap: () => navigator.pushNamed(
+                    Routes.PatientInfoView,
+                    arguments: PatientInfoViewArguments(
+                        patient: appointmentList[i].patient)),
+                // imageUrl: appointmentList[i].patient.image,
+                serviceTitle: appointmentList[i].procedures![0].procedureName,
+                doctor: appointmentList[i].dentist,
+                patient: appointmentList[i].patient,
+                appointmentDate: DateFormat.yMMMd()
+                    .format(appointmentList[i].date.toDateTime()!),
+                time:
+                    '${appointmentList[i].startTime.toDateTime()!.toTime()}-${appointmentList[i].endTime.toDateTime()!.toTime()}',
+                appointmentStatus: getAppointmentStatus(
+                    appointmentList[i].appointment_status),
+                appointmentId: appointmentList[i].appointment_id,
               ),
             ),
           ),

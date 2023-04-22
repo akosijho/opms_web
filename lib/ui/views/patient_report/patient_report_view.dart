@@ -23,13 +23,17 @@ class PatientReportView extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: model.isBusy
               ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  child: ListView(
                     children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 5),
-                      Text("Loading Data. Please wait...")
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(),
+                          SizedBox(height: 5),
+                          Text("Loading Data. Please wait...")
+                        ],
+                      ),
                     ],
                   ),
                 )

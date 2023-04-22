@@ -78,7 +78,7 @@ class MedicineCard extends StatelessWidget {
           width: 50,
           child: SvgPicture.asset(
             'assets/icons/eyeglass.svg',
-            color: Colors.purple,
+            color: Colors.black,
           ),
         ),
       );

@@ -2,14 +2,14 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:age_calculator/age_calculator.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:opmswebstaff/app/app.locator.dart';
 import 'package:opmswebstaff/app/app.router.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/core/service/url_launcher/url_launcher_service.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../core/service/api/api_service.dart';

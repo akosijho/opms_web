@@ -35,6 +35,9 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
       viewModelBuilder: () => LoginViewModel(),
+      // onModelReady: (model) {
+      //   model.listenToConnectivityChanges();
+      // },
       builder: (context, model, child) {
         return Scaffold(
           body: SingleChildScrollView(

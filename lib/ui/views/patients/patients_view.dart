@@ -142,6 +142,7 @@ class PatientsView extends StatelessWidget {
                                     color: Colors.white,
                                     child: InkWell(
                                       onTap: () =>
+                                      // model.currentIndex = model.currentIndex ==  0 ? 1 : 0,
                                           model.goToPatientInfoView(index),
                                       child: PatientCard(
                                         key: ObjectKey(
