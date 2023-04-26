@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:opmswebstaff/constants/font_name/font_name.dart';
 import 'package:opmswebstaff/constants/styles/palette_color.dart';
 import 'package:opmswebstaff/constants/styles/text_styles.dart';
@@ -17,6 +19,8 @@ import '../../../core/service/snack_bar/snack_bar_service.dart';
 import '../../../models/notification/notification_model.dart';
 import '../../../models/patient_model/patient_model.dart';
 import '../selection_list/selection_option.dart';
+// import 'package:universal_html/html.dart' as html;
+// import 'dart:html' as html;
 
 class AppointmentCard extends StatefulWidget {
   final Key key;
@@ -118,6 +122,81 @@ class _AppointmentCardState extends State<AppointmentCard> {
       // }
     }
   }
+  // Future<void> updateAppointmentStatus(String appointmentId) async {
+  //   final appointmentStatus = await showSelectionDialog([
+  //     AppointmentStatus.Completed.name,
+  //     AppointmentStatus.Cancelled.name,
+  //     AppointmentStatus.Pending.name,
+  //     AppointmentStatus.Declined.name,
+  //   ]);
+  //
+  //   if (appointmentStatus != null) {
+  //     html.window.document.body.style.cursor = 'wait';
+  //     await apiService.updateAppointmentStatus(
+  //         appointmentId: appointmentId, appointmentStatus: appointmentStatus);
+  //     html.window.document.body.style.cursor = 'default';
+  //     final notification = NotificationModel(
+  //       user_id: widget.patient.id,
+  //       notification_title: 'Appointment status: ${appointmentStatus}.',
+  //       notification_msg: 'Your Appointment on ${widget.appointmentDate}'
+  //           ' with Doc. ${widget.doctor} was marked: ${appointmentStatus}',
+  //       notification_type: 'appointment',
+  //       isRead: false,
+  //     );
+  //     await apiService.saveNotification(
+  //         notification: notification, typeId: widget.appointmentId);
+  //     showSnackBar('Appointment status was updated', 'Success!');
+  //   }
+  // }
+  //
+  // Future<String?> showSelectionDialog(List<String> options) async {
+  //   final completer = Completer<String>();
+  //   final dialog = html.DivElement()
+  //     ..style.position = 'fixed'
+  //     ..style.top = '0'
+  //     ..style.left = '0'
+  //     ..style.width = '100%'
+  //     ..style.height = '100%'
+  //     ..style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+  //     ..style.display = 'flex'
+  //     ..style.justifyContent = 'center'
+  //     ..style.alignItems = 'center'
+  //     ..append(html.DivElement()
+  //       ..style.backgroundColor = 'white'
+  //       ..style.borderRadius = '4px'
+  //       ..style.padding = '16px'
+  //       ..append(html.UListElement()
+  //         ..style.listStyleType = 'none'
+  //         ..style.padding = '0'
+  //         ..appendAll(options.map((option) => html.LIElement()
+  //           ..style.padding = '8px'
+  //           ..style.cursor = 'pointer'
+  //           ..text = option
+  //           ..onClick.listen((event) {
+  //             dialog.remove();
+  //             completer.complete(option);
+  //           })))));
+  //
+  //   html.document.body?.append(dialog);
+  //   return completer.future;
+  // }
+  //
+  // void showSnackBar(String message, String title) {
+  //   final snackBar = html.DivElement()
+  //     ..text = message
+  //     ..style.backgroundColor = 'black'
+  //     ..style.color = 'white'
+  //     ..style.padding = '16px'
+  //     ..style.position = 'fixed'
+  //     ..style.bottom = '16px'
+  //     ..style.left = '50%'
+  //     ..style.transform = 'translateX(-50%)'
+  //     ..style.zIndex = '999'
+  //     ..append(html.Element.tag('strong')..text = title);
+  //
+  //   html.document.body?.append(snackBar);
+  //   html.window.setTimeout(() => snackBar.remove(), 3000);
+  // }
 
   @override
   Widget build(BuildContext context) {

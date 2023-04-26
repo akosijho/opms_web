@@ -145,9 +145,7 @@ class MyMobileBody extends StatelessWidget {
                     height: 500,
                     width: 740,
                     decoration: BoxDecoration(
-                        color: Colors.purpleAccent[100],
-                        borderRadius: BorderRadius.all(Radius.circular(10))
-                    ),
+                        border: Border.all(color: Colors.blue)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SalesReportsView(),
