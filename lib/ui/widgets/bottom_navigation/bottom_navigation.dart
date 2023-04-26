@@ -2,6 +2,8 @@ import 'package:opmswebstaff/constants/styles/palette_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:opmswebstaff/ui/views/user_view/user_view_model.dart';
+import 'package:stacked/stacked.dart';
 
 class CustomBottomNavigation extends StatelessWidget {
   final selectedIndex;
@@ -13,7 +15,10 @@ class CustomBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-          return Drawer(
+    return ViewModelBuilder<UserViewModel>.reactive(
+        viewModelBuilder: () => UserViewModel(),
+    // onModelReady: (model) => model.init(widget.user),
+    builder: (context, model, widget) =>Drawer(
             child: Material(
               color: Palettes.kcDarkerBlueMain1,
               child: ListView(
@@ -139,6 +144,16 @@ class CustomBottomNavigation extends StatelessWidget {
                         ),),
                       onTap: () => setSelectedIndex(7),
                       selected: selectedIndex == 7),
+                  ListTile(
+                      leading: Icon(
+                          Icons.logout,
+                      color: Palettes.kcNeutral4,
+                      ),
+                      title: Text('Log Out',
+                        style: TextStyle(
+                            color: Colors.white
+                        ),),
+                      onTap: () => model.logout()),
 
                   // BottomNavigationBar(
                   //   type: BottomNavigationBarType.fixed,
@@ -233,6 +248,7 @@ class CustomBottomNavigation extends StatelessWidget {
                 ],
               ),
             ),
+    )
           );
 
   }

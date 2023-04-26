@@ -35,6 +35,7 @@ import '../core/service/validator/validator_service.dart';
 import '../core/service/validator/validator_service_impl.dart';
 import '../core/utility/connectivity_state.dart';
 import '../core/utility/image_selector.dart';
+import '../ui/views/main_body/main_body_view_model.dart';
 
 final locator = StackedLocator.instance;
 
@@ -62,4 +63,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => ConnectivityService());
   locator.registerLazySingleton(() => FirebaseMessagingService());
   locator.registerLazySingleton<PdfService>(() => PdfServiceImp());
+  locator.registerLazySingleton<MainBodyViewModel>(() => MainBodyViewModel());
 }

@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:opmswebstaff/ui/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../main.dart';
+
 class MainBodyView extends StatelessWidget {
   const MainBodyView({Key? key}) : super(key: key);
 
@@ -55,7 +57,7 @@ class MainBodyView extends StatelessWidget {
                 ),
                 Expanded(
                   child: IndexStackBody(
-                    index: model.selectedIndex,
+                    // index: model.selectedIndex,
                   ),
                 )
               ],
@@ -68,26 +70,15 @@ class MainBodyView extends StatelessWidget {
   }
 }
 
-class IndexStackBody extends StatelessWidget {
-  final index;
+class IndexStackBody extends ViewModelWidget<MainBodyViewModel> {
 
-  IndexStackBody({Key? key, required this.index}) : super(key: key);
+  IndexStackBody({Key? key, }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, MainBodyViewModel viewModel) {
     return IndexedStack(
-      index: index,
-      children: [
-        HomePageView(),
-        AppointmentView(),
-        PatientsView(),
-        ProceduresView(),
-        MedicineView(),
-        PaymentSelectPatientView(),
-        AddExpenseView(),
-        // PatientReportView(showAppBar: true)
-        ReportView()
-      ],
+      index: viewModel.selectedIndex,
+      children: viewModel.widget
     );
   }
 }

@@ -57,7 +57,7 @@ class PrescriptionViewModel extends BaseViewModel {
     final pdfPrescription = await pdfService.printPrescription(
         prescription: prescription, patient: patient);
     pdfService.savePdfFile(
-        fileName: patient.fullName + '-Prescription-' + prescription.date,
+        // fileName: patient.fullName + '-Prescription-' + prescription.date,
         byteList: pdfPrescription);
   }
 }

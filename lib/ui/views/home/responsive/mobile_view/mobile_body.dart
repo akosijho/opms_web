@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:opmswebstaff/constants/styles/palette_color.dart';
 import 'package:opmswebstaff/ui/views/home/home_view_model.dart';
 import 'package:opmswebstaff/ui/views/patient_report/patient_report_view.dart';
+import 'package:opmswebstaff/ui/views/sales_report/sales_report_view.dart';
 import 'package:opmswebstaff/ui/widgets/home_appointment/home_appointment.dart';
 import 'package:stacked/stacked.dart';
 
@@ -118,26 +119,40 @@ class MyMobileBody extends StatelessWidget {
                         color: Colors.deepPurple[100],
                         borderRadius: BorderRadius.all(Radius.circular(10))
                     ),
-                    child: model.myAppointments.isNotEmpty
-                        ? Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: HomeAppointment(
-                      myAppointments: model.myAppointments,
-                      isBusy: model.isBusy,
-                      navigationService: model.navigationService,
-                    ),
-                        )
-                        : Center(
-                      child: Container(
-                        height: 100,
-                        child: Column(
-                          children: [
-                            Text('Appointments'),
-                            Text('No Appointments for today'),
-                          ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: model.myAppointments.isNotEmpty
+                          ? HomeAppointment(
+                        myAppointments: model.myAppointments,
+                        isBusy: model.isBusy,
+                        navigationService: model.navigationService,
+                      )
+                          : Center(
+                        child: Container(
+                          height: 100,
+                          child: Column(
+                            children: [
+                              Text('Appointments'),
+                              Text('No Appointments for today'),
+                            ],
+                          ),
                         ),
                       ),
                     ),
+                  ),
+                  SizedBox(height: 40),
+                  Container(
+                    height: 500,
+                    width: 740,
+                    decoration: BoxDecoration(
+                        color: Colors.purpleAccent[100],
+                        borderRadius: BorderRadius.all(Radius.circular(10))
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SalesReportsView(),
+                    ),
+                    // child: PatientReportView(showAppBar: false),
                   ),
                 ],
               ),

@@ -39,6 +39,7 @@ class SetupUserViewModel extends BaseViewModel {
   final List<String> genderOptions = ['Male', 'Female'];
   final List<String> positionOptions = ['Doctor', 'Staff'];
   final List<String> imageSourceOptions = ['Gallery', 'Camera'];
+  final List<String> editDeleteOptions = ['Edit', 'Delete'];
   XFile? selectedImage;
 
   String? tempGender;
@@ -150,7 +151,7 @@ class SetupUserViewModel extends BaseViewModel {
         navigationService.closeOverlay();
         sessionService.saveSession(
             isRunFirstTime: false, isLoggedIn: true, isAccountSetupDone: true);
-        navigationService.popAllAndPushNamed(Routes.Success);
+        navigationService.popAllAndPushNamed(Routes.MainBodyView);
         logger.i('User Created Successfully');
       } else {
         navigationService.closeOverlay();

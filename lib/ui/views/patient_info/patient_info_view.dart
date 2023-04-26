@@ -141,8 +141,8 @@ class PatientInfoView extends StatelessWidget {
                                       model.goToUpdatePatient(patient: patient),
                                   child: Icon(Icons.edit,
                                       color: Colors.grey.shade900),
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.grey.shade300),
+                                  // style: ElevatedButton.styleFrom(
+                                  //     primary: Colors.grey.shade300),
                                 ),
                               ),
                             ],

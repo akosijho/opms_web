@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 import 'package:opmswebstaff/app/app.locator.dart';
 import 'package:opmswebstaff/app/app.logger.dart';
 import 'package:opmswebstaff/app/app.router.dart';
@@ -16,14 +17,38 @@ import 'package:opmswebstaff/enums/appointment_status.dart';
 import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
 import 'package:opmswebstaff/models/notification/notification_model.dart';
 import 'package:opmswebstaff/models/user_model/user_model.dart';
+import 'package:opmswebstaff/ui/views/add_expenses/add_expenses_view.dart';
+import 'package:opmswebstaff/ui/views/appointment/appointment_view.dart';
+import 'package:opmswebstaff/ui/views/finance/reports_view.dart';
+import 'package:opmswebstaff/ui/views/home/home_view.dart';
+import 'package:opmswebstaff/ui/views/medicine/medicine_view.dart';
+import 'package:opmswebstaff/ui/views/patients/patients_view.dart';
+import 'package:opmswebstaff/ui/views/payment_select_patient/payment_select_patient_view.dart';
+import 'package:opmswebstaff/ui/views/procedures/procedure_view.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 
+@LazySingleton(asType: MainBodyViewModel)
 class MainBodyViewModel extends BaseViewModel {
   int selectedIndex = 0;
   final navigationService = locator<NavigationService>();
   final snackBarService = locator<SnackBarService>();
+
+  final List<Widget> widget = [
+    HomePageView(),
+    AppointmentView(),
+    PatientsView(),
+    ProceduresView(),
+    MedicineView(),
+    PaymentSelectPatientView(),
+    AddExpenseView(),
+    // PatientReportView(showAppBar: true)
+    ReportView()
+  ];
+
   void setSelectedIndex(int index) {
     selectedIndex = index;
+    print(selectedIndex);
     notifyListeners();
   }
   final logger = getLogger('AppointmentModel', printCallingFunctionName: true);

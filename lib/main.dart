@@ -10,11 +10,20 @@ import 'package:get_storage/get_storage.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/core/utility/custom_scroll_behaviour.dart';
 import 'package:opmswebstaff/firebase_options.dart';
+import 'package:opmswebstaff/ui/views/add_expenses/add_expenses_view.dart';
+import 'package:opmswebstaff/ui/views/appointment/appointment_view.dart';
+import 'package:opmswebstaff/ui/views/finance/reports_view.dart';
+import 'package:opmswebstaff/ui/views/home/home_view.dart';
+import 'package:opmswebstaff/ui/views/medicine/medicine_view.dart';
+import 'package:opmswebstaff/ui/views/patients/patients_view.dart';
+import 'package:opmswebstaff/ui/views/payment_select_patient/payment_select_patient_view.dart';
+import 'package:opmswebstaff/ui/views/procedures/procedure_view.dart';
 
 import 'app/app.locator.dart';
 import 'app/app.router.dart';
 import 'constants/styles/palette_color.dart';
 import 'constants/styles/theme_style.dart';
+// import 'package:http/http.dart' as http;
 
 String appVersion = '';
 
@@ -26,6 +35,9 @@ void main() async {
     // navigation bar color
     statusBarColor: Palettes.kcBlueMain1,
   ));
+  // final response = await http.get(Uri.parse('https://example.com'));
+  // print(response.body);
+
   setupLocator();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

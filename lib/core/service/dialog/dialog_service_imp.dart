@@ -124,8 +124,8 @@ class DialogServiceImpl extends DialogService {
               borderRadius: BorderRadius.circular(10),
             ),
             padding: EdgeInsets.all(8.sp),
-            height: 260.sp,
-            width: 250.sp,
+            height: 100.sp,
+            width: 100.sp,
             child: Material(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,

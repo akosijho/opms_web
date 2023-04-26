@@ -15,7 +15,6 @@ class PaymentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.zero,
       ),
@@ -131,44 +130,41 @@ class PaymentCard extends StatelessWidget {
               thickness: 1,
               color: Colors.grey.shade300,
             ),
-            InkWell(
-              onTap: () => onViewRxTap(),
-              child: Container(
-                height: 40,
-                padding: EdgeInsets.all(8),
-                width: double.maxFinite,
-                color: Colors.grey.shade100,
-                alignment: Alignment.centerRight,
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () => onViewRxTap(),
+            Container(
+              height: 40,
+              padding: EdgeInsets.all(8),
+              width: double.maxFinite,
+              color: Colors.grey.shade100,
+              alignment: Alignment.centerRight,
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () => onViewRxTap(),
+                    child: Row(
+                      children: [
+                        Text('View Px History'),
+                        Icon(
+                          Icons.arrow_forward,
+                          size: 20,
+                        )
+                      ],
+                    ),
+                  ),
+                  InkWell(
+                      onTap: () => onViewReceiptTap(),
                       child: Row(
                         children: [
-                          Text('View Px History'),
+                          Text('View Receipt'),
                           Icon(
                             Icons.arrow_forward,
                             size: 20,
                           )
                         ],
-                      ),
-                    ),
-                    InkWell(
-                        onTap: () => onViewReceiptTap(),
-                        child: Row(
-                          children: [
-                            Text('View Receipt'),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 20,
-                            )
-                          ],
-                        )),
+                      )),
 
-                  ],
-                ),
+                ],
               ),
             )
           ],

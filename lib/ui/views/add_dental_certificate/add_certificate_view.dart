@@ -22,11 +22,11 @@ class AddCertificateView extends StatelessWidget {
         ),
         persistentFooterButtons: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Expanded(
-                  child: ElevatedButton(
-                      onPressed: () => model.saveDentalCertificate(patient),
-                      child: Text('Save & Generate PDF'))),
+              ElevatedButton(
+                  onPressed: () => model.saveDentalCertificate(patient),
+                  child: Text('Save & Generate PDF', style: TextStyle(fontSize: 14),)),
             ],
           )
         ],
@@ -48,7 +48,7 @@ class AddCertificateView extends StatelessWidget {
                       errorBorder: TextBorderStyles.errorBorder,
                       errorStyle: TextStyles.errorTextStyle,
                       disabledBorder: TextBorderStyles.normalBorder,
-                      hintText: 'Date when procedure rendered',
+                      hintText: 'Date when service rendered',
                       labelText: 'Date*',
                       labelStyle:
                           TextStyles.tsBody1(color: Palettes.kcNeutral1),
@@ -74,8 +74,8 @@ class AddCertificateView extends StatelessWidget {
                       errorBorder: TextBorderStyles.errorBorder,
                       errorStyle: TextStyles.errorTextStyle,
                       disabledBorder: TextBorderStyles.normalBorder,
-                      hintText: 'Select Procedure',
-                      labelText: 'Procedure*',
+                      hintText: 'Select Service',
+                      labelText: 'Service*',
                       labelStyle:
                           TextStyles.tsBody1(color: Palettes.kcNeutral1),
                       floatingLabelBehavior: FloatingLabelBehavior.always,

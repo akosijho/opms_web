@@ -54,9 +54,9 @@ class ViewPatientPayment extends StatelessWidget {
                 shrinkWrap: true,
                 primary: false,
                 itemBuilder: (context, index) => PaymentCard(
+                  payment: model.patientPaymentList[index],
                   onViewReceiptTap: () => model.goToReceipt(index),
                   onViewRxTap: () => model.goToRx(index),
-                  payment: model.patientPaymentList[index],
                 ),
                 separatorBuilder: (context, index) => SizedBox(height: 8),
                 itemCount: model.patientPaymentList.length)

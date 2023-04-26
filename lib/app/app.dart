@@ -45,6 +45,7 @@ import 'package:opmswebstaff/ui/views/get_started/get_started_view.dart';
 import 'package:opmswebstaff/ui/views/home/home_view.dart';
 import 'package:opmswebstaff/ui/views/login/login_view.dart';
 import 'package:opmswebstaff/ui/views/main_body/main_body_view.dart';
+import 'package:opmswebstaff/ui/views/main_body/main_body_view_model.dart';
 import 'package:opmswebstaff/ui/views/medical_history/medical_history_view.dart';
 import 'package:opmswebstaff/ui/views/medical_history_photo_view/med_history_photo_view.dart';
 import 'package:opmswebstaff/ui/views/medicine/medicine_view.dart';
@@ -87,7 +88,7 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
     MaterialRoute(page: RegisterView, name: 'Register'),
     MaterialRoute(page: VerifyEmailView, name: 'VerifyEmail'),
     MaterialRoute(page: SetUpUserView, name: 'SetUpUserView'),
-    MaterialRoute(page: SuccessView, name: 'Success'),
+    // MaterialRoute(page: SuccessView, name: 'Success'),
     MaterialRoute(page: MainBodyView, name: 'MainBodyView'),
     MaterialRoute(page: HomePageView, name: 'HomePageView'),
     MaterialRoute(page: AppointmentView, name: 'AppointmentView'),
@@ -214,6 +215,7 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
     LazySingleton(classType: ConnectivityService),
     LazySingleton(classType: FirebaseMessagingService),
     LazySingleton(classType: PdfServiceImp, asType: PdfService),
+    LazySingleton(classType: MainBodyViewModel, asType: MainBodyViewModel),
   ],
   logger: StackedLogger(),
 )

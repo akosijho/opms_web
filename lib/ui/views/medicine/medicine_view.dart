@@ -30,8 +30,11 @@ class _MedicineViewState extends State<MedicineView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<MedicineViewModel>.reactive(
       viewModelBuilder: () => MedicineViewModel(),
+      // onModelReady: (model) {
+      //   model.getMedicineList();
+      // },
       onModelReady: (model) {
-        model.getMedicineList();
+        model.init();
       },
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
@@ -156,6 +159,7 @@ class _MedicineViewState extends State<MedicineView> {
                         brandName: model.medicineList[index].brandName,
                         price: model.medicineList[index].priceToCurrency,
                         image: model.medicineList[index].image,
+                        medicine: model.medicineList[index],
                       ),
                     ),
                   ),

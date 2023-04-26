@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:opmswebstaff/app/app.router.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
@@ -10,6 +11,8 @@ import '../../../app/app.locator.dart';
 import '../../../core/service/dialog/dialog_service.dart';
 import '../../../models/dental_certificate/dental_certificate.dart';
 import '../../../models/patient_model/patient_model.dart';
+import 'package:pdf/widgets.dart' as pw;
+
 
 class DentalCertification extends BaseViewModel {
   final navigationService = locator<NavigationService>();
@@ -59,7 +62,7 @@ class DentalCertification extends BaseViewModel {
         dentalCertificate: certificate, patient: patient);
 
     pdfService.savePdfFile(
-        fileName: patient.fullName + '-Certificate-' + certificate.date,
+        // fileName: patient.fullName + '-Certificate-' + certificate.date,
         byteList: pdf);
   }
 }

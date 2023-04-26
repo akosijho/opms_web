@@ -10,6 +10,7 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'dart:html' as html;
 
 import '../../../models/dental_certificate/dental_certificate.dart';
 import '../../../models/patient_model/patient_model.dart';
@@ -293,12 +294,42 @@ class PdfServiceImp extends PdfService {
     throw UnimplementedError();
   }
 
-  Future<void> savePdfFile(
-      {required String fileName, required Uint8List byteList}) async {
-    final output = await getExternalStorageDirectory();
-    var filePath = "${output!.path}/$fileName.pdf";
-    final file = File(filePath);
-    await file.writeAsBytes(byteList);
-    await OpenFile.open(filePath);
+  // Future<void> savePdfFile(
+  //     {required String fileName, required Uint8List byteList}) async {
+  //   final output = await getExternalStorageDirectory();
+  //   var filePath = "${output!.path}/$fileName.pdf";
+  //   final file = File(filePath);
+  //   await file.writeAsBytes(byteList);
+  //   await OpenFile.open(filePath);
+  // }
+
+  // Future<void> savedPdfFile({required Uint8List byteList}) async{
+  //   final blob = html.Blob([byteList], 'application/pdf');
+  //   final url = html.Url.createObjectUrlFromBlob(blob);
+  //
+  //   final anchor = html.document.createElement('a') as html.AnchorElement;
+  //   anchor.href = url;
+  //   anchor.target = '_blank';
+  //   anchor.click();
+  //
+
+  @override
+  Future<void> savePdfFile({required Uint8List byteList}) async{
+    final blob = html.Blob([byteList], 'application/pdf');
+    final url = html.Url.createObjectUrlFromBlob(blob);
+
+    final anchor = html.document.createElement('a') as html.AnchorElement;
+    anchor.href = url;
+    anchor.target = '_blank';
+    anchor.click();
+  }
+
+  @override
+  Future<void> savePdfFile2({required String fileName, required Uint8List byteList}) async {
+      final output = await getExternalStorageDirectory();
+      var filePath = "${output!.path}/$fileName.pdf";
+      final file = File(filePath);
+      await file.writeAsBytes(byteList);
+      await OpenFile.open(filePath);
   }
 }

@@ -92,7 +92,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
     ));
 
     if (appointmentStatus != null) {
-      if (await connectivityService.checkConnectivity()) {
+      // if (await connectivityService.checkConnectivity()) {
         dialogService.showDefaultLoadingDialog(
             barrierDismissible: false, willPop: false);
         await apiService.updateAppointmentStatus(
@@ -110,12 +110,12 @@ class _AppointmentCardState extends State<AppointmentCard> {
             notification: notification, typeId: widget.appointmentId);
         snackBarService.showSnackBar(
             message: 'Appointment status was updated', title: 'Success!');
-      } else {
-        navigationService.pop();
-        snackBarService.showSnackBar(
-            message: 'Check your network connection and try again',
-            title: 'Network Error');
-      }
+      // } else {
+      //   navigationService.pop();
+      //   snackBarService.showSnackBar(
+      //       message: 'Check your network connection and try again',
+      //       title: 'Network Error');
+      // }
     }
   }
 

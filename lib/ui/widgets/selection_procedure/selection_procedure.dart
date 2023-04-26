@@ -28,7 +28,7 @@ class SelectionProcedure extends StatelessWidget {
                 children: [
                   SizedBox(height: 10),
                   Text(
-                    'Select Procedure',
+                    'Select Service',
                     style: TextStyle(
                       fontSize: 28,
                       fontFamily: FontNames.gilRoy,
@@ -68,13 +68,13 @@ class SelectionProcedure extends StatelessWidget {
                         ),
                       ),
                       constraints: BoxConstraints(maxHeight: 43),
-                      hintText: 'Search Procedure...',
+                      hintText: 'Search Service...',
                     ),
                   ),
                   SizedBox(height: 8),
                   Row(
                     children: [
-                      Text('List of Procedures'),
+                      Text('List of Services'),
                       Expanded(child: Divider())
                     ],
                   ),
@@ -120,7 +120,7 @@ class SelectionProcedure extends StatelessWidget {
     } else {
       if (procedureList!.length <= 0) {
         return Center(
-          child: Text('No Procedures Found...'),
+          child: Text('No Services Found...'),
         );
       } else {
         return Container(

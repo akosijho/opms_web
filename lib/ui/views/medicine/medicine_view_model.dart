@@ -11,6 +11,7 @@ class MedicineViewModel extends BaseViewModel {
   final apiService = locator<ApiService>();
   StreamSubscription? medicineStreamSub;
   List<Medicine> medicineList = [];
+  List<Medicine> tempProduct = [];
 
   bool isScrolledUp = true;
   bool searchMode = false;
@@ -20,9 +21,28 @@ class MedicineViewModel extends BaseViewModel {
     medicineStreamSub!.cancel();
     super.dispose();
   }
+  void init() async {
+    setBusy(true);
+    await getProducts();
+    await Future.delayed(Duration(seconds: 1));
+    setBusy(false);
+    getMedicineList();
+  }
 
   void setFabSize({required bool isScrolledUp}) {
     this.isScrolledUp = isScrolledUp;
+    notifyListeners();
+  }
+  Future<void> getProducts() async {
+    final products = await apiService.getProducts();
+    if (products != null) {
+      medicineList.clear();
+      medicineList.addAll(products);
+      tempProduct.clear();
+      tempProduct.addAll(products);
+
+      notifyListeners();
+    }
     notifyListeners();
   }
 

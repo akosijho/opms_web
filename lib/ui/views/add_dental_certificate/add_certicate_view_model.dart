@@ -55,30 +55,71 @@ class AddCertificateViewModel extends BaseViewModel {
     }
   }
 
+  // void saveDentalCertificate(Patient patient) async {
+  //   if (addCertificateFormKey.currentState!.validate()) {
+  //     dialogService.showDefaultLoadingDialog();
+  //
+  //     final cert = DentalCertificate(
+  //         procedure: procedureTextController.text,
+  //         date: selectedDate.toString());
+  //
+  //     final addCertQuery = await apiService.addDentalCertificate(
+  //         dentalCertificate: cert, patient: patient);
+  //     if (addCertQuery.success) {
+  //       navigationService.popRepeated(2);
+  //       snackBarService.showSnackBar(
+  //           message: 'Certificated Added. Open it now!', title: 'Success');
+  //       final pdf = await pdfService.printDentalCertificate(
+  //           dentalCertificate: cert, patient: patient);
+  //       pdfService.savePdfFile(
+  //           fileName: patient.fullName + '-Certificate-' + cert.date,
+  //           byteList: pdf);
+  //     } else {
+  //       navigationService.pop();
+  //       snackBarService.showSnackBar(
+  //           message: addCertQuery.errorMessage!, title: 'Network Error');
+  //     }
+  //   }
+  // }
+
   void saveDentalCertificate(Patient patient) async {
     if (addCertificateFormKey.currentState!.validate()) {
       dialogService.showDefaultLoadingDialog();
 
       final cert = DentalCertificate(
-          procedure: procedureTextController.text,
-          date: selectedDate.toString());
+        procedure: procedureTextController.text,
+        date: selectedDate.toString(),
+      );
 
       final addCertQuery = await apiService.addDentalCertificate(
-          dentalCertificate: cert, patient: patient);
+        dentalCertificate: cert,
+        patient: patient,
+      );
+
       if (addCertQuery.success) {
         navigationService.popRepeated(2);
         snackBarService.showSnackBar(
-            message: 'Certificated Added. Open it now!', title: 'Success');
+          message: 'Certificate Added. Open it now!',
+          title: 'Success',
+        );
+
         final pdf = await pdfService.printDentalCertificate(
-            dentalCertificate: cert, patient: patient);
+          dentalCertificate: cert,
+          patient: patient,
+        );
+
         pdfService.savePdfFile(
-            fileName: patient.fullName + '-Certificate-' + cert.date,
-            byteList: pdf);
+          // fileName: '${patient.fullName}-Certificate-${cert.date}',
+          byteList: pdf,
+        );
       } else {
         navigationService.pop();
         snackBarService.showSnackBar(
-            message: addCertQuery.errorMessage!, title: 'Network Error');
+          message: addCertQuery.errorMessage!,
+          title: 'Network Error',
+        );
       }
     }
   }
+
 }

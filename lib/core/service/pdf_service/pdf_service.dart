@@ -16,6 +16,9 @@ abstract class PdfService {
   Future<Uint8List> printDentalCertificate(
       {required DentalCertificate dentalCertificate, required Patient patient});
 
-  Future<void> savePdfFile(
+  Future<void> savePdfFile2(
       {required String fileName, required Uint8List byteList});
+
+  Future<void> savePdfFile(
+      {required Uint8List byteList});
 }

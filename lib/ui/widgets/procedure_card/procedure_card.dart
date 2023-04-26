@@ -36,19 +36,19 @@ class _ProcedureCardState extends State<ProcedureCard> {
 
   Future<void> deleteProcedure(String procedureId) async {
     dialogService.showConfirmDialog(
-        title: 'Delete  Procedure',
+        title: 'Delete  Service',
         middleText:
-            'This action will delete the selected procedure permanently. Continue this action?',
+            'This action will delete the selected service permanently. Continue this action?',
         onCancel: () => navigationService.pop(),
         onContinue: () async {
-          if (await connectivityService.checkConnectivity()) {
+          // if (await connectivityService.checkConnectivity()) {
             await apiService.deleteProcedure(procedureId: procedureId);
             navigationService.pop();
-            toastService.showToast(message: 'Procedure deleted');
-          } else {
-            toastService.showToast(
-                message: 'Network Error. Please Try Again Later.');
-          }
+            toastService.showToast(message: 'Service deleted');
+          // } else {
+          //   toastService.showToast(
+          //       message: 'Network Error. Please Try Again Later.');
+          // }
         });
   }
 
@@ -172,7 +172,7 @@ class _ProcedureCardState extends State<ProcedureCard> {
                     children: [
                       Text(
                         widget.procedure.procedureName,
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 16),
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: 5),

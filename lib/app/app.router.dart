@@ -64,14 +64,12 @@ import '../ui/views/view_patient_appointment/view_patient_appointment_view.dart'
 import '../ui/views/view_patient_payments/view_patient_payment.dart';
 import '../ui/widgets/selection_dentist/selection_dentist.dart';
 import '../ui/widgets/selection_procedure/selection_procedure.dart';
-import '../ui/widgets/success_view/success.dart';
 
 class Routes {
   static const String Login = '/login-view';
   static const String Register = '/register-view';
   static const String VerifyEmail = '/verify-email-view';
   static const String SetUpUserView = '/set-up-user-view';
-  static const String Success = '/success-view';
   static const String MainBodyView = '/main-body-view';
   static const String HomePageView = '/home-page-view';
   static const String AppointmentView = '/appointment-view';
@@ -124,7 +122,6 @@ class Routes {
     Register,
     VerifyEmail,
     SetUpUserView,
-    Success,
     MainBodyView,
     HomePageView,
     AppointmentView,
@@ -180,7 +177,6 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.Register, page: RegisterView),
     RouteDef(Routes.VerifyEmail, page: VerifyEmailView),
     RouteDef(Routes.SetUpUserView, page: SetUpUserView),
-    RouteDef(Routes.Success, page: SuccessView),
     RouteDef(Routes.MainBodyView, page: MainBodyView),
     RouteDef(Routes.HomePageView, page: HomePageView),
     RouteDef(Routes.AppointmentView, page: AppointmentView),
@@ -266,12 +262,6 @@ class StackedRouter extends RouterBase {
           lastName: args.lastName,
           userPhoto: args.userPhoto,
         ),
-        settings: data,
-      );
-    },
-    SuccessView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const SuccessView(),
         settings: data,
       );
     },

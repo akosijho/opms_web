@@ -817,4 +817,13 @@ class ApiServiceImpl extends ApiService {
           'No Internet Connection. Check your connection and try again');
     }
   }
+
+  @override
+  Future<List<Medicine>> getProducts() {
+    return medicineReference
+        .orderBy('dateCreated', descending: true)
+        .get()
+        .then((value) =>
+        value.docs.map((e) => Medicine.fromJson(e.data())).toList());
+  }
 }
