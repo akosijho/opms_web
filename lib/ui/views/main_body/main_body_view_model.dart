@@ -58,7 +58,7 @@ class MainBodyViewModel extends BaseViewModel {
   final fAuthService = locator<FirebaseAuthService>();
   final toastService = locator<ToastService>();
   final bottomSheetService = locator<BottomSheetService>();
-  final connectivityService = locator<ConnectivityService>();
+  // final connectivityService = locator<ConnectivityService>();
   // final snackBarService = locator<SnackBarService>();
 
   StreamSubscription? userSubscription;

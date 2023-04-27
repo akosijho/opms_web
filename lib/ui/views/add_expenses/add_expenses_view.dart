@@ -64,7 +64,10 @@ class AddExpenseView extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => model.performAddingExpense(),
+                onTap: () {
+                  if (model.addExpenseFormKey.currentState!.validate()){
+                  model.performAddingExpense();
+                  }},
                 child: Container(
                   height: double.maxFinite,
                   color: Palettes.kcPurpleMain,

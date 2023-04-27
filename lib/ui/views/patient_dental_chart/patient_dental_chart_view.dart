@@ -42,8 +42,9 @@ class PatientDentalChartView extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: SizedBox(
-                  width: double.maxFinite,
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  // width: double.maxFinite,
                   child: ElevatedButton.icon(
                     label: Text('Save',
                     style: TextStyle(
@@ -69,22 +70,20 @@ class PatientDentalChartView extends StatelessWidget {
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children:[
-
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      icon: Icon(
-                        Icons.history,
-                        color: Colors.white,
-                      ),
-                      onPressed: () => model.navigationService.pushNamed(
-                          Routes.ViewDentalNote,
-                          arguments: ViewDentalNoteArguments(patient: patient)),
-                      label: Text('View Optical Notes'),
-                      style: ElevatedButton.styleFrom(
-                        textStyle: TextStyles.tsBody2(),
-                        primary: Palettes.kcBlueMain1,
-                      ),
+                  ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.history,
+                      color: Colors.white,
+                    ),
+                    onPressed: () => model.navigationService.pushNamed(
+                        Routes.ViewDentalNote,
+                        arguments: ViewDentalNoteArguments(patient: patient)),
+                    label: Text('View Optical Notes'),
+                    style: ElevatedButton.styleFrom(
+                      textStyle: TextStyles.tsBody2(),
+                      primary: Palettes.kcBlueMain1,
                     ),
                   ),
                   SizedBox(width: 4),

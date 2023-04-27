@@ -300,16 +300,16 @@ class _UserViewState extends State<UserView> {
                     SizedBox(
                       height: 40,
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Expanded(
-                              child: ElevatedButton.icon(
-                                  onPressed: () => model.updateUserInfo(),
-                                  icon: Icon(Icons.update),
-                                  label: Text('Update',
-                                  style: TextStyle(
-                                    fontSize: 14
-                                  )
-                                  ))),
+                          ElevatedButton.icon(
+                              onPressed: () => model.updateUserInfo(),
+                              icon: Icon(Icons.update),
+                              label: Text('Update',
+                              style: TextStyle(
+                                fontSize: 14
+                              )
+                              )),
                           SizedBox(width: 10),
                         ],
                       ),

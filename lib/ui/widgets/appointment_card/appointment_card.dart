@@ -53,7 +53,7 @@ class AppointmentCard extends StatefulWidget {
 
 class _AppointmentCardState extends State<AppointmentCard> {
   final bottomSheetService = locator<BottomSheetService>();
-  final connectivityService = locator<ConnectivityService>();
+  // final connectivityService = locator<ConnectivityService>();
   final snackBarService = locator<SnackBarService>();
   final dialogService = locator<DialogService>();
   final apiService = locator<ApiService>();

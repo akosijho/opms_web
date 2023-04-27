@@ -39,7 +39,7 @@ class MedicineCard extends StatefulWidget {
 }
 
 class _MedicineCardState extends State<MedicineCard> {
-  final connectivityService = locator<ConnectivityService>();
+  // final connectivityService = locator<ConnectivityService>();
   final snackBarService = locator<SnackBarService>();
   final dialogService = locator<DialogService>();
   final apiService = locator<ApiService>();
@@ -83,12 +83,6 @@ class _MedicineCardState extends State<MedicineCard> {
     // }
   }
 
-
-  void updateProduct(Procedure procedure) {
-    navigationService.pushNamed(Routes.UpdateProcedureViews,
-        arguments: UpdateProcedureViewArguments(procedure: procedure));
-  }
-
   // Future<void> setActionValue() async {
   //   final selectedAction =
   //   await bottomSheetService.openBottomSheet(SelectionOption(
@@ -124,12 +118,16 @@ class _MedicineCardState extends State<MedicineCard> {
         //     .delete();
         break;
       case 'Edit':
-        toastService.showToast(message: 'Edit action selected');
+        this.updateProduct(widget.medicine);
         break;
       default:
         toastService.showToast(message: 'Something went wrong');
         break;
     }
+  }
+  void updateProduct(Medicine medicine) {
+    navigationService.pushNamed(Routes.UpdateProductViews,
+        arguments: UpdateProductViewArguments(medicine: medicine));
   }
 
   @override

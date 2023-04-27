@@ -24,7 +24,7 @@ class PaymentSelectDentalNoteView extends StatelessWidget {
         persistentFooterButtons: [
           Container(
             color: Colors.white,
-            width: double.maxFinite,
+            // width: double.maxFinite,
             child: ElevatedButton(
                 onPressed: () => model.returnSelectedDentalNote(),
                 child: Text('Confirm')),

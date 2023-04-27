@@ -15,7 +15,7 @@ class ViewPatientAppointmentViewModel extends BaseViewModel {
   final apiService = locator<ApiService>();
   final dialogService = locator<DialogService>();
   final navigationService = locator<NavigationService>();
-  final connectivityService = locator<ConnectivityService>();
+  // final connectivityService = locator<ConnectivityService>();
 
   StreamSubscription? patientSub;
   List<AppointmentModel> patientListOfAppointments = [];
@@ -36,26 +36,26 @@ class ViewPatientAppointmentViewModel extends BaseViewModel {
     await Future.delayed(Duration(milliseconds: 300));
     dialogService.showDefaultLoadingDialog(
         willPop: false, barrierDismissible: false);
-    if (await connectivityService.checkConnectivity()) {
+    // if (await connectivityService.checkConnectivity()) {
       getPatientAppointment(patientId: patientId);
       navigationService.pop();
-    } else {
-      navigationService.pop();
-      dialogService.showConfirmDialog(
-          mainOptionTxt: 'Okay',
-          willPop: false,
-          barrierDismissible: false,
-          title: 'Network Error'
-              '',
-          middleText: "Check your internet connection"
-              " and try again.",
-          onCancel: () {
-            navigationService.pop();
-          },
-          onContinue: () {
-            navigationService.pop();
-          });
-    }
+    // } else {
+    //   navigationService.pop();
+    //   dialogService.showConfirmDialog(
+    //       mainOptionTxt: 'Okay',
+    //       willPop: false,
+    //       barrierDismissible: false,
+    //       title: 'Network Error'
+    //           '',
+    //       middleText: "Check your internet connection"
+    //           " and try again.",
+    //       onCancel: () {
+    //         navigationService.pop();
+    //       },
+    //       onContinue: () {
+    //         navigationService.pop();
+    //       });
+    // }
   }
 
   void listenToAppointmentChanges({required dynamic patientId}) {

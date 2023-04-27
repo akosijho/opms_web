@@ -201,4 +201,6 @@ abstract class ApiService {
   Future<List<Medicine>> getProducts();
 
   Future<QueryResult> updateProcedure(Procedure procedure);
+
+  Future<QueryResult> updateProduct(Medicine medicine);
 }

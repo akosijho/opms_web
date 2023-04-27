@@ -41,9 +41,9 @@ class UpdateProcedureViewModel extends BaseViewModel {
 
   void performUpdate(String procedureId) async {
     dialogService.showConfirmDialog(
-        title: 'Update procedure',
+        title: 'Update service',
         middleText:
-            'This action will saved the changes made in the selected procedure. Continue this action?',
+            'This action will saved the changes made in the selected service. Continue this action?',
         onCancel: () => navigationService.pop(),
         onContinue: () => updateProcedure(procedureId));
   }
@@ -64,7 +64,7 @@ class UpdateProcedureViewModel extends BaseViewModel {
     if (updateProcedureQuery.success) {
       navigationService.popUntilNamed(Routes.MainBodyView);
       snackBarService.showSnackBar(
-          message: 'Procedure was updated.', title: 'Success!');
+          message: 'Service was updated.', title: 'Success!');
     } else {
       navigationService.popUntilNamed(Routes.UpdateProcedureViews);
       snackBarService.showSnackBar(

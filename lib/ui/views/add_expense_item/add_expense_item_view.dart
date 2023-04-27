@@ -21,11 +21,14 @@ class AddExpenseItemView extends StatelessWidget {
         ),
         persistentFooterButtons: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () => model.returnExpenseItem(),
-                  child: Text('Add'),
+              ElevatedButton(
+                onPressed: () => model.returnExpenseItem(),
+                child: Text('Add',
+                  style: TextStyle(
+                    fontSize: 16
+                  ),
                 ),
               ),
             ],

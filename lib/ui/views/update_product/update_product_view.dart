@@ -1,25 +1,25 @@
-import 'package:opmswebstaff/models/procedure/procedure.dart';
-import 'package:opmswebstaff/ui/views/update_procedure/update_procedure_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:opmswebstaff/models/medicine/medicine.dart';
+import 'package:opmswebstaff/ui/views/update_product/update_product_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../constants/styles/palette_color.dart';
 import '../../../constants/styles/text_border_styles.dart';
 import '../../../constants/styles/text_styles.dart';
 
-class UpdateProcedureView extends StatelessWidget {
-  final Procedure procedure;
-  const UpdateProcedureView({Key? key, required this.procedure})
+class UpdateProductView extends StatelessWidget {
+  final Medicine medicine;
+  const UpdateProductView({Key? key, required this.medicine})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<UpdateProcedureViewModel>.reactive(
-      viewModelBuilder: () => UpdateProcedureViewModel(),
-      onModelReady: (model) => model.init(procedure),
+    return ViewModelBuilder<UpdateProductViewModel>.reactive(
+      viewModelBuilder: () => UpdateProductViewModel(),
+      onModelReady: (model) => model.init(medicine),
       builder: (context, model, widget) => Scaffold(
         appBar: AppBar(
-          title: Text('Update Service'),
+          title: Text('Update Product'),
           centerTitle: true,
         ),
         persistentFooterButtons: [
@@ -28,14 +28,13 @@ class UpdateProcedureView extends StatelessWidget {
             child: ElevatedButton(
                 onPressed: () {
                   if (model.updateFormKey.currentState!.validate()) {
-                    model.performUpdate(procedure.id!);
+                    model.performUpdate(medicine.id!);
                   }
                 },
                 child: Text('Save Changes',
-                    style: TextStyle(
-                        fontSize: 15
-                    )
-                )),
+                  style: TextStyle(
+                    fontSize: 15
+                  ))),
           )
         ],
         body: model.isBusy
@@ -48,18 +47,34 @@ class UpdateProcedureView extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                   children: [
                     TextFormField(
-                      controller: model.procedureNameTxtController,
+                      controller: model.productNameTxtController,
                       validator: (value) =>
                           model.validatorService.validateMedicineName(value!),
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         errorBorder: TextBorderStyles.errorBorder,
                         errorStyle: TextStyles.errorTextStyle,
-                        hintText: 'Service Name',
-                        labelText: 'Service*',
+                        hintText: 'Product Name',
+                        labelText: 'Product*',
                         // disabledBorder: ,
                         labelStyle:
                             TextStyles.tsBody1(color: Palettes.kcNeutral1),
+                        floatingLabelBehavior: FloatingLabelBehavior.always,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    TextFormField(
+                      controller: model.brandNameTxtController,
+                      validator: (value) =>
+                          model.validatorService.validateBrandName(value!),
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                        errorBorder: TextBorderStyles.errorBorder,
+                        errorStyle: TextStyles.errorTextStyle,
+                        hintText: 'Brand Name',
+                        labelText: 'Brand Name*',
+                        // disabledBorder: ,
+                        labelStyle: TextStyles.tsBody1(color: Palettes.kcNeutral1),
                         floatingLabelBehavior: FloatingLabelBehavior.always,
                       ),
                     ),
@@ -73,7 +88,7 @@ class UpdateProcedureView extends StatelessWidget {
                       decoration: InputDecoration(
                         errorBorder: TextBorderStyles.errorBorder,
                         errorStyle: TextStyles.errorTextStyle,
-                        hintText: 'Service Amount Fee',
+                        hintText: 'Product Amount Fee',
                         labelText: 'Amount(Optional)',
                         // disabledBorder: ,
                         labelStyle:

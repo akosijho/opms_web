@@ -154,12 +154,14 @@ class UserViewModel extends BaseViewModel {
                 searchIndex: userSearchIndex,
                 phoneNum: phoneNumController.text);
             final updateUserQuery = await apiService.updateUserInfo(user: user);
-            navigationService.pop();
+
 
             if (updateUserQuery.success) {
+              navigationService.pop();
               snackBarService.showSnackBar(
                   message: 'User Updated', title: 'Success');
             } else {
+              navigationService.pop();
               snackBarService.showSnackBar(
                   message: updateUserQuery.errorMessage!, title: 'Error');
             }

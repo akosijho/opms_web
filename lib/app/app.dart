@@ -65,6 +65,7 @@ import 'package:opmswebstaff/ui/views/selection_tooth_condition/selection_tooth_
 import 'package:opmswebstaff/ui/views/set_dental_note/set_dental_note_view.dart';
 import 'package:opmswebstaff/ui/views/set_tooth_condition/set_tooth_condition_view.dart';
 import 'package:opmswebstaff/ui/views/update_procedure/update_procedure_view.dart';
+import 'package:opmswebstaff/ui/views/update_product/update_product_view.dart';
 import 'package:opmswebstaff/ui/views/update_user_info/setup_user_view.dart';
 import 'package:opmswebstaff/ui/views/user_view/user_view.dart';
 import 'package:opmswebstaff/ui/views/verify_email/verify_email_view.dart';
@@ -193,6 +194,11 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
     CustomRoute(
         page: UpdateProcedureView,
         name: 'UpdateProcedureViews',
+        transitionsBuilder: TransitionsBuilders.slideBottom,
+        durationInMilliseconds: 300),
+    CustomRoute(
+        page: UpdateProductView,
+        name: 'UpdateProductViews',
         transitionsBuilder: TransitionsBuilders.slideBottom,
         durationInMilliseconds: 300),
   ],

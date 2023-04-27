@@ -80,9 +80,10 @@ class AddExpensesViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> addExpense() async {
+  // Future<void> addExpense() async {
+  void addExpense() async {
     dialogService.showDefaultLoadingDialog(
-        willPop: false, barrierDismissible: false);
+        barrierDismissible: false, willPop: true);
     final expense = Expense(
         items: listOfExpenseItem,
         totalAmount: totalAmount,
@@ -90,11 +91,13 @@ class AddExpensesViewModel extends BaseViewModel {
         note: noteTextController.text);
     final addExpenseQueryRes = await apiService.addExpense(expense: expense);
     if (addExpenseQueryRes.success) {
-      navigationService.popRepeated(3);
+      navigationService.popRepeated(1);
+      // navigationService.pushReplacementNamed(Routes.MainBodyView);
       snackBarService.showSnackBar(
           message: 'Clinic Expense Saved', title: 'SUCCESS!');
     } else {
       navigationService.popRepeated(1);
+      // navigationService.popUntilNamed(Routes.AddExpenseView);
       snackBarService.showSnackBar(
           message: addExpenseQueryRes.errorMessage ?? 'Something Went Wrong',
           title: 'Error');
@@ -102,7 +105,7 @@ class AddExpensesViewModel extends BaseViewModel {
   }
 
   void performAddingExpense() async {
-    if (addExpenseFormKey.currentState!.validate()) {
+    // if (addExpenseFormKey.currentState!.validate()) {
       if (listOfExpenseItem.isNotEmpty) {
         dialogService.showConfirmDialog(
           title: 'Add clinic expense',
@@ -119,6 +122,6 @@ class AddExpensesViewModel extends BaseViewModel {
                 'No Items added. You must add at least one item to continue',
             title: 'Error');
       }
-    }
+    // }
   }
 }

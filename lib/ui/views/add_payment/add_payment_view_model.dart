@@ -146,9 +146,9 @@ class AddPaymentViewModel extends BaseViewModel {
   void computeServiceSubTotal() {
     serviceSubTotal = 0;
 
-      serviceSubTotal +=
-      double.parse(selectedProcedure!.price!);
-      notifyListeners();
+    serviceSubTotal +=
+        double.parse(selectedProcedure!.price!);
+    notifyListeners();
 
     computeTotalAmountFinal();
   }
@@ -166,7 +166,7 @@ class AddPaymentViewModel extends BaseViewModel {
   void computeTotalAmountFinal() {
     totalAmountFinal = 0;
     // totalAmountFinal = dentalNoteSubTotal + medicineSubTotal;
-    totalAmountFinal = serviceSubTotal + medicineSubTotal;
+    totalAmountFinal = dentalNoteSubTotal + medicineSubTotal;
     totalAmountTxtController.text = totalAmountFinal.toString();
     notifyListeners();
   }

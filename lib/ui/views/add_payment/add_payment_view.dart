@@ -35,9 +35,9 @@ class AddPaymentView extends StatelessWidget {
               color: Colors.white,
               border: Border(
                   top: BorderSide(
-                color: Colors.grey.shade500,
-                width: 1,
-              )),
+                    color: Colors.grey.shade500,
+                    width: 1,
+                  )),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -120,7 +120,7 @@ class AddPaymentView extends StatelessWidget {
                       birthDate: DateFormat.yMMMd()
                           .format(patient.birthDate.toDateTime()!),
                       age: AgeCalculator.age(patient.birthDate.toDateTime()!,
-                              today: DateTime.now())
+                          today: DateTime.now())
                           .years
                           .toString(),
                     ),
@@ -165,7 +165,7 @@ class AddPaymentView extends StatelessWidget {
                                 labelStyle: TextStyles.tsBody1(
                                     color: Palettes.kcNeutral1),
                                 floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
+                                FloatingLabelBehavior.always,
                                 suffixIcon: Icon(
                                   Icons.arrow_drop_down,
                                   size: 24,
@@ -192,7 +192,7 @@ class AddPaymentView extends StatelessWidget {
                                 labelStyle: TextStyles.tsBody1(
                                     color: Palettes.kcNeutral1),
                                 floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
+                                FloatingLabelBehavior.always,
                                 suffixIcon: Icon(
                                   Icons.arrow_drop_down,
                                   size: 24,
@@ -219,7 +219,7 @@ class AddPaymentView extends StatelessWidget {
                                 labelStyle: TextStyles.tsBody1(
                                     color: Palettes.kcNeutral1),
                                 floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
+                                FloatingLabelBehavior.always,
                                 suffixIcon: Icon(
                                   Icons.arrow_drop_down,
                                   size: 24,
@@ -260,8 +260,8 @@ class AddPaymentView extends StatelessWidget {
                         //         errorBorder: TextBorderStyles.errorBorder,
                         //         errorStyle: TextStyles.errorTextStyle,
                         //         disabledBorder: TextBorderStyles.normalBorder,
-                        //         hintText: 'Select Service Rendered',
-                        //         labelText: 'Service*',
+                        //         hintText: 'Select Procedure Rendered',
+                        //         labelText: 'Procedure*',
                         //         labelStyle:
                         //         TextStyle(fontSize: 21, color: Palettes.kcNeutral1),
                         //         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -282,12 +282,12 @@ class AddPaymentView extends StatelessWidget {
 
                             ActionChip(
                               label: Text(
-                                  0 <= 0 ? 'Select Optical Service' : 'Add more'),
+                                  0 <= 0 ? 'Select Optical Note' : 'Add more'),
                               labelPadding: EdgeInsets.symmetric(horizontal: 8),
                               labelStyle:
-                                  TextStyles.tsBody2(color: Colors.white),
+                              TextStyles.tsBody2(color: Colors.white),
                               backgroundColor: Palettes.kcBlueMain1,
-                              tooltip: 'Select Optical Service',
+                              tooltip: 'Select Optical Note',
                               onPressed: () =>
                                   model.selectDentalNote(patient.id),
                             )
@@ -301,20 +301,20 @@ class AddPaymentView extends StatelessWidget {
                           padding: EdgeInsets.symmetric(vertical: 8),
                           child: model.selectedDentalNotes.isNotEmpty
                               ? ListView.separated(
-                                  shrinkWrap: true,
-                                  primary: false,
-                                  itemBuilder: (context, index) =>
-                                      PaymentDentalNoteCard(
-                                          dentalNote:
-                                              model.selectedDentalNotes[index],
-                                          patientID: patient.id),
-                                  separatorBuilder: (context, index) =>
-                                      SizedBox(height: 10),
-                                  itemCount: model.selectedDentalNotes.length)
+                              shrinkWrap: true,
+                              primary: false,
+                              itemBuilder: (context, index) =>
+                                  PaymentDentalNoteCard(
+                                      dentalNote:
+                                      model.selectedDentalNotes[index],
+                                      patientID: patient.id),
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: 10),
+                              itemCount: model.selectedDentalNotes.length)
                               : SizedBox(
-                                  height: 100,
-                                  child:
-                                      Center(child: Text('No Notes Selected'))),
+                              height: 100,
+                              child:
+                              Center(child: Text('No Notes Selected'))),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -325,10 +325,10 @@ class AddPaymentView extends StatelessWidget {
                             ),
                             ActionChip(
                               label:
-                                  Text(0 <= 0 ? 'Select Product' : 'Add more'),
+                              Text(0 <= 0 ? 'Select Product' : 'Add more'),
                               labelPadding: EdgeInsets.symmetric(horizontal: 8),
                               labelStyle:
-                                  TextStyles.tsBody2(color: Colors.white),
+                              TextStyles.tsBody2(color: Colors.white),
                               backgroundColor: Palettes.kcBlueMain1,
                               tooltip: 'Select Product',
                               onPressed: () =>
@@ -338,29 +338,51 @@ class AddPaymentView extends StatelessWidget {
                         ),
                         model.selectedMedicines.isNotEmpty
                             ? Container(
-                                width: double.maxFinite,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
-                                ),
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: ListView.separated(
-                                    shrinkWrap: true,
-                                    primary: false,
-                                    itemBuilder: (context, index) =>
-                                        PaymentMedicineCard(
-                                            medicine:
-                                                model.selectedMedicines[index]),
-                                    separatorBuilder: (context, index) =>
-                                        SizedBox(height: 4),
-                                    itemCount: model.selectedMedicines.length),
-                              )
+                          width: double.maxFinite,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,
+                          ),
+                          padding: EdgeInsets.symmetric(vertical: 8),
+                          child: ListView.separated(
+                              shrinkWrap: true,
+                              primary: false,
+                              itemBuilder: (context, index) =>
+                                  PaymentMedicineCard(
+                                      medicine:
+                                      model.selectedMedicines[index]),
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: 4),
+                              itemCount: model.selectedMedicines.length),
+                        )
                             : Container(
-                                height: 50,
-                                width: double.maxFinite,
-                                color: Colors.grey.shade200,
-                                alignment: Alignment.center,
-                                child: Text('No Product Selected'),
-                              ),
+                          height: 50,
+                          width: double.maxFinite,
+                          color: Colors.grey.shade200,
+                          alignment: Alignment.center,
+                          child: Text('No Medicine Selected'),
+                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Text(
+                        //       'Rx',
+                        //       style: TextStyles.tsButton1(),
+                        //     ),
+                        //
+                        //     ActionChip(
+                        //       label: Text(
+                        //           0 <= 0 ? 'Add RX' : 'Add more'),
+                        //       labelPadding: EdgeInsets.symmetric(horizontal: 8),
+                        //       labelStyle:
+                        //       TextStyles.tsBody2(color: Colors.white),
+                        //       backgroundColor: Palettes.kcBlueMain1,
+                        //       tooltip: 'Add RX',
+                        //       onPressed: () =>
+                        //           // model.addRx(patient.id),
+                        //       AddRxView()
+                        //     )
+                        //   ],
+                        // ),
                         SizedBox(height: 6),
                         Container(
                           height: 8,
@@ -373,7 +395,7 @@ class AddPaymentView extends StatelessWidget {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Text(
@@ -383,7 +405,7 @@ class AddPaymentView extends StatelessWidget {
                                   ),
                                   Text(
                                     // '${model.dentalNoteSubTotal.toString().toCurrency}',
-                                    '${model.serviceSubTotal.toString().toCurrency}',
+                                    '${model.dentalNoteSubTotal.toString().toCurrency}',
                                     style: TextStyle(
                                       color: Colors.deepOrangeAccent,
                                       fontWeight: FontWeight.bold,
@@ -396,7 +418,7 @@ class AddPaymentView extends StatelessWidget {
                               SizedBox(height: 8),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Text(
@@ -435,12 +457,12 @@ class AddPaymentView extends StatelessWidget {
                                         ),
                                         enabled:
 
-                                      //   model.dentalNoteSubTotal == 0 &&
-                                      // model.medicineSubTotal == 0,
-                                            model.serviceSubTotal == 0 &&
-                                                model.medicineSubTotal == 0,
+                                        //   model.dentalNoteSubTotal == 0 &&
+                                        // model.medicineSubTotal == 0,
+                                        model.serviceSubTotal == 0 &&
+                                            model.medicineSubTotal == 0,
                                         controller:
-                                            model.totalAmountTxtController,
+                                        model.totalAmountTxtController,
                                         onChanged: (value) =>
                                             model.onTotalAmountTextEdit(value),
                                         validator: (value) => model
@@ -457,27 +479,27 @@ class AddPaymentView extends StatelessWidget {
                                               maxHeight: 60, minHeight: 60),
                                           enabledBorder: OutlineInputBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(4),
+                                              BorderRadius.circular(4),
                                               borderSide: BorderSide(
                                                   color:
-                                                      Colors.deepOrangeAccent)),
+                                                  Colors.deepOrangeAccent)),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(4),
+                                            BorderRadius.circular(4),
                                             borderSide: BorderSide(
                                                 color: Colors.deepOrangeAccent,
                                                 width: 2),
                                           ),
                                           focusedErrorBorder:
-                                              OutlineInputBorder(
+                                          OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(0),
+                                            BorderRadius.circular(0),
                                             borderSide: BorderSide(
                                                 color: Colors.red, width: 2),
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(4),
+                                            BorderRadius.circular(4),
                                             borderSide: BorderSide(
                                                 color: Colors.red, width: 2),
                                           ),

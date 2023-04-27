@@ -84,7 +84,7 @@ class SelectPaymentType extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 4),
                           child: SizedBox(
-                              width: double.maxFinite,
+                              // width: double.maxFinite,
                               child: ElevatedButton(
                                 onPressed: () {
                                   model.returnPaymentType(

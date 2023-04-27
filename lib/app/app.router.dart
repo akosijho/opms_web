@@ -12,6 +12,7 @@ import 'package:stacked/stacked_annotations.dart';
 
 import '../models/appointment_model/appointment_model.dart';
 import '../models/medical_history/medical_history.dart';
+import '../models/medicine/medicine.dart';
 import '../models/patient_model/patient_model.dart';
 import '../models/payment/payment.dart';
 import '../models/procedure/procedure.dart';
@@ -55,6 +56,7 @@ import '../ui/views/selection_tooth_condition/selection_tooth_condition_view.dar
 import '../ui/views/set_dental_note/set_dental_note_view.dart';
 import '../ui/views/set_tooth_condition/set_tooth_condition_view.dart';
 import '../ui/views/update_procedure/update_procedure_view.dart';
+import '../ui/views/update_product/update_product_view.dart';
 import '../ui/views/update_user_info/setup_user_view.dart';
 import '../ui/views/user_view/user_view.dart';
 import '../ui/views/verify_email/verify_email_view.dart';
@@ -117,6 +119,7 @@ class Routes {
   static const String ViewDentalNoteByToothView =
       '/view-dental-note-by-tooth-view';
   static const String UpdateProcedureViews = '/update-procedure-view';
+  static const String UpdateProductViews = '/update-product-view';
   static const all = <String>{
     Login,
     Register,
@@ -166,6 +169,7 @@ class Routes {
     ViewDentalNote,
     ViewDentalNoteByToothView,
     UpdateProcedureViews,
+    UpdateProductViews,
   };
 }
 
@@ -223,6 +227,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.ViewDentalNote, page: ViewDentalNote),
     RouteDef(Routes.ViewDentalNoteByToothView, page: ViewDentalNoteByToothView),
     RouteDef(Routes.UpdateProcedureViews, page: UpdateProcedureView),
+    RouteDef(Routes.UpdateProductViews, page: UpdateProductView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -668,6 +673,19 @@ class StackedRouter extends RouterBase {
         transitionDuration: const Duration(milliseconds: 300),
       );
     },
+    UpdateProductView: (data) {
+      var args = data.getArgs<UpdateProductViewArguments>(nullOk: false);
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            UpdateProductView(
+          key: args.key,
+          medicine: args.medicine,
+        ),
+        settings: data,
+        transitionsBuilder: TransitionsBuilders.slideBottom,
+        transitionDuration: const Duration(milliseconds: 300),
+      );
+    },
   };
 }
 
@@ -866,4 +884,11 @@ class UpdateProcedureViewArguments {
   final Key? key;
   final Procedure procedure;
   UpdateProcedureViewArguments({this.key, required this.procedure});
+}
+
+/// UpdateProductView arguments holder class
+class UpdateProductViewArguments {
+  final Key? key;
+  final Medicine medicine;
+  UpdateProductViewArguments({this.key, required this.medicine});
 }

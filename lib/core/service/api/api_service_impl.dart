@@ -30,7 +30,7 @@ import '../../../models/payment/payment.dart';
 
 class ApiServiceImpl extends ApiService {
   final userReference = FirebaseFirestore.instance.collection('users');
-  final connectivityService = locator<ConnectivityService>();
+  // final connectivityService = locator<ConnectivityService>();
 
   final appointmentReference =
       FirebaseFirestore.instance.collection('appointments');
@@ -458,13 +458,13 @@ class ApiServiceImpl extends ApiService {
 
   @override
   Future<QueryResult> addPayment({required Payment payment}) async {
-    if (await connectivityService.checkConnectivity()) {
+    // if (await connectivityService.checkConnectivity()) {
       final paymentDoc = await paymentReference.doc();
       final paymentRes = await paymentDoc.set(payment.toJson(paymentDoc.id));
       return QueryResult.success(returnValue: paymentDoc.id);
-    } else {
-      return QueryResult.error('Check your network and try again!');
-    }
+    // } else {
+    //   return QueryResult.error('Check your network and try again!');
+    // }
   }
 
   @override
@@ -490,14 +490,14 @@ class ApiServiceImpl extends ApiService {
 
   @override
   Future<QueryResult> addExpense({required Expense expense}) async {
-    if (await connectivityService.checkConnectivity()) {
+    // if (await connectivityService.checkConnectivity()) {
       final expenseDoc = await expenseReference.doc();
 
       await expenseDoc.set(expense.toJson(expenseDoc.id));
       return QueryResult.success();
-    } else {
-      return QueryResult.error('Check your network and try again!');
-    }
+    // } else {
+    //   return QueryResult.error('Check your network and try again!');
+    // }
   }
 
   @override
@@ -542,14 +542,14 @@ class ApiServiceImpl extends ApiService {
       {required dynamic appointmentId,
       required String appointmentStatus}) async {
     try {
-      if (await connectivityService.checkConnectivity()) {
+      // if (await connectivityService.checkConnectivity()) {
         final queryRes = await appointmentReference
             .doc(appointmentId)
             .update({'appointment_status': appointmentStatus});
         return QueryResult.success();
-      } else {
-        return QueryResult.error('Check your network connection and try again');
-      }
+      // } else {
+      //   return QueryResult.error('Check your network connection and try again');
+      // }
     } catch (e) {
       return QueryResult.error('Something went wrong');
     }
@@ -574,16 +574,16 @@ class ApiServiceImpl extends ApiService {
   @override
   Future<QueryResult> addPrescription(
       {required Prescription prescription, required patientId}) async {
-    if (await connectivityService.checkConnectivity()) {
+    // if (await connectivityService.checkConnectivity()) {
       final prescriptionDoc = await patientReference
           .doc(patientId)
           .collection('prescription')
           .doc();
       await prescriptionDoc.set(prescription.toJson(id: prescriptionDoc.id));
       return QueryResult.success();
-    } else {
-      return QueryResult.error("Check your network connection and try again");
-    }
+    // } else {
+    //   return QueryResult.error("Check your network connection and try again");
+    // }
   }
 
   @override
@@ -609,7 +609,7 @@ class ApiServiceImpl extends ApiService {
   Future<QueryResult> addDentalCertificate(
       {required DentalCertificate dentalCertificate,
       required Patient patient}) async {
-    if (await connectivityService.checkConnectivity()) {
+    // if (await connectivityService.checkConnectivity()) {
       final certDoc = await patientReference
           .doc(patient.id)
           .collection('dental_certificate')
@@ -618,9 +618,9 @@ class ApiServiceImpl extends ApiService {
           id: certDoc.id,
           dateCreated: FieldValue.serverTimestamp().toString()));
       return QueryResult.success();
-    } else {
-      return QueryResult.error("Check your network connection and try again");
-    }
+    // } else {
+    //   return QueryResult.error("Check your network connection and try again");
+    // }
   }
 
   @override
@@ -645,13 +645,13 @@ class ApiServiceImpl extends ApiService {
 
   @override
   Future<QueryResult> updatePatientInfo({required Patient patient}) async {
-    if (await connectivityService.checkConnectivity()) {
+    // if (await connectivityService.checkConnectivity()) {
       patientReference.doc(patient.id).set(patient.toJson(
           patientId: patient.id, dateCreated: FieldValue.serverTimestamp()));
       return QueryResult.success();
-    } else {
-      return QueryResult.error('Check your network connection and try again');
-    }
+    // } else {
+    //   return QueryResult.error('Check your network connection and try again');
+    // }
   }
 
   @override
@@ -684,48 +684,48 @@ class ApiServiceImpl extends ApiService {
   @override
   Future<QueryResult> updateUserStatus(
       {required String userId, required String status}) async {
-    if (await connectivityService.checkConnectivity()) {
+    // if (await connectivityService.checkConnectivity()) {
       await userReference.doc(userId).update({'active_status': status});
       return QueryResult.success();
-    } else {
-      return QueryResult.error(
-          'Unable To Update Status. No Internet Connection.');
-    }
+    // } else {
+    //   return QueryResult.error(
+    //       'Unable To Update Status. No Internet Connection.');
+    // }
   }
 
   @override
   Future<QueryResult> updateUserInfo({required UserModel user}) async {
-    if (await connectivityService.checkConnectivity()) {
+    // if (await connectivityService.checkConnectivity()) {
       await userReference.doc(user.userId).set(user.toJson());
       return QueryResult.success();
-    } else {
-      return QueryResult.error(
-          'Unable To Update Status. No Internet Connection.');
-    }
+    // } else {
+    //   return QueryResult.error(
+    //       'Unable To Update Status. No Internet Connection.');
+    // }
   }
 
   @override
   Future<QueryResult> updatePatientPhoto(
       {required String image, required String patientID}) async {
-    if (await connectivityService.checkConnectivity()) {
+    // if (await connectivityService.checkConnectivity()) {
       await patientReference.doc(patientID).update({'image': image});
       return QueryResult.success();
-    } else {
-      return QueryResult.error(
-          'Unable To Update Image. No Internet Connection.');
-    }
+    // } else {
+    //   return QueryResult.error(
+    //       'Unable To Update Image. No Internet Connection.');
+    // }
   }
 
   @override
   Future<QueryResult> updateUserPhoto(
       {required String image, required String userId}) async {
-    if (await connectivityService.checkConnectivity()) {
+    // if (await connectivityService.checkConnectivity()) {
       await userReference.doc(userId).update({'image': image});
       return QueryResult.success();
-    } else {
-      return QueryResult.error(
-          'Unable To Update Image. No Internet Connection.');
-    }
+    // } else {
+    //   return QueryResult.error(
+    //       'Unable To Update Image. No Internet Connection.');
+    // }
   }
 
   @override
@@ -807,15 +807,29 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
+  // Future<QueryResult> updateProcedure(Procedure procedure) async {
+  //   if (await connectivityService.checkConnectivity()) {
+  //     procedureReference.doc(procedure.id).set(procedure.toJson(
+  //         dateCreated: FieldValue.serverTimestamp(), id: procedure.id));
+  //     return QueryResult.success();
+  //   } else {
+  //     return QueryResult.error(
+  //         'No Internet Connection. Check your connection and try again');
+  //   }
+  // }
   Future<QueryResult> updateProcedure(Procedure procedure) async {
-    if (await connectivityService.checkConnectivity()) {
-      procedureReference.doc(procedure.id).set(procedure.toJson(
-          dateCreated: FieldValue.serverTimestamp(), id: procedure.id));
-      return QueryResult.success();
-    } else {
-      return QueryResult.error(
-          'No Internet Connection. Check your connection and try again');
-    }
+    // if (await connectivityService.checkConnectivity()) {
+      try {
+        await procedureReference.doc(procedure.id).set(procedure.toJson(
+            dateCreated: FieldValue.serverTimestamp(), id: procedure.id));
+        return QueryResult.success();
+      } catch (e) {
+        return QueryResult.error('Failed to update service');
+      }
+    // } else {
+    //   return QueryResult.error(
+    //       'No Internet Connection. Check your connection and try again');
+    // }
   }
 
   @override
@@ -825,5 +839,31 @@ class ApiServiceImpl extends ApiService {
         .get()
         .then((value) =>
         value.docs.map((e) => Medicine.fromJson(e.data())).toList());
+  }
+
+  @override
+  // Future<QueryResult> updateProduct(Medicine medicine) async {
+  //   if (await connectivityService.checkConnectivity()) {
+  //   medicineReference.doc(medicine.id).set(medicine.toJson(
+  //   dateCreated: FieldValue.serverTimestamp(), id: medicine.id));
+  //   return QueryResult.success();
+  //   } else {
+  //   return QueryResult.error(
+  //   'No Internet Connection. Check your connection and try again');
+  //   }
+  // }
+  Future<QueryResult> updateProduct(Medicine medicine) async {
+    // if (await connectivityService.checkConnectivity()) {
+      try {
+        await medicineReference.doc(medicine.id).set(medicine.toJson(
+            dateCreated: FieldValue.serverTimestamp(), id: medicine.id));
+        return QueryResult.success();
+      } catch (e) {
+        return QueryResult.error('Failed to update product');
+      }
+    // } else {
+    //   return QueryResult.error(
+    //       'No Internet Connection. Check your connection and try again');
+    // }
   }
 }
