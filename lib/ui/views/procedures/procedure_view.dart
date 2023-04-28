@@ -114,7 +114,7 @@ class _ProceduresViewState extends State<ProceduresView> {
                                     ),
                                   ),
                                   constraints: BoxConstraints(maxHeight: 43),
-                                  hintText: 'Search Procedure...',
+                                  hintText: 'Search Service...',
                                 ),
                               ),
                             ),

@@ -99,7 +99,7 @@ class _AddProcedureViewState extends State<AddProcedureView> {
                     ),
                     SizedBox(height: 100),
                     SizedBox(
-                      width: double.maxFinite,
+                      // width: double.maxFinite,
                       child: ElevatedButton(
                           onPressed: () {
                             if (addProcedureFormKey.currentState!.validate()) {
