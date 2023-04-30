@@ -1,5 +1,5 @@
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
-import 'package:opmswebstaff/models/procedure/procedure.dart';
+import 'package:opmswebstaff/models/service/service.dart';
 
 class AppointmentModel {
   final String? appointment_id;
@@ -7,10 +7,10 @@ class AppointmentModel {
   final String date;
   final String startTime;
   final String endTime;
-  final String dentist;
+  final String optometrist;
   final String appointment_status;
 
-  final List<dynamic>? procedures;
+  final List<dynamic>? services;
   final String? dateCreated;
   final bool? isAccepted;
 
@@ -20,9 +20,9 @@ class AppointmentModel {
     required this.date,
     required this.startTime,
     required this.endTime,
-    required this.dentist,
+    required this.optometrist,
     required this.appointment_status,
-    this.procedures,
+    this.services,
     this.dateCreated,
     this.isAccepted,
   });
@@ -38,10 +38,10 @@ class AppointmentModel {
       'date': this.date,
       'startTime': this.startTime,
       'endTime': this.endTime,
-      'dentist': this.dentist,
+      'optometrist': this.optometrist,
       'appointment_status': this.appointment_status,
-      'procedures': this
-          .procedures
+      'services': this
+          .services
           ?.map((e) => e.toJson(dateCreated: e.dateCreated, id: e.id))
           .toList(),
       // ?.map((e) => e?.toJson(dateCreated: this.date)),
@@ -58,12 +58,13 @@ class AppointmentModel {
         date: map['date'] as String,
         startTime: map['startTime'] as String,
         endTime: map['endTime'] as String,
-        dentist: map['dentist'] as String,
+        optometrist: map['optometrist'] as String,
         isAccepted: map['isAccepted,'],
         appointment_status: map['appointment_status'] as String,
-        procedures: map['procedures']
-            .map((procedure) => Procedure.fromJson(procedure))
+        services: map['services']
+            .map((services) => Service.fromJson(services))
             .toList(),
         dateCreated: map['dateCreated'].toString());
   }
+
 }

@@ -9,9 +9,9 @@ import '../../../constants/styles/text_styles.dart';
 import '../../../core/service/validator/validator_service.dart';
 
 class CartMedicineCard extends StatefulWidget {
-  final Medicine medicine;
+  final Product medicine;
   final bool isChecked;
-  final List<Medicine> selectedMedicines;
+  final List<Product> selectedMedicines;
   final VoidCallback notifyChange;
   CartMedicineCard(
       {Key? key,
@@ -63,7 +63,7 @@ class _CartMedicineCardState extends State<CartMedicineCard> {
     } catch (e) {}
   }
 
-  void updateQtyOfSelectedMedicine(List<Medicine> selectedMedicineList,
+  void updateQtyOfSelectedMedicine(List<Product> selectedMedicineList,
       String selectedMedicineId, String newAmount) {
     int target = selectedMedicineList
         .indexWhere((element) => element.id == selectedMedicineId);
@@ -82,8 +82,8 @@ class _CartMedicineCardState extends State<CartMedicineCard> {
           .removeWhere((medicine) => medicine.id == widget.medicine.id);
       widget.notifyChange();
     } else {
-      widget.selectedMedicines.add(Medicine(
-        medicineName: widget.medicine.medicineName,
+      widget.selectedMedicines.add(Product(
+        productName: widget.medicine.productName,
         price: widget.medicine.price,
         qty: newQty,
         brandName: widget.medicine.brandName,
@@ -212,7 +212,7 @@ class _CartMedicineCardState extends State<CartMedicineCard> {
                     style: TextStyles.tsBody1(color: Colors.grey.shade900),
                   ),
                   Text(
-                    widget.medicine.medicineName,
+                    widget.medicine.productName,
                     style: TextStyles.tsBody2(color: Colors.black54),
                   ),
                   SizedBox(height: 4),

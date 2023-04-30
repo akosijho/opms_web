@@ -116,8 +116,8 @@ class HomeAppointment extends StatelessWidget {
                                         patient: myAppointments[i].patient)),
                                 // imageUrl: myAppointments[i].patient.image,
                                 serviceTitle:
-                                    myAppointments[i].procedures![0].procedureName,
-                                doctor: myAppointments[i].dentist,
+                                    myAppointments[i].services![0].serviceName,
+                                doctor: myAppointments[i].optometrist,
                                 patient: myAppointments[i].patient,
                                 appointmentDate: DateFormat.yMMMd()
                                     .format(myAppointments[i].date.toDateTime()!),

@@ -40,7 +40,7 @@ class PaymentCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        payment.dentalNoteSubTotal.toCurrency!,
+                        payment.opticalNoteSubTotal.toCurrency!,
                         style: GoogleFonts.robotoCondensed(
                           fontSize: 17,
                           color: Colors.grey.shade900,
@@ -60,7 +60,7 @@ class PaymentCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        payment.medicineSubTotal.toCurrency!,
+                        payment.productSubTotal.toCurrency!,
                         style: GoogleFonts.robotoCondensed(
                           fontSize: 17,
                           color: Colors.grey.shade900,

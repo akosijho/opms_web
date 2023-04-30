@@ -56,11 +56,17 @@ class AppointmentView extends StatelessWidget {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.miniEndFloat,
+          // floatingActionButton: FloatingActionButton.extended(
+          //   heroTag: null,
+          //   onPressed: model.goToSelectPatient(context),
+          //   label: Text('Add Appointment'),
+          // ),
           floatingActionButton: FloatingActionButton.extended(
             heroTag: null,
-            onPressed: model.goToSelectPatient,
+            onPressed: () => model.goToSelectPatient(context),
             label: Text('Add Appointment'),
           ),
+
           body: Container(
             color: Colors.grey.shade50,
             child: ListView(
@@ -234,8 +240,8 @@ class AppointmentView extends StatelessWidget {
                     arguments: PatientInfoViewArguments(
                         patient: appointmentList[i].patient)),
                 // imageUrl: appointmentList[i].patient.image,
-                serviceTitle: appointmentList[i].procedures![0].procedureName,
-                doctor: appointmentList[i].dentist,
+                serviceTitle: appointmentList[i].services![0].serviceName,
+                doctor: appointmentList[i].optometrist,
                 patient: appointmentList[i].patient,
                 appointmentDate: DateFormat.yMMMd()
                     .format(appointmentList[i].date.toDateTime()!),

@@ -40,7 +40,7 @@ class ReceiptViewModel extends BaseViewModel {
     );
   }
 
-  String computeMedTotal(Medicine medicine) {
+  String computeMedTotal(Product medicine) {
     int qty = int.parse(medicine.qty!);
     double price = double.parse(medicine.price!);
     return (qty * price).toString().toCurrency!;

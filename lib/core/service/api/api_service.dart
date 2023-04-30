@@ -2,22 +2,22 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
-import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
 import 'package:opmswebstaff/models/expense/expense.dart';
 import 'package:opmswebstaff/models/medical_history/medical_history.dart';
 import 'package:opmswebstaff/models/medicine/medicine.dart';
 import 'package:opmswebstaff/models/notification/notification_model.dart';
 import 'package:opmswebstaff/models/notification_token/notification_token_model.dart';
+import 'package:opmswebstaff/models/optical_certificate/optical_certificate.dart';
+import 'package:opmswebstaff/models/optical_notes/optical_notes.dart';
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
 import 'package:opmswebstaff/models/prescription/prescription.dart';
-import 'package:opmswebstaff/models/procedure/procedure.dart';
 import 'package:opmswebstaff/models/query_result/query_result.dart';
+import 'package:opmswebstaff/models/service/service.dart';
 import 'package:opmswebstaff/models/tooth_condition/tooth_condition.dart';
 import 'package:opmswebstaff/models/upload_results/image_upload_result.dart';
 import 'package:opmswebstaff/models/user_model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../models/dental_certificate/dental_certificate.dart';
 import '../../../models/payment/payment.dart';
 
 abstract class ApiService {
@@ -48,24 +48,24 @@ abstract class ApiService {
 
   Future<List<Patient>> searchPatient(String query);
 
-  Future<dynamic>? addMedicine({required Medicine medicine, String? image});
+  Future<dynamic>? addProduct({required Product product, String? image});
 
-  Future<List<Medicine>> searchMedicine(String query);
+  Future<List<Product>> searchProduct(String query);
 
-  Stream<List<Medicine>> getMedicineList();
+  Stream<List<Product>> getProductList();
 
-  Future<dynamic>? addProcedure({required Procedure procedure});
+  Future<dynamic>? addService({required Service service});
 
-  Future<List<Procedure>> searchProcedure(String query);
+  Future<List<Service>> searchService(String query);
 
-  Stream<List<Procedure>> getProcedureList();
+  Stream<List<Service>> getServiceList();
 
   Future<String> createAppointment(AppointmentModel appointment);
 
-  Future<ImageUploadResult> uploadMedicineImage(
+  Future<ImageUploadResult> uploadProductImage(
       {required File imageToUpload, required String genericName});
 
-  Future<List<UserModel>> searchDentist({required String query});
+  Future<List<UserModel>> searchOptometrist({required String query});
 
   Stream<List<AppointmentModel>> getAppointmentToday();
 
@@ -74,9 +74,9 @@ abstract class ApiService {
 
   Future<void> deleteAppointment({required String appointmentId});
 
-  Future<void> deleteProcedure({required String procedureId});
+  Future<void> deleteService({required String procedureId});
 
-  Future<void> deleteMedicine({required String medicineId});
+  Future<void> deleteProduct({required String medicineId});
 
   Future<void> deleteUser({required String userId});
 
@@ -95,21 +95,21 @@ abstract class ApiService {
       required dynamic patientId,
       required ToothCondition toothCondition});
 
-  Future<void> addToothDentalNotes(
+  Future<void> addOpticalNotes(
       {required String toothId,
       required dynamic patientId,
-      required DentalNotes dentalNotes,
+      required OpticalNotes opticalNotes,
       required dynamic procedureId});
 
   Future<List<ToothCondition>?> getDentalConditionList(
       {required dynamic patientId, String? toothId});
 
-  Future<List<DentalNotes>?> getDentalNotesList(
+  Future<List<OpticalNotes>?> getOpticalNotesList(
       {required dynamic patientId, String? toothId, bool? isPaid});
 
   Stream<List<Patient>> getPatientDentalCondition(String patientId);
 
-  Future<void> updateDentalAmountField(
+  Future<void> updateOpticalAmountField(
       {required dynamic patientId,
       String? toothId,
       required dental_noteId,
@@ -118,7 +118,7 @@ abstract class ApiService {
 
   Future<QueryResult> addPayment({required Payment payment});
 
-  Future<void> updateDentalANotePaidStatus(
+  Future<void> updateOpticalANotePaidStatus(
       {required dynamic patientId,
       String? toothId,
       required dental_noteId,
@@ -151,12 +151,12 @@ abstract class ApiService {
   Future<List<Prescription>> getPatientPrescription(
       {required dynamic patientId});
 
-  Future<QueryResult> addDentalCertificate(
-      {required DentalCertificate dentalCertificate, required Patient patient});
+  Future<QueryResult> addOpticalCertificate(
+      {required OpticalCertificate opticalCertificate, required Patient patient});
 
-  Stream listenToDentalCertChanges({required Patient patient});
+  Stream listenToOpticalCertChanges({required Patient patient});
 
-  Future<List<DentalCertificate>> getDentalCert({required Patient patient});
+  Future<List<OpticalCertificate>> getOpticalCert({required Patient patient});
 
   Future<QueryResult> updatePatientInfo({required Patient patient});
 
@@ -196,11 +196,11 @@ abstract class ApiService {
 
   Future<AppointmentModel> getAppointmentById(String id);
 
-  Future<List<Procedure>> getProcedures();
+  Future<List<Service>> getService();
 
-  Future<List<Medicine>> getProducts();
+  Future<List<Product>> getProducts();
 
-  Future<QueryResult> updateProcedure(Procedure procedure);
+  Future<QueryResult> updateService(Service procedure);
 
-  Future<QueryResult> updateProduct(Medicine medicine);
+  Future<QueryResult> updateProduct(Product medicine);
 }

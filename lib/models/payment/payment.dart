@@ -1,16 +1,16 @@
 import 'package:opmswebstaff/models/medicine/medicine.dart';
+import 'package:opmswebstaff/models/optical_notes/optical_notes.dart';
 
-import '../dental_notes/dental_notes.dart';
 
 class Payment {
   final String? payment_id;
   final String patient_id;
   final String patient_name;
-  final String dentist;
-  final List<dynamic>? dentalNote;
-  final List<dynamic>? medicineList;
-  final String dentalNoteSubTotal;
-  final String medicineSubTotal;
+  final String optometrist;
+  final List<dynamic>? opticalNote;
+  final List<dynamic>? productList;
+  final String opticalNoteSubTotal;
+  final String productSubTotal;
   final String totalAmount;
   final String payment_type;
   String paymentDate;
@@ -19,12 +19,12 @@ class Payment {
   Payment({
     this.payment_id,
     required this.patient_name,
-    this.medicineList,
+    this.productList,
     required this.patient_id,
-    required this.dentist,
-    this.dentalNote,
-    required this.dentalNoteSubTotal,
-    required this.medicineSubTotal,
+    required this.optometrist,
+    this.opticalNote,
+    required this.opticalNoteSubTotal,
+    required this.productSubTotal,
     required this.totalAmount,
     required this.payment_type,
     required this.paymentDate,
@@ -34,17 +34,17 @@ class Payment {
   Map<String, dynamic> toJson(dynamic id) {
     return {
       'payment_id': id,
-      'dentist': this.dentist,
-      'dentalNote': this
-          .dentalNote
-          ?.map((e) => e.toJson(id: e.id, procedureId: e.procedure.id))
+      'optometrist': this.optometrist,
+      'opticallNote': this
+          .opticalNote
+          ?.map((e) => e.toJson(id: e.id, procedureId: e.service.id))
           .toList(),
-      'medicineList': medicineList
+      'productList': productList
           ?.map((e) =>
               e.toJson(dateCreated: e.dateCreated, id: e.id, image: e.image))
           .toList(),
-      'dentalNoteSubTotal': this.dentalNoteSubTotal,
-      'medicineSubTotal': this.medicineSubTotal,
+      'opticalNoteSubTotal': this.opticalNoteSubTotal,
+      'productSubTotal': this.productSubTotal,
       'totalAmount': this.totalAmount,
       'payment_type': this.payment_type,
       'patient_id': this.patient_id,
@@ -57,19 +57,19 @@ class Payment {
   factory Payment.fromJson(Map<String, dynamic> map) {
     return Payment(
       payment_id: map['payment_id'] as String,
-      dentist: map['dentist'] as String,
-      dentalNote: map['dentalNote'] != null
-          ? map['dentalNote']
-              .map((dentalNote) => DentalNotes.fromJson(dentalNote))
+      optometrist: map['optometrist'] as String,
+      opticalNote: map['opticalNote'] != null
+          ? map['opticalNote']
+              .map((dentalNote) => OpticalNotes.fromJson(dentalNote))
               .toList()
           : [],
-      medicineList: map['medicineList'] != null
-          ? map['medicineList']
-              .map((medicine) => Medicine.fromJson(medicine))
+      productList: map['productList'] != null
+          ? map['productList']
+              .map((medicine) => Product.fromJson(medicine))
               .toList()
           : [],
-      dentalNoteSubTotal: map['dentalNoteSubTotal'] as String,
-      medicineSubTotal: map['medicineSubTotal'] as String,
+      opticalNoteSubTotal: map['opticalNoteSubTotal'] as String,
+      productSubTotal: map['productSubTotal'] as String,
       totalAmount: map['totalAmount'] as String,
       payment_type: map['payment_type'] as String,
       patient_id: map['patient_id'] as String,

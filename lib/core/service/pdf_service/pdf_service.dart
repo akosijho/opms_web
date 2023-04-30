@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:opmswebstaff/models/dental_certificate/dental_certificate.dart';
+import 'package:opmswebstaff/models/optical_certificate/optical_certificate.dart';
 import 'package:opmswebstaff/models/payment/payment.dart';
 import 'package:opmswebstaff/models/prescription/prescription.dart';
 
@@ -13,8 +13,8 @@ abstract class PdfService {
   Future<Uint8List> printPrescription(
       {required Prescription prescription, required Patient patient});
 
-  Future<Uint8List> printDentalCertificate(
-      {required DentalCertificate dentalCertificate, required Patient patient});
+  Future<Uint8List> printOpticalCertificate(
+      {required OpticalCertificate dentalCertificate, required Patient patient});
 
   Future<void> savePdfFile2(
       {required String fileName, required Uint8List byteList});

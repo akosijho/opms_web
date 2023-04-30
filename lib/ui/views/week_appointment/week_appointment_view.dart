@@ -67,8 +67,8 @@ class WeekAppointmentView extends StatelessWidget {
                       onPatientTap: () {},
                       // imageUrl: model.appointments[i].patient.image,
                       serviceTitle:
-                          model.appointments[i].procedures![0].procedureName,
-                      doctor: model.appointments[i].dentist,
+                          model.appointments[i].services![0].serviceName,
+                      doctor: model.appointments[i].optometrist,
                       patient: model.appointments[i].patient,
                       appointmentDate: DateFormat.yMMMd()
                           .format(model.appointments[i].date.toDateTime()!),

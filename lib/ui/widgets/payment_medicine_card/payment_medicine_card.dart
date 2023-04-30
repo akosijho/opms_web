@@ -7,7 +7,7 @@ import 'package:image_network/image_network.dart';
 import '../../../constants/styles/text_styles.dart';
 
 class PaymentMedicineCard extends StatelessWidget {
-  final Medicine medicine;
+  final Product medicine;
   const PaymentMedicineCard({Key? key, required this.medicine})
       : super(key: key);
 
@@ -32,7 +32,7 @@ class PaymentMedicineCard extends StatelessWidget {
                     style: TextStyles.tsBody1(color: Colors.grey.shade900),
                   ),
                   Text(
-                    medicine.medicineName,
+                    medicine.productName,
                     style: TextStyles.tsBody2(color: Colors.black54),
                   ),
                   SizedBox(height: 10),

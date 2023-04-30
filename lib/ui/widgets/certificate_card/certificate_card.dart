@@ -1,14 +1,14 @@
-import 'package:opmswebstaff/extensions/string_extension.dart';
-import 'package:opmswebstaff/models/dental_certificate/dental_certificate.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/optical_certificate/optical_certificate.dart';
 
 class CertificateCard extends StatelessWidget {
-  final DentalCertificate dentalCertificate;
+  final OpticalCertificate opticalCertificate;
   final VoidCallback onViewCertTap;
   const CertificateCard(
-      {Key? key, required this.dentalCertificate, required this.onViewCertTap})
+      {Key? key, required this.opticalCertificate, required this.onViewCertTap})
       : super(key: key);
 
   @override
@@ -37,7 +37,7 @@ class CertificateCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${dentalCertificate.procedure}',
+                    '${opticalCertificate.service}',
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -65,7 +65,7 @@ class CertificateCard extends StatelessWidget {
                       Text(
                         DateFormat.yMMMd()
                             .add_jm()
-                            .format(dentalCertificate.date.toDateTime()!),
+                            .format(opticalCertificate.date.toDateTime()!),
                         style: GoogleFonts.robotoCondensed(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

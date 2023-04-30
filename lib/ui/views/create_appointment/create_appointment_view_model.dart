@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:opmswebstaff/app/app.locator.dart';
 import 'package:opmswebstaff/app/app.router.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
@@ -13,9 +14,11 @@ import 'package:opmswebstaff/extensions/date_format_extension.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
 import 'package:opmswebstaff/models/notification/notification_model.dart';
-import 'package:opmswebstaff/models/procedure/procedure.dart';
+import 'package:opmswebstaff/models/service/service.dart';
 import 'package:opmswebstaff/models/user_model/user_model.dart';
 import 'package:opmswebstaff/ui/widgets/selection_date/selection_date.dart';
+import 'package:opmswebstaff/ui/widgets/selection_optometrist/selection_optometrist.dart';
+import 'package:opmswebstaff/ui/widgets/selection_service/selection_service.dart';
 import 'package:opmswebstaff/ui/widgets/selection_time/selection_time.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
@@ -31,13 +34,13 @@ class CreateAppointmentViewModel extends BaseViewModel {
   final dialogService = locator<DialogService>();
 
   String? tempDate;
-  List<Procedure> selectedProcedures = [];
+  List<Service> selectedServices = [];
   DateTime? selectedAppointmentDate;
   DateTime? selectedStartTime;
   DateTime? selectedEndTime;
   DateTime? tempStartTime;
   DateTime? tempEndTime;
-  UserModel? myDentist;
+  UserModel? myOptometrist;
   AppointmentModel? latestAppointment;
 
   Future<void> setAppointment(
@@ -63,7 +66,7 @@ class CreateAppointmentViewModel extends BaseViewModel {
           user_id: patientId,
           notification_title: 'New Appointment',
           notification_msg: 'You have new appointment '
-              'with Doctor ${appointment.dentist}'
+              'with Doctor ${appointment.optometrist}'
               ' on '
               '${DateFormat.yMMMd().add_jm().format(appointment.date.toDateTime()!)} ',
           notification_type: 'appointment',
@@ -81,32 +84,123 @@ class CreateAppointmentViewModel extends BaseViewModel {
     }
   }
 
-  void selectDate(TextEditingController controller) async {
-    selectedAppointmentDate =
-        await bottomSheetService.openBottomSheet(SelectionDate(
-      title: 'Set Appointment date',
-      initialDate: DateTime.now(),
-      maxDate: DateTime.utc(DateTime.now().year + 5),
-    ));
+  // void selectDate(TextEditingController controller) async {
+  //   selectedAppointmentDate =
+  //       await bottomSheetService.openBottomSheet(SelectionDate(
+  //     title: 'Set Appointment date',
+  //     initialDate: DateTime.now(),
+  //     maxDate: DateTime.utc(DateTime.now().year + 5),
+  //   ));
+  //   tempDate = selectedAppointmentDate != null
+  //       ? selectedAppointmentDate.toString()
+  //       : tempDate ?? '';
+  //   selectedAppointmentDate = tempDate?.toDateTime()?.toDateMonthDayOnly() ??
+  //       selectedAppointmentDate?.toDateMonthDayOnly();
+  //   if (selectedAppointmentDate != null) {
+  //     controller.text = DateFormat.yMMMd().format(selectedAppointmentDate!);
+  //   }
+  //   notifyListeners();
+  // }
+
+  void selectDate(BuildContext context, TextEditingController controller) async {
+    selectedAppointmentDate = await showDialog(
+      context: context,
+      barrierColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 450,
+            height: 450,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: SelectionDate(
+              title: 'Set Appointment date',
+              initialDate: DateTime.now(),
+              maxDate: DateTime.utc(DateTime.now().year + 5),
+            ),
+          ),
+        );
+      },
+    );
     tempDate = selectedAppointmentDate != null
         ? selectedAppointmentDate.toString()
         : tempDate ?? '';
-    selectedAppointmentDate = tempDate?.toDateTime()?.toDateMonthDayOnly() ??
-        selectedAppointmentDate?.toDateMonthDayOnly();
+    selectedAppointmentDate =
+        tempDate?.toDateTime()?.toDateMonthDayOnly() ?? selectedAppointmentDate?.toDateMonthDayOnly();
     if (selectedAppointmentDate != null) {
       controller.text = DateFormat.yMMMd().format(selectedAppointmentDate!);
     }
     notifyListeners();
   }
 
-  void selectStartTime(TextEditingController controller) async {
+
+  // void selectStartTime(TextEditingController controller) async {
+  //   if (selectedAppointmentDate != null) {
+  //     selectedStartTime =
+  //         await bottomSheetService.openBottomSheet(SelectionTime(
+  //       title: 'Set Start Time',
+  //       initialDateTime: DateTime(selectedAppointmentDate!.year,
+  //           selectedAppointmentDate!.month, selectedAppointmentDate!.day),
+  //     ));
+  //     if (selectedStartTime != null) {
+  //       if (selectedEndTime != selectedStartTime) {
+  //         tempStartTime = selectedStartTime;
+  //         controller.text = DateFormat.jm().format(selectedStartTime!);
+  //       } else {
+  //         snackBarService.showSnackBar(
+  //             message: 'Start time cannot be the same with End time',
+  //             title: 'Warning');
+  //         controller.text = '';
+  //       }
+  //     } else {
+  //       selectedStartTime = tempStartTime;
+  //       notifyListeners();
+  //     }
+  //   } else {
+  //     snackBarService.showSnackBar(
+  //         message: 'Please Set Appointment Date First', title: 'Warning');
+  //   }
+  // }
+
+  void selectStartTime(BuildContext context, TextEditingController controller) async {
     if (selectedAppointmentDate != null) {
-      selectedStartTime =
-          await bottomSheetService.openBottomSheet(SelectionTime(
-        title: 'Set Start Time',
-        initialDateTime: DateTime(selectedAppointmentDate!.year,
-            selectedAppointmentDate!.month, selectedAppointmentDate!.day),
-      ));
+      selectedStartTime = await showDialog(
+        context: context,
+        barrierColor: Colors.transparent,
+        builder: (BuildContext context) {
+          return Center(
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: SelectionTime(
+                title: 'Set Start Time',
+                initialDateTime: DateTime(selectedAppointmentDate!.year,
+                    selectedAppointmentDate!.month, selectedAppointmentDate!.day),
+              ),
+            ),
+          );
+        },
+      );
       if (selectedStartTime != null) {
         if (selectedEndTime != selectedStartTime) {
           tempStartTime = selectedStartTime;
@@ -127,13 +221,64 @@ class CreateAppointmentViewModel extends BaseViewModel {
     }
   }
 
-  void selectEndTime(TextEditingController controller) async {
+
+  // void selectEndTime(TextEditingController controller) async {
+  //   if (selectedStartTime != null) {
+  //     selectedEndTime = await bottomSheetService.openBottomSheet(SelectionTime(
+  //       title: 'Set End Time',
+  //       initialDateTime: selectedStartTime!.add(Duration(minutes: 60)),
+  //       minimumDateTime: selectedStartTime!.add(Duration(minutes: 5)),
+  //     ));
+  //     if (selectedEndTime != null) {
+  //       if (selectedStartTime != selectedEndTime) {
+  //         tempEndTime = selectedEndTime;
+  //         controller.text = DateFormat.jm().format(selectedEndTime!);
+  //       } else {
+  //         snackBarService.showSnackBar(
+  //             message: 'Start time cannot be the same with End time',
+  //             title: 'Warning');
+  //         controller.text = '';
+  //       }
+  //     } else {
+  //       selectedEndTime = tempEndTime;
+  //       notifyListeners();
+  //     }
+  //   } else {
+  //     snackBarService.showSnackBar(
+  //         message: 'Please set start time first', title: 'Warning');
+  //   }
+  // }
+
+  void selectEndTime(BuildContext context, TextEditingController controller) async {
     if (selectedStartTime != null) {
-      selectedEndTime = await bottomSheetService.openBottomSheet(SelectionTime(
-        title: 'Set End Time',
-        initialDateTime: selectedStartTime!.add(Duration(minutes: 60)),
-        minimumDateTime: selectedStartTime!.add(Duration(minutes: 5)),
-      ));
+      selectedEndTime = await showDialog(
+        context: context,
+        barrierColor: Colors.transparent,
+        builder: (BuildContext context) {
+          return Center(
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: SelectionTime(
+                title: 'Set End Time',
+                initialDateTime: selectedStartTime!.add(Duration(minutes: 60)),
+                minimumDateTime: selectedStartTime!.add(Duration(minutes: 5)),
+              ),
+            ),
+          );
+        },
+      );
       if (selectedEndTime != null) {
         if (selectedStartTime != selectedEndTime) {
           tempEndTime = selectedEndTime;
@@ -154,14 +299,37 @@ class CreateAppointmentViewModel extends BaseViewModel {
     }
   }
 
-  void openProcedureFullScreenModal(TextEditingController controller) async {
-    Procedure? tempProcedure =
-        await navigationService.pushNamed(Routes.SelectionProcedure);
+
+  // void openProcedureFullScreenModal(TextEditingController controller) async {
+  //   Service? tempProcedure =
+  //       await navigationService.pushNamed(Routes.SelectionService);
+  //   if (tempProcedure != null) {
+  //     if (!(selectedServices
+  //         .map((procedure) => procedure.id)
+  //         .contains(tempProcedure.id))) {
+  //       selectedServices.add(tempProcedure);
+  //       notifyListeners();
+  //     } else {
+  //       toastService.showToast(message: 'Already Selected');
+  //     }
+  //   }
+  // }
+  void openProcedureFullScreenModal(BuildContext context, TextEditingController controller) async {
+    Service? tempProcedure = await showDialog<Service>(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 500,
+            height: 500,
+            child: SelectionService(),
+          ),
+        );
+      },
+    );
     if (tempProcedure != null) {
-      if (!(selectedProcedures
-          .map((procedure) => procedure.id)
-          .contains(tempProcedure.id))) {
-        selectedProcedures.add(tempProcedure);
+      if (!selectedServices.map((procedure) => procedure.id).contains(tempProcedure.id)) {
+        selectedServices.add(tempProcedure);
         notifyListeners();
       } else {
         toastService.showToast(message: 'Already Selected');
@@ -169,18 +337,52 @@ class CreateAppointmentViewModel extends BaseViewModel {
     }
   }
 
-  void openDentistModal(TextEditingController controller) async {
-    UserModel? selectedDentist =
-        await navigationService.pushNamed(Routes.SelectionDentist);
-    if (selectedDentist != null) {
-      myDentist = selectedDentist;
-      controller.text = selectedDentist.fullName;
+
+  // void openDentistModal(TextEditingController controller) async {
+  //   UserModel? selectedDentist =
+  //       await navigationService.pushNamed(Routes.SelectionOptometrist);
+  //   if (selectedDentist != null) {
+  //     myDentist = selectedDentist;
+  //     controller.text = selectedDentist.fullName;
+  //     notifyListeners();
+  //   }
+  // }
+  // void openOptometristModal(BuildContext context, TextEditingController controller) async {
+  //   UserModel? selectedOptometrist = await showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return SelectionOptometrist();
+  //     },
+  //   );
+  //   if (selectedOptometrist != null) {
+  //     myDentist = selectedOptometrist;
+  //     controller.text = selectedOptometrist.fullName;
+  //     notifyListeners();
+  //   }
+  // }
+  void openOptometristModal(BuildContext context, TextEditingController controller) async {
+    UserModel? selectedOptometrist = await showDialog<UserModel>(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 500,
+            height: 500,
+            child: SelectionOptometrist(),
+          ),
+        );
+      },
+    );
+    if (selectedOptometrist != null) {
+      myOptometrist = selectedOptometrist;
+      controller.text = selectedOptometrist.fullName;
       notifyListeners();
     }
   }
 
-  void deleteSelectedProcedure(Procedure procedure) {
-    selectedProcedures.removeWhere((element) => element.id == procedure.id);
+
+  void deleteSelectedProcedure(Service procedure) {
+    selectedServices.removeWhere((element) => element.id == procedure.id);
     notifyListeners();
     toastService.showToast(message: 'Removed');
   }

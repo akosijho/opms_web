@@ -7,7 +7,6 @@ import 'package:opmswebstaff/app/app.logger.dart';
 import 'package:opmswebstaff/app/app.router.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
 import 'package:opmswebstaff/core/service/bottom_sheet/bottom_sheet_service.dart';
-import 'package:opmswebstaff/core/service/connectivity/connectivity_service.dart';
 import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
 import 'package:opmswebstaff/core/service/firebase_auth/firebase_auth_service.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
@@ -21,10 +20,10 @@ import 'package:opmswebstaff/ui/views/add_expenses/add_expenses_view.dart';
 import 'package:opmswebstaff/ui/views/appointment/appointment_view.dart';
 import 'package:opmswebstaff/ui/views/finance/reports_view.dart';
 import 'package:opmswebstaff/ui/views/home/home_view.dart';
-import 'package:opmswebstaff/ui/views/medicine/medicine_view.dart';
 import 'package:opmswebstaff/ui/views/patients/patients_view.dart';
 import 'package:opmswebstaff/ui/views/payment_select_patient/payment_select_patient_view.dart';
-import 'package:opmswebstaff/ui/views/procedures/procedure_view.dart';
+import 'package:opmswebstaff/ui/views/product/product_view.dart';
+import 'package:opmswebstaff/ui/views/service/service_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -38,8 +37,8 @@ class MainBodyViewModel extends BaseViewModel {
     HomePageView(),
     AppointmentView(),
     PatientsView(),
-    ProceduresView(),
-    MedicineView(),
+    ServicesView(),
+    ProductView(),
     PaymentSelectPatientView(),
     AddExpenseView(),
     // PatientReportView(showAppBar: true)

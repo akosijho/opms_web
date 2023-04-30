@@ -84,8 +84,8 @@ class PatientInfoViewModel extends BaseViewModel {
 
   void goToMedicalChart({required Patient? patient}) {
     if (patient != null)
-      navigationService.pushNamed(Routes.PatientDentalChartView,
-          arguments: PatientDentalChartViewArguments(patient: patient));
+      navigationService.pushNamed(Routes.PatientOpticalChartView,
+          arguments: PatientOpticalChartViewArguments(patient: patient));
   }
 
   void goToViewPatientAppointmentView({required Patient? patient}) {
@@ -113,8 +113,8 @@ class PatientInfoViewModel extends BaseViewModel {
 
   void goToDentalCertificateView({required Patient? patient}) {
     if (patient != null)
-      navigationService.pushNamed(Routes.DentalCertificationView,
-          arguments: DentalCertificationViewArguments(patient: patient));
+      navigationService.pushNamed(Routes.OpticalCertificationView,
+          arguments: OpticalCertificationViewArguments(patient: patient));
   }
 
   void goToUpdatePatient({required Patient? patient}) {

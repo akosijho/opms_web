@@ -1,14 +1,5 @@
 import 'package:opmswebstaff/constants/styles/palette_color.dart';
-import 'package:opmswebstaff/ui/views/add_expenses/add_expenses_view.dart';
-import 'package:opmswebstaff/ui/views/appointment/appointment_view.dart';
-import 'package:opmswebstaff/ui/views/finance/reports_view.dart';
-import 'package:opmswebstaff/ui/views/home/home_view.dart';
 import 'package:opmswebstaff/ui/views/main_body/main_body_view_model.dart';
-import 'package:opmswebstaff/ui/views/medicine/medicine_view.dart';
-import 'package:opmswebstaff/ui/views/patient_report/patient_report_view.dart';
-import 'package:opmswebstaff/ui/views/patients/patients_view.dart';
-import 'package:opmswebstaff/ui/views/payment_select_patient/payment_select_patient_view.dart';
-import 'package:opmswebstaff/ui/views/procedures/procedure_view.dart';
 import 'package:opmswebstaff/ui/widgets/bottom_navigation/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:opmswebstaff/ui/widgets/custom_app_bar/custom_app_bar.dart';

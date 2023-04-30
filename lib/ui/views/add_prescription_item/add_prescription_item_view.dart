@@ -44,7 +44,7 @@ class AddPrescriptionItemView extends StatelessWidget {
                     validator: (value) =>
                         model.validatorService.validateInscription(value!),
                     decoration: InputDecoration(
-                      hintText: 'Type here the medicine prescribed',
+                      hintText: 'Type here the product prescribed',
                       labelText: 'Inscription*',
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       labelStyle:

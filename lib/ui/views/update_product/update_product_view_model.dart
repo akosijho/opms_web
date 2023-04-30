@@ -10,7 +10,6 @@ import 'package:stacked/stacked.dart';
 import '../../../app/app.locator.dart';
 import '../../../core/service/navigation/navigation_service.dart';
 import '../../../core/service/snack_bar/snack_bar_service.dart';
-import '../../../models/procedure/procedure.dart';
 
 class UpdateProductViewModel extends BaseViewModel {
 //
@@ -34,10 +33,10 @@ class UpdateProductViewModel extends BaseViewModel {
     super.dispose();
   }
 
-  void init(Medicine medicine) async {
+  void init(Product medicine) async {
     setBusy(true);
     await Future.delayed(Duration(milliseconds: 500));
-    productNameTxtController.text = medicine.medicineName;
+    productNameTxtController.text = medicine.productName;
     brandNameTxtController.text = medicine.brandName!;
     amountTxtController.text = medicine.price ?? 'Not Set';
     setBusy(false);
@@ -59,21 +58,21 @@ class UpdateProductViewModel extends BaseViewModel {
     //     string: productNameTxtController.text);
     // final brandIndex = await searchIndexService.setSearchIndex(
     //     string: productNameTxtController.text);
-    final medicine = Medicine(
+    final product = Product(
       id: productId,
-      medicineName: productNameTxtController.text,
+      productName: productNameTxtController.text,
       brandName: brandNameTxtController.text,
       price: amountTxtController.text,
 
     );
 
-    final updateProductQuery = await apiService.updateProduct(medicine);
+    final updateProductQuery = await apiService.updateProduct(product);
     if (updateProductQuery.success) {
       navigationService.popUntilNamed(Routes.MainBodyView);
       snackBarService.showSnackBar(
           message: 'Product was updated.', title: 'Success!');
     } else {
-      navigationService.popUntilNamed(Routes.UpdateProcedureViews);
+      navigationService.popUntilNamed(Routes.UpdateProductViews);
       snackBarService.showSnackBar(
           message: updateProductQuery.errorMessage!, title: 'Network Error');
     }
@@ -96,14 +95,14 @@ class UpdateProductViewModel extends BaseViewModel {
   //       // final brandIndex = await searchIndexService.setSearchIndex(
   //       //   string: productNameTxtController.text,
   //       // );
-  //       final medicine = Medicine(
+  //       final product = Medicine(
   //         id: productId,
   //         medicineName: productNameTxtController.text,
   //         brandName: brandNameTxtController.text,
   //         price: amountTxtController.text,
   //       );
   //
-  //       final updateProductQuery = await apiService.updateProduct(medicine);
+  //       final updateProductQuery = await apiService.updateProduct(product);
   //       if (updateProductQuery.success) {
   //         navigationService.popUntilNamed(Routes.MainBodyView);
   //         snackBarService.showSnackBar(

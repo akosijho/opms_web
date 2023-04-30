@@ -12,13 +12,13 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'dart:html' as html;
 
-import '../../../models/dental_certificate/dental_certificate.dart';
+import '../../../models/optical_certificate/optical_certificate.dart';
 import '../../../models/patient_model/patient_model.dart';
 
 class PdfServiceImp extends PdfService {
   @override
-  Future<Uint8List> printDentalCertificate(
-      {required DentalCertificate dentalCertificate,
+  Future<Uint8List> printOpticalCertificate(
+      {required OpticalCertificate dentalCertificate,
       required Patient patient}) {
     final pdf = pw.Document();
     pdf.addPage(
@@ -100,7 +100,7 @@ class PdfServiceImp extends PdfService {
                             style: pw.TextStyle(
                               fontSize: 12,
                             )),
-                        pw.Text('${dentalCertificate.procedure.toUpperCase()} ',
+                        pw.Text('${dentalCertificate.service.toUpperCase()} ',
                             style: pw.TextStyle(
                               fontSize: 12,
                               fontWeight: pw.FontWeight.bold,

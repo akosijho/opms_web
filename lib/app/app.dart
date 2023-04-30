@@ -25,57 +25,51 @@ import 'package:opmswebstaff/core/service/validator/validator_service_impl.dart'
 import 'package:opmswebstaff/core/utility/connectivity_state.dart';
 import 'package:opmswebstaff/core/utility/image_selector.dart';
 import 'package:opmswebstaff/ui/views/add%20rx/rx_view.dart';
-import 'package:opmswebstaff/ui/views/add_dental_certificate/add_certificate_view.dart';
 import 'package:opmswebstaff/ui/views/add_expense_item/add_expense_item_view.dart';
 import 'package:opmswebstaff/ui/views/add_expenses/add_expenses_view.dart';
-import 'package:opmswebstaff/ui/views/add_medicine/add_medicine_view.dart';
+import 'package:opmswebstaff/ui/views/add_optical_certificate/add_certificate_view.dart';
 import 'package:opmswebstaff/ui/views/add_patient/add_patient_view.dart';
 import 'package:opmswebstaff/ui/views/add_payment/add_payment_view.dart';
 import 'package:opmswebstaff/ui/views/add_prescription/add_prescription_view.dart';
 import 'package:opmswebstaff/ui/views/add_prescription_item/add_prescription_item_view.dart';
-import 'package:opmswebstaff/ui/views/add_procedure/add_procedure_view.dart';
+import 'package:opmswebstaff/ui/views/add_product/add_product_view.dart';
+import 'package:opmswebstaff/ui/views/add_service/add_service_view.dart';
 import 'package:opmswebstaff/ui/views/appointment/appointment_view.dart';
 import 'package:opmswebstaff/ui/views/appointment_select_patient/appointment_select_patient_view.dart';
 import 'package:opmswebstaff/ui/views/appoitment_yearly_monthly/appointment_year_month_view.dart';
 import 'package:opmswebstaff/ui/views/create_appointment/create_appointment_view.dart';
-import 'package:opmswebstaff/ui/views/dental_certification/dental_certification_view.dart';
-import 'package:opmswebstaff/ui/views/dental_chart_legend/dental_chart_legend.dart';
 import 'package:opmswebstaff/ui/views/finance/reports_view.dart';
-import 'package:opmswebstaff/ui/views/get_started/get_started_view.dart';
 import 'package:opmswebstaff/ui/views/home/home_view.dart';
 import 'package:opmswebstaff/ui/views/login/login_view.dart';
 import 'package:opmswebstaff/ui/views/main_body/main_body_view.dart';
 import 'package:opmswebstaff/ui/views/main_body/main_body_view_model.dart';
 import 'package:opmswebstaff/ui/views/medical_history/medical_history_view.dart';
 import 'package:opmswebstaff/ui/views/medical_history_photo_view/med_history_photo_view.dart';
-import 'package:opmswebstaff/ui/views/medicine/medicine_view.dart';
 import 'package:opmswebstaff/ui/views/notification/notification_view.dart';
-import 'package:opmswebstaff/ui/views/patient_dental_chart/patient_dental_chart_view.dart';
+import 'package:opmswebstaff/ui/views/optical_certification/optical_certification_view.dart';
 import 'package:opmswebstaff/ui/views/patient_info/patient_info_view.dart';
+import 'package:opmswebstaff/ui/views/patient_optical_chart/patient_optical_chart_view.dart';
 import 'package:opmswebstaff/ui/views/patients/patients_view.dart';
-import 'package:opmswebstaff/ui/views/payment_select_dental_note/payment_select_dental_note_view.dart';
+import 'package:opmswebstaff/ui/views/payment_select_optical_note/payment_select_optical_note_view.dart';
 import 'package:opmswebstaff/ui/views/payment_select_patient/payment_select_patient_view.dart';
-import 'package:opmswebstaff/ui/views/pre_loader/pre_loader_view.dart';
 import 'package:opmswebstaff/ui/views/prescription_view/prescription_view.dart';
-import 'package:opmswebstaff/ui/views/procedures/procedure_view.dart';
+import 'package:opmswebstaff/ui/views/product/product_view.dart';
 import 'package:opmswebstaff/ui/views/receipt_view/receipt_view.dart';
 import 'package:opmswebstaff/ui/views/register/register_view.dart';
-import 'package:opmswebstaff/ui/views/select_medicine_view/select_medicine_view.dart';
-import 'package:opmswebstaff/ui/views/selection_tooth_condition/selection_tooth_condition_view.dart';
-import 'package:opmswebstaff/ui/views/set_dental_note/set_dental_note_view.dart';
-import 'package:opmswebstaff/ui/views/set_tooth_condition/set_tooth_condition_view.dart';
-import 'package:opmswebstaff/ui/views/update_procedure/update_procedure_view.dart';
+import 'package:opmswebstaff/ui/views/select_product_view/select_product_view.dart';
+import 'package:opmswebstaff/ui/views/service/service_view.dart';
+import 'package:opmswebstaff/ui/views/set_optical_note/set_optical_note_view.dart';
 import 'package:opmswebstaff/ui/views/update_product/update_product_view.dart';
+import 'package:opmswebstaff/ui/views/update_service/update_service_view.dart';
 import 'package:opmswebstaff/ui/views/update_user_info/setup_user_view.dart';
 import 'package:opmswebstaff/ui/views/user_view/user_view.dart';
 import 'package:opmswebstaff/ui/views/verify_email/verify_email_view.dart';
-import 'package:opmswebstaff/ui/views/view_dental_note/view_dental_note.dart';
+import 'package:opmswebstaff/ui/views/view_optical_note/view_optical_note.dart';
 import 'package:opmswebstaff/ui/views/view_dental_notes_by_tooth/view_dental_note_by_tooth_view.dart';
 import 'package:opmswebstaff/ui/views/view_patient_appointment/view_patient_appointment_view.dart';
 import 'package:opmswebstaff/ui/views/view_patient_payments/view_patient_payment.dart';
-import 'package:opmswebstaff/ui/widgets/selection_dentist/selection_dentist.dart';
-import 'package:opmswebstaff/ui/widgets/selection_procedure/selection_procedure.dart';
-import 'package:opmswebstaff/ui/widgets/success_view/success.dart';
+import 'package:opmswebstaff/ui/widgets/selection_optometrist/selection_optometrist.dart';
+import 'package:opmswebstaff/ui/widgets/selection_service/selection_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -93,22 +87,21 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
     MaterialRoute(page: MainBodyView, name: 'MainBodyView'),
     MaterialRoute(page: HomePageView, name: 'HomePageView'),
     MaterialRoute(page: AppointmentView, name: 'AppointmentView'),
-    MaterialRoute(page: MedicineView, name: 'MedicineView'),
+    MaterialRoute(page: ProductView, name: 'ProductView'),
     MaterialRoute(page: PatientsView, name: 'PatientsView'),
-    MaterialRoute(page: ProceduresView, name: 'ProceduresView'),
+    MaterialRoute(page: ServicesView, name: 'ServicesView'),
     MaterialRoute(page: AddPatientView, name: 'AddPatientView'),
     MaterialRoute(
         page: AppointmentSelectPatientView,
         name: 'AppointmentSelectPatientView'),
     MaterialRoute(page: CreateAppointmentView, name: 'CreateAppointmentView'),
-    MaterialRoute(page: AddMedicineView, name: 'AddMedicineView'),
-    MaterialRoute(page: AddProcedureView, name: 'AddProcedureView'),
+    MaterialRoute(page: AddProductView, name: 'AddProductView'),
+    MaterialRoute(page: AddServiceView, name: 'AddServiceView'),
     MaterialRoute(page: PatientInfoView, name: 'PatientInfoView'),
     MaterialRoute(page: MedicalHistoryView, name: 'MedicalHistoryView'),
     MaterialRoute(page: MedHistoryPhotoView, name: 'MedHistoryPhotoView'),
-    MaterialRoute(page: PatientDentalChartView, name: 'PatientDentalChartView'),
-    MaterialRoute(page: SetToothConditionView, name: 'SetToothConditionView'),
-    MaterialRoute(page: SetDentalNoteView, name: 'SetDentalNoteView'),
+    MaterialRoute(page: PatientOpticalChartView, name: 'PatientOpticalChartView'),
+    MaterialRoute(page: SetOpticalNoteView, name: 'SetOpticalNoteView'),
     MaterialRoute(page: AddPaymentView, name: 'AddPaymentView'),
     MaterialRoute(page: NotificationView, name: 'NotificationView'),
     // MaterialRoute(page: ViewDentalNoteView, name: 'ViewDentalNoteView'),
@@ -119,26 +112,20 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
     MaterialRoute(page: AddPrescriptionView, name: 'AddPrescriptionView'),
     MaterialRoute(page: PrescriptionView, name: 'PrescriptionView'),
     MaterialRoute(page: EditPatientView, name: 'EditPatientView'),
-    MaterialRoute(page: DentalChartLegend, name: 'DentalChartLegend'),
     MaterialRoute(
         page: ViewAppointmentByPeriod, name: 'ViewAppointmentByPeriod'),
     MaterialRoute(
-        page: DentalCertificationView, name: 'DentalCertificationView'),
+        page: OpticalCertificationView, name: 'OpticalCertificationView'),
     MaterialRoute(
         page: PaymentSelectPatientView, name: 'PaymentSelectPatientView'),
     CustomRoute(
-        page: SelectionDentist,
-        name: 'SelectionDentist',
+        page: SelectionOptometrist,
+        name: 'SelectionOptometrist',
         transitionsBuilder: TransitionsBuilders.slideBottom,
         durationInMilliseconds: 300),
     CustomRoute(
-        page: SelectionProcedure,
-        name: 'SelectionProcedure',
-        transitionsBuilder: TransitionsBuilders.slideBottom,
-        durationInMilliseconds: 300),
-    CustomRoute(
-        page: SelectionToothCondition,
-        name: 'SelectionToothCondition',
+        page: SelectionService,
+        name: 'SelectionService',
         transitionsBuilder: TransitionsBuilders.slideBottom,
         durationInMilliseconds: 300),
     CustomRoute(
@@ -147,13 +134,13 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
         transitionsBuilder: TransitionsBuilders.slideRight,
         durationInMilliseconds: 300),
     CustomRoute(
-        page: PaymentSelectDentalNoteView,
-        name: 'PaymentSelectDentalNoteView',
+        page: PaymentSelectOpticalNoteView,
+        name: 'PaymentSelectOpticalNoteView',
         transitionsBuilder: TransitionsBuilders.slideBottom,
         durationInMilliseconds: 300),
     CustomRoute(
-        page: SelectMedicineView,
-        name: 'SelectMedicineView',
+        page: SelectProductView,
+        name: 'SelectProductView',
         transitionsBuilder: TransitionsBuilders.slideBottom,
         durationInMilliseconds: 300),
     CustomRoute(
@@ -182,8 +169,8 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
         transitionsBuilder: TransitionsBuilders.slideBottom,
         durationInMilliseconds: 300),
     CustomRoute(
-        page: ViewDentalNote,
-        name: 'ViewDentalNote',
+        page: ViewOpticalNote,
+        name: 'ViewOpticalNote',
         transitionsBuilder: TransitionsBuilders.slideBottom,
         durationInMilliseconds: 300),
     CustomRoute(
@@ -192,8 +179,8 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
         transitionsBuilder: TransitionsBuilders.slideBottom,
         durationInMilliseconds: 300),
     CustomRoute(
-        page: UpdateProcedureView,
-        name: 'UpdateProcedureViews',
+        page: UpdateServiceView,
+        name: 'UpdateServiceViews',
         transitionsBuilder: TransitionsBuilders.slideBottom,
         durationInMilliseconds: 300),
     CustomRoute(

@@ -1,6 +1,6 @@
 import 'package:opmswebstaff/ui/views/view_dental_notes_by_tooth/view_dental_note_by_tooth_view_model.dart';
-import 'package:opmswebstaff/ui/widgets/dental_note_card/dental_note_card.dart';
 import 'package:flutter/material.dart';
+import 'package:opmswebstaff/ui/widgets/optical_note_card/optical_note_card.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../models/patient_model/patient_model.dart';
@@ -44,8 +44,8 @@ class ViewDentalNoteByToothView extends StatelessWidget {
                       ? ListView.separated(
                           shrinkWrap: true,
                           primary: false,
-                          itemBuilder: (context, index) => DentalNoteCard(
-                              dentalNote: model.dentalNotes[index],
+                          itemBuilder: (context, index) => OpticalNoteCard(
+                              opticalNote: model.dentalNotes[index],
                               patient: patient),
                           separatorBuilder: (context, index) =>
                               SizedBox(height: 8),

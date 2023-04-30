@@ -8,7 +8,7 @@ import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
 import 'package:opmswebstaff/core/service/toast/toast_service.dart';
 import 'package:opmswebstaff/core/service/validator/validator_service.dart';
-import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
+import 'package:opmswebstaff/models/optical_notes/optical_notes.dart';
 import 'package:opmswebstaff/ui/widgets/selection_date/selection_date.dart';
 
 
@@ -27,12 +27,12 @@ class RxViewModel extends ChangeNotifier {
   TextEditingController(text: DateFormat.yMMMd().format(DateTime.now()));
 
   TextEditingController note = TextEditingController();
-  DentalNotes? currentDentalNote;
+  OpticalNotes? currentOpticalNote;
 
 
-  void init(DentalNotes dentalNote) {
-    currentDentalNote = dentalNote;
-    note.text = currentDentalNote!.note;
+  void init(OpticalNotes opticalNote) {
+    currentOpticalNote = opticalNote;
+    note.text = currentOpticalNote!.note;
     // firstNameController.text = currentUser!.firstName;
     // lastNameController.text = currentUser!.lastName;
     // phoneNumController.text = currentUser!.phoneNum;

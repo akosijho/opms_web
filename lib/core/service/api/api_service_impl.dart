@@ -3,20 +3,19 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
-import 'package:opmswebstaff/core/service/connectivity/connectivity_service.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
-import 'package:opmswebstaff/models/dental_certificate/dental_certificate.dart';
-import 'package:opmswebstaff/models/dental_notes/dental_notes.dart';
+import 'package:opmswebstaff/models/optical_certificate/optical_certificate.dart';
 import 'package:opmswebstaff/models/expense/expense.dart';
 import 'package:opmswebstaff/models/medical_history/medical_history.dart';
 import 'package:opmswebstaff/models/medicine/medicine.dart';
 import 'package:opmswebstaff/models/notification/notification_model.dart';
 import 'package:opmswebstaff/models/notification_token/notification_token_model.dart';
+import 'package:opmswebstaff/models/optical_notes/optical_notes.dart';
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
 import 'package:opmswebstaff/models/prescription/prescription.dart';
-import 'package:opmswebstaff/models/procedure/procedure.dart';
 import 'package:opmswebstaff/models/query_result/query_result.dart';
+import 'package:opmswebstaff/models/service/service.dart';
 import 'package:opmswebstaff/models/tooth_condition/tooth_condition.dart';
 import 'package:opmswebstaff/models/upload_results/image_upload_result.dart';
 import 'package:opmswebstaff/models/user_model/user_model.dart';
@@ -37,10 +36,10 @@ class ApiServiceImpl extends ApiService {
 
   final patientReference = FirebaseFirestore.instance.collection('patients');
 
-  final medicineReference = FirebaseFirestore.instance.collection('medicines');
+  final medicineReference = FirebaseFirestore.instance.collection('products');
 
   final procedureReference =
-      FirebaseFirestore.instance.collection('procedures');
+      FirebaseFirestore.instance.collection('services');
 
   final paymentReference = FirebaseFirestore.instance.collection('payments');
 
@@ -157,43 +156,43 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future? addMedicine({required Medicine medicine, String? image}) async {
+  Future? addProduct({required Product product, String? image}) async {
     final medicineRef = await medicineReference.doc();
-    return medicineRef.set(medicine.toJson(
+    return medicineRef.set(product.toJson(
         id: medicineRef.id,
         image: image ?? '',
         dateCreated: FieldValue.serverTimestamp()));
   }
 
   @override
-  Future? addProcedure({required Procedure procedure}) async {
+  Future? addService({required Service service}) async {
     final procedureRef = await procedureReference.doc();
-    return procedureRef.set(procedure.toJson(
+    return procedureRef.set(service.toJson(
         id: procedureRef.id, dateCreated: FieldValue.serverTimestamp()));
   }
 
   @override
-  Stream<List<Medicine>> getMedicineList() {
+  Stream<List<Product>> getProductList() {
     return medicineReference
         .orderBy('dateCreated', descending: true)
         .snapshots()
         .map((value) => value.docs
-            .map((medicine) => Medicine.fromJson(medicine.data()))
+            .map((medicine) => Product.fromJson(medicine.data()))
             .toList());
   }
 
   @override
-  Stream<List<Procedure>> getProcedureList() {
+  Stream<List<Service>> getServiceList() {
     return procedureReference
         .orderBy('dateCreated', descending: true)
         .snapshots()
         .map((value) => value.docs
-            .map((procedure) => Procedure.fromJson(procedure.data()))
+            .map((procedure) => Service.fromJson(procedure.data()))
             .toList());
   }
 
   @override
-  Future<List<Medicine>> searchMedicine(String query) async {
+  Future<List<Product>> searchProduct(String query) async {
     return await medicineReference
         .where('medicineName', isGreaterThanOrEqualTo: query.toTitleCase())
         .where('medicineName',
@@ -201,17 +200,17 @@ class ApiServiceImpl extends ApiService {
         .orderBy('medicineName', descending: true)
         .get()
         .then((value) => value.docs
-            .map((medicine) => Medicine.fromJson(medicine.data()))
+            .map((medicine) => Product.fromJson(medicine.data()))
             .toList());
   }
 
   @override
-  Future<List<Procedure>> searchProcedure(String query) async {
+  Future<List<Service>> searchService(String query) async {
     return await procedureReference
         .where("searchIndex", arrayContains: query)
         .get()
         .then((value) => value.docs
-            .map((procedure) => Procedure.fromJson(procedure.data()))
+            .map((procedure) => Service.fromJson(procedure.data()))
             .toList());
   }
 
@@ -227,7 +226,7 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<ImageUploadResult> uploadMedicineImage(
+  Future<ImageUploadResult> uploadProductImage(
       {required File imageToUpload, required String genericName}) async {
     try {
       final profileImageRef =
@@ -243,7 +242,7 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<List<UserModel>> searchDentist({required String query}) async {
+  Future<List<UserModel>> searchOptometrist({required String query}) async {
     if (query != '') {
       return await userReference
           .where("searchIndex", arrayContains: query)
@@ -284,12 +283,12 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<void> deleteMedicine({required String medicineId}) async {
+  Future<void> deleteProduct({required String medicineId}) async {
     return await medicineReference.doc(medicineId).delete();
   }
 
   @override
-  Future<void> deleteProcedure({required String procedureId}) async {
+  Future<void> deleteService({required String procedureId}) async {
     return await procedureReference.doc(procedureId).delete();
   }
 
@@ -366,15 +365,15 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<void> addToothDentalNotes(
+  Future<void> addOpticalNotes(
       {required String toothId,
       required dynamic patientId,
-      required DentalNotes dentalNotes,
+      required OpticalNotes opticalNotes,
       required dynamic procedureId}) async {
     final toothDoc =
-        await patientReference.doc(patientId).collection('dental_notes').doc();
+        await patientReference.doc(patientId).collection('optical_notes').doc();
     return await toothDoc
-        .set(dentalNotes.toJson(id: toothDoc.id, procedureId: procedureId));
+        .set(opticalNotes.toJson(id: toothDoc.id, procedureId: procedureId));
   }
 
   @override
@@ -390,47 +389,47 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<List<DentalNotes>?> getDentalNotesList(
+  Future<List<OpticalNotes>?> getOpticalNotesList(
       {required patientId, String? toothId, bool? isPaid}) async {
     if (toothId == null) {
       if (isPaid == null) {
         return await patientReference
             .doc(patientId)
-            .collection('dental_notes')
+            .collection('optical_notes')
             .orderBy("selectedTooth")
             .orderBy('date', descending: true)
             .get()
             .then((value) =>
-                value.docs.map((e) => DentalNotes.fromJson(e.data())).toList());
+                value.docs.map((e) => OpticalNotes.fromJson(e.data())).toList());
       } else {
         return await patientReference
             .doc(patientId)
-            .collection('dental_notes')
+            .collection('optical_notes')
             .orderBy('date')
             .where('isPaid', isEqualTo: isPaid)
             .orderBy('selectedTooth')
             .get()
             .then((value) =>
-                value.docs.map((e) => DentalNotes.fromJson(e.data())).toList());
+                value.docs.map((e) => OpticalNotes.fromJson(e.data())).toList());
       }
     } else {
       if (isPaid == null) {
         return await patientReference
             .doc(patientId)
-            .collection('dental_notes')
+            .collection('optical_notes')
             .where('selectedTooth', isEqualTo: toothId)
             .get()
             .then((value) =>
-                value.docs.map((e) => DentalNotes.fromJson(e.data())).toList());
+                value.docs.map((e) => OpticalNotes.fromJson(e.data())).toList());
       } else {
         return await patientReference
             .doc(patientId)
-            .collection('dental_notes')
+            .collection('optical_notes')
             .where('selectedTooth', isEqualTo: toothId)
             .where('isPaid', isEqualTo: isPaid)
             .get()
             .then((value) =>
-                value.docs.map((e) => DentalNotes.fromJson(e.data())).toList());
+                value.docs.map((e) => OpticalNotes.fromJson(e.data())).toList());
       }
     }
   }
@@ -443,7 +442,7 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<void> updateDentalAmountField(
+  Future<void> updateOpticalAmountField(
       {required patientId,
       String? toothId,
       required dental_noteId,
@@ -451,9 +450,9 @@ class ApiServiceImpl extends ApiService {
       required String price}) async {
     final queryRes = await patientReference
         .doc(patientId)
-        .collection('dental_notes')
+        .collection('optical_notes')
         .doc(dental_noteId)
-        .update({'procedure.price': "$price"});
+        .update({'service.price': "$price"});
   }
 
   @override
@@ -468,14 +467,14 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<void> updateDentalANotePaidStatus(
+  Future<void> updateOpticalANotePaidStatus(
       {required patientId,
       String? toothId,
       required dental_noteId,
       required bool isPaid}) async {
     final queryRes = await patientReference
         .doc(patientId)
-        .collection('dental_notes')
+        .collection('optical_notes')
         .doc(dental_noteId)
         .update({'isPaid': isPaid});
   }
@@ -606,15 +605,15 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<QueryResult> addDentalCertificate(
-      {required DentalCertificate dentalCertificate,
+  Future<QueryResult> addOpticalCertificate(
+      {required OpticalCertificate opticalCertificate,
       required Patient patient}) async {
     // if (await connectivityService.checkConnectivity()) {
       final certDoc = await patientReference
           .doc(patient.id)
-          .collection('dental_certificate')
+          .collection('optical_certificate')
           .doc();
-      await certDoc.set(dentalCertificate.toJson(
+      await certDoc.set(opticalCertificate.toJson(
           id: certDoc.id,
           dateCreated: FieldValue.serverTimestamp().toString()));
       return QueryResult.success();
@@ -624,22 +623,22 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Stream listenToDentalCertChanges({required Patient patient}) {
+  Stream listenToOpticalCertChanges({required Patient patient}) {
     return patientReference
         .doc(patient.id)
-        .collection('dental_certificate')
+        .collection('optical_certificate')
         .snapshots();
   }
 
   @override
-  Future<List<DentalCertificate>> getDentalCert({required Patient patient}) {
+  Future<List<OpticalCertificate>> getOpticalCert({required Patient patient}) {
     return patientReference
         .doc(patient.id)
-        .collection('dental_certificate')
+        .collection('optical_certificate')
         .orderBy('date', descending: true)
         .get()
         .then((value) => value.docs
-            .map((e) => DentalCertificate.fromJson(e.data()))
+            .map((e) => OpticalCertificate.fromJson(e.data()))
             .toList());
   }
 
@@ -798,26 +797,26 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<List<Procedure>> getProcedures() {
+  Future<List<Service>> getService() {
     return procedureReference
         .orderBy('dateCreated', descending: true)
         .get()
         .then((value) =>
-            value.docs.map((e) => Procedure.fromJson(e.data())).toList());
+            value.docs.map((e) => Service.fromJson(e.data())).toList());
   }
 
   @override
-  // Future<QueryResult> updateProcedure(Procedure procedure) async {
+  // Future<QueryResult> updateProcedure(Procedure service) async {
   //   if (await connectivityService.checkConnectivity()) {
-  //     procedureReference.doc(procedure.id).set(procedure.toJson(
-  //         dateCreated: FieldValue.serverTimestamp(), id: procedure.id));
+  //     procedureReference.doc(service.id).set(service.toJson(
+  //         dateCreated: FieldValue.serverTimestamp(), id: service.id));
   //     return QueryResult.success();
   //   } else {
   //     return QueryResult.error(
   //         'No Internet Connection. Check your connection and try again');
   //   }
   // }
-  Future<QueryResult> updateProcedure(Procedure procedure) async {
+  Future<QueryResult> updateService(Service procedure) async {
     // if (await connectivityService.checkConnectivity()) {
       try {
         await procedureReference.doc(procedure.id).set(procedure.toJson(
@@ -833,26 +832,26 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<List<Medicine>> getProducts() {
+  Future<List<Product>> getProducts() {
     return medicineReference
         .orderBy('dateCreated', descending: true)
         .get()
         .then((value) =>
-        value.docs.map((e) => Medicine.fromJson(e.data())).toList());
+        value.docs.map((e) => Product.fromJson(e.data())).toList());
   }
 
   @override
-  // Future<QueryResult> updateProduct(Medicine medicine) async {
+  // Future<QueryResult> updateProduct(Medicine product) async {
   //   if (await connectivityService.checkConnectivity()) {
-  //   medicineReference.doc(medicine.id).set(medicine.toJson(
-  //   dateCreated: FieldValue.serverTimestamp(), id: medicine.id));
+  //   medicineReference.doc(product.id).set(product.toJson(
+  //   dateCreated: FieldValue.serverTimestamp(), id: product.id));
   //   return QueryResult.success();
   //   } else {
   //   return QueryResult.error(
   //   'No Internet Connection. Check your connection and try again');
   //   }
   // }
-  Future<QueryResult> updateProduct(Medicine medicine) async {
+  Future<QueryResult> updateProduct(Product medicine) async {
     // if (await connectivityService.checkConnectivity()) {
       try {
         await medicineReference.doc(medicine.id).set(medicine.toJson(

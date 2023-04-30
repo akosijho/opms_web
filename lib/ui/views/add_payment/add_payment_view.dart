@@ -3,10 +3,10 @@ import 'package:opmswebstaff/constants/font_name/font_name.dart';
 import 'package:opmswebstaff/constants/styles/text_styles.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:opmswebstaff/ui/widgets/patient_card/patient_card.dart';
-import 'package:opmswebstaff/ui/widgets/payment_dental_note_card/payment_dental_note_card.dart';
 import 'package:opmswebstaff/ui/widgets/payment_medicine_card/payment_medicine_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:opmswebstaff/ui/widgets/payment_optical_note_card/payment_optical_note_card.dart';
 import 'package:stacked/stacked.dart';
 import '../../../constants/styles/palette_color.dart';
 import '../../../constants/styles/text_border_styles.dart';
@@ -73,17 +73,19 @@ class AddPaymentView extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => model.savePaymentInfo(
+                onTap: () {
+                  if (model.addPaymentFormKey.currentState!.validate()){
+                  model.savePaymentInfo(
                   paymentType: model.paymentTypeTxtController.text,
-                  dentist: model.dentistTxtController.text,
+                  optometrist: model.optometristTxtController.text,
                   totalAmountFinal: model.totalAmountFinal,
                   patientId: patient.id,
-                  dentalNoteSubTotal: model.dentalNoteSubTotal,
-                  medicineSubTotal: model.medicineSubTotal,
-                  selectedMedicine: model.selectedMedicines,
-                  selectedNotes: model.selectedDentalNotes,
+                  opticalNoteSubTotal: model.opticalNoteSubTotal,
+                  productSubTotal: model.productSubTotal,
+                  selectedProduct: model.selectedProducts,
+                  selectedNotes: model.selectedOpticalNotes,
                   patient_name: patient.fullName,
-                ),
+                );}},
                 child: Container(
                   height: double.maxFinite,
                   color: Palettes.kcPurpleMain,
@@ -148,9 +150,9 @@ class AddPaymentView extends StatelessWidget {
                           ],
                         ),
                         GestureDetector(
-                          onTap: () => model.showSelectDentist(),
+                          onTap: () => model.showSelectOptometrist(),
                           child: TextFormField(
-                            controller: model.dentistTxtController,
+                            controller: model.optometristTxtController,
                             textInputAction: TextInputAction.next,
                             enabled: false,
                             validator: (value) =>
@@ -289,7 +291,7 @@ class AddPaymentView extends StatelessWidget {
                               backgroundColor: Palettes.kcBlueMain1,
                               tooltip: 'Select Optical Note',
                               onPressed: () =>
-                                  model.selectDentalNote(patient.id),
+                                  model.selectOpticalNote(patient.id),
                             )
                           ],
                         ),
@@ -299,18 +301,18 @@ class AddPaymentView extends StatelessWidget {
                             color: Colors.grey.shade200,
                           ),
                           padding: EdgeInsets.symmetric(vertical: 8),
-                          child: model.selectedDentalNotes.isNotEmpty
+                          child: model.selectedOpticalNotes.isNotEmpty
                               ? ListView.separated(
                               shrinkWrap: true,
                               primary: false,
                               itemBuilder: (context, index) =>
-                                  PaymentDentalNoteCard(
+                                  PaymentOpticalNoteCard(
                                       dentalNote:
-                                      model.selectedDentalNotes[index],
+                                      model.selectedOpticalNotes[index],
                                       patientID: patient.id),
                               separatorBuilder: (context, index) =>
                                   SizedBox(height: 10),
-                              itemCount: model.selectedDentalNotes.length)
+                              itemCount: model.selectedOpticalNotes.length)
                               : SizedBox(
                               height: 100,
                               child:
@@ -332,11 +334,11 @@ class AddPaymentView extends StatelessWidget {
                               backgroundColor: Palettes.kcBlueMain1,
                               tooltip: 'Select Product',
                               onPressed: () =>
-                                  model.selectMedicines(patient.id),
+                                  model.selectProducts(patient.id),
                             ),
                           ],
                         ),
-                        model.selectedMedicines.isNotEmpty
+                        model.selectedProducts.isNotEmpty
                             ? Container(
                           width: double.maxFinite,
                           decoration: BoxDecoration(
@@ -349,10 +351,10 @@ class AddPaymentView extends StatelessWidget {
                               itemBuilder: (context, index) =>
                                   PaymentMedicineCard(
                                       medicine:
-                                      model.selectedMedicines[index]),
+                                      model.selectedProducts[index]),
                               separatorBuilder: (context, index) =>
                                   SizedBox(height: 4),
-                              itemCount: model.selectedMedicines.length),
+                              itemCount: model.selectedProducts.length),
                         )
                             : Container(
                           height: 50,
@@ -405,7 +407,7 @@ class AddPaymentView extends StatelessWidget {
                                   ),
                                   Text(
                                     // '${model.dentalNoteSubTotal.toString().toCurrency}',
-                                    '${model.dentalNoteSubTotal.toString().toCurrency}',
+                                    '${model.opticalNoteSubTotal.toString().toCurrency}',
                                     style: TextStyle(
                                       color: Colors.deepOrangeAccent,
                                       fontWeight: FontWeight.bold,
@@ -427,7 +429,7 @@ class AddPaymentView extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    '${model.medicineSubTotal}'.toCurrency!,
+                                    '${model.productSubTotal}'.toCurrency!,
                                     style: TextStyle(
                                       color: Colors.deepOrangeAccent,
                                       fontWeight: FontWeight.bold,
@@ -460,7 +462,7 @@ class AddPaymentView extends StatelessWidget {
                                         //   model.dentalNoteSubTotal == 0 &&
                                         // model.medicineSubTotal == 0,
                                         model.serviceSubTotal == 0 &&
-                                            model.medicineSubTotal == 0,
+                                            model.productSubTotal == 0,
                                         controller:
                                         model.totalAmountTxtController,
                                         onChanged: (value) =>

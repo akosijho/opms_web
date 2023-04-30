@@ -19,7 +19,7 @@ class CustomBottomNavigation extends StatelessWidget {
         viewModelBuilder: () => UserViewModel(),
         // onModelReady: (model) => model.init(widget.user),
         builder: (context, model, widget) => Drawer(
-          width: 180,
+          width: 200,
               child: Material(
                 color: Palettes.kcDarkerBlueMain1,
                 child: ListView(
@@ -36,10 +36,10 @@ class CustomBottomNavigation extends StatelessWidget {
                           'Home',
                           style: TextStyle(color: Colors.white),
                         ),
-                        shape: Border(
-                          bottom: BorderSide(color: Colors.grey),
-                          top: BorderSide(color: Colors.grey),
-                        ),
+                        // shape: Border(
+                        //   bottom: BorderSide(color: Colors.grey),
+                        //   top: BorderSide(color: Colors.grey),
+                        // ),
                         onTap: () => setSelectedIndex(0),
                         selected: selectedIndex == 0
                         // onTap: () => model.goToHome()
@@ -57,10 +57,10 @@ class CustomBottomNavigation extends StatelessWidget {
                           'Appointment',
                           style: TextStyle(color: Colors.white),
                         ),
-                        shape: Border(
-                          bottom: BorderSide(color: Colors.grey),
-                          // top: BorderSide(color: Colors.grey),
-                        ),
+                        // shape: Border(
+                        //   bottom: BorderSide(color: Colors.grey),
+                        //   // top: BorderSide(color: Colors.grey),
+                        // ),
                         onTap: () => setSelectedIndex(1),
                         selected: selectedIndex == 1),
 
@@ -76,10 +76,10 @@ class CustomBottomNavigation extends StatelessWidget {
                           'Patients',
                           style: TextStyle(color: Colors.white),
                         ),
-                        shape: Border(
-                          bottom: BorderSide(color: Colors.grey),
-                          // top: BorderSide(color: Colors.grey),
-                        ),
+                        // shape: Border(
+                        //   bottom: BorderSide(color: Colors.grey),
+                        //   // top: BorderSide(color: Colors.grey),
+                        // ),
                         onTap: () => setSelectedIndex(2),
                         selected: selectedIndex == 2),
                     ListTile(
@@ -94,10 +94,10 @@ class CustomBottomNavigation extends StatelessWidget {
                           'Services',
                           style: TextStyle(color: Colors.white),
                         ),
-                        shape: Border(
-                          bottom: BorderSide(color: Colors.grey),
-                          // top: BorderSide(color: Colors.grey),
-                        ),
+                        // shape: Border(
+                        //   bottom: BorderSide(color: Colors.grey),
+                        //   // top: BorderSide(color: Colors.grey),
+                        // ),
                         onTap: () => setSelectedIndex(3),
                         selected: selectedIndex == 3),
                     ListTile(
@@ -112,10 +112,10 @@ class CustomBottomNavigation extends StatelessWidget {
                           'Products',
                           style: TextStyle(color: Colors.white),
                         ),
-                        shape: Border(
-                          bottom: BorderSide(color: Colors.grey),
-                          // top: BorderSide(color: Colors.grey),
-                        ),
+                        // shape: Border(
+                        //   bottom: BorderSide(color: Colors.grey),
+                        //   // top: BorderSide(color: Colors.grey),
+                        // ),
                         onTap: () => setSelectedIndex(4),
                         selected: selectedIndex == 4),
 
@@ -131,10 +131,10 @@ class CustomBottomNavigation extends StatelessWidget {
                           'Payments',
                           style: TextStyle(color: Colors.white),
                         ),
-                        shape: Border(
-                          bottom: BorderSide(color: Colors.grey),
-                          // top: BorderSide(color: Colors.grey),
-                        ),
+                        // shape: Border(
+                        //   bottom: BorderSide(color: Colors.grey),
+                        //   // top: BorderSide(color: Colors.grey),
+                        // ),
                         onTap: () => setSelectedIndex(5),
                         selected: selectedIndex == 5),
 
@@ -150,10 +150,10 @@ class CustomBottomNavigation extends StatelessWidget {
                           'Expenses',
                           style: TextStyle(color: Colors.white),
                         ),
-                        shape: Border(
-                          bottom: BorderSide(color: Colors.grey),
-                          // top: BorderSide(color: Colors.grey),
-                        ),
+                        // shape: Border(
+                        //   bottom: BorderSide(color: Colors.grey),
+                        //   // top: BorderSide(color: Colors.grey),
+                        // ),
                         onTap: () => setSelectedIndex(6),
                         selected: selectedIndex == 6),
 
@@ -169,10 +169,10 @@ class CustomBottomNavigation extends StatelessWidget {
                           'Report',
                           style: TextStyle(color: Colors.white),
                         ),
-                        shape: Border(
-                          bottom: BorderSide(color: Colors.grey),
-                          // top: BorderSide(color: Colors.grey),
-                        ),
+                        // shape: Border(
+                        //   bottom: BorderSide(color: Colors.grey),
+                        //   // top: BorderSide(color: Colors.grey),
+                        // ),
                         onTap: () => setSelectedIndex(7),
                         selected: selectedIndex == 7),
                     ListTile(
@@ -184,102 +184,13 @@ class CustomBottomNavigation extends StatelessWidget {
                           'Log Out',
                           style: TextStyle(color: Colors.white),
                         ),
-                        shape: Border(
-                          bottom: BorderSide(color: Colors.grey),
-                          // top: BorderSide(color: Colors.grey),
-                        ),
+                        // shape: Border(
+                        //   bottom: BorderSide(color: Colors.grey),
+                        //   // top: BorderSide(color: Colors.grey),
+                        // ),
                         onTap: () => model.logout()),
 
-                    // BottomNavigationBar(
-                    //   type: BottomNavigationBarType.fixed,
-                    //   elevation: 0,
-                    //   onTap: (index) => setSelectedIndex(index),
-                    //   currentIndex: selectedIndex,
-                    //   backgroundColor: Colors.transparent,
-                    //   showUnselectedLabels: true,
-                    //   unselectedLabelStyle: TextStyle(fontSize: 10),
-                    //   selectedLabelStyle:
-                    //       TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-                    //   fixedColor: Palettes.kcBlueMain1,
-                    //   items: [
-                    //     BottomNavigationBarItem(
-                    //       label: 'Home',
-                    //       icon: CircleAvatar(
-                    //           radius: 20,
-                    //           backgroundColor: selectedIndex == 0
-                    //               ? Palettes.kcBlueMain1.withOpacity(0.1)
-                    //               : Colors.transparent,
-                    //           child: SvgPicture.asset(
-                    //             'assets/icons/homee.svg',
-                    //             height: 23,
-                    //             color: selectedIndex == 0
-                    //                 ? Palettes.kcBlueMain1
-                    //                 : Palettes.kcNeutral1,
-                    //           )
-                    //       ),
-                    //     ),
-                    //     BottomNavigationBarItem(
-                    //       label: 'Appointment',
-                    //       icon: CircleAvatar(
-                    //           radius: 20,
-                    //           backgroundColor: selectedIndex == 1
-                    //               ? Palettes.kcBlueMain1.withOpacity(0.1)
-                    //               : Colors.transparent,
-                    //           child: SvgPicture.asset(
-                    //             'assets/icons/appointment.svg',
-                    //             height: 23,
-                    //             color: selectedIndex == 1
-                    //                 ? Palettes.kcBlueMain1
-                    //                 : Palettes.kcNeutral1,
-                    //           )),
-                    //     ),
-                    //     BottomNavigationBarItem(
-                    //       label: 'Patients',
-                    //       icon: CircleAvatar(
-                    //           radius: 20,
-                    //           backgroundColor: selectedIndex == 2
-                    //               ? Palettes.kcBlueMain1.withOpacity(0.1)
-                    //               : Colors.transparent,
-                    //           child: SvgPicture.asset(
-                    //             'assets/icons/patients.svg',
-                    //             height: 23,
-                    //             color: selectedIndex == 2
-                    //                 ? Palettes.kcBlueMain1
-                    //                 : Palettes.kcNeutral1,
-                    //           )),
-                    //     ),
-                    //     BottomNavigationBarItem(
-                    //       label: 'Procedures',
-                    //       icon: CircleAvatar(
-                    //           radius: 20,
-                    //           backgroundColor: selectedIndex == 3
-                    //               ? Palettes.kcBlueMain1.withOpacity(0.1)
-                    //               : Colors.transparent,
-                    //           child: SvgPicture.asset(
-                    //             'assets/icons/Filter.svg',
-                    //             height: 23,
-                    //             color: selectedIndex == 3
-                    //                 ? Palettes.kcBlueMain1
-                    //                 : Palettes.kcNeutral1,
-                    //           )),
-                    //     ),
-                    //     BottomNavigationBarItem(
-                    //       label: 'Medicine',
-                    //       icon: CircleAvatar(
-                    //           radius: 20,
-                    //           backgroundColor: selectedIndex == 4
-                    //               ? Palettes.kcBlueMain1.withOpacity(0.1)
-                    //               : Colors.transparent,
-                    //           child: SvgPicture.asset(
-                    //             'assets/icons/Work.svg',
-                    //             height: 23,
-                    //             color: selectedIndex == 4
-                    //                 ? Palettes.kcBlueMain1
-                    //                 : Palettes.kcNeutral1,
-                    //           )),
-                    //     ),
-                    //   ],
-                    // ),
+
                   ],
                 ),
               ),

@@ -65,8 +65,8 @@ class ViewPatientAppointment extends StatelessWidget {
                           // imageUrl:
                           //     model.patientListOfAppointments[i].patient.image,
                           serviceTitle: model.patientListOfAppointments[i]
-                              .procedures![0].procedureName,
-                          doctor: model.patientListOfAppointments[i].dentist,
+                              .services![0].serviceName,
+                          doctor: model.patientListOfAppointments[i].optometrist,
                           patient: model.patientListOfAppointments[i].patient,
                           appointmentDate: DateFormat.yMMMd().format(model
                               .patientListOfAppointments[i].date

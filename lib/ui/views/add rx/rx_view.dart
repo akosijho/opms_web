@@ -117,7 +117,7 @@ class RxView extends StatelessWidget {
                                                 SizedBox(height: 6),
                                                 Text(
                                                   payment
-                                                      .dentalNote![index].sphere,
+                                                      .opticalNote![index].sphere,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 10),
@@ -190,7 +190,7 @@ class RxView extends StatelessWidget {
                                       ),
                                       separatorBuilder: (context, index) =>
                                           Divider(height: 1),
-                                      itemCount: payment.dentalNote!.length)
+                                      itemCount: payment.opticalNote!.length)
                                   // itemCount: payment.dentalNote!.length)
                                 ]),
                                 Column(children: [
@@ -208,7 +208,7 @@ class RxView extends StatelessWidget {
                                                         TextStyle(fontSize: 12)),
                                                 SizedBox(height: 6),
                                                 Text(
-                                                  payment.dentalNote![index]
+                                                  payment.opticalNote![index]
                                                       .cylinder,
                                                   style: TextStyle(
                                                       color: Colors.black,
@@ -282,7 +282,7 @@ class RxView extends StatelessWidget {
                                       ),
                                       separatorBuilder: (context, index) =>
                                           Divider(height: 1),
-                                      itemCount: payment.dentalNote!.length)
+                                      itemCount: payment.opticalNote!.length)
                                   // TextFormField(
                                   //   // textInputAction: TextInputAction.done,
                                   //   textAlign: TextAlign.start,
@@ -319,7 +319,7 @@ class RxView extends StatelessWidget {
                                                         TextStyle(fontSize: 12)),
                                                 SizedBox(height: 6),
                                                 Text(
-                                                  payment.dentalNote![index].axis,
+                                                  payment.opticalNote![index].axis,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 10),
@@ -392,7 +392,7 @@ class RxView extends StatelessWidget {
                                       ),
                                       separatorBuilder: (context, index) =>
                                           Divider(height: 1),
-                                      itemCount: payment.dentalNote!.length)
+                                      itemCount: payment.opticalNote!.length)
                                   // TextFormField(
                                   //   // textInputAction: TextInputAction.done,
                                   //   textAlign: TextAlign.start,
@@ -429,7 +429,7 @@ class RxView extends StatelessWidget {
                                                         TextStyle(fontSize: 12)),
                                                 SizedBox(height: 6),
                                                 Text(
-                                                  payment.dentalNote![index].pd,
+                                                  payment.opticalNote![index].pd,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 10),
@@ -508,7 +508,7 @@ class RxView extends StatelessWidget {
                                       ),
                                       separatorBuilder: (context, index) =>
                                           Divider(height: 1),
-                                      itemCount: payment.dentalNote!.length)
+                                      itemCount: payment.opticalNote!.length)
                                 ]),
                                 Column(children: [
                                   ListView.separated(
@@ -525,7 +525,7 @@ class RxView extends StatelessWidget {
                                                         TextStyle(fontSize: 12)),
                                                 SizedBox(height: 6),
                                                 Text(
-                                                  payment.dentalNote![index].add,
+                                                  payment.opticalNote![index].add,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 10),
@@ -604,7 +604,7 @@ class RxView extends StatelessWidget {
                                       ),
                                       separatorBuilder: (context, index) =>
                                           Divider(height: 1),
-                                      itemCount: payment.dentalNote!.length)
+                                      itemCount: payment.opticalNote!.length)
                                 ]),
                                 Column(children: [
                                   ListView.separated(
@@ -621,7 +621,7 @@ class RxView extends StatelessWidget {
                                                         TextStyle(fontSize: 12)),
                                                 SizedBox(height: 6),
                                                 Text(
-                                                  payment.dentalNote![index].va,
+                                                  payment.opticalNote![index].va,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 10),
@@ -700,7 +700,7 @@ class RxView extends StatelessWidget {
                                       ),
                                       separatorBuilder: (context, index) =>
                                           Divider(height: 1),
-                                      itemCount: payment.dentalNote!.length)
+                                      itemCount: payment.opticalNote!.length)
                                 ]),
                               ]),
                               // TableRow(children: [
@@ -893,7 +893,7 @@ class RxView extends StatelessWidget {
                                                         TextStyle(fontSize: 12)),
                                                 SizedBox(height: 6),
                                                 Text(
-                                                  payment.dentalNote![index]
+                                                  payment.opticalNote![index]
                                                       .sphereCL,
                                                   style: TextStyle(
                                                       color: Colors.black,
@@ -973,7 +973,7 @@ class RxView extends StatelessWidget {
                                       ),
                                       separatorBuilder: (context, index) =>
                                           Divider(height: 1),
-                                      itemCount: payment.dentalNote!.length)
+                                      itemCount: payment.opticalNote!.length)
                                 ]),
                                 Column(children: [
                                   ListView.separated(
@@ -990,7 +990,7 @@ class RxView extends StatelessWidget {
                                                         TextStyle(fontSize: 12)),
                                                 SizedBox(height: 6),
                                                 Text(
-                                                  payment.dentalNote![index]
+                                                  payment.opticalNote![index]
                                                       .cylinderCL,
                                                   style: TextStyle(
                                                       color: Colors.black,
@@ -1070,7 +1070,7 @@ class RxView extends StatelessWidget {
                                       ),
                                       separatorBuilder: (context, index) =>
                                           Divider(height: 1),
-                                      itemCount: payment.dentalNote!.length)
+                                      itemCount: payment.opticalNote!.length)
                                 ]),
                                 Column(children: [
                                   ListView.separated(
@@ -1088,7 +1088,7 @@ class RxView extends StatelessWidget {
                                                 SizedBox(height: 6),
                                                 Text(
                                                   payment
-                                                      .dentalNote![index].axisCL,
+                                                      .opticalNote![index].axisCL,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 10),
@@ -1167,7 +1167,7 @@ class RxView extends StatelessWidget {
                                       ),
                                       separatorBuilder: (context, index) =>
                                           Divider(height: 1),
-                                      itemCount: payment.dentalNote!.length)
+                                      itemCount: payment.opticalNote!.length)
                                 ]),
                                 Column(children: [
                                   ListView.separated(
@@ -1184,7 +1184,7 @@ class RxView extends StatelessWidget {
                                                         TextStyle(fontSize: 12)),
                                                 SizedBox(height: 6),
                                                 Text(
-                                                  payment.dentalNote![index].bcCL,
+                                                  payment.opticalNote![index].bcCL,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 10),
@@ -1263,7 +1263,7 @@ class RxView extends StatelessWidget {
                                       ),
                                       separatorBuilder: (context, index) =>
                                           Divider(height: 1),
-                                      itemCount: payment.dentalNote!.length)
+                                      itemCount: payment.opticalNote!.length)
                                 ]),
                                 Column(children: [
                                   ListView.separated(
@@ -1281,7 +1281,7 @@ class RxView extends StatelessWidget {
                                                 SizedBox(height: 6),
                                                 Text(
                                                   payment
-                                                      .dentalNote![index].diaCL,
+                                                      .opticalNote![index].diaCL,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 10),
@@ -1360,7 +1360,7 @@ class RxView extends StatelessWidget {
                                       ),
                                       separatorBuilder: (context, index) =>
                                           Divider(height: 1),
-                                      itemCount: payment.dentalNote!.length)
+                                      itemCount: payment.opticalNote!.length)
                                 ]),
                                 Column(children: [
                                   ListView.separated(
@@ -1379,7 +1379,7 @@ class RxView extends StatelessWidget {
                                                         fontSize: 12)),
                                                 SizedBox(height: 6),
                                                 Text(
-                                                  payment.dentalNote![index]
+                                                  payment.opticalNote![index]
                                                       .tintCL,
                                                   style: TextStyle(
                                                       color: Colors.black,
@@ -1459,7 +1459,7 @@ class RxView extends StatelessWidget {
                                           ),
                                       separatorBuilder: (context, index) =>
                                           Divider(height: 1),
-                                      itemCount: payment.dentalNote!.length)
+                                      itemCount: payment.opticalNote!.length)
                                 ]),
                               ]),
                             ],
@@ -1545,7 +1545,7 @@ class RxView extends StatelessWidget {
                                   Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      payment.dentalNote![index].note,
+                                      payment.opticalNote![index].note,
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 12),
                                     ),
@@ -1555,7 +1555,7 @@ class RxView extends StatelessWidget {
                             ),
                         separatorBuilder: (context, index) =>
                             Divider(height: 1),
-                        itemCount: payment.dentalNote!.length),
+                        itemCount: payment.opticalNote!.length),
                   )
                 ],
               ),

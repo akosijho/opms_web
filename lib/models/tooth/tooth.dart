@@ -1,11 +1,11 @@
-import 'package:opmswebstaff/models/procedure/procedure.dart';
+import 'package:opmswebstaff/models/service/service.dart';
 import 'package:opmswebstaff/models/tooth_condition/tooth_condition.dart';
 
 class Tooth {
   final dynamic id;
   final int index;
   final List<ToothCondition> toothCondition;
-  final List<Procedure> procedures;
+  final List<Service> procedures;
   final String payment_status;
   final dynamic payment_id;
 
@@ -23,7 +23,7 @@ class Tooth {
       'id': this.id,
       'index': this.index,
       'toothStatus': this.toothCondition,
-      'procedures': this.procedures,
+      'service': this.procedures,
       'payment_status': this.payment_status,
       'payment_id': this.payment_id,
     };
@@ -34,7 +34,7 @@ class Tooth {
       id: map['id'] as dynamic,
       index: map['index'] as int,
       toothCondition: map['toothStatus'] as List<ToothCondition>,
-      procedures: map['procedures'] as List<Procedure>,
+      procedures: map['service'] as List<Service>,
       payment_status: map['payment_status'] as String,
       payment_id: map['payment_id'] as dynamic,
     );

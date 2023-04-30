@@ -86,7 +86,7 @@ class ReceiptView extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 20),
-                      payment.dentalNote!.isNotEmpty
+                      payment.opticalNote!.isNotEmpty
                           ? Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,14 +107,14 @@ class ReceiptView extends StatelessWidget {
                                             RichText(
                                               text: TextSpan(
                                                   text: payment
-                                                      .dentalNote![index]
-                                                      .procedure
-                                                      .procedureName,
+                                                      .opticalNote![index]
+                                                      .service
+                                                      .serviceName,
                                                   children: [
                                                     TextSpan(
                                                       text: ' @tooth#' +
                                                           payment
-                                                              .dentalNote![
+                                                              .opticalNote![
                                                                   index]
                                                               .selectedTooth,
                                                     )
@@ -123,15 +123,15 @@ class ReceiptView extends StatelessWidget {
                                                     color: Colors.black,
                                                   )),
                                             ),
-                                            Text(payment.dentalNote![index]
-                                                .procedure.price!
+                                            Text(payment.opticalNote![index]
+                                                .service.price!
                                                 .toString()
                                                 .toCurrency!),
                                           ],
                                         ),
                                     separatorBuilder: (context, index) =>
                                         Divider(height: 1),
-                                    itemCount: payment.dentalNote!.length),
+                                    itemCount: payment.opticalNote!.length),
                               ],
                             )
                           : Container(),
@@ -141,7 +141,7 @@ class ReceiptView extends StatelessWidget {
                         color: Colors.grey,
                       ),
                       SizedBox(height: 4),
-                      payment.medicineList!.isNotEmpty
+                      payment.productList!.isNotEmpty
                           ? Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,13 +157,13 @@ class ReceiptView extends StatelessWidget {
                                             RichText(
                                               text: TextSpan(
                                                   text: payment
-                                                      .medicineList![index]
+                                                      .productList![index]
                                                       .brandName,
                                                   children: [
                                                     TextSpan(
                                                         text: ' @' +
                                                             payment
-                                                                .medicineList![
+                                                                .productList![
                                                                     index]
                                                                 .price
                                                                 .toString()
@@ -172,7 +172,7 @@ class ReceiptView extends StatelessWidget {
                                                           TextSpan(
                                                               text: '  x' +
                                                                   payment
-                                                                      .medicineList![
+                                                                      .productList![
                                                                           index]
                                                                       .qty
                                                                       .toString())
@@ -185,12 +185,12 @@ class ReceiptView extends StatelessWidget {
                                                   )),
                                             ),
                                             Text(
-                                                '${model.computeMedTotal(payment.medicineList![index])}')
+                                                '${model.computeMedTotal(payment.productList![index])}')
                                           ],
                                         ),
                                     separatorBuilder: (context, index) =>
                                         Divider(height: 1),
-                                    itemCount: payment.medicineList!.length),
+                                    itemCount: payment.productList!.length),
                               ],
                             )
                           : Container(),
@@ -204,7 +204,7 @@ class ReceiptView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('Optical Note SubTotal: '),
-                          Text(payment.dentalNoteSubTotal
+                          Text(payment.opticalNoteSubTotal
                               .toString()
                               .toCurrency!),
                         ],
@@ -213,7 +213,7 @@ class ReceiptView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('Product SubTotal: '),
-                          Text(payment.medicineSubTotal
+                          Text(payment.productSubTotal
                               .toString()
                               .toCurrency!),
                         ],

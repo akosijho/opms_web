@@ -8,7 +8,7 @@ import '../../../constants/styles/text_border_styles.dart';
 import '../../../constants/styles/text_styles.dart';
 
 class UpdateProductView extends StatelessWidget {
-  final Medicine medicine;
+  final Product medicine;
   const UpdateProductView({Key? key, required this.medicine})
       : super(key: key);
 

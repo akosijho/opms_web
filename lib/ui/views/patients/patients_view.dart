@@ -42,10 +42,10 @@ class PatientsView extends StatelessWidget {
             heroTag: null,
             isExtended: model.isScrolledUp,
             onPressed: () {
-              // model.navigationService.pushNamed(Routes.AddPatientView);
-              mainBody.widget.add(AddPatientView());
-              // print(widget);
-              mainBody.setSelectedIndex(mainBody.widget.length-1);
+              model.navigationService.pushNamed(Routes.AddPatientView);
+              // mainBody.widget.add(AddPatientView());
+              // // print(widget);
+              // mainBody.setSelectedIndex(mainBody.widget.length-1);
 
               // setState(() {
               //   mainBody.widget[mainBody.selectedIndex]= AddPatientView();

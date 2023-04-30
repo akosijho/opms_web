@@ -99,15 +99,15 @@ class AppointmentSelectPatientView extends StatelessWidget {
                                 'assets/icons/Search.svg',
                               ),
                             ),
-                            suffixIcon: GestureDetector(
-                              onTap: () {},
-                              child: Padding(
-                                padding: EdgeInsets.all(8),
-                                child: SvgPicture.asset(
-                                  'assets/icons/Filter.svg',
-                                ),
-                              ),
-                            ),
+                            // suffixIcon: GestureDetector(
+                            //   onTap: () {},
+                            //   child: Padding(
+                            //     padding: EdgeInsets.all(8),
+                            //     child: SvgPicture.asset(
+                            //       'assets/icons/Filter.svg',
+                            //     ),
+                            //   ),
+                            // ),
                             constraints: BoxConstraints(maxHeight: 43),
                             hintText: 'Search by Last Name, First Name',
                           ),
@@ -121,46 +121,43 @@ class AppointmentSelectPatientView extends StatelessWidget {
                               SliverChildBuilderDelegate((context, index) {
                             return AnimationConfiguration.staggeredList(
                               position: index,
-                              child: SlideAnimation(
-                                duration: Duration(milliseconds: 400),
-                                horizontalOffset: 100,
-                                child: Container(
-                                  margin: EdgeInsets.only(top: 8, bottom: 8),
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.shade600,
-                                        blurRadius: 1,
-                                      )
-                                    ],
-                                  ),
-                                  child: Material(
-                                    color: Colors.white,
-                                    child: InkWell(
-                                      onTap: () => model.selectPatient(
-                                          model.patientList[index]),
-                                      child: PatientCard(
-                                        key: ObjectKey(
-                                            model.patientList[index].id),
-                                        name: model.patientList[index].fullName,
-                                        // image: model.patientList[index].image,
-                                        phone:
-                                            model.patientList[index].phoneNum,
-                                        address:
-                                            model.patientList[index].address,
-                                        birthDate: DateFormat.yMMMd().format(
-                                            model.patientList[index].birthDate
-                                                .toDateTime()!),
-                                        age: AgeCalculator.age(
-                                                model.patientList[index]
-                                                    .birthDate
-                                                    .toDateTime()!,
-                                                today: DateTime.now())
-                                            .years
-                                            .toString(),
-                                        dateCreated: model
-                                            .patientList[index].dateCreated!,
-                                      ),
+                              child: Container(
+                                margin: EdgeInsets.only(top: 8, bottom: 8),
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.shade600,
+                                      blurRadius: 1,
+                                    )
+                                  ],
+                                ),
+                                child: Material(
+                                  color: Colors.white,
+                                  child: InkWell(
+                                    onTap: () => model.selectPatient(
+                                        context,
+                                        model.patientList[index]),
+                                    child: PatientCard(
+                                      key: ObjectKey(
+                                          model.patientList[index].id),
+                                      name: model.patientList[index].fullName,
+                                      // image: model.patientList[index].image,
+                                      phone:
+                                          model.patientList[index].phoneNum,
+                                      address:
+                                          model.patientList[index].address,
+                                      birthDate: DateFormat.yMMMd().format(
+                                          model.patientList[index].birthDate
+                                              .toDateTime()!),
+                                      age: AgeCalculator.age(
+                                              model.patientList[index]
+                                                  .birthDate
+                                                  .toDateTime()!,
+                                              today: DateTime.now())
+                                          .years
+                                          .toString(),
+                                      dateCreated: model
+                                          .patientList[index].dateCreated!,
                                     ),
                                   ),
                                 ),

@@ -41,7 +41,7 @@ class SelectionTime extends StatelessWidget {
                   ),
                   Text(
                     title ?? '',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                   TextButton(
                     onPressed: () =>

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:opmswebstaff/app/app.locator.dart';
 import 'package:opmswebstaff/app/app.router.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
@@ -8,6 +9,8 @@ import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/core/service/toast/toast_service.dart';
 import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
 import 'package:ntp/ntp.dart';
+import 'package:opmswebstaff/models/patient_model/patient_model.dart';
+import 'package:opmswebstaff/ui/views/appointment_select_patient/appointment_select_patient_view.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../enums/appointment_status.dart';
@@ -31,9 +34,51 @@ class AppointmentViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void goToSelectPatient() {
-    navigationService.pushNamed(Routes.AppointmentSelectPatientView);
+  // void goToSelectPatient() {
+  //   navigationService.pushNamed(Routes.AppointmentSelectPatientView);
+  // }
+  void goToSelectPatient(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 500,
+            height: 500,
+            child: AppointmentSelectPatientView(),
+          ),
+        );
+      },
+    );
   }
+
+    // navigationService.pushNamed(Routes.CreateAppointmentView,
+    //     arguments: CreateAppointmentViewArguments(patient: patient, popTimes: 3));
+
+
+  // void goToSelectPatient(BuildContext context, Patient patient) async {
+  //   await showDialog<Patient>(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return Center(
+  //         child: SizedBox(
+  //           width: 500,
+  //           height: 500,
+  //           child: AppointmentSelectPatientView(),
+  //         ),
+  //       );
+  //     },
+  //   );
+  //
+  //
+  //     navigationService.pushNamed(
+  //       Routes.CreateAppointmentView,
+  //       arguments: CreateAppointmentViewArguments(patient: patient, popTimes: 3),
+  //     );
+  //
+  // }
+
+
 
   void setFilter(String filter) {
     this.filter = filter;
@@ -59,8 +104,8 @@ class AppointmentViewModel extends BaseViewModel {
     apiService.listenToAppointmentChanges().listen((event) {
       appointmentSub =
           apiService.listenToAppointmentChanges().listen((event) async {
-        await getAppointmentByDate(selectedDate);
-      });
+            await getAppointmentByDate(selectedDate);
+          });
     });
   }
 
@@ -80,7 +125,7 @@ class AppointmentViewModel extends BaseViewModel {
     appointmentList.addAll(tempList);
     for (AppointmentModel appointment in tempList) {
       appointmentList.removeWhere((element) =>
-          !(element.appointment_status == AppointmentStatus.Completed.name));
+      !(element.appointment_status == AppointmentStatus.Completed.name));
       notifyListeners();
     }
     setBusy(false);
@@ -93,7 +138,7 @@ class AppointmentViewModel extends BaseViewModel {
     appointmentList.addAll(tempList);
     for (AppointmentModel appointment in tempList) {
       appointmentList.removeWhere((element) =>
-          !(element.appointment_status == AppointmentStatus.Pending.name));
+      !(element.appointment_status == AppointmentStatus.Pending.name));
       notifyListeners();
     }
     setBusy(false);
@@ -106,7 +151,7 @@ class AppointmentViewModel extends BaseViewModel {
     appointmentList.addAll(tempList);
     for (AppointmentModel appointment in tempList) {
       appointmentList.removeWhere((element) =>
-          !(element.appointment_status == AppointmentStatus.OnRequest.name));
+      !(element.appointment_status == AppointmentStatus.OnRequest.name));
       notifyListeners();
     }
     setBusy(false);
@@ -119,7 +164,7 @@ class AppointmentViewModel extends BaseViewModel {
     appointmentList.addAll(tempList);
     for (AppointmentModel appointment in tempList) {
       appointmentList.removeWhere((element) =>
-          !(element.appointment_status == AppointmentStatus.Cancelled.name));
+      !(element.appointment_status == AppointmentStatus.Cancelled.name));
       notifyListeners();
     }
     setBusy(false);
@@ -132,7 +177,7 @@ class AppointmentViewModel extends BaseViewModel {
     appointmentList.addAll(tempList);
     for (AppointmentModel appointment in tempList) {
       appointmentList.removeWhere((element) =>
-          !(element.appointment_status == AppointmentStatus.Declined.name));
+      !(element.appointment_status == AppointmentStatus.Declined.name));
       notifyListeners();
     }
     setBusy(false);
@@ -142,7 +187,7 @@ class AppointmentViewModel extends BaseViewModel {
     dialogService.showConfirmDialog(
         title: 'Delete  appointment',
         middleText:
-            'This action will delete the appointment permanently. Continue this action?',
+        'This action will delete the appointment permanently. Continue this action?',
         onCancel: () => navigationService.pop(),
         onContinue: () async {
           await apiService.deleteAppointment(

@@ -59,54 +59,53 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
               ),
               persistentFooterButtons: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Expanded(
-                        child: ElevatedButton(
+                    ElevatedButton(
                       onPressed: model.navigationService.pop,
                       child: Text('Cancel',
                       style: TextStyle(
-                        fontSize: 16
+                    fontSize: 16
                       ),
                       ),
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.red.shade700),
-                    )),
+                      primary: Colors.red.shade700),
+                    ),
                     SizedBox(
                       width: 10,
                     ),
-                    Expanded(
-                        child: ElevatedButton(
-                            onPressed: () {
-                              if (createAppointmentFormKey.currentState!
-                                  .validate()) {
-                                if (!(model.selectedProcedures.length <= 0)) {
-                                  model.setAppointment(
-                                    appointment: AppointmentModel(
-                                      patient: widget.patient,
-                                      date: model.selectedAppointmentDate
-                                          .toString(),
-                                      startTime:
-                                          model.selectedStartTime.toString(),
-                                      endTime: model.selectedEndTime.toString(),
-                                      dentist: dentistTxtController.text,
-                                      procedures: model.selectedProcedures,
-                                      appointment_status:
-                                          AppointmentStatus.Pending.name,
-                                    ),
-                                    popTime: widget.popTimes,
-                                    patientId: widget.patient.id,
-                                  );
-                                } else {
-                                  model.snackBarService.showSnackBar(
-                                      message: 'No Procedures Selected',
-                                      title: 'Warning');
-                                }
-                              }
-                            },
-                            child: Text('Save',
-                              style: TextStyle(
-                                fontSize: 16
-                            ),))),
+                    ElevatedButton(
+                        onPressed: () {
+                          if (createAppointmentFormKey.currentState!
+                              .validate()) {
+                            if (!(model.selectedServices.length <= 0)) {
+                              model.setAppointment(
+                                appointment: AppointmentModel(
+                                  patient: widget.patient,
+                                  date: model.selectedAppointmentDate
+                                      .toString(),
+                                  startTime:
+                                      model.selectedStartTime.toString(),
+                                  endTime: model.selectedEndTime.toString(),
+                                  optometrist: dentistTxtController.text,
+                                  services: model.selectedServices,
+                                  appointment_status:
+                                      AppointmentStatus.Pending.name,
+                                ),
+                                popTime: widget.popTimes,
+                                patientId: widget.patient.id,
+                              );
+                            } else {
+                              model.snackBarService.showSnackBar(
+                                  message: 'No Services Selected',
+                                  title: 'Warning');
+                            }
+                          }
+                        },
+                        child: Text('Save',
+                          style: TextStyle(
+                            fontSize: 16
+                        ),)),
                   ],
                 )
               ],
@@ -147,7 +146,7 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             GestureDetector(
-                              onTap: () => model.selectDate(dateTxtController),
+                              onTap: () => model.selectDate(context, dateTxtController),
                               child: TextFormField(
                                 controller: dateTxtController,
                                 enabled: false,
@@ -183,7 +182,7 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                                 ),
                                 ActionChip(
                                   label: Text(
-                                      model.selectedProcedures.length <= 0
+                                      model.selectedServices.length <= 0
                                           ? 'Select'
                                           : 'Add more'),
                                   labelPadding:
@@ -191,16 +190,16 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                                   labelStyle:
                                       TextStyles.tsBody2(color: Colors.white),
                                   backgroundColor: Palettes.kcBlueMain1,
-                                  tooltip: 'Select Procedure',
+                                  tooltip: 'Select Service',
                                   onPressed: () =>
                                       model.openProcedureFullScreenModal(
-                                    procedureTxtController,
+                                    context, procedureTxtController,
                                   ),
                                 )
                               ],
                             ),
                             Visibility(
-                              visible: model.selectedProcedures.length > 0
+                              visible: model.selectedServices.length > 0
                                   ? true
                                   : false,
                               child: Container(
@@ -210,9 +209,9 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                                 padding: EdgeInsets.all(4),
                                 child: Wrap(
                                   spacing: 4,
-                                  children: model.selectedProcedures
+                                  children: model.selectedServices
                                       .map((e) => InputChip(
-                                            label: Text(e.procedureName),
+                                            label: Text(e.serviceName),
                                             backgroundColor:
                                                 Colors.deepPurple.shade50,
                                             labelStyle: TextStyles.tsBody2(
@@ -236,7 +235,7 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                             ),
                             GestureDetector(
                               onTap: () =>
-                                  model.selectStartTime(startTimeTxtController),
+                                  model.selectStartTime(context, startTimeTxtController),
                               child: TextFormField(
                                 controller: startTimeTxtController,
                                 enabled: false,
@@ -258,7 +257,7 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                             SizedBox(height: 10),
                             GestureDetector(
                               onTap: () =>
-                                  model.selectEndTime(endTimeTxtController),
+                                  model.selectEndTime(context, endTimeTxtController),
                               child: TextFormField(
                                 controller: endTimeTxtController,
                                 enabled: false,
@@ -280,7 +279,7 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                             SizedBox(height: 10),
                             GestureDetector(
                               onTap: () =>
-                                  model.openDentistModal(dentistTxtController),
+                                  model.openOptometristModal(context, dentistTxtController),
                               child: TextFormField(
                                 controller: dentistTxtController,
                                 textInputAction: TextInputAction.next,

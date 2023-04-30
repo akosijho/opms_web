@@ -1,17 +1,17 @@
 import 'package:intl/intl.dart';
 
-class Medicine {
+class Product {
   final String? id;
-  final String medicineName;
+  final String productName;
   final String? brandName;
   final String? price;
   final String? image;
   final dynamic dateCreated;
   String? qty;
 
-  Medicine(
+  Product(
       {this.id,
-      required this.medicineName,
+      required this.productName,
       required this.price,
       this.brandName,
       this.image,
@@ -22,7 +22,7 @@ class Medicine {
       {String? id, String? image, required dynamic dateCreated, String? qty}) {
     return {
       'id': id,
-      'medicineName': this.medicineName,
+      'productName': this.productName,
       'price': this.price,
       'image': image ?? '',
       'brandName': this.brandName ?? 'Not Set',
@@ -31,11 +31,11 @@ class Medicine {
     };
   }
 
-  factory Medicine.fromJson(Map<String, dynamic> map) {
-    return Medicine(
+  factory Product.fromJson(Map<String, dynamic> map) {
+    return Product(
       id: map['id'],
       image: map['image'],
-      medicineName: map['medicineName'] as String,
+      productName: map['productName'] as String,
       price: map['price'] as String,
       brandName: map['brandName'],
       dateCreated: map['dateCreated'],
