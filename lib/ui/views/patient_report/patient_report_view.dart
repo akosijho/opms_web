@@ -57,14 +57,23 @@ class PatientReportView extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
-                          height: 400,
-                          width: 400,
+                        // SizedBox(
+                        //   // height: 400,
+                        //   // width: 400,
+                        //   child: charts.PieChart(
+                        //     model.setSeriesList(),
+                        //     animate: true,
+                        //   ),
+                        // ),
+                        Container(
+                          height: 400, // set the height explicitly
+                          width: 400, // set the width explicitly
                           child: charts.PieChart(
                             model.setSeriesList(),
                             animate: true,
                           ),
                         ),
+
                         SizedBox(height: 20),
                         Row(
                           children: [

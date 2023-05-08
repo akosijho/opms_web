@@ -58,9 +58,9 @@ class _AddPatientViewState extends State<AddPatientView> {
         ),
         persistentFooterButtons: [
           SizedBox(
-            width: MediaQuery.of(context).size.width,
+            // width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: model.isButtonClicked ? null : () {
                 if (addPatientFormKey.currentState!.validate()) {
                   model.savePatient(
                     firstName: firstNameTxtController.text,
@@ -73,15 +73,15 @@ class _AddPatientViewState extends State<AddPatientView> {
                     emergencyContactName: emergencyContactName.text,
                     emergencyContactNumber: emergencyContactNumber.text,
                   );
+                  setState(() {
+                    model.isButtonClicked = true;
+                  });
                 } else {
                   model.autoValidate = true;
                   model.notifyListeners();
                 }
               },
-              child: Text('Save',
-                style: TextStyle(
-                  fontSize: 16
-              ),),
+              child: Text('Save', style: TextStyle(fontSize: 16)),
             ),
           ),
         ],
@@ -159,7 +159,7 @@ class _AddPatientViewState extends State<AddPatientView> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => model.setGenderValue(genderTxtController),
+                        onTap: () => model.setGenderValue(genderTxtController, context),
                         child: TextFormField(
                           controller: genderTxtController,
                           autovalidateMode: model.autoValidate
@@ -191,7 +191,7 @@ class _AddPatientViewState extends State<AddPatientView> {
                       ),
                       GestureDetector(
                         onTap: () =>
-                            model.setBirthDateValue(birthDateTxtController),
+                            model.setBirthDateValue(birthDateTxtController, context),
                         child: TextFormField(
                           controller: birthDateTxtController,
                           autovalidateMode: model.autoValidate

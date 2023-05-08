@@ -93,26 +93,100 @@ class EditPatientViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> setGenderValue(
-      TextEditingController textEditingController) async {
-    String? selectedGender =
-        await bottomSheetService.openBottomSheet(SelectionOption(
-              options: SetupUserViewModel().genderOptions,
-              title: 'Select gender',
-            )) ??
-            '';
+  // Future<void> setGenderValue(
+  //     TextEditingController textEditingController) async {
+  //   String? selectedGender =
+  //       await bottomSheetService.openBottomSheet(SelectionOption(
+  //             options: SetupUserViewModel().genderOptions,
+  //             title: 'Select gender',
+  //           )) ??
+  //           '';
+  //   if (selectedGender != null) {
+  //     textEditingController.text = selectedGender;
+  //     notifyListeners();
+  //   }
+  // }
+  Future<void> setGenderValue(TextEditingController textEditingController,
+      BuildContext context) async {
+    String? selectedGender = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 300,
+          width: 300,
+          child: AlertDialog(
+            title: Text('Select Gender'),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: SetupUserViewModel().genderOptions.map((gender) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop(gender);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                      child: Text(
+                        gender,
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
     if (selectedGender != null) {
       textEditingController.text = selectedGender;
       notifyListeners();
     }
   }
 
-  Future<void> setBirthDateValue(
-      TextEditingController textEditingController) async {
-    DateTime? birthDate =
-        await bottomSheetService.openBottomSheet(SelectionDate(
-      title: 'Select birth date',
-    ));
+  // Future<void> setBirthDateValue(
+  //     TextEditingController textEditingController) async {
+  //   DateTime? birthDate =
+  //       await bottomSheetService.openBottomSheet(SelectionDate(
+  //     title: 'Select birth date',
+  //   ));
+  //   if (birthDate != null) {
+  //     selectedBirthDate = birthDate;
+  //     textEditingController.text =
+  //         DateFormat.yMMMd().format(selectedBirthDate!);
+  //     notifyListeners();
+  //   }
+  // }
+
+  Future<void> setBirthDateValue(TextEditingController textEditingController,
+      BuildContext context) async {
+    DateTime? birthDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+      helpText: 'Select Birth Date',
+      cancelText: 'CANCEL',
+      confirmText: 'SELECT',
+      errorFormatText: 'Invalid date format',
+      errorInvalidText: 'Invalid date',
+      fieldLabelText: 'Birth date',
+      fieldHintText: 'Month/Date/Year',
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.blue,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
     if (birthDate != null) {
       selectedBirthDate = birthDate;
       textEditingController.text =
@@ -141,22 +215,34 @@ class EditPatientViewModel extends BaseViewModel {
       emergencyContactNumber: emergencyContactNumberTxtController.text,
       notes: noteTxtController.text,
     );
-    apiService.updatePatientInfo(patient: updatedPatient);
+    final updatePatientQuery = await apiService.updatePatientInfo(
+        patient: updatedPatient);
+    if (updatePatientQuery.success) {
+      navigationService.popRepeated(1);
+      snackBarService.showSnackBar(
+          message: 'Patient Info was updated', title: 'Success!');
+    } else {
+      navigationService.popUntilNamed(Routes.EditPatientView);
+      snackBarService.showSnackBar(
+          message: updatePatientQuery.errorMessage!, title: 'Network Error');
+    }
   }
 
   void performUpdate(Patient patient) async {
     dialogService.showConfirmDialog(
         title: 'Update Patient Info',
         middleText:
-            'Doing this action will update the patient information. Continue this action?',
+        'Doing this action will update the patient information. Continue this action?',
         onCancel: () => navigationService.pop(),
-        onContinue: () async {
-          navigationService.pop();
-          dialogService.showDefaultLoadingDialog();
-          await updatePatient(patient);
-          navigationService.popUntilNamed(Routes.PatientInfoView);
-          snackBarService.showSnackBar(
-              message: 'Patient Info was updated', title: 'Success!');
-        });
+        // onContinue: () async {
+        //   // navigationService.pop();
+        //   dialogService.showDefaultLoadingDialog();
+        //   await updatePatient(patient);
+        //   navigationService.popUntilNamed(Routes.PatientInfoView);
+        //   snackBarService.showSnackBar(
+        //       message: 'Patient Info was updated', title: 'Success!');
+        // }
+        onContinue: () => updatePatient(patient));
   }
+
 }

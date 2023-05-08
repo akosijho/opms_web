@@ -14,7 +14,7 @@ abstract class PdfService {
       {required Prescription prescription, required Patient patient});
 
   Future<Uint8List> printOpticalCertificate(
-      {required OpticalCertificate dentalCertificate, required Patient patient});
+      {required OpticalCertificate opticalCertificate, required Patient patient});
 
   Future<void> savePdfFile2(
       {required String fileName, required Uint8List byteList});

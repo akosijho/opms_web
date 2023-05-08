@@ -34,6 +34,7 @@ class AddPatientViewModel extends BaseViewModel {
   final dialogService = locator<DialogService>();
   final searchIndexService = locator<SearchIndexService>();
 
+  bool isButtonClicked = false;
   bool haveAllergies = false;
   bool isMinor = false;
   // XFile? patientSelectedImage;
@@ -52,31 +53,153 @@ class AddPatientViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> setGenderValue(
-      TextEditingController textEditingController) async {
-    String selectedGender =
-        await bottomSheetService.openBottomSheet(SelectionOption(
-              options: SetupUserViewModel().genderOptions,
-              title: 'Select gender',
-            )) ??
-            '';
-    tempGender = selectedGender != '' ? selectedGender : tempGender ?? '';
+  // Future<void> setGenderValue(
+  //     TextEditingController textEditingController) async {
+  //   String selectedGender =
+  //       await bottomSheetService.openBottomSheet(SelectionOption(
+  //             options: SetupUserViewModel().genderOptions,
+  //             title: 'Select gender',
+  //           )) ??
+  //           '';
+  //   tempGender = selectedGender != '' ? selectedGender : tempGender ?? '';
+  //   selectedGender = tempGender!;
+  //   textEditingController.text = selectedGender;
+  //   notifyListeners();
+  // }
+
+  Future<void> setGenderValue(TextEditingController textEditingController, BuildContext context) async {
+    String? selectedGender = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 300,
+          width: 300,
+          child: AlertDialog(
+            title: Text('Select Gender'),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: SetupUserViewModel().genderOptions.map((gender) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop(gender);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                      child: Text(
+                        gender,
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    selectedGender = selectedGender ?? '';
+    tempGender = selectedGender.isNotEmpty ? selectedGender : tempGender ?? '';
     selectedGender = tempGender!;
     textEditingController.text = selectedGender;
     notifyListeners();
   }
 
-  Future<void> setBirthDateValue(
-      TextEditingController textEditingController) async {
-    DateTime? selectedBirthDate =
-        await bottomSheetService.openBottomSheet(SelectionDate(
-      title: 'Select birth date',
-    ));
-    tempBirthDate =
-        selectedBirthDate != null ? selectedBirthDate : tempBirthDate;
+  // Future<void> setBirthDateValue(
+  //     TextEditingController textEditingController) async {
+  //   DateTime? selectedBirthDate =
+  //       await bottomSheetService.openBottomSheet(SelectionDate(
+  //     title: 'Select birth date',
+  //   ));
+  //   tempBirthDate =
+  //       selectedBirthDate != null ? selectedBirthDate : tempBirthDate;
+  //   selectedBirthDate = tempBirthDate!;
+  //   textEditingController.text = DateFormat.yMMMd().format(selectedBirthDate);
+  //   ;
+  //   notifyListeners();
+  // }
+  // Future<void> setBirthDateValue(TextEditingController textEditingController, BuildContext context) async {
+  //   DateTime? selectedBirthDate = await showDialog<DateTime>(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return Container(
+  //         height: 250,
+  //         width: 300,
+  //         child: AlertDialog(
+  //           title: Text('Select Birth Date'),
+  //           content: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               SizedBox(height: 16),
+  //               InkWell(
+  //                 onTap: () {
+  //                   Navigator.of(context).pop(DateTime.now());
+  //                 },
+  //                 child: Text(
+  //                   'Today',
+  //                   style: TextStyle(fontSize: 16),
+  //                 ),
+  //               ),
+  //               SizedBox(height: 8),
+  //               Divider(),
+  //               SizedBox(height: 8),
+  //               ElevatedButton(
+  //                 onPressed: () async {
+  //                   DateTime? pickedDate = await showDatePicker(
+  //                     context: context,
+  //                     initialDate: DateTime.now(),
+  //                     firstDate: DateTime(1900),
+  //                     lastDate: DateTime.now(),
+  //                   );
+  //                   if (pickedDate != null) {
+  //                     Navigator.of(context).pop(pickedDate);
+  //                   }
+  //                 },
+  //                 child: Text('Select Date'),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  //
+  //   tempBirthDate = selectedBirthDate ?? tempBirthDate;
+  //   selectedBirthDate = tempBirthDate!;
+  //   textEditingController.text = DateFormat.yMMMd().format(selectedBirthDate);
+  //   notifyListeners();
+  // }
+  Future<void> setBirthDateValue(TextEditingController textEditingController, BuildContext context) async {
+    DateTime? selectedBirthDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+      helpText: 'Select Birth Date',
+      cancelText: 'CANCEL',
+      confirmText: 'SELECT',
+      errorFormatText: 'Invalid date format',
+      errorInvalidText: 'Invalid date',
+      fieldLabelText: 'Birth date',
+      fieldHintText: 'Month/Date/Year',
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.blue,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    tempBirthDate = selectedBirthDate ?? tempBirthDate;
     selectedBirthDate = tempBirthDate!;
     textEditingController.text = DateFormat.yMMMd().format(selectedBirthDate);
-    ;
     notifyListeners();
   }
 
@@ -102,6 +225,31 @@ class AddPatientViewModel extends BaseViewModel {
   //   imageCache.clear();
   //   logger.i('image cache cleared');
   // }
+
+  // Future<void> setBirthDateValue(TextEditingController textEditingController, BuildContext context) async {
+  //   DateTime? selectedBirthDate = await showDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime(1900),
+  //     lastDate: DateTime.now(),
+  //     builder: (BuildContext context, Widget? child) {
+  //       return AlertDialog(
+  //         title: Text('Select Birth Date'),
+  //         content: SizedBox(
+  //           height: 250,
+  //           width: 300,
+  //           child: child,
+  //         ),
+  //       );
+  //     },
+  //   );
+  //
+  //   tempBirthDate = selectedBirthDate ?? tempBirthDate;
+  //   selectedBirthDate = tempBirthDate!;
+  //   textEditingController.text = DateFormat.yMMMd().format(selectedBirthDate);
+  //   notifyListeners();
+  // }
+
 
   Future<void> savePatient({
     required String firstName,

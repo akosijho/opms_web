@@ -48,17 +48,17 @@ class OpticalCertificationView extends StatelessWidget {
               ],
             ),
             SizedBox(height: 10),
-            model.dentalCertificates.isNotEmpty
+            model.opticalCertificates.isNotEmpty
                 ? ListView.separated(
                     shrinkWrap: true,
                     primary: false,
                     itemBuilder: (context, index) => CertificateCard(
-                        opticalCertificate: model.dentalCertificates[index],
+                        opticalCertificate: model.opticalCertificates[index],
                         onViewCertTap: () => model.openCertificate(
-                            certificate: model.dentalCertificates[index],
+                            certificate: model.opticalCertificates[index],
                             patient: patient)),
                     separatorBuilder: (context, index) => SizedBox(height: 10),
-                    itemCount: model.dentalCertificates.length,
+                    itemCount: model.opticalCertificates.length,
                   )
                 : Container(
                     height: 500,

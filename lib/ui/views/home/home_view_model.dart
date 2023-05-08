@@ -174,4 +174,12 @@ class HomePageViewModel extends BaseViewModel {
     navigationService.pushNamed(Routes.UserView,
         arguments: UserViewArguments(user: user));
   }
+
+  void goToDesktopView(){
+    navigationService.pushNamed(Routes.DesktopView);
+  }
+
+  void goToMobileView(){
+    navigationService.pushNamed(Routes.MobileView);
+  }
 }

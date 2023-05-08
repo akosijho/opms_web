@@ -1,5 +1,10 @@
+
+import 'dart:html';
 import 'dart:typed_data';
 
+import 'package:flutter/rendering.dart';
+import 'package:open_file/open_file.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
 import 'package:opmswebstaff/core/service/toast/toast_service.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
@@ -8,6 +13,9 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:stacked/stacked.dart';
+import 'dart:html' as html;
+
+
 
 import '../../../app/app.locator.dart';
 
@@ -39,6 +47,8 @@ class ReceiptViewModel extends BaseViewModel {
       },
     );
   }
+
+
 
   String computeMedTotal(Product medicine) {
     int qty = int.parse(medicine.qty!);

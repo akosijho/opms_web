@@ -315,7 +315,7 @@ class CreateAppointmentViewModel extends BaseViewModel {
   //   }
   // }
   void openProcedureFullScreenModal(BuildContext context, TextEditingController controller) async {
-    Service? tempProcedure = await showDialog<Service>(
+    Service? tempService = await showDialog<Service>(
       context: context,
       builder: (BuildContext context) {
         return Center(
@@ -327,9 +327,9 @@ class CreateAppointmentViewModel extends BaseViewModel {
         );
       },
     );
-    if (tempProcedure != null) {
-      if (!selectedServices.map((procedure) => procedure.id).contains(tempProcedure.id)) {
-        selectedServices.add(tempProcedure);
+    if (tempService != null) {
+      if (!selectedServices.map((procedure) => procedure.id).contains(tempService.id)) {
+        selectedServices.add(tempService);
         notifyListeners();
       } else {
         toastService.showToast(message: 'Already Selected');

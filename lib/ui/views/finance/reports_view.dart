@@ -1,3 +1,4 @@
+import 'package:opmswebstaff/app/app.router.dart';
 import 'package:opmswebstaff/ui/views/expenses_report/expenses_report_view.dart';
 import 'package:opmswebstaff/ui/views/finance/reports_view_model.dart';
 import 'package:opmswebstaff/ui/views/patient_report/patient_report_view.dart';
@@ -12,7 +13,14 @@ class ReportView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ReportsViewModel>.reactive(
       viewModelBuilder: () => ReportsViewModel(),
-      builder: (context, model, widget) => Scaffold(
+      builder: (context, model, widget) {
+        return WillPopScope(
+            onWillPop: () async {
+          var willPop = await model.navigationService
+              .popAllAndPushNamed(Routes.MainBodyView);
+          return willPop != null ? true : false;
+        },
+        child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: model.currentIndex,
           onTap: (index) => model.changeIndex(index),
@@ -36,7 +44,9 @@ class ReportView extends StatelessWidget {
             ExpensesReportView(),
           ],
         ),
-      ),
+      ));
+  }
+
     );
   }
 }

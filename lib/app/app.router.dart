@@ -34,6 +34,8 @@ import '../ui/views/create_appointment/create_appointment_view.dart';
 import '../ui/views/edit_patient/edit_patient_view.dart';
 import '../ui/views/finance/reports_view.dart';
 import '../ui/views/home/home_view.dart';
+import '../ui/views/home/responsive/desktop_view/desktop_body.dart';
+import '../ui/views/home/responsive/mobile_view/mobile_body.dart';
 import '../ui/views/login/login_view.dart';
 import '../ui/views/main_body/main_body_view.dart';
 import '../ui/views/medical_history/medical_history_view.dart';
@@ -71,6 +73,8 @@ class Routes {
   static const String SetUpUserView = '/set-up-user-view';
   static const String MainBodyView = '/main-body-view';
   static const String HomePageView = '/home-page-view';
+  static const String DesktopView = '/my-desktop-body';
+  static const String MobileView = '/my-mobile-body';
   static const String AppointmentView = '/appointment-view';
   static const String ProductView = '/product-view';
   static const String PatientsView = '/patients-view';
@@ -121,6 +125,8 @@ class Routes {
     SetUpUserView,
     MainBodyView,
     HomePageView,
+    DesktopView,
+    MobileView,
     AppointmentView,
     ProductView,
     PatientsView,
@@ -174,6 +180,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.SetUpUserView, page: SetUpUserView),
     RouteDef(Routes.MainBodyView, page: MainBodyView),
     RouteDef(Routes.HomePageView, page: HomePageView),
+    RouteDef(Routes.DesktopView, page: MyDesktopBody),
+    RouteDef(Routes.MobileView, page: MyMobileBody),
     RouteDef(Routes.AppointmentView, page: AppointmentView),
     RouteDef(Routes.ProductView, page: ProductView),
     RouteDef(Routes.PatientsView, page: PatientsView),
@@ -267,6 +275,18 @@ class StackedRouter extends RouterBase {
     HomePageView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const HomePageView(),
+        settings: data,
+      );
+    },
+    MyDesktopBody: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const MyDesktopBody(),
+        settings: data,
+      );
+    },
+    MyMobileBody: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const MyMobileBody(),
         settings: data,
       );
     },

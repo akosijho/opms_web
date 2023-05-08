@@ -3,8 +3,6 @@ import 'package:opmswebstaff/ui/views/home/home_view_model.dart';
 import 'package:opmswebstaff/ui/views/home/responsive/desktop_view/desktop_body.dart';
 import 'package:opmswebstaff/ui/views/home/responsive/mobile_view/mobile_body.dart';
 import 'package:opmswebstaff/ui/views/home/responsive/responsive_layout.dart';
-import 'package:opmswebstaff/ui/views/patient_report/patient_report_view.dart';
-import 'package:opmswebstaff/ui/widgets/home_appointment/home_appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

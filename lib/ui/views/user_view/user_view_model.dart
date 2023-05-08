@@ -83,6 +83,14 @@ class UserViewModel extends BaseViewModel {
     status = currentUser!.active_status;
   }
 
+  Future<void> refresh() async {
+    setBusy(true);
+    await Future.delayed(Duration(seconds: 1));
+    setBusy(false);
+
+  }
+
+
   void listenToUserChange() {
     apiService.getUserAccountDetails().listen((event) {
       userSub?.cancel();

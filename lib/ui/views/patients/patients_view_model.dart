@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:opmswebstaff/app/app.locator.dart';
 import 'package:opmswebstaff/app/app.router.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
@@ -9,6 +10,8 @@ import 'package:opmswebstaff/core/service/url_launcher/url_launcher_service.dart
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
+import 'package:opmswebstaff/ui/views/add_patient/add_patient_view.dart';
+import 'package:opmswebstaff/ui/views/patient_info/patient_info_view.dart';
 import 'package:stacked/stacked.dart';
 
 class PatientsViewModel extends BaseViewModel {
@@ -57,10 +60,40 @@ class PatientsViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  void goToPatientInfoView(int index) {
-    navigationService.pushNamed(Routes.PatientInfoView,
-        arguments: PatientInfoViewArguments(patient: patientList[index]));
+  // void goToPatientInfoView(int index) {
+  //   navigationService.pushNamed(Routes.PatientInfoView,
+  //       arguments: PatientInfoViewArguments(patient: patientList[index]));
+  // }
+  void goToPatientInfoView(BuildContext context, int index) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 800,
+            height: 800,
+            child: PatientInfoView(patient: patientList[index]),
+          ),
+        );
+      },
+    );
   }
+
+  void goToAddPatientView(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 800,
+            height: 800,
+            child: AddPatientView(),
+          ),
+        );
+      },
+    );
+  }
+
 
   int currentIndex = 0;
 

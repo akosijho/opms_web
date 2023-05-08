@@ -18,7 +18,7 @@ class PaymentSelectOpticalNoteView extends StatelessWidget {
       onModelReady: (model) => model.init(patientId),
       builder: (context, model, widget) => Scaffold(
         appBar: AppBar(
-          title: Text('Select Dental Note'),
+          title: Text('Select Optical Note'),
           centerTitle: true,
         ),
         persistentFooterButtons: [
@@ -27,7 +27,11 @@ class PaymentSelectOpticalNoteView extends StatelessWidget {
             // width: double.maxFinite,
             child: ElevatedButton(
                 onPressed: () => model.returnSelectedDentalNote(),
-                child: Text('Confirm')),
+                child: Text('Confirm',
+                style: TextStyle(
+                  fontSize: 16
+                ),
+                )),
           )
         ],
         body: Form(
@@ -41,7 +45,7 @@ class PaymentSelectOpticalNoteView extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Unpaid Dental Note List',
+                      'Unpaid Optical Note List',
                       style: TextStyles.tsHeading5(),
                     ),
                     SizedBox(width: 2),

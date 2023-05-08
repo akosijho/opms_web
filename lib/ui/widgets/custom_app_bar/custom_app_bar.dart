@@ -134,26 +134,32 @@ class CustomHomePageAppBar extends StatelessWidget with PreferredSizeWidget {
                     )
               ),
               SizedBox(width: 40),
-              IconButton(
-                onPressed: () => onNotificationTap!(),
-                padding: EdgeInsets.zero,
-                splashColor: Colors.transparent,
-                alignment: Alignment.centerRight,
-                icon: SvgPicture.asset(
-                  hasNotification
-                      ? 'assets/icons/Notification - Noti.svg'
-                      : 'assets/icons/Notification-clear.svg',
-                ),
-              ),
-              SizedBox(width: 20),
               // IconButton(
-              //   onPressed: () => onLogOutTap != null ? onLogOutTap!() : null,
+              //   onPressed: () => onNotificationTap!(),
               //   padding: EdgeInsets.zero,
+              //   splashColor: Colors.transparent,
+              //   alignment: Alignment.centerRight,
               //   icon: SvgPicture.asset(
-              //     'assets/icons/Logout.svg',
-              //     color: Colors.white,
+              //     hasNotification
+              //         ? 'assets/icons/Notification - Noti.svg'
+              //         : 'assets/icons/Notification-clear.svg',
               //   ),
               // ),
+              //   TextButton.icon(
+              //     onPressed: () => model.logout(),
+              //     icon: Icon(Icons.logout),
+              //     label: Text('Log Out'),
+              //     style: TextButton.styleFrom(primary: Colors.white),
+              //   ),
+              SizedBox(width: 20),
+              IconButton(
+                onPressed: () => onLogOutTap != null ? onLogOutTap!() : null,
+                padding: EdgeInsets.zero,
+                icon: SvgPicture.asset(
+                  'assets/icons/Logout.svg',
+                  color: Colors.white,
+                ),
+              ),
               // SizedBox(width: 10),
             ],
           ),

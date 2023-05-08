@@ -40,6 +40,8 @@ import 'package:opmswebstaff/ui/views/appoitment_yearly_monthly/appointment_year
 import 'package:opmswebstaff/ui/views/create_appointment/create_appointment_view.dart';
 import 'package:opmswebstaff/ui/views/finance/reports_view.dart';
 import 'package:opmswebstaff/ui/views/home/home_view.dart';
+import 'package:opmswebstaff/ui/views/home/responsive/desktop_view/desktop_body.dart';
+import 'package:opmswebstaff/ui/views/home/responsive/mobile_view/mobile_body.dart';
 import 'package:opmswebstaff/ui/views/login/login_view.dart';
 import 'package:opmswebstaff/ui/views/main_body/main_body_view.dart';
 import 'package:opmswebstaff/ui/views/main_body/main_body_view_model.dart';
@@ -86,6 +88,8 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
     // MaterialRoute(page: SuccessView, name: 'Success'),
     MaterialRoute(page: MainBodyView, name: 'MainBodyView'),
     MaterialRoute(page: HomePageView, name: 'HomePageView'),
+    MaterialRoute(page: MyDesktopBody, name: 'DesktopView'),
+    MaterialRoute(page: MyMobileBody, name: 'MobileView'),
     MaterialRoute(page: AppointmentView, name: 'AppointmentView'),
     MaterialRoute(page: ProductView, name: 'ProductView'),
     MaterialRoute(page: PatientsView, name: 'PatientsView'),

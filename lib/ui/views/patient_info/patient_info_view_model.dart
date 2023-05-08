@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:age_calculator/age_calculator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:opmswebstaff/app/app.locator.dart';
 import 'package:opmswebstaff/app/app.router.dart';
@@ -10,6 +11,8 @@ import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/core/service/url_launcher/url_launcher_service.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
+import 'package:opmswebstaff/ui/views/edit_patient/edit_patient_view.dart';
+import 'package:opmswebstaff/ui/views/patient_optical_chart/patient_optical_chart_view.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../core/service/api/api_service.dart';
@@ -82,10 +85,27 @@ class PatientInfoViewModel extends BaseViewModel {
         arguments: MedicalHistoryViewArguments(patientId: patientId));
   }
 
-  void goToMedicalChart({required Patient? patient}) {
-    if (patient != null)
-      navigationService.pushNamed(Routes.PatientOpticalChartView,
-          arguments: PatientOpticalChartViewArguments(patient: patient));
+  // void goToMedicalChart({required Patient? patient}) {
+  //   if (patient != null)
+  //     navigationService.pushNamed(Routes.PatientOpticalChartView,
+  //         arguments: PatientOpticalChartViewArguments(patient: patient));
+  // }
+  void goToMedicalChart({required Patient? patient, required BuildContext context}) {
+    if (patient != null) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.all(16),
+            content: Container(
+              height: 700,
+              width: 700,
+              child: PatientOpticalChartView(patient: patient),
+            ),
+          );
+        },
+      );
+    }
   }
 
   void goToViewPatientAppointmentView({required Patient? patient}) {
@@ -111,16 +131,32 @@ class PatientInfoViewModel extends BaseViewModel {
           arguments: PrescriptionViewArguments(patient: patient));
   }
 
-  void goToDentalCertificateView({required Patient? patient}) {
+  void goToOpticalCertificateView({required Patient? patient}) {
     if (patient != null)
       navigationService.pushNamed(Routes.OpticalCertificationView,
           arguments: OpticalCertificationViewArguments(patient: patient));
   }
 
-  void goToUpdatePatient({required Patient? patient}) {
-    if (patient != null)
-      navigationService.pushNamed(Routes.EditPatientView,
-          arguments: EditPatientViewArguments(patient: patient));
+  // void goToUpdatePatient({required Patient? patient}) {
+  //   if (patient != null)
+  //     navigationService.pushNamed(Routes.EditPatientView,
+  //         arguments: EditPatientViewArguments(patient: patient));
+  // }
+
+  void goToUpdatePatient({required Patient? patient, required BuildContext context}) {
+    if (patient != null) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+              height: 800,
+              width: 800,
+              child: EditPatientView(patient: patient),
+
+          );
+        },
+      );
+    }
   }
 
   Future<void> updatePatientImage() async {

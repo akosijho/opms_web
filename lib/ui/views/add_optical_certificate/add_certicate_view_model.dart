@@ -77,7 +77,7 @@ class AddCertificateViewModel extends BaseViewModel {
         );
 
         final pdf = await pdfService.printOpticalCertificate(
-          dentalCertificate: cert,
+          opticalCertificate: cert,
           patient: patient,
         );
 

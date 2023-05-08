@@ -18,7 +18,7 @@ import '../../../models/patient_model/patient_model.dart';
 class PdfServiceImp extends PdfService {
   @override
   Future<Uint8List> printOpticalCertificate(
-      {required OpticalCertificate dentalCertificate,
+      {required OpticalCertificate opticalCertificate,
       required Patient patient}) {
     final pdf = pw.Document();
     pdf.addPage(
@@ -100,7 +100,7 @@ class PdfServiceImp extends PdfService {
                             style: pw.TextStyle(
                               fontSize: 12,
                             )),
-                        pw.Text('${dentalCertificate.service.toUpperCase()} ',
+                        pw.Text('${opticalCertificate.service.toUpperCase()} ',
                             style: pw.TextStyle(
                               fontSize: 12,
                               fontWeight: pw.FontWeight.bold,
@@ -110,7 +110,7 @@ class PdfServiceImp extends PdfService {
                               fontSize: 12,
                             )),
                         pw.Text(
-                            '${DateFormat.yMMMd().format(dentalCertificate.date.toDateTime()!).toUpperCase()}. ',
+                            '${DateFormat.yMMMd().format(opticalCertificate.date.toDateTime()!).toUpperCase()}. ',
                             style: pw.TextStyle(
                               fontSize: 12,
                               fontWeight: pw.FontWeight.bold,

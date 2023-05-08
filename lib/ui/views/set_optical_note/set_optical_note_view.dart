@@ -37,7 +37,7 @@ class SetOpticalNoteView extends StatelessWidget {
                 label: Text('Save'),
                 onPressed: () {
                   if (model.setDentalNoteFormKey.currentState!.validate()) {
-                    model.addDentalNote(
+                    model.addOpticalNote(
                       patientId: patientId, );
                   }
                 },
@@ -709,7 +709,7 @@ class SetOpticalNoteView extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => model.selectDate(),
+                onTap: () => model.selectDate(context),
                 child: TextFormField(
                   controller: model.dateTextController,
                   enabled: false,
@@ -735,7 +735,7 @@ class SetOpticalNoteView extends StatelessWidget {
               ),
               SizedBox(height: 9),
               GestureDetector(
-                onTap: () => model.goToSelectProcedure(),
+                onTap: () => model.goToSelectService(context),
                 child: TextFormField(
                   controller: model.procedureTxtController,
                   validator: (value) =>

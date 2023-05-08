@@ -20,12 +20,12 @@ class ServiceViewModel extends BaseViewModel {
   }
 
   Future<void> getServices() async {
-    final procedures = await apiService.getService();
-    if (procedures != null) {
+    final service = await apiService.getService();
+    if (service != null) {
       serviceList.clear();
-      serviceList.addAll(procedures);
+      serviceList.addAll(service);
       tempService.clear();
-      tempService.addAll(procedures);
+      tempService.addAll(service);
 
       notifyListeners();
     }
@@ -37,15 +37,15 @@ class ServiceViewModel extends BaseViewModel {
     await getServices();
     await Future.delayed(Duration(seconds: 1));
     setBusy(false);
-    getProcedureList();
+    getServiceList();
   }
 
   Future<void> searchService(String query) async {
     if (query.trimLeft().trimRight() != "") {
-      final procedure = await apiService.searchService(query);
-      if (procedure != null) {
+      final service = await apiService.searchService(query);
+      if (service != null) {
         serviceList.clear();
-        serviceList.addAll(procedure);
+        serviceList.addAll(service);
         notifyListeners();
       }
     } else {
@@ -55,7 +55,7 @@ class ServiceViewModel extends BaseViewModel {
     }
   }
 
-  void getProcedureList() {
+  void getServiceList() {
     apiService.getServiceList().listen((event) {
       serviceStreamSub?.cancel();
       serviceStreamSub = apiService.getServiceList().listen((procedures) {

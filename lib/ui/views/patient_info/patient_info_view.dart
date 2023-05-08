@@ -136,9 +136,9 @@ class PatientInfoView extends StatelessWidget {
                               ),
                               SizedBox(
                                 width: 60,
-                                child: ElevatedButton(
-                                  onPressed: () =>
-                                      model.goToUpdatePatient(patient: patient),
+                                child: InkWell(
+                                  onTap: () =>
+                                      model.goToUpdatePatient(patient: patient, context: context),
                                   child: Icon(Icons.edit,
                                       color: Colors.grey.shade900),
                                   // style: ElevatedButton.styleFrom(
@@ -384,7 +384,7 @@ class PatientInfoView extends StatelessWidget {
                             shadowColor: Colors.grey.shade500,
                             child: ListTile(
                               onTap: () =>
-                                  model.goToMedicalChart(patient: patient),
+                                  model.goToMedicalChart(patient: patient, context: context),
                               leading: SvgPicture.asset(
                                 'assets/icons/Filter.svg',
                                 color: Colors.black,
@@ -471,7 +471,7 @@ class PatientInfoView extends StatelessWidget {
                           Card(
                             shadowColor: Colors.grey.shade500,
                             child: ListTile(
-                              onTap: () => model.goToDentalCertificateView(
+                              onTap: () => model.goToOpticalCertificateView(
                                   patient: patient),
                               leading: Icon(
                                 Icons.receipt,

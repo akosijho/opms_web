@@ -19,179 +19,183 @@ class CustomBottomNavigation extends StatelessWidget {
         viewModelBuilder: () => UserViewModel(),
         // onModelReady: (model) => model.init(widget.user),
         builder: (context, model, widget) => Drawer(
-          width: 200,
+              width: 200,
               child: Material(
                 color: Palettes.kcDarkerBlueMain1,
-                child: ListView(
-                  children: [
-                    ListTile(
-                        leading: SvgPicture.asset(
-                          'assets/icons/homee.svg',
-                          height: 23,
-                          color: selectedIndex == 0
-                              ? Palettes.kcNeutral5
-                              : Palettes.kcNeutral4,
-                        ),
-                        title: Text(
-                          'Home',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        // shape: Border(
-                        //   bottom: BorderSide(color: Colors.grey),
-                        //   top: BorderSide(color: Colors.grey),
-                        // ),
-                        onTap: () => setSelectedIndex(0),
-                        selected: selectedIndex == 0
-                        // onTap: () => model.goToHome()
+                child: RefreshIndicator(
+                  color: Palettes.kcBlueMain1,
+                  onRefresh: () async {
+                    model.refresh();
+                  },
+                  child: ListView(
+                    children: [
+                      ListTile(
+                          leading: SvgPicture.asset(
+                            'assets/icons/homee.svg',
+                            height: 23,
+                            color: selectedIndex == 0
+                                ? Palettes.kcNeutral5
+                                : Palettes.kcNeutral4,
+                          ),
+                          title: Text(
+                            'Home',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          // shape: Border(
+                          //   bottom: BorderSide(color: Colors.grey),
+                          //   top: BorderSide(color: Colors.grey),
+                          // ),
+                          onTap: () => setSelectedIndex(0),
+                          selected: selectedIndex == 0
+                          // onTap: () => model.goToHome()
 
-                        ),
-                    ListTile(
-                        leading: SvgPicture.asset(
-                          'assets/icons/appointment.svg',
-                          height: 23,
-                          color: selectedIndex == 1
-                              ? Palettes.kcNeutral5
-                              : Palettes.kcNeutral4,
-                        ),
-                        title: Text(
-                          'Appointment',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        // shape: Border(
-                        //   bottom: BorderSide(color: Colors.grey),
-                        //   // top: BorderSide(color: Colors.grey),
-                        // ),
-                        onTap: () => setSelectedIndex(1),
-                        selected: selectedIndex == 1),
+                          ),
+                      ListTile(
+                          leading: SvgPicture.asset(
+                            'assets/icons/appointment.svg',
+                            height: 23,
+                            color: selectedIndex == 1
+                                ? Palettes.kcNeutral5
+                                : Palettes.kcNeutral4,
+                          ),
+                          title: Text(
+                            'Appointment',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          // shape: Border(
+                          //   bottom: BorderSide(color: Colors.grey),
+                          //   // top: BorderSide(color: Colors.grey),
+                          // ),
+                          onTap: () => setSelectedIndex(1),
+                          selected: selectedIndex == 1),
 
-                    ListTile(
-                        leading: SvgPicture.asset(
-                          'assets/icons/patients.svg',
-                          height: 23,
-                          color: selectedIndex == 2
-                              ? Palettes.kcNeutral5
-                              : Palettes.kcNeutral4,
-                        ),
-                        title: Text(
-                          'Patients',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        // shape: Border(
-                        //   bottom: BorderSide(color: Colors.grey),
-                        //   // top: BorderSide(color: Colors.grey),
-                        // ),
-                        onTap: () => setSelectedIndex(2),
-                        selected: selectedIndex == 2),
-                    ListTile(
-                        leading: SvgPicture.asset(
-                          'assets/icons/Filter.svg',
-                          height: 23,
-                          color: selectedIndex == 3
-                              ? Palettes.kcNeutral5
-                              : Palettes.kcNeutral4,
-                        ),
-                        title: Text(
-                          'Services',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        // shape: Border(
-                        //   bottom: BorderSide(color: Colors.grey),
-                        //   // top: BorderSide(color: Colors.grey),
-                        // ),
-                        onTap: () => setSelectedIndex(3),
-                        selected: selectedIndex == 3),
-                    ListTile(
-                        leading: SvgPicture.asset(
-                          'assets/icons/Work.svg',
-                          height: 23,
-                          color: selectedIndex == 4
-                              ? Palettes.kcNeutral5
-                              : Palettes.kcNeutral4,
-                        ),
-                        title: Text(
-                          'Products',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        // shape: Border(
-                        //   bottom: BorderSide(color: Colors.grey),
-                        //   // top: BorderSide(color: Colors.grey),
-                        // ),
-                        onTap: () => setSelectedIndex(4),
-                        selected: selectedIndex == 4),
+                      ListTile(
+                          leading: SvgPicture.asset(
+                            'assets/icons/patients.svg',
+                            height: 23,
+                            color: selectedIndex == 2
+                                ? Palettes.kcNeutral5
+                                : Palettes.kcNeutral4,
+                          ),
+                          title: Text(
+                            'Patients',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          // shape: Border(
+                          //   bottom: BorderSide(color: Colors.grey),
+                          //   // top: BorderSide(color: Colors.grey),
+                          // ),
+                          onTap: () => setSelectedIndex(2),
+                          selected: selectedIndex == 2),
+                      ListTile(
+                          leading: SvgPicture.asset(
+                            'assets/icons/Filter.svg',
+                            height: 23,
+                            color: selectedIndex == 3
+                                ? Palettes.kcNeutral5
+                                : Palettes.kcNeutral4,
+                          ),
+                          title: Text(
+                            'Services',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          // shape: Border(
+                          //   bottom: BorderSide(color: Colors.grey),
+                          //   // top: BorderSide(color: Colors.grey),
+                          // ),
+                          onTap: () => setSelectedIndex(3),
+                          selected: selectedIndex == 3),
+                      ListTile(
+                          leading: SvgPicture.asset(
+                            'assets/icons/Work.svg',
+                            height: 23,
+                            color: selectedIndex == 4
+                                ? Palettes.kcNeutral5
+                                : Palettes.kcNeutral4,
+                          ),
+                          title: Text(
+                            'Products',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          // shape: Border(
+                          //   bottom: BorderSide(color: Colors.grey),
+                          //   // top: BorderSide(color: Colors.grey),
+                          // ),
+                          onTap: () => setSelectedIndex(4),
+                          selected: selectedIndex == 4),
 
-                    ListTile(
-                        leading: SvgPicture.asset(
-                          'assets/icons/Wallet.svg',
-                          height: 23,
-                          color: selectedIndex == 5
-                              ? Palettes.kcNeutral5
-                              : Palettes.kcNeutral4,
-                        ),
-                        title: Text(
-                          'Payments',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        // shape: Border(
-                        //   bottom: BorderSide(color: Colors.grey),
-                        //   // top: BorderSide(color: Colors.grey),
-                        // ),
-                        onTap: () => setSelectedIndex(5),
-                        selected: selectedIndex == 5),
+                      ListTile(
+                          leading: SvgPicture.asset(
+                            'assets/icons/Wallet.svg',
+                            height: 23,
+                            color: selectedIndex == 5
+                                ? Palettes.kcNeutral5
+                                : Palettes.kcNeutral4,
+                          ),
+                          title: Text(
+                            'Payments',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          // shape: Border(
+                          //   bottom: BorderSide(color: Colors.grey),
+                          //   // top: BorderSide(color: Colors.grey),
+                          // ),
+                          onTap: () => setSelectedIndex(5),
+                          selected: selectedIndex == 5),
 
-                    ListTile(
-                        leading: SvgPicture.asset(
-                          'assets/icons/Ticket.svg',
-                          height: 23,
-                          color: selectedIndex == 6
-                              ? Palettes.kcNeutral5
-                              : Palettes.kcNeutral4,
-                        ),
-                        title: Text(
-                          'Expenses',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        // shape: Border(
-                        //   bottom: BorderSide(color: Colors.grey),
-                        //   // top: BorderSide(color: Colors.grey),
-                        // ),
-                        onTap: () => setSelectedIndex(6),
-                        selected: selectedIndex == 6),
+                      ListTile(
+                          leading: SvgPicture.asset(
+                            'assets/icons/Ticket.svg',
+                            height: 23,
+                            color: selectedIndex == 6
+                                ? Palettes.kcNeutral5
+                                : Palettes.kcNeutral4,
+                          ),
+                          title: Text(
+                            'Expenses',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          // shape: Border(
+                          //   bottom: BorderSide(color: Colors.grey),
+                          //   // top: BorderSide(color: Colors.grey),
+                          // ),
+                          onTap: () => setSelectedIndex(6),
+                          selected: selectedIndex == 6),
 
-                    ListTile(
-                        leading: SvgPicture.asset(
-                          'assets/icons/Graph.svg',
-                          height: 23,
-                          color: selectedIndex == 7
-                              ? Palettes.kcNeutral5
-                              : Palettes.kcNeutral4,
-                        ),
-                        title: Text(
-                          'Report',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        // shape: Border(
-                        //   bottom: BorderSide(color: Colors.grey),
-                        //   // top: BorderSide(color: Colors.grey),
-                        // ),
-                        onTap: () => setSelectedIndex(7),
-                        selected: selectedIndex == 7),
-                    ListTile(
-                        leading: Icon(
-                          Icons.logout,
-                          color: Palettes.kcNeutral4,
-                        ),
-                        title: Text(
-                          'Log Out',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        // shape: Border(
-                        //   bottom: BorderSide(color: Colors.grey),
-                        //   // top: BorderSide(color: Colors.grey),
-                        // ),
-                        onTap: () => model.logout()),
-
-
-                  ],
+                      ListTile(
+                          leading: SvgPicture.asset(
+                            'assets/icons/Graph.svg',
+                            height: 23,
+                            color: selectedIndex == 7
+                                ? Palettes.kcNeutral5
+                                : Palettes.kcNeutral4,
+                          ),
+                          title: Text(
+                            'Report',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          // shape: Border(
+                          //   bottom: BorderSide(color: Colors.grey),
+                          //   // top: BorderSide(color: Colors.grey),
+                          // ),
+                          onTap: () => setSelectedIndex(7),
+                          selected: selectedIndex == 7),
+                      // ListTile(
+                      //     leading: Icon(
+                      //       Icons.logout,
+                      //       color: Palettes.kcNeutral4,
+                      //     ),
+                      //     title: Text(
+                      //       'Log Out',
+                      //       style: TextStyle(color: Colors.white),
+                      //     ),
+                      //     // shape: Border(
+                      //     //   bottom: BorderSide(color: Colors.grey),
+                      //     //   // top: BorderSide(color: Colors.grey),
+                      //     // ),
+                      //     onTap: () => model.logout()),
+                    ],
+                  ),
                 ),
               ),
             ));

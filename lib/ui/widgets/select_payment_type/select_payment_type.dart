@@ -90,7 +90,11 @@ class SelectPaymentType extends StatelessWidget {
                                   model.returnPaymentType(
                                       model.paymentTypes[model.val]);
                                 },
-                                child: Text('Confirm'),
+                                child: Text('Confirm',
+                                style: TextStyle(
+                                  fontSize: 16
+                                ),
+                                ),
                               )),
                         )
                       ],

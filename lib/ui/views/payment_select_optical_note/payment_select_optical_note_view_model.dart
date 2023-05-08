@@ -27,13 +27,13 @@ class PaymentSelectOpticalNoteViewModel extends BaseViewModel {
   }
 
   void returnSelectedDentalNote() {
-    if (dentalFormKey.currentState!.validate()) {
+    // if (dentalFormKey.currentState!.validate()) {
       navigationService.pop(returnValue: selectedDentalNote);
-    } else {
-      snackBarService.showSnackBar(
-          message: 'Make sure service amounts are valid',
-          title: 'Invalid Amount');
-    }
+    // } else {
+    //   snackBarService.showSnackBar(
+    //       message: 'Make sure service amounts are valid',
+    //       title: 'Invalid Amount');
+    // }
   }
 
   bool dentalNoteExistInSelectedNotes(String dentalNoteId) {

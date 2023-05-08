@@ -81,14 +81,32 @@ class NotificationViewModel extends BaseViewModel {
     }
   }
 
+  // Future<void> openNotification(NotificationModel notification) async {
+  //   if (notification.notification_type == 'appointment') {
+  //     final appointmentId = notification.id.toString().split(' ').first;
+  //     final appointment = await apiService.getAppointmentById(appointmentId);
+  //     navigationService.pushNamed(Routes.AppointmentView,
+  //         arguments: AppointmentViewArguments(appointment: appointment));
+  //   } else if (notification.notification_type == 'payment') {
+  //     //
+  //   }
+  // }
   Future<void> openNotification(NotificationModel notification) async {
-    if (notification.notification_type == 'appointment') {
-      final appointmentId = notification.id.toString().split(' ').first;
-      final appointment = await apiService.getAppointmentById(appointmentId);
-      navigationService.pushNamed(Routes.AppointmentView,
-          arguments: AppointmentViewArguments(appointment: appointment));
-    } else if (notification.notification_type == 'payment') {
-      //
+    try {
+      if (notification.notification_type == 'appointment') {
+        final appointmentId = notification.id.toString().split(' ').first;
+        final appointment = await apiService.getAppointmentById(appointmentId);
+        navigationService.pushNamed(Routes.AppointmentView,
+            arguments: AppointmentViewArguments(appointment: appointment));
+      } else if (notification.notification_type == 'payment') {
+        //
+      }
+    } catch (e) {
+      // Handle the error here
+      print('Error opening notification: $e');
+      // Show a snackbar or a dialog with the error message
+      // snackbarService.showSnackbar(message: 'Error opening notification: $e');
     }
   }
+
 }

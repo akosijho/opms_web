@@ -33,7 +33,7 @@ class _EditPatientViewModelState extends State<EditPatientView> {
         ),
         persistentFooterButtons: [
           SizedBox(
-            width: MediaQuery.of(context).size.width,
+            // width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
               onPressed: () => model.performUpdate(widget.patient),
               child: Text('Update', style: TextStyle(fontSize: 16)),
@@ -86,7 +86,7 @@ class _EditPatientViewModelState extends State<EditPatientView> {
                       ),
                       GestureDetector(
                         onTap: () =>
-                            model.setGenderValue(model.genderTxtController),
+                            model.setGenderValue(model.genderTxtController, context),
                         child: TextFormField(
                           controller: model.genderTxtController,
                           autovalidateMode: AutovalidateMode.always,
@@ -116,7 +116,7 @@ class _EditPatientViewModelState extends State<EditPatientView> {
                       ),
                       GestureDetector(
                         onTap: () => model
-                            .setBirthDateValue(model.birthDateTxtController),
+                            .setBirthDateValue(model.birthDateTxtController, context),
                         child: TextFormField(
                           controller: model.birthDateTxtController,
                           autovalidateMode: AutovalidateMode.always,

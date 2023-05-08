@@ -21,7 +21,7 @@ class OpticalCertification extends BaseViewModel {
   final pdfService = locator<PdfService>();
   StreamSubscription? certSub;
 
-  List<OpticalCertificate> dentalCertificates = [];
+  List<OpticalCertificate> opticalCertificates = [];
 
   void goToAddCertificate(Patient patient) async {
     navigationService.pushNamed(Routes.AddCertificateView,
@@ -38,8 +38,8 @@ class OpticalCertification extends BaseViewModel {
     final cert = await apiService.getOpticalCert(patient: patient);
     dialogService.showDefaultLoadingDialog();
     await Future.delayed(Duration(milliseconds: 300));
-    dentalCertificates.clear();
-    dentalCertificates.addAll(cert);
+    opticalCertificates.clear();
+    opticalCertificates.addAll(cert);
     navigationService.pop();
     notifyListeners();
   }
@@ -59,7 +59,7 @@ class OpticalCertification extends BaseViewModel {
       {required OpticalCertificate certificate,
       required Patient patient}) async {
     final pdf = await pdfService.printOpticalCertificate(
-        dentalCertificate: certificate, patient: patient);
+        opticalCertificate: certificate, patient: patient);
 
     pdfService.savePdfFile(
         // fileName: patient.fullName + '-Certificate-' + certificate.date,

@@ -19,15 +19,19 @@ class SelectProductView extends StatelessWidget {
         },
         builder: (context, model, widget) => Scaffold(
               appBar: AppBar(
-                title: Text('Select Dental Note'),
+                title: Text('Select Optical Note'),
               ),
               persistentFooterButtons: [
                 Container(
                   color: Colors.white,
-                  width: double.maxFinite,
+                  // width: double.maxFinite,
                   child: ElevatedButton(
                       onPressed: () => model.returnSelectedProduct(),
-                      child: Text('Confirm')),
+                      child: Text('Confirm',
+                      style: TextStyle(
+                        fontSize: 16
+                      ),
+                      )),
                 )
               ],
               body: Form(

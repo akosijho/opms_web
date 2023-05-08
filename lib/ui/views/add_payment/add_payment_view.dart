@@ -150,7 +150,7 @@ class AddPaymentView extends StatelessWidget {
                           ],
                         ),
                         GestureDetector(
-                          onTap: () => model.showSelectOptometrist(),
+                          onTap: () => model.showSelectOptometrist(context),
                           child: TextFormField(
                             controller: model.optometristTxtController,
                             textInputAction: TextInputAction.next,
@@ -177,7 +177,7 @@ class AddPaymentView extends StatelessWidget {
                         ),
                         SizedBox(height: 5),
                         GestureDetector(
-                          onTap: () => model.showSelectPaymentType(),
+                          onTap: () => model.showSelectPaymentType(context),
                           child: TextFormField(
                             controller: model.paymentTypeTxtController,
                             textInputAction: TextInputAction.next,
@@ -204,7 +204,7 @@ class AddPaymentView extends StatelessWidget {
                         ),
                         SizedBox(height: 5),
                         GestureDetector(
-                          onTap: () => model.selectDate(),
+                          onTap: () => model.selectDate(context),
                           child: TextFormField(
                             controller: model.dateTxtController,
                             textInputAction: TextInputAction.next,

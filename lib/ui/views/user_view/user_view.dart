@@ -28,14 +28,14 @@ class _UserViewState extends State<UserView> {
       builder: (context, model, widget) => Scaffold(
         appBar: AppBar(
           title: Text('User Info'),
-          actions: [
-            TextButton.icon(
-              onPressed: () => model.logout(),
-              icon: Icon(Icons.logout),
-              label: Text('Log Out'),
-              style: TextButton.styleFrom(primary: Colors.white),
-            )
-          ],
+          // actions: [
+          //   TextButton.icon(
+          //     onPressed: () => model.logout(),
+          //     icon: Icon(Icons.logout),
+          //     label: Text('Log Out'),
+          //     style: TextButton.styleFrom(primary: Colors.white),
+          //   )
+          // ],
         ),
         body: Form(
           key: model.updateUserFormKey,

@@ -14,6 +14,7 @@ import 'package:opmswebstaff/ui/widgets/select_payment_type/select_payment_type.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:opmswebstaff/ui/widgets/selection_optometrist/selection_optometrist.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/app.router.dart';
@@ -66,32 +67,138 @@ class AddPaymentViewModel extends BaseViewModel {
 
   Future<void> getAllPatientOpticalNotes() async {}
 
-  void showSelectOptometrist() async {
-    UserModel? selectedOptometrist =
-        await navigationService.pushNamed(Routes.SelectionOptometrist);
+  // void showSelectOptometrist() async {
+  //   UserModel? selectedOptometrist =
+  //       await navigationService.pushNamed(Routes.SelectionOptometrist);
+  //   if (selectedOptometrist != null) {
+  //     optometristTxtController.text = selectedOptometrist.fullName;
+  //   }
+  // }
+  void showSelectOptometrist(BuildContext context) async {
+    UserModel? selectedOptometrist = await showDialog<UserModel>(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            width: 500,
+            height: 500,
+            child: SelectionOptometrist(),
+          ),
+        );
+      },
+    );
+
     if (selectedOptometrist != null) {
       optometristTxtController.text = selectedOptometrist.fullName;
     }
   }
 
-  void showSelectPaymentType() async {
-    selectedPaymentType = await Get.dialog(SelectPaymentType());
-    paymentTypeTxtController.text = selectedPaymentType;
+
+  // void showSelectPaymentType() async {
+  //   selectedPaymentType = await Get.dialog(SelectPaymentType());
+  //   paymentTypeTxtController.text = selectedPaymentType;
+  // }
+  void showSelectPaymentType(BuildContext context) async {
+    String? selectedPaymentType = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            width: 500,
+            height: 250,
+            child: SelectPaymentType(),
+          ),
+        );
+      },
+    );
+
+    if (selectedPaymentType != null) {
+      paymentTypeTxtController.text = selectedPaymentType;
+    }
   }
 
-  void selectDate() async {
-    final DateTime? date =
-        await bottomSheetService.openBottomSheet(SelectionDate(
-      title: 'Set Payment Date',
+  // void selectDate() async {
+  //   final DateTime? date =
+  //       await bottomSheetService.openBottomSheet(SelectionDate(
+  //     title: 'Set Payment Date',
+  //     initialDate: DateTime.now(),
+  //     maxDate: DateTime.now(),
+  //   ));
+  //   if (date != null) {
+  //     selectedPaymentDate = date;
+  //     notifyListeners();
+  //     dateTxtController.text = DateFormat.yMMMd().format(selectedPaymentDate!);
+  //   }
+  // }
+
+  // void selectDate(BuildContext context) async {
+  //   final DateTime? date = await showDialog<DateTime>(
+  //     context: context,
+  //     builder: (context) {
+  //       return Center(
+  //         child: Container(
+  //           width: 450,
+  //           height: 450,
+  //           decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             borderRadius: BorderRadius.circular(10),
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: Colors.black.withOpacity(0.2),
+  //                 blurRadius: 5,
+  //                 offset: Offset(0, 3),
+  //               ),
+  //             ],
+  //           ),
+  //           child: SelectionDate(
+  //             title: 'Set Payment Date',
+  //             initialDate: DateTime.now(),
+  //             maxDate: DateTime.now(),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  //
+  //   if (date != null) {
+  //     selectedPaymentDate = date;
+  //     notifyListeners();
+  //     dateTxtController.text = DateFormat.yMMMd().format(selectedPaymentDate!);
+  //   }
+  // }
+
+  Future<void> selectDate(BuildContext context) async {
+    DateTime? date = await showDatePicker(
+      context: context,
       initialDate: DateTime.now(),
-      maxDate: DateTime.now(),
-    ));
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+      helpText: 'Set Payment Date',
+      cancelText: 'CANCEL',
+      confirmText: 'SELECT',
+      errorFormatText: 'Invalid date format',
+      errorInvalidText: 'Invalid date',
+      fieldLabelText: 'Birth date',
+      fieldHintText: 'Month/Date/Year',
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.blue,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
     if (date != null) {
       selectedPaymentDate = date;
       notifyListeners();
       dateTxtController.text = DateFormat.yMMMd().format(selectedPaymentDate!);
     }
   }
+
 
   void selectOpticalNote(String patientId) async {
     selectedOpticalNotes = await navigationService.pushNamed(

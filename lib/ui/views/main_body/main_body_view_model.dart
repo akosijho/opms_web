@@ -20,6 +20,9 @@ import 'package:opmswebstaff/ui/views/add_expenses/add_expenses_view.dart';
 import 'package:opmswebstaff/ui/views/appointment/appointment_view.dart';
 import 'package:opmswebstaff/ui/views/finance/reports_view.dart';
 import 'package:opmswebstaff/ui/views/home/home_view.dart';
+import 'package:opmswebstaff/ui/views/home/responsive/desktop_view/desktop_body.dart';
+import 'package:opmswebstaff/ui/views/home/responsive/mobile_view/mobile_body.dart';
+import 'package:opmswebstaff/ui/views/home/responsive/responsive_layout.dart';
 import 'package:opmswebstaff/ui/views/patients/patients_view.dart';
 import 'package:opmswebstaff/ui/views/payment_select_patient/payment_select_patient_view.dart';
 import 'package:opmswebstaff/ui/views/product/product_view.dart';
@@ -34,7 +37,10 @@ class MainBodyViewModel extends BaseViewModel {
   final snackBarService = locator<SnackBarService>();
 
   final List<Widget> widget = [
-    HomePageView(),
+    // HomePageView(),
+    ResponsiveLayout(
+        desktopBody: MyDesktopBody(),
+        mobileBody: MyMobileBody()),
     AppointmentView(),
     PatientsView(),
     ServicesView(),

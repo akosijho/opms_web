@@ -42,7 +42,8 @@ class PatientsView extends StatelessWidget {
             heroTag: null,
             isExtended: model.isScrolledUp,
             onPressed: () {
-              model.navigationService.pushNamed(Routes.AddPatientView);
+              model.goToAddPatientView(context);
+              // model.navigationService.pushNamed(Routes.AddPatientView);
               // mainBody.widget.add(AddPatientView());
               // // print(widget);
               // mainBody.setSelectedIndex(mainBody.widget.length-1);
@@ -155,7 +156,7 @@ class PatientsView extends StatelessWidget {
                                   child: InkWell(
                                     onTap: () =>
                                     // model.currentIndex = model.currentIndex ==  0 ? 1 : 0,
-                                        model.goToPatientInfoView(index),
+                                        model.goToPatientInfoView(context, index),
                                     child: PatientCard(
                                       key: ObjectKey(
                                           model.patientList[index].id),

@@ -13,7 +13,7 @@ import '../../../models/patient_model/patient_model.dart';
 final GlobalKey<RefreshIndicatorState> refreshKey =
     new GlobalKey<RefreshIndicatorState>();
 
-class PatientDentalChartViewModel extends BaseViewModel {
+class PatientOpticalChartViewModel extends BaseViewModel {
   // Patient? patientList;
 
   TextEditingController frameBrand = TextEditingController(),

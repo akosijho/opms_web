@@ -11,9 +11,7 @@ import 'package:opmswebstaff/models/patient_model/patient_model.dart';
 import 'package:opmswebstaff/ui/views/set_optical_note/set_optical_note_view_model.dart';
 import 'package:stacked/stacked.dart';
 
-
 class PatientOpticalChartView extends StatelessWidget {
-
   final Patient patient;
 
   const PatientOpticalChartView({Key? key, required this.patient})
@@ -45,17 +43,14 @@ class PatientOpticalChartView extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   // width: double.maxFinite,
                   child: ElevatedButton.icon(
-                    label: Text('Save',
-                    style: TextStyle(
-                      fontSize: 14
-                    )
-                    ),
+                    label: Text('Save', style: TextStyle(fontSize: 14)),
                     onPressed: () {
                       if (model.setDentalNoteFormKey.currentState!.validate()) {
-                        List<String> eye =[];
+                        List<String> eye = [];
 
-                        model.addDentalNote(
-                          patientId: patient.id, );
+                        model.addOpticalNote(
+                          patientId: patient.id,
+                        );
                       }
                     },
                     // onPressed: () {
@@ -68,41 +63,39 @@ class PatientOpticalChartView extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children:[
-                  ElevatedButton.icon(
-                    icon: Icon(
-                      Icons.history,
-                      color: Colors.white,
-                    ),
-                    onPressed: () => model.navigationService.pushNamed(
-                        Routes.ViewOpticalNote,
-                        arguments: ViewOpticalNoteArguments(patient: patient)),
-                    label: Text('View Optical Notes'),
-                    style: ElevatedButton.styleFrom(
-                      textStyle: TextStyles.tsBody2(),
-                      primary: Palettes.kcBlueMain1,
-                    ),
+              Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                ElevatedButton.icon(
+                  icon: Icon(
+                    Icons.history,
+                    color: Colors.white,
                   ),
-                  SizedBox(width: 4),
-                  ElevatedButton.icon(
-                    icon: Icon(
-                      Icons.money,
-                      color: Colors.white,
-                    ),
-                    onPressed: () => model.navigationService.pushNamed(
-                        Routes.AddPaymentView,
-                        arguments: AddPaymentViewArguments(patient: patient)),
-                    label: Text('Add Payment'),
-                    style: ElevatedButton.styleFrom(
-                      textStyle: TextStyles.tsBody2(),
-                      primary: Palettes.kcNeutral1,
-                    ),
+                  // onPressed: () => model.navigationService.pushNamed(
+                  //     Routes.ViewOpticalNote,
+                  //     arguments: ViewOpticalNoteArguments(patient: patient)),
+                  onPressed: () => model.goToOpticalNote(context, patient),
+                  label: Text('View Optical Notes'),
+                  style: ElevatedButton.styleFrom(
+                    textStyle: TextStyles.tsBody2(),
+                    primary: Palettes.kcBlueMain1,
                   ),
-                ]
-              ),
-
+                ),
+                SizedBox(width: 4),
+                ElevatedButton.icon(
+                  icon: Icon(
+                    Icons.money,
+                    color: Colors.white,
+                  ),
+                  // onPressed: () => model.navigationService.pushNamed(
+                  //     Routes.AddPaymentView,
+                  //     arguments: AddPaymentViewArguments(patient: patient)),
+                  onPressed: () => model.goToAddPayment(context, patient),
+                  label: Text('Add Payment'),
+                  style: ElevatedButton.styleFrom(
+                    textStyle: TextStyles.tsBody2(),
+                    primary: Palettes.kcNeutral1,
+                  ),
+                ),
+              ]),
             ],
           ),
         ],
@@ -155,24 +148,28 @@ class PatientOpticalChartView extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         height: 49,
                         decoration:
-                        const BoxDecoration(color: Color(0xff68D2F4)),
+                            const BoxDecoration(color: Color(0xff68D2F4)),
                         child: const Center(
                             child: Text(
-                              "RX SPECTACLE",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w500),
-                            ))),
+                          "RX SPECTACLE",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w500),
+                        ))),
                     Container(
                       padding: EdgeInsets.all(8),
                       child: Table(
                         //defaultColumnWidth: FixedColumnWidth(120.0),
                         border: TableBorder.all(
                             color: Colors.black,
-                            //style: BorderStyle.solid,
+                            //stylFe: BorderStyle.solid,
                             width: 1),
                         children: [
                           TableRow(children: [
-                            Column(children: [Text('OD\n/\nOS', textAlign: TextAlign.center,)]),
+                            Column(children: [
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Text('OD/OS'))
+                            ]),
                             Column(children: [
                               TextFormField(
                                 // textAlign: TextAlign.start,
@@ -184,7 +181,7 @@ class PatientOpticalChartView extends StatelessWidget {
                                 decoration: const InputDecoration(
                                   //prefixIcon: Icon(Icons.mail),
                                   contentPadding:
-                                  EdgeInsets.only(top: 10, left: 4),
+                                      EdgeInsets.only(top: 10, left: 4),
                                   labelText: 'Sphere',
                                   // enabledBorder: UnderlineInputBorder(
                                   //     borderSide: BorderSide(
@@ -207,7 +204,7 @@ class PatientOpticalChartView extends StatelessWidget {
                                 controller: model.cylinder,
                                 decoration: const InputDecoration(
                                   contentPadding:
-                                  EdgeInsets.only(top: 10, left: 4),
+                                      EdgeInsets.only(top: 10, left: 4),
                                   labelText: 'Cylinder',
                                   // enabledBorder: UnderlineInputBorder(
                                   //     borderSide: BorderSide(
@@ -229,7 +226,7 @@ class PatientOpticalChartView extends StatelessWidget {
                                 controller: model.axis,
                                 decoration: const InputDecoration(
                                   contentPadding:
-                                  EdgeInsets.only(top: 10, left: 4),
+                                      EdgeInsets.only(top: 10, left: 4),
                                   labelText: 'Axis',
                                   // enabledBorder: UnderlineInputBorder(
                                   //     borderSide: BorderSide(
@@ -250,7 +247,7 @@ class PatientOpticalChartView extends StatelessWidget {
                                 controller: model.pd,
                                 decoration: const InputDecoration(
                                   contentPadding:
-                                  EdgeInsets.only(top: 10, left: 4),
+                                      EdgeInsets.only(top: 10, left: 4),
                                   labelText: 'PD',
                                   // enabledBorder: UnderlineInputBorder(
                                   //     borderSide: BorderSide(
@@ -271,7 +268,7 @@ class PatientOpticalChartView extends StatelessWidget {
                                 controller: model.add,
                                 decoration: const InputDecoration(
                                   contentPadding:
-                                  EdgeInsets.only(top: 10, left: 4),
+                                      EdgeInsets.only(top: 10, left: 4),
                                   labelText: 'ADD',
                                   // enabledBorder: UnderlineInputBorder(
                                   //     borderSide: BorderSide(
@@ -293,163 +290,13 @@ class PatientOpticalChartView extends StatelessWidget {
                                 controller: model.va,
                                 decoration: const InputDecoration(
                                   contentPadding:
-                                  EdgeInsets.only(top: 10, left: 4),
+                                      EdgeInsets.only(top: 10, left: 4),
                                   labelText: 'V.A',
-                                  // enabledBorder: UnderlineInputBorder(
-                                  //     borderSide: BorderSide(
-                                  //         color: Color(0xffADADAD))),
-                                  // focusedBorder: UnderlineInputBorder(
-                                  //     borderSide:
-                                  //     BorderSide(color: Colors.blue)),
                                   border: InputBorder.none,
                                 ),
                               ),
                             ]),
                           ]),
-                          // TableRow(children: [
-                          //   Column(children: [Text('LEFT\n(OS)')]),
-                          //   Column(children: [
-                          //     TextFormField(
-                          //       textAlign: TextAlign.start,
-                          //       minLines: 1,
-                          //       maxLines: 2,
-                          //       keyboardType: TextInputType.multiline,
-                          //       // controller: model.specl1,
-                          //       decoration: const InputDecoration(
-                          //         contentPadding:
-                          //         EdgeInsets.only(top: 10, left: 4),
-                          //         //labelText: 'Lens Tint',
-                          //         //hintText: 'Enter Email',
-                          //         enabledBorder: UnderlineInputBorder(
-                          //             borderSide: BorderSide(
-                          //                 color: Color(0xffADADAD))),
-                          //         focusedBorder: UnderlineInputBorder(
-                          //             borderSide:
-                          //             BorderSide(color: Colors.blue)),
-                          //
-                          //         border: InputBorder.none,
-                          //       ),
-                          //     ),
-                          //   ]),
-                          //   Column(children: [
-                          //     TextFormField(
-                          //       textAlign: TextAlign.start,
-                          //       minLines: 1,
-                          //       maxLines: 2,
-                          //       keyboardType: TextInputType.multiline,
-                          //       // controller: model.specl2,
-                          //       decoration: const InputDecoration(
-                          //         contentPadding:
-                          //         EdgeInsets.only(top: 10, left: 4),
-                          //         //labelText: 'Lens Tint',
-                          //         //hintText: 'Enter Email',
-                          //         enabledBorder: UnderlineInputBorder(
-                          //             borderSide: BorderSide(
-                          //                 color: Color(0xffADADAD))),
-                          //         focusedBorder: UnderlineInputBorder(
-                          //             borderSide:
-                          //             BorderSide(color: Colors.blue)),
-                          //
-                          //         border: InputBorder.none,
-                          //       ),
-                          //     ),
-                          //   ]),
-                          //   Column(children: [
-                          //     TextFormField(
-                          //       textAlign: TextAlign.start,
-                          //       minLines: 1,
-                          //       maxLines: 2,
-                          //       keyboardType: TextInputType.multiline,
-                          //       // controller: model.specl3,
-                          //       decoration: const InputDecoration(
-                          //         contentPadding:
-                          //         EdgeInsets.only(top: 10, left: 4),
-                          //         //labelText: 'Lens Tint',
-                          //         //hintText: 'Enter Email',
-                          //         enabledBorder: UnderlineInputBorder(
-                          //             borderSide: BorderSide(
-                          //                 color: Color(0xffADADAD))),
-                          //         focusedBorder: UnderlineInputBorder(
-                          //             borderSide:
-                          //             BorderSide(color: Colors.blue)),
-                          //
-                          //         border: InputBorder.none,
-                          //       ),
-                          //     ),
-                          //   ]),
-                          //   Column(children: [
-                          //     TextFormField(
-                          //       textAlign: TextAlign.start,
-                          //       minLines: 1,
-                          //       maxLines: 2,
-                          //       keyboardType: TextInputType.multiline,
-                          //       // controller: model.specl4,
-                          //       decoration: const InputDecoration(
-                          //         //prefixIcon: Icon(Icons.mail),
-                          //         contentPadding:
-                          //         EdgeInsets.only(top: 10, left: 4),
-                          //         //labelText: 'Lens Tint',
-                          //         //hintText: 'Enter Email',
-                          //         enabledBorder: UnderlineInputBorder(
-                          //             borderSide: BorderSide(
-                          //                 color: Color(0xffADADAD))),
-                          //         focusedBorder: UnderlineInputBorder(
-                          //             borderSide:
-                          //             BorderSide(color: Colors.blue)),
-                          //
-                          //         border: InputBorder.none,
-                          //       ),
-                          //     ),
-                          //   ]),
-                          //   Column(children: [
-                          //     TextFormField(
-                          //       textAlign: TextAlign.start,
-                          //       minLines: 1,
-                          //       maxLines: 2,
-                          //       keyboardType: TextInputType.multiline,
-                          //       // controller: model.specl5,
-                          //       decoration: const InputDecoration(
-                          //         //prefixIcon: Icon(Icons.mail),
-                          //         contentPadding:
-                          //         EdgeInsets.only(top: 10, left: 4),
-                          //         //labelText: 'Lens Tint',
-                          //         //hintText: 'Enter Email',
-                          //         enabledBorder: UnderlineInputBorder(
-                          //             borderSide: BorderSide(
-                          //                 color: Color(0xffADADAD))),
-                          //         focusedBorder: UnderlineInputBorder(
-                          //             borderSide:
-                          //             BorderSide(color: Colors.blue)),
-                          //
-                          //         border: InputBorder.none,
-                          //       ),
-                          //     ),
-                          //   ]),
-                          //   Column(children: [
-                          //     TextFormField(
-                          //       textAlign: TextAlign.start,
-                          //       minLines: 1,
-                          //       maxLines: 2,
-                          //       keyboardType: TextInputType.multiline,
-                          //       // controller: model.specl6,
-                          //       decoration: const InputDecoration(
-                          //         //prefixIcon: Icon(Icons.mail),
-                          //         contentPadding:
-                          //         EdgeInsets.only(top: 10, left: 4),
-                          //         //labelText: 'Lens Tint',
-                          //         //hintText: 'Enter Email',
-                          //         enabledBorder: UnderlineInputBorder(
-                          //             borderSide: BorderSide(
-                          //                 color: Color(0xffADADAD))),
-                          //         focusedBorder: UnderlineInputBorder(
-                          //             borderSide:
-                          //             BorderSide(color: Colors.blue)),
-                          //
-                          //         border: InputBorder.none,
-                          //       ),
-                          //     ),
-                          //   ]),
-                          // ]),
                         ],
                       ),
                     ),
@@ -457,13 +304,13 @@ class PatientOpticalChartView extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         height: 49,
                         decoration:
-                        const BoxDecoration(color: Color(0xff68D2F4)),
+                            const BoxDecoration(color: Color(0xff68D2F4)),
                         child: const Center(
                             child: Text(
-                              "RX CONTACT LENS",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w500),
-                            ))),
+                          "RX CONTACT LENS",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w500),
+                        ))),
                     Container(
                       padding: EdgeInsets.all(8),
                       child: Table(
@@ -474,7 +321,14 @@ class PatientOpticalChartView extends StatelessWidget {
                             width: 1),
                         children: [
                           TableRow(children: [
-                            Column(children: [Text('OD\n/\nOS', textAlign: TextAlign.center,)]),
+                            Column(children: [
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'OD/OS',
+                                ),
+                              )
+                            ]),
                             Column(children: [
                               TextFormField(
                                 textAlign: TextAlign.start,
@@ -484,7 +338,7 @@ class PatientOpticalChartView extends StatelessWidget {
                                 controller: model.sphereCL,
                                 decoration: const InputDecoration(
                                   contentPadding:
-                                  EdgeInsets.only(top: 10, left: 4),
+                                      EdgeInsets.only(top: 10, left: 4),
                                   labelText: 'Sphere',
                                   // enabledBorder: UnderlineInputBorder(
                                   //     borderSide: BorderSide(
@@ -506,7 +360,7 @@ class PatientOpticalChartView extends StatelessWidget {
                                 controller: model.cylinderCL,
                                 decoration: const InputDecoration(
                                   contentPadding:
-                                  EdgeInsets.only(top: 10, left: 4),
+                                      EdgeInsets.only(top: 10, left: 4),
                                   labelText: 'Cylinder',
                                   // enabledBorder: UnderlineInputBorder(
                                   //     borderSide: BorderSide(
@@ -528,7 +382,7 @@ class PatientOpticalChartView extends StatelessWidget {
                                 controller: model.axisCL,
                                 decoration: const InputDecoration(
                                   contentPadding:
-                                  EdgeInsets.only(top: 10, left: 4),
+                                      EdgeInsets.only(top: 10, left: 4),
                                   labelText: 'Axis',
                                   // enabledBorder: UnderlineInputBorder(
                                   //     borderSide: BorderSide(
@@ -550,7 +404,7 @@ class PatientOpticalChartView extends StatelessWidget {
                                 controller: model.bcCL,
                                 decoration: const InputDecoration(
                                   contentPadding:
-                                  EdgeInsets.only(top: 10, left: 4),
+                                      EdgeInsets.only(top: 10, left: 4),
                                   labelText: 'B.C',
                                   // enabledBorder: UnderlineInputBorder(
                                   //     borderSide: BorderSide(
@@ -572,7 +426,7 @@ class PatientOpticalChartView extends StatelessWidget {
                                 controller: model.diaCL,
                                 decoration: const InputDecoration(
                                   contentPadding:
-                                  EdgeInsets.only(top: 10, left: 4),
+                                      EdgeInsets.only(top: 10, left: 4),
                                   labelText: 'DIA',
                                   // enabledBorder: UnderlineInputBorder(
                                   //     borderSide: BorderSide(
@@ -594,7 +448,7 @@ class PatientOpticalChartView extends StatelessWidget {
                                 controller: model.tintCL,
                                 decoration: const InputDecoration(
                                   contentPadding:
-                                  EdgeInsets.only(top: 10, left: 4),
+                                      EdgeInsets.only(top: 10, left: 4),
                                   labelText: 'Tint',
                                   //hintText: 'Enter Email',
                                   // enabledBorder: UnderlineInputBorder(
@@ -609,147 +463,7 @@ class PatientOpticalChartView extends StatelessWidget {
                               ),
                             ]),
                           ]),
-                          // TableRow(children: [
-                          //   Column(children: [Text('LEFT\n(OS)')]),
-                          //   Column(children: [
-                          //     TextFormField(
-                          //       textAlign: TextAlign.start,
-                          //       minLines: 1,
-                          //       maxLines: 2,
-                          //       keyboardType: TextInputType.multiline,
-                          //       // controller: model.lensl1,
-                          //       decoration: const InputDecoration(
-                          //         contentPadding:
-                          //         EdgeInsets.only(top: 10, left: 4),
-                          //         //labelText: 'Lens Tint',
-                          //         //hintText: 'Enter Email',
-                          //         enabledBorder: UnderlineInputBorder(
-                          //             borderSide: BorderSide(
-                          //                 color: Color(0xffADADAD))),
-                          //         focusedBorder: UnderlineInputBorder(
-                          //             borderSide:
-                          //             BorderSide(color: Colors.blue)),
-                          //
-                          //         border: InputBorder.none,
-                          //       ),
-                          //     ),
-                          //   ]),
-                          //   Column(children: [
-                          //     TextFormField(
-                          //       textAlign: TextAlign.start,
-                          //       minLines: 1,
-                          //       maxLines: 2,
-                          //       keyboardType: TextInputType.multiline,
-                          //       // controller: model.lensl2,
-                          //       decoration: const InputDecoration(
-                          //         contentPadding:
-                          //         EdgeInsets.only(top: 10, left: 4),
-                          //         //labelText: 'Lens Tint',
-                          //         //hintText: 'Enter Email',
-                          //         enabledBorder: UnderlineInputBorder(
-                          //             borderSide: BorderSide(
-                          //                 color: Color(0xffADADAD))),
-                          //         focusedBorder: UnderlineInputBorder(
-                          //             borderSide:
-                          //             BorderSide(color: Colors.blue)),
-                          //
-                          //         border: InputBorder.none,
-                          //       ),
-                          //     ),
-                          //   ]),
-                          //   Column(children: [
-                          //     TextFormField(
-                          //       textAlign: TextAlign.start,
-                          //       minLines: 1,
-                          //       maxLines: 2,
-                          //       keyboardType: TextInputType.multiline,
-                          //       // controller: model.lensl3,
-                          //       decoration: const InputDecoration(
-                          //         contentPadding:
-                          //         EdgeInsets.only(top: 10, left: 4),
-                          //         //labelText: 'Lens Tint',
-                          //         //hintText: 'Enter Email',
-                          //         enabledBorder: UnderlineInputBorder(
-                          //             borderSide: BorderSide(
-                          //                 color: Color(0xffADADAD))),
-                          //         focusedBorder: UnderlineInputBorder(
-                          //             borderSide:
-                          //             BorderSide(color: Colors.blue)),
-                          //
-                          //         border: InputBorder.none,
-                          //       ),
-                          //     ),
-                          //   ]),
-                          //   Column(children: [
-                          //     TextFormField(
-                          //       textAlign: TextAlign.start,
-                          //       minLines: 1,
-                          //       maxLines: 2,
-                          //       keyboardType: TextInputType.multiline,
-                          //       // controller: model.lensl4,
-                          //       decoration: const InputDecoration(
-                          //         contentPadding:
-                          //         EdgeInsets.only(top: 10, left: 4),
-                          //         //labelText: 'Lens Tint',
-                          //         //hintText: 'Enter Email',
-                          //         enabledBorder: UnderlineInputBorder(
-                          //             borderSide: BorderSide(
-                          //                 color: Color(0xffADADAD))),
-                          //         focusedBorder: UnderlineInputBorder(
-                          //             borderSide:
-                          //             BorderSide(color: Colors.blue)),
-                          //
-                          //         border: InputBorder.none,
-                          //       ),
-                          //     ),
-                          //   ]),
-                          //   Column(children: [
-                          //     TextFormField(
-                          //       textAlign: TextAlign.start,
-                          //       minLines: 1,
-                          //       maxLines: 2,
-                          //       keyboardType: TextInputType.multiline,
-                          //       // controller: model.lensl5,
-                          //       decoration: const InputDecoration(
-                          //         contentPadding:
-                          //         EdgeInsets.only(top: 10, left: 4),
-                          //         //labelText: 'Lens Tint',
-                          //         //hintText: 'Enter Email',
-                          //         enabledBorder: UnderlineInputBorder(
-                          //             borderSide: BorderSide(
-                          //                 color: Color(0xffADADAD))),
-                          //         focusedBorder: UnderlineInputBorder(
-                          //             borderSide:
-                          //             BorderSide(color: Colors.blue)),
-                          //
-                          //         border: InputBorder.none,
-                          //       ),
-                          //     ),
-                          //   ]),
-                          //   Column(children: [
-                          //     TextFormField(
-                          //       textAlign: TextAlign.start,
-                          //       minLines: 1,
-                          //       maxLines: 2,
-                          //       keyboardType: TextInputType.multiline,
-                          //       // controller: model.lensl6,
-                          //       decoration: const InputDecoration(
-                          //         contentPadding:
-                          //         EdgeInsets.only(top: 10, left: 4),
-                          //         //labelText: 'Lens Tint',
-                          //         //hintText: 'Enter Email',
-                          //         enabledBorder: UnderlineInputBorder(
-                          //             borderSide: BorderSide(
-                          //                 color: Color(0xffADADAD))),
-                          //         focusedBorder: UnderlineInputBorder(
-                          //             borderSide:
-                          //             BorderSide(color: Colors.blue)),
-                          //
-                          //         border: InputBorder.none,
-                          //       ),
-                          //     ),
-                          //   ]),
-                          // ]),
+
                         ],
                       ),
                     ),
@@ -758,7 +472,7 @@ class PatientOpticalChartView extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => model.selectDate(),
+                onTap: () => model.selectDate(context),
                 child: TextFormField(
                   controller: model.dateTextController,
                   enabled: false,
@@ -773,7 +487,7 @@ class PatientOpticalChartView extends StatelessWidget {
                       hintText: 'MM/DD/YYYY',
                       labelText: 'Appointment Date*',
                       labelStyle:
-                      TextStyle(fontSize: 21, color: Palettes.kcNeutral1),
+                          TextStyle(fontSize: 21, color: Palettes.kcNeutral1),
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       suffixIcon: SvgPicture.asset(
                         'assets/icons/Calendar.svg',
@@ -784,7 +498,7 @@ class PatientOpticalChartView extends StatelessWidget {
               ),
               SizedBox(height: 9),
               GestureDetector(
-                onTap: () => model.goToSelectProcedure(),
+                onTap: () => model.goToSelectService(context),
                 child: TextFormField(
                   controller: model.procedureTxtController,
                   validator: (value) =>
@@ -799,7 +513,7 @@ class PatientOpticalChartView extends StatelessWidget {
                       hintText: 'Select Service Rendered',
                       labelText: 'Service*',
                       labelStyle:
-                      TextStyle(fontSize: 21, color: Palettes.kcNeutral1),
+                          TextStyle(fontSize: 21, color: Palettes.kcNeutral1),
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       suffixIcon: Icon(
                         Icons.arrow_drop_down,
@@ -818,12 +532,12 @@ class PatientOpticalChartView extends StatelessWidget {
                   labelText: 'Note (Optional)',
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   labelStyle:
-                  TextStyle(fontSize: 20, color: Palettes.kcNeutral1),
+                      TextStyle(fontSize: 20, color: Palettes.kcNeutral1),
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Palettes.kcBlueMain1)),
                   focusedBorder: OutlineInputBorder(
                       borderSide:
-                      BorderSide(color: Palettes.kcBlueMain1, width: 2)),
+                          BorderSide(color: Palettes.kcBlueMain1, width: 2)),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Palettes.kcBlueMain1)),
                 ),
