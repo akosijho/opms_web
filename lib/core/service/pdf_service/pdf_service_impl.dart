@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:opmswebstaff/core/service/pdf_service/pdf_service.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
+import 'package:opmswebstaff/models/optical_receipt/optical_receipt.dart';
 import 'package:opmswebstaff/models/payment/payment.dart';
 import 'package:opmswebstaff/models/prescription/prescription.dart';
 import 'package:intl/intl.dart';
@@ -331,5 +332,138 @@ class PdfServiceImp extends PdfService {
       final file = File(filePath);
       await file.writeAsBytes(byteList);
       await OpenFile.open(filePath);
+  }
+
+  @override
+  Future<Uint8List> printOpticalReceipt({required OpticalReceipt opticalReceipt, required Patient patient}) {
+    final pdf = pw.Document();
+    pdf.addPage(
+      pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) => pw.Container(
+          height: PdfPageFormat.a4.height,
+          width: PdfPageFormat.a4.width,
+          child: pw.Column(children: [
+            pw.Text('EyeChoice Optical Shop',
+                style: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold,
+                  fontSize: 10,
+                )),
+            pw.Text('Tagbilaran City, Bohol',
+                style: pw.TextStyle(
+                  fontSize: 13,
+                )),
+            pw.SizedBox(height: 25),
+            pw.Container(
+              alignment: pw.Alignment.centerLeft,
+              child: pw.Column(
+                mainAxisAlignment: pw.MainAxisAlignment.start,
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Row(
+                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                      children: [
+                        pw.Text('Dr. Rica Angelique Plaza',
+                            style: pw.TextStyle(
+                              fontWeight: pw.FontWeight.bold,
+                              fontSize: 10,
+                            )),
+                      ]),
+                  pw.Text('Optometrist',
+                      style: pw.TextStyle(
+                        fontSize: 9,
+                      )),
+                  pw.SizedBox(height: 4),
+                ],
+              ),
+            ),
+            pw.Divider(
+              thickness: 2,
+              color: PdfColor.fromHex("#000000"),
+            ),
+            pw.SizedBox(height: 20),
+            pw.Align(
+                child: pw.Text('RECEIPT',
+                    style: pw.TextStyle(
+                      fontSize: 14,
+                      fontWeight: pw.FontWeight.bold,
+                    ))),
+            pw.SizedBox(height: 20),
+            pw.Expanded(
+              child: pw.Column(children: [
+                pw.Container(
+                  alignment: pw.Alignment.centerLeft,
+                  child: pw.Column(
+                    mainAxisAlignment: pw.MainAxisAlignment.start,
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Text('To whom it may concern:',
+                          style: pw.TextStyle(
+                            fontSize: 12,
+                          )),
+                      pw.SizedBox(height: 8),
+                      pw.Wrap(spacing: 4, runSpacing: 4, children: [
+                        pw.Text('This is to certify that patient ',
+                            style: pw.TextStyle(
+                              fontSize: 12,
+                            )),
+                        pw.Text('${patient.firstName}, ${patient.lastName} ',
+                            style: pw.TextStyle(
+                              fontSize: 12,
+                              fontWeight: pw.FontWeight.bold,
+                            )),
+                        pw.Text('has undergone the service - ',
+                            style: pw.TextStyle(
+                              fontSize: 12,
+                            )),
+                        pw.Text('${opticalReceipt.totalAmount.toUpperCase()} ',
+                            style: pw.TextStyle(
+                              fontSize: 12,
+                              fontWeight: pw.FontWeight.bold,
+                            )),
+                        pw.Text('on ',
+                            style: pw.TextStyle(
+                              fontSize: 12,
+                            )),
+                        pw.Text(
+                            '${DateFormat.yMMMd().format(opticalReceipt.paymentDate.toDateTime()!).toUpperCase()}. ',
+                            style: pw.TextStyle(
+                              fontSize: 12,
+                              fontWeight: pw.FontWeight.bold,
+                            )),
+                      ]),
+                    ],
+                  ),
+                ),
+              ]),
+            ),
+            pw.Align(
+                alignment: pw.Alignment.bottomRight,
+                child: pw.Column(
+                    mainAxisAlignment: pw.MainAxisAlignment.end,
+                    crossAxisAlignment: pw.CrossAxisAlignment.center,
+                    children: [
+                      pw.Container(
+                        padding: pw.EdgeInsets.all(4),
+                        decoration: pw.BoxDecoration(
+                            border: pw.Border(
+                                bottom: pw.BorderSide(
+                                    width: 1,
+                                    color: PdfColor.fromHex("#000000")))),
+                        child: pw.Text('DR. RICA ANGELIQUE PLAZA'),
+                      ),
+                      pw.Text('SIGNATURE')
+                    ])),
+            pw.SizedBox(height: 20),
+            pw.Divider(
+              thickness: 2,
+              color: PdfColor.fromHex("#000000"),
+            ),
+          ]),
+        ),
+      ),
+    );
+
+    return pdf.save();
   }
 }

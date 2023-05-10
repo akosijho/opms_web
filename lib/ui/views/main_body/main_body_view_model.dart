@@ -25,6 +25,7 @@ import 'package:opmswebstaff/ui/views/home/responsive/mobile_view/mobile_body.da
 import 'package:opmswebstaff/ui/views/home/responsive/responsive_layout.dart';
 import 'package:opmswebstaff/ui/views/patients/patients_view.dart';
 import 'package:opmswebstaff/ui/views/payment_select_patient/payment_select_patient_view.dart';
+import 'package:opmswebstaff/ui/views/product/frame_lens/frame_lens_view.dart';
 import 'package:opmswebstaff/ui/views/product/product_view.dart';
 import 'package:opmswebstaff/ui/views/service/service_view.dart';
 import 'package:stacked/stacked.dart';
@@ -44,7 +45,8 @@ class MainBodyViewModel extends BaseViewModel {
     AppointmentView(),
     PatientsView(),
     ServicesView(),
-    ProductView(),
+    // ProductView(),
+    FrameLensView(),
     PaymentSelectPatientView(),
     AddExpenseView(),
     // PatientReportView(showAppBar: true)

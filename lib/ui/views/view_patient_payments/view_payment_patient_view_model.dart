@@ -70,7 +70,7 @@ class ViewPatientPaymentViewModel extends BaseViewModel {
 
   void goToReceipt(int index) {
     navigationService.pushNamed(Routes.ReceiptView,
-        arguments: ReceiptViewArguments(payment: patientPaymentList[index]));
+        arguments: ReceiptViewArguments(payment: patientPaymentList[index], showAppBar: true));
   }
   void goToRx(int index) {
     navigationService.pushNamed(Routes.RxView,

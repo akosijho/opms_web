@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:opmswebstaff/core/service/api/api_service.dart';
+import 'package:opmswebstaff/models/product/product.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/app.locator.dart';
 import '../../../core/service/navigation/navigation_service.dart';
-import '../../../models/medicine/medicine.dart';
 
 class SelectProductViewModel extends BaseViewModel {
   final navigationService = locator<NavigationService>();

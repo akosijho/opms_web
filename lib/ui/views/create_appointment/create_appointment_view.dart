@@ -285,7 +285,7 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                                 textInputAction: TextInputAction.next,
                                 enabled: false,
                                 validator: (value) => model.validatorService
-                                    .validateDentist(value!),
+                                    .validateOptometrist(value!),
                                 keyboardType: TextInputType.datetime,
                                 decoration: InputDecoration(
                                     errorBorder: TextBorderStyles.errorBorder,

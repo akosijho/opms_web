@@ -4,7 +4,7 @@ import 'package:opmswebstaff/core/service/api/api_service.dart';
 import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
 import 'package:opmswebstaff/core/service/search_index/search_index.dart';
 import 'package:opmswebstaff/core/service/validator/validator_service.dart';
-import 'package:opmswebstaff/models/medicine/medicine.dart';
+import 'package:opmswebstaff/models/product/product.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/app.locator.dart';

@@ -12,9 +12,10 @@ import 'package:stacked/stacked_annotations.dart';
 
 import '../models/appointment_model/appointment_model.dart';
 import '../models/medical_history/medical_history.dart';
-import '../models/medicine/medicine.dart';
 import '../models/patient_model/patient_model.dart';
 import '../models/payment/payment.dart';
+import '../models/product/lens.dart';
+import '../models/product/product.dart';
 import '../models/service/service.dart';
 import '../models/user_model/user_model.dart';
 import '../ui/views/add%20rx/rx_view.dart';
@@ -25,6 +26,7 @@ import '../ui/views/add_patient/add_patient_view.dart';
 import '../ui/views/add_payment/add_payment_view.dart';
 import '../ui/views/add_prescription/add_prescription_view.dart';
 import '../ui/views/add_prescription_item/add_prescription_item_view.dart';
+import '../ui/views/add_product/add_lens/add_lens_view.dart';
 import '../ui/views/add_product/add_product_view.dart';
 import '../ui/views/add_service/add_service_view.dart';
 import '../ui/views/appointment/appointment_view.dart';
@@ -45,15 +47,19 @@ import '../ui/views/optical_certification/optical_certification_view.dart';
 import '../ui/views/patient_info/patient_info_view.dart';
 import '../ui/views/patient_optical_chart/patient_optical_chart_view.dart';
 import '../ui/views/patients/patients_view.dart';
+import '../ui/views/payment_select_balance_note/payment_select_balance_note_view.dart';
 import '../ui/views/payment_select_optical_note/payment_select_optical_note_view.dart';
 import '../ui/views/payment_select_patient/payment_select_patient_view.dart';
 import '../ui/views/prescription_view/prescription_view.dart';
+import '../ui/views/product/frame_lens/frame_lens_view.dart';
 import '../ui/views/product/product_view.dart';
 import '../ui/views/receipt_view/receipt_view.dart';
 import '../ui/views/register/register_view.dart';
+import '../ui/views/select_product_view/select_lens_view/select_lens_view.dart';
 import '../ui/views/select_product_view/select_product_view.dart';
 import '../ui/views/service/service_view.dart';
 import '../ui/views/set_optical_note/set_optical_note_view.dart';
+import '../ui/views/update_product/update_lens/update_lens.dart';
 import '../ui/views/update_product/update_product_view.dart';
 import '../ui/views/update_service/update_service_view.dart';
 import '../ui/views/update_user_info/setup_user_view.dart';
@@ -79,12 +85,14 @@ class Routes {
   static const String ProductView = '/product-view';
   static const String PatientsView = '/patients-view';
   static const String ServicesView = '/services-view';
+  static const String FrameLensView = '/frame-lens-view';
   static const String AddPatientView = '/add-patient-view';
   static const String AppointmentSelectPatientView =
       '/appointment-select-patient-view';
   static const String CreateAppointmentView = '/create-appointment-view';
   static const String AddProductView = '/add-product-view';
   static const String AddServiceView = '/add-service-view';
+  static const String AddLensView = '/add-lens-view';
   static const String PatientInfoView = '/patient-info-view';
   static const String MedicalHistoryView = '/medical-history-view';
   static const String MedHistoryPhotoView = '/med-history-photo-view';
@@ -118,6 +126,10 @@ class Routes {
       '/view-dental-note-by-tooth-view';
   static const String UpdateServiceViews = '/update-service-view';
   static const String UpdateProductViews = '/update-product-view';
+  static const String UpdateLensViews = '/update-lens-view';
+  static const String PaymentSelectBalanceNoteView =
+      '/payment-select-balance-note-view';
+  static const String SelectLensView = '/select-lens-view';
   static const all = <String>{
     Login,
     Register,
@@ -131,11 +143,13 @@ class Routes {
     ProductView,
     PatientsView,
     ServicesView,
+    FrameLensView,
     AddPatientView,
     AppointmentSelectPatientView,
     CreateAppointmentView,
     AddProductView,
     AddServiceView,
+    AddLensView,
     PatientInfoView,
     MedicalHistoryView,
     MedHistoryPhotoView,
@@ -167,6 +181,9 @@ class Routes {
     ViewDentalNoteByToothView,
     UpdateServiceViews,
     UpdateProductViews,
+    UpdateLensViews,
+    PaymentSelectBalanceNoteView,
+    SelectLensView,
   };
 }
 
@@ -186,12 +203,14 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.ProductView, page: ProductView),
     RouteDef(Routes.PatientsView, page: PatientsView),
     RouteDef(Routes.ServicesView, page: ServicesView),
+    RouteDef(Routes.FrameLensView, page: FrameLensView),
     RouteDef(Routes.AddPatientView, page: AddPatientView),
     RouteDef(Routes.AppointmentSelectPatientView,
         page: AppointmentSelectPatientView),
     RouteDef(Routes.CreateAppointmentView, page: CreateAppointmentView),
     RouteDef(Routes.AddProductView, page: AddProductView),
     RouteDef(Routes.AddServiceView, page: AddServiceView),
+    RouteDef(Routes.AddLensView, page: AddLensView),
     RouteDef(Routes.PatientInfoView, page: PatientInfoView),
     RouteDef(Routes.MedicalHistoryView, page: MedicalHistoryView),
     RouteDef(Routes.MedHistoryPhotoView, page: MedHistoryPhotoView),
@@ -224,6 +243,10 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.ViewDentalNoteByToothView, page: ViewDentalNoteByToothView),
     RouteDef(Routes.UpdateServiceViews, page: UpdateServiceView),
     RouteDef(Routes.UpdateProductViews, page: UpdateProductView),
+    RouteDef(Routes.UpdateLensViews, page: UpdateLensView),
+    RouteDef(Routes.PaymentSelectBalanceNoteView,
+        page: PaymentSelectBalanceNoteView),
+    RouteDef(Routes.SelectLensView, page: SelectLensView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -320,6 +343,12 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    FrameLensView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const FrameLensView(),
+        settings: data,
+      );
+    },
     AddPatientView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const AddPatientView(),
@@ -352,6 +381,12 @@ class StackedRouter extends RouterBase {
     AddServiceView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const AddServiceView(),
+        settings: data,
+      );
+    },
+    AddLensView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const AddLensView(),
         settings: data,
       );
     },
@@ -566,6 +601,7 @@ class StackedRouter extends RouterBase {
         pageBuilder: (context, animation, secondaryAnimation) => ReceiptView(
           key: args.key,
           payment: args.payment,
+          showAppBar: args.showAppBar,
         ),
         settings: data,
         transitionsBuilder: TransitionsBuilders.slideRight,
@@ -664,6 +700,41 @@ class StackedRouter extends RouterBase {
           key: args.key,
           medicine: args.medicine,
         ),
+        settings: data,
+        transitionsBuilder: TransitionsBuilders.slideBottom,
+        transitionDuration: const Duration(milliseconds: 300),
+      );
+    },
+    UpdateLensView: (data) {
+      var args = data.getArgs<UpdateLensViewArguments>(nullOk: false);
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) => UpdateLensView(
+          key: args.key,
+          lens: args.lens,
+        ),
+        settings: data,
+        transitionsBuilder: TransitionsBuilders.slideBottom,
+        transitionDuration: const Duration(milliseconds: 300),
+      );
+    },
+    PaymentSelectBalanceNoteView: (data) {
+      var args =
+          data.getArgs<PaymentSelectBalanceNoteViewArguments>(nullOk: false);
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            PaymentSelectBalanceNoteView(
+          key: args.key,
+          patientId: args.patientId,
+        ),
+        settings: data,
+        transitionsBuilder: TransitionsBuilders.slideBottom,
+        transitionDuration: const Duration(milliseconds: 300),
+      );
+    },
+    SelectLensView: (data) {
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const SelectLensView(),
         settings: data,
         transitionsBuilder: TransitionsBuilders.slideBottom,
         transitionDuration: const Duration(milliseconds: 300),
@@ -820,7 +891,9 @@ class PaymentSelectOpticalNoteViewArguments {
 class ReceiptViewArguments {
   final Key? key;
   final Payment payment;
-  ReceiptViewArguments({this.key, required this.payment});
+  final bool showAppBar;
+  ReceiptViewArguments(
+      {this.key, required this.payment, required this.showAppBar});
 }
 
 /// RxView arguments holder class
@@ -865,4 +938,18 @@ class UpdateProductViewArguments {
   final Key? key;
   final Product medicine;
   UpdateProductViewArguments({this.key, required this.medicine});
+}
+
+/// UpdateLensView arguments holder class
+class UpdateLensViewArguments {
+  final Key? key;
+  final Lens lens;
+  UpdateLensViewArguments({this.key, required this.lens});
+}
+
+/// PaymentSelectBalanceNoteView arguments holder class
+class PaymentSelectBalanceNoteViewArguments {
+  final Key? key;
+  final String patientId;
+  PaymentSelectBalanceNoteViewArguments({this.key, required this.patientId});
 }

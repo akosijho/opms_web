@@ -36,7 +36,8 @@ class _LoginViewState extends State<LoginView> {
     return ViewModelBuilder<LoginViewModel>.reactive(
       viewModelBuilder: () => LoginViewModel(),
       // onModelReady: (model) {
-      //   model.listenToConnectivityChanges();
+      //   // model.listenToConnectivityChanges();
+      //   model.getSessionInfo();
       // },
       builder: (context, model, child) {
         return Scaffold(
@@ -46,181 +47,183 @@ class _LoginViewState extends State<LoginView> {
               width: screenWidth(context),
               height: screenHeight(context),
               color: Palettes.kcBlueMain1,
-              child: Center(
-                child: Container(
-                  width: 600,
-                  margin: EdgeInsets.only(top: 50, bottom: 50),
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(65),
+              child: Row(
+                children: [
+                  Container(
+                    width: 600,
+                    margin: EdgeInsets.only(top: 50, bottom: 50),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(65),
+                      ),
+                    ),
+                    child: ListView(
+                      children: [
+                        Form(
+                          key: model.loginFormKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              // SizedBox(height: 20.h),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Image.asset(
+                                  'assets/icons/logo_opms_circle.png',
+                                  height: 100,
+                                  width: 100,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'EyeChoice Optical Shop',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: FontNames.gilRoy,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30,
+                                    letterSpacing: 1,
+                                    wordSpacing: 1,
+                                    color: Palettes.kcBlueMain1,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 16),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Login',
+                                  style: TextStyles.tsHeading3(),
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Enter your email account to login',
+                                  style: TextStyles.tsHeading4(
+                                      color: Palettes.kcNeutral2),
+                                ),
+                              ),
+                              SizedBox(height: 4.h),
+
+                              //Email Text Field
+                              TextFormField(
+                                controller: emailController,
+                                focusNode: emailFocusNode,
+                                keyboardType: TextInputType.emailAddress,
+                                autovalidateMode: model.autoValidate
+                                    ? AutovalidateMode.onUserInteraction
+                                    : AutovalidateMode.disabled,
+                                validator: (value) => model.validatorService
+                                    .validateEmailAddress(value!.trim()),
+                                textInputAction: TextInputAction.next,
+                                decoration: InputDecoration(
+                                  hintText: 'Your Email Account',
+                                  enabledBorder: TextBorderStyles.normalBorder,
+                                  focusedBorder: TextBorderStyles.focusedBorder,
+                                  prefixIconConstraints:
+                                      BoxConstraints(minWidth: 20),
+                                  prefixIcon: Container(
+                                    margin: EdgeInsets.only(right: 10),
+                                    // height: 22.h,
+                                    // width: 21.w,
+                                    child: SvgPicture.asset(
+                                      'assets/icons/Message.svg',
+                                      color: emailFocusNode.hasFocus
+                                          ? Palettes.kcBlueMain1
+                                          : Palettes.kcNeutral2,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 10.h),
+
+                              //Password Text Field
+                              TextFormField(
+                                controller: passwordController,
+                                focusNode: passwordFocusNode,
+                                obscureText: model.isObscure,
+                                autovalidateMode: model.autoValidate
+                                    ? AutovalidateMode.onUserInteraction
+                                    : AutovalidateMode.disabled,
+                                textInputAction: TextInputAction.go,
+                                onChanged: (value) =>
+                                    model.setShowIconVisibility(
+                                        passwordController.text),
+                                onEditingComplete: () => model.loginNow(
+                                    emailValue: emailController.text,
+                                    passwordValue: passwordController.text),
+                                validator: (value) => model.validatorService
+                                    .validatePassword(value!),
+                                decoration: InputDecoration(
+                                  enabledBorder: TextBorderStyles.normalBorder,
+                                  focusedBorder: TextBorderStyles.focusedBorder,
+                                  hintText: 'Your Password',
+                                  prefixIconConstraints:
+                                      BoxConstraints(minWidth: 20),
+                                  prefixIcon: Container(
+                                    margin: EdgeInsets.only(right: 10),
+                                    child: SvgPicture.asset(
+                                      'assets/icons/Lock.svg',
+                                      color: passwordFocusNode.hasFocus
+                                          ? Palettes.kcBlueMain1
+                                          : Palettes.kcNeutral2,
+                                    ),
+                                  ),
+                                  suffixIcon: Visibility(
+                                    visible: model.isShowIconVisible,
+                                    child: IconButton(
+                                        onPressed: model.showHidePassword,
+                                        padding: EdgeInsets.zero,
+                                        icon: SvgPicture.asset(
+                                          model.isObscure
+                                              ? 'assets/icons/Show.svg'
+                                              : 'assets/icons/Hide.svg',
+                                          color: Palettes.kcBlueMain1,
+                                        )),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 10.h),
+                              GestureDetector(
+                                onTap: () {},
+                                child: Text(
+                                  'Forgot Password?',
+                                  textAlign: TextAlign.end,
+                                  style: TextStyles.tsHeading5(
+                                      color: Palettes.kcNeutral2),
+                                ),
+                              ),
+                              SizedBox(height: 20.h),
+                              Container(
+                                // height: 45,
+                                width: screenWidth(context),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    model.loginNow(
+                                        emailValue: emailController.text,
+                                        passwordValue: passwordController.text);
+                                  },
+                                  child: Text('Login',
+                                    style: TextStyle(
+                                        fontSize: 30
+                                    )),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SocialLogin(
+                          goToRegister: () => model.goToRegisterView(),
+                          // loginWithGoogle: () => model.loginWithGoogle(),
+                        ),
+                      ],
                     ),
                   ),
-                  child: ListView(
-                    children: [
-                      Form(
-                        key: model.loginFormKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            // SizedBox(height: 20.h),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Image.asset(
-                                'assets/icons/logo_opms_circle.png',
-                                height: 100,
-                                width: 100,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'EyeChoice Optical Shop',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: FontNames.gilRoy,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30,
-                                  letterSpacing: 1,
-                                  wordSpacing: 1,
-                                  color: Palettes.kcBlueMain1,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 16),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Login',
-                                style: TextStyles.tsHeading3(),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Enter your email account to login',
-                                style: TextStyles.tsHeading4(
-                                    color: Palettes.kcNeutral2),
-                              ),
-                            ),
-                            SizedBox(height: 4.h),
-
-                            //Email Text Field
-                            TextFormField(
-                              controller: emailController,
-                              focusNode: emailFocusNode,
-                              keyboardType: TextInputType.emailAddress,
-                              autovalidateMode: model.autoValidate
-                                  ? AutovalidateMode.onUserInteraction
-                                  : AutovalidateMode.disabled,
-                              validator: (value) => model.validatorService
-                                  .validateEmailAddress(value!.trim()),
-                              textInputAction: TextInputAction.next,
-                              decoration: InputDecoration(
-                                hintText: 'Your Email Account',
-                                enabledBorder: TextBorderStyles.normalBorder,
-                                focusedBorder: TextBorderStyles.focusedBorder,
-                                prefixIconConstraints:
-                                    BoxConstraints(minWidth: 20),
-                                prefixIcon: Container(
-                                  margin: EdgeInsets.only(right: 10),
-                                  // height: 22.h,
-                                  // width: 21.w,
-                                  child: SvgPicture.asset(
-                                    'assets/icons/Message.svg',
-                                    color: emailFocusNode.hasFocus
-                                        ? Palettes.kcBlueMain1
-                                        : Palettes.kcNeutral2,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10.h),
-
-                            //Password Text Field
-                            TextFormField(
-                              controller: passwordController,
-                              focusNode: passwordFocusNode,
-                              obscureText: model.isObscure,
-                              autovalidateMode: model.autoValidate
-                                  ? AutovalidateMode.onUserInteraction
-                                  : AutovalidateMode.disabled,
-                              textInputAction: TextInputAction.go,
-                              onChanged: (value) =>
-                                  model.setShowIconVisibility(
-                                      passwordController.text),
-                              onEditingComplete: () => model.loginNow(
-                                  emailValue: emailController.text,
-                                  passwordValue: passwordController.text),
-                              validator: (value) => model.validatorService
-                                  .validatePassword(value!),
-                              decoration: InputDecoration(
-                                enabledBorder: TextBorderStyles.normalBorder,
-                                focusedBorder: TextBorderStyles.focusedBorder,
-                                hintText: 'Your Password',
-                                prefixIconConstraints:
-                                    BoxConstraints(minWidth: 20),
-                                prefixIcon: Container(
-                                  margin: EdgeInsets.only(right: 10),
-                                  child: SvgPicture.asset(
-                                    'assets/icons/Lock.svg',
-                                    color: passwordFocusNode.hasFocus
-                                        ? Palettes.kcBlueMain1
-                                        : Palettes.kcNeutral2,
-                                  ),
-                                ),
-                                suffixIcon: Visibility(
-                                  visible: model.isShowIconVisible,
-                                  child: IconButton(
-                                      onPressed: model.showHidePassword,
-                                      padding: EdgeInsets.zero,
-                                      icon: SvgPicture.asset(
-                                        model.isObscure
-                                            ? 'assets/icons/Show.svg'
-                                            : 'assets/icons/Hide.svg',
-                                        color: Palettes.kcBlueMain1,
-                                      )),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10.h),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Text(
-                                'Forgot Password?',
-                                textAlign: TextAlign.end,
-                                style: TextStyles.tsHeading5(
-                                    color: Palettes.kcNeutral2),
-                              ),
-                            ),
-                            SizedBox(height: 20.h),
-                            Container(
-                              // height: 45,
-                              width: screenWidth(context),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  model.loginNow(
-                                      emailValue: emailController.text,
-                                      passwordValue: passwordController.text);
-                                },
-                                child: Text('Login',
-                                  style: TextStyle(
-                                      fontSize: 30
-                                  )),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SocialLogin(
-                        goToRegister: () => model.goToRegisterView(),
-                        // loginWithGoogle: () => model.loginWithGoogle(),
-                      ),
-                    ],
-                  ),
-                ),
+                ],
               ),
             ),
           ),

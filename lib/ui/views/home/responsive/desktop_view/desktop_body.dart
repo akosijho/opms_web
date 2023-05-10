@@ -92,7 +92,7 @@ class MyDesktopBody extends StatelessWidget {
                     SizedBox(height: 40),
                     Container(
                       height: 500,
-                      width: 740,
+                      width: 900,
                       decoration:
                           BoxDecoration(border: Border.all(color: Colors.blue)),
                       child: Padding(

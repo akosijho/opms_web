@@ -35,7 +35,7 @@ abstract class ValidatorService {
 
   String? validateEndTime(String value);
 
-  String? validateDentist(String value);
+  String? validateOptometrist(String value);
 
   String? validateToothCondition(String value);
 

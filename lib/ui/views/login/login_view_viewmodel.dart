@@ -31,6 +31,9 @@ class LoginViewModel extends FormViewModel {
   bool isObscure = true;
   bool isShowIconVisible = false;
 
+
+
+
   Future<void> loginNow(
       {required String emailValue, required String passwordValue}) async {
     if (loginFormKey.currentState!.validate()) {
@@ -66,6 +69,7 @@ class LoginViewModel extends FormViewModel {
       }
     }
   }
+
 
   void goToRegisterView() {
     navigationService.pushNamed(Routes.Register);
@@ -140,4 +144,5 @@ class LoginViewModel extends FormViewModel {
       }
     }
   }
-}
+
+    }

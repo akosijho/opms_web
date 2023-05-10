@@ -8,10 +8,10 @@ import '../../../constants/styles/palette_color.dart';
 import '../../../constants/styles/text_styles.dart';
 
 class PaymentOpticalNoteCard extends StatelessWidget {
-  final OpticalNotes dentalNote;
+  final OpticalNotes opticalNote;
   final String patientID;
   const PaymentOpticalNoteCard(
-      {Key? key, required this.dentalNote, required this.patientID})
+      {Key? key, required this.opticalNote, required this.patientID})
       : super(key: key);
 
   @override
@@ -80,7 +80,7 @@ class PaymentOpticalNoteCard extends StatelessWidget {
                                   color: Colors.grey.shade700),
                               children: [
                             TextSpan(
-                                text: dentalNote.service.serviceName,
+                                text: opticalNote.service.serviceName,
                                 style:
                                     TextStyles.tsHeading5(color: Colors.black))
                           ])),
@@ -94,7 +94,7 @@ class PaymentOpticalNoteCard extends StatelessWidget {
                             TextSpan(
                                 text: DateFormat.yMd()
                                     .add_jm()
-                                    .format(dentalNote.date.toDateTime()!),
+                                    .format(opticalNote.date.toDateTime()!),
                                 style:
                                     TextStyles.tsHeading5(color: Colors.black))
                           ])),
@@ -106,7 +106,7 @@ class PaymentOpticalNoteCard extends StatelessWidget {
                                   color: Colors.deepOrange),
                               children: [
                             TextSpan(
-                                text: dentalNote.service.priceToCurrency,
+                                text: opticalNote.service.priceToCurrency,
                                 style: TextStyle(
                                     color: Colors.deepOrangeAccent,
                                     fontSize: 16))

@@ -6,6 +6,7 @@ import 'package:opmswebstaff/app/app.router.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
+import 'package:opmswebstaff/ui/views/add_patient/add_patient_view.dart';
 import 'package:opmswebstaff/ui/views/appointment_select_patient/appointment_select_patient_view.dart';
 import 'package:opmswebstaff/ui/views/create_appointment/create_appointment_view.dart';
 import 'package:stacked/stacked.dart';
@@ -66,10 +67,23 @@ class AppointmentSelectPatientViewModel extends BaseViewModel {
         );
       },
     );
-
       // navigationService.pushNamed(Routes.CreateAppointmentView,
       //     arguments: CreateAppointmentViewArguments(patient: patient, popTimes: 3));
 
+  }
+  void goToAddPatient(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 500,
+            height: 500,
+            child: AddPatientView(),
+          ),
+        );
+      },
+    );
   }
 
 }

@@ -10,7 +10,7 @@ import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
 import 'package:opmswebstaff/core/service/toast/toast_service.dart';
-import 'package:opmswebstaff/models/medicine/medicine.dart';
+import 'package:opmswebstaff/models/product/product.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;

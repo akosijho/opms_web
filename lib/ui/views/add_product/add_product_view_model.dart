@@ -7,7 +7,7 @@ import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/core/service/toast/toast_service.dart';
 import 'package:opmswebstaff/core/service/validator/validator_service.dart';
-import 'package:opmswebstaff/models/medicine/medicine.dart';
+import 'package:opmswebstaff/models/product/product.dart';
 import 'package:opmswebstaff/ui/views/update_user_info/setup_user_viewmodel.dart';
 import 'package:opmswebstaff/ui/widgets/selection_list/selection_option.dart';
 import 'package:flutter/cupertino.dart';

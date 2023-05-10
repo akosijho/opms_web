@@ -169,7 +169,7 @@ class ValidatorServiceImpl extends ValidatorService {
   }
 
   @override
-  String? validateDentist(String value) {
+  String? validateOptometrist(String value) {
     if (value.isEmpty) {
       return ' No Dentist Selected';
     } else

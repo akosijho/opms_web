@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:opmswebstaff/models/medicine/medicine.dart';
+import 'package:opmswebstaff/models/product/product.dart';
 import 'package:opmswebstaff/ui/views/update_product/update_product_view_model.dart';
 import 'package:stacked/stacked.dart';
 

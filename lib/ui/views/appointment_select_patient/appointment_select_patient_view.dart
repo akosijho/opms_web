@@ -33,7 +33,8 @@ class AppointmentSelectPatientView extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
               child: ElevatedButton(
                 onPressed: () =>
-                    model.navigationService.pushNamed(Routes.AddPatientView),
+                    // model.navigationService.pushNamed(Routes.AddPatientView),
+                model.goToAddPatient(context),
                 child: Text(
                   'Add Patient',
                   style: TextStyle(fontSize: 15),

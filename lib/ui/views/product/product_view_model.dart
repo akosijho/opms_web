@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:opmswebstaff/app/app.locator.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
-import 'package:opmswebstaff/models/medicine/medicine.dart';
+import 'package:opmswebstaff/models/product/product.dart';
 import 'package:stacked/stacked.dart';
 
 class ProductViewModel extends BaseViewModel {

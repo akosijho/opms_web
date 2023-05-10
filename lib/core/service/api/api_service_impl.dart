@@ -5,15 +5,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
+import 'package:opmswebstaff/models/balance_notes/balance_notes.dart';
 import 'package:opmswebstaff/models/optical_certificate/optical_certificate.dart';
 import 'package:opmswebstaff/models/expense/expense.dart';
 import 'package:opmswebstaff/models/medical_history/medical_history.dart';
-import 'package:opmswebstaff/models/medicine/medicine.dart';
 import 'package:opmswebstaff/models/notification/notification_model.dart';
 import 'package:opmswebstaff/models/notification_token/notification_token_model.dart';
 import 'package:opmswebstaff/models/optical_notes/optical_notes.dart';
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
 import 'package:opmswebstaff/models/prescription/prescription.dart';
+import 'package:opmswebstaff/models/product/lens.dart';
+import 'package:opmswebstaff/models/product/product.dart';
 import 'package:opmswebstaff/models/query_result/query_result.dart';
 import 'package:opmswebstaff/models/service/service.dart';
 import 'package:opmswebstaff/models/tooth_condition/tooth_condition.dart';
@@ -33,6 +35,8 @@ class ApiServiceImpl extends ApiService {
 
   final appointmentReference =
       FirebaseFirestore.instance.collection('appointments');
+
+  final lensReference = FirebaseFirestore.instance.collection('lens');
 
   final patientReference = FirebaseFirestore.instance.collection('patients');
 
@@ -470,12 +474,12 @@ class ApiServiceImpl extends ApiService {
   Future<void> updateOpticalANotePaidStatus(
       {required patientId,
       String? toothId,
-      required dental_noteId,
+      required optical_noteId,
       required bool isPaid}) async {
     final queryRes = await patientReference
         .doc(patientId)
         .collection('optical_notes')
-        .doc(dental_noteId)
+        .doc(optical_noteId)
         .update({'isPaid': isPaid});
   }
 
@@ -864,5 +868,99 @@ class ApiServiceImpl extends ApiService {
     //   return QueryResult.error(
     //       'No Internet Connection. Check your connection and try again');
     // }
+  }
+
+  @override
+  Future? addLens({required Lens lens, String? image}) async {
+    final lensRef = await lensReference.doc();
+    return lensRef.set(lens.toJson(
+        id: lensRef.id,
+        image: image ?? '',
+        dateCreated: FieldValue.serverTimestamp()));
+  }
+
+  @override
+  Future<void> deleteLens({required String lensId}) async {
+    return await lensReference.doc(lensId).delete();
+  }
+
+  @override
+  Stream<List<Lens>> getLensList() {
+    return lensReference
+        .orderBy('dateCreated', descending: true)
+        .snapshots()
+        .map((value) =>
+        value.docs
+            .map((lens) => Lens.fromJson(lens.data()))
+            .toList());
+  }
+
+  @override
+  Future<QueryResult> updateLens(Lens lens) async {
+    // if (await connectivityService.checkConnectivity()) {
+      lensReference.doc(lens.id).set(lens.toJson(
+          dateCreated: FieldValue.serverTimestamp(), id: lens.id));
+      return QueryResult.success();
+    // } else {
+    //   return QueryResult.error(
+    //       'No Internet Connection. Check your connection and try again');
+    // }
+  }
+
+  @override
+  Stream listenToUsersChanges({required String usersId}) {
+    return userReference.doc(usersId).snapshots();
+  }
+
+  @override
+  Future<List<BalanceNotes>?> getBalanceList({required patientId, bool? isPaid}) async{
+    if (isPaid == null) {
+      return await patientReference
+          .doc(patientId)
+          .collection('balance_notes')
+      // .orderBy("selectedTooth")
+          .orderBy('date', descending: true)
+          .get()
+          .then((value) =>
+          value.docs.map((e) => BalanceNotes.fromJson(e.data())).toList());
+    } else {
+      return await patientReference
+          .doc(patientId)
+          .collection('balance_notes')
+          .orderBy('date')
+          .where('isPaid', isEqualTo: isPaid)
+      // .orderBy('selectedTooth')
+          .get()
+          .then((value) =>
+          value.docs.map((e) => BalanceNotes.fromJson(e.data())).toList());
+    }
+    // } else {
+    //   return await patientReference
+    //       .doc(patientId)
+    //       .collection('optical_notes')
+    //       .where('sphere', isEqualTo: toothId)
+    //       .where('isPaid', isEqualTo: isPaid)
+    //       .get()
+    //       .then((value) =>
+    //       value.docs.map((e) => OpticalNotes.fromJson(e.data())).toList());
+    // }
+  }
+
+  @override
+  Future<void> updateBalanceAmountField({required patientId, required balance_noteId, required String price}) async{
+    final queryRes = await patientReference
+        .doc(patientId)
+        .collection('balance_notes')
+        .doc(balance_noteId)
+        .update({'balance': "$price"});
+  }
+
+  @override
+  Future<void> updateBalanceANotePaidStatus({required patientId, required balance_noteId, required bool isPaid}) async{
+    final queryRes = await patientReference
+        .doc(patientId)
+        .collection('balance_notes')
+        .doc(balance_noteId)
+        .update({'isPaid': isPaid});
   }
 }

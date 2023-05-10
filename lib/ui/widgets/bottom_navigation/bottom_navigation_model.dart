@@ -22,11 +22,11 @@ class BottomNavigationModel extends BaseViewModel {
     navigationService.pushNamed(Routes.PatientsView);
   }
 
-  void goToProcedures() {
+  void goToService() {
     navigationService.pushNamed(Routes.ServicesView);
   }
-  void goToMedicine() {
-    navigationService.pushNamed(Routes.ProductView);
+  void goToProduct() {
+    navigationService.pushNamed(Routes.FrameLensView);
   }
 
 

@@ -111,7 +111,7 @@ class PaymentSelectOpticalNoteView extends StatelessWidget {
                                 itemCount: model.listOfUnpaidDentalNotes.length,
                               )
                             : Center(
-                                child: Text('No Dental Notes Found...'),
+                                child: Text('No Optical Notes Found...'),
                               )),
               ],
             ),

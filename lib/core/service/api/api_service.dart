@@ -2,15 +2,17 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
+import 'package:opmswebstaff/models/balance_notes/balance_notes.dart';
 import 'package:opmswebstaff/models/expense/expense.dart';
 import 'package:opmswebstaff/models/medical_history/medical_history.dart';
-import 'package:opmswebstaff/models/medicine/medicine.dart';
 import 'package:opmswebstaff/models/notification/notification_model.dart';
 import 'package:opmswebstaff/models/notification_token/notification_token_model.dart';
 import 'package:opmswebstaff/models/optical_certificate/optical_certificate.dart';
 import 'package:opmswebstaff/models/optical_notes/optical_notes.dart';
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
 import 'package:opmswebstaff/models/prescription/prescription.dart';
+import 'package:opmswebstaff/models/product/lens.dart';
+import 'package:opmswebstaff/models/product/product.dart';
 import 'package:opmswebstaff/models/query_result/query_result.dart';
 import 'package:opmswebstaff/models/service/service.dart';
 import 'package:opmswebstaff/models/tooth_condition/tooth_condition.dart';
@@ -120,9 +122,9 @@ abstract class ApiService {
 
   Future<void> updateOpticalANotePaidStatus(
       {required dynamic patientId,
-      String? toothId,
-      required dental_noteId,
-      required bool isPaid});
+        String? toothId,
+        required optical_noteId,
+        required bool isPaid});
 
   Future<Payment> getPaymentInfo({required String paymentId});
 
@@ -200,7 +202,28 @@ abstract class ApiService {
 
   Future<List<Product>> getProducts();
 
-  Future<QueryResult> updateService(Service procedure);
+  Future<QueryResult> updateService(Service service);
 
-  Future<QueryResult> updateProduct(Product medicine);
+  Future<QueryResult> updateProduct(Product product);
+
+  Future<void> deleteLens({required String lensId});
+
+  Future<dynamic>? addLens({required Lens lens, String? image});
+
+  Stream<List<Lens>> getLensList();
+
+  Future<QueryResult> updateLens(Lens lens);
+
+  Future<List<BalanceNotes>?> getBalanceList(
+      {required dynamic patientId, bool? isPaid});
+
+  Future<void> updateBalanceAmountField(
+      {required dynamic patientId,
+        required balance_noteId,
+        required String price
+      });
+  Future<void> updateBalanceANotePaidStatus(
+      {required dynamic patientId,
+        required balance_noteId,
+        required bool isPaid});
 }

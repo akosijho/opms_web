@@ -428,7 +428,7 @@ class PatientInfoView extends StatelessWidget {
                             shadowColor: Colors.grey.shade500,
                             child: ListTile(
                               onTap: () => model.goToViewPatientAppointmentView(
-                                  patient: patient),
+                                  patient: patient, context: context),
                               leading: SvgPicture.asset(
                                 'assets/icons/Calendar.svg',
                                 color: Colors.black,
@@ -450,7 +450,7 @@ class PatientInfoView extends StatelessWidget {
                             shadowColor: Colors.grey.shade500,
                             child: ListTile(
                               onTap: () => model.goToViewPatientPaymentsView(
-                                  patient: patient),
+                                  patient: patient, context: context),
                               leading: Icon(
                                 Icons.money,
                                 color: Colors.black,
@@ -472,7 +472,7 @@ class PatientInfoView extends StatelessWidget {
                             shadowColor: Colors.grey.shade500,
                             child: ListTile(
                               onTap: () => model.goToOpticalCertificateView(
-                                  patient: patient),
+                                  patient: patient, context: context),
                               leading: Icon(
                                 Icons.receipt,
                                 color: Colors.black,

@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:opmswebstaff/models/medicine/medicine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_network/image_network.dart';
+import 'package:opmswebstaff/models/product/product.dart';
 
 import '../../../constants/styles/text_styles.dart';
 
-class PaymentMedicineCard extends StatelessWidget {
-  final Product medicine;
-  const PaymentMedicineCard({Key? key, required this.medicine})
+class PaymentProductCard extends StatelessWidget {
+  final Product product;
+  const PaymentProductCard({Key? key, required this.product})
       : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class PaymentMedicineCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          showMedImage(medicine.image),
+          showMedImage(product.image),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(5.0),
@@ -28,11 +28,11 @@ class PaymentMedicineCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    medicine.brandName ?? 'No Brand',
+                    product.brandName ?? 'No Brand',
                     style: TextStyles.tsBody1(color: Colors.grey.shade900),
                   ),
                   Text(
-                    medicine.productName,
+                    product.productName,
                     style: TextStyles.tsBody2(color: Colors.black54),
                   ),
                   SizedBox(height: 10),
@@ -40,7 +40,7 @@ class PaymentMedicineCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        medicine.priceToCurrency ?? '0',
+                        product.priceToCurrency ?? '0',
                         textAlign: TextAlign.left,
                         softWrap: true,
                         style: TextStyle(
@@ -56,7 +56,7 @@ class PaymentMedicineCard extends StatelessWidget {
                                   color: Colors.grey.shade900),
                               children: [
                             TextSpan(
-                                text: medicine.qty, style: TextStyles.tsBody1())
+                                text: product.qty, style: TextStyles.tsBody1())
                           ]))
                     ],
                   ),

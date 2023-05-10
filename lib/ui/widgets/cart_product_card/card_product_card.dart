@@ -1,37 +1,37 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:opmswebstaff/models/medicine/medicine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_network/image_network.dart';
+import 'package:opmswebstaff/models/product/product.dart';
 
 import '../../../app/app.locator.dart';
 import '../../../constants/styles/text_styles.dart';
 import '../../../core/service/validator/validator_service.dart';
 
-class CartMedicineCard extends StatefulWidget {
-  final Product medicine;
+class CartProductCard extends StatefulWidget {
+  final Product product;
   final bool isChecked;
-  final List<Product> selectedMedicines;
+  final List<Product> selectedProduct;
   final VoidCallback notifyChange;
-  CartMedicineCard(
+  CartProductCard(
       {Key? key,
-      required this.medicine,
+      required this.product,
       required this.isChecked,
-      required this.selectedMedicines,
+      required this.selectedProduct,
       required this.notifyChange})
       : super(key: key);
 
   @override
-  State<CartMedicineCard> createState() => _CartMedicineCardState();
+  State<CartProductCard> createState() => _CartProductCardState();
 }
 
-class _CartMedicineCardState extends State<CartMedicineCard> {
+class _CartProductCardState extends State<CartProductCard> {
   final validatorService = locator<ValidatorService>();
   final qtyTxtController = TextEditingController();
 
   @override
   void initState() {
-    qtyTxtController.text = widget.medicine.qty ?? '1';
+    qtyTxtController.text = widget.product.qty ?? '1';
     super.initState();
   }
 
@@ -46,8 +46,8 @@ class _CartMedicineCardState extends State<CartMedicineCard> {
       int qtyF = int.parse(qtyTxtController.text);
       qtyF++;
       qtyTxtController.text = qtyF.toString();
-      updateQtyOfSelectedMedicine(widget.selectedMedicines,
-          widget.medicine.id ?? '', qtyTxtController.text);
+      updateQtyOfSelectedMedicine(widget.selectedProduct,
+          widget.product.id ?? '', qtyTxtController.text);
     } catch (e) {}
   }
 
@@ -57,8 +57,8 @@ class _CartMedicineCardState extends State<CartMedicineCard> {
       if (!(qtyF <= 1)) {
         qtyF--;
         qtyTxtController.text = qtyF.toString();
-        updateQtyOfSelectedMedicine(widget.selectedMedicines,
-            widget.medicine.id ?? '', qtyTxtController.text);
+        updateQtyOfSelectedMedicine(widget.selectedProduct,
+            widget.product.id ?? '', qtyTxtController.text);
       }
     } catch (e) {}
   }
@@ -75,21 +75,21 @@ class _CartMedicineCardState extends State<CartMedicineCard> {
   }
 
   void onItemTap(String newQty) {
-    if ((widget.selectedMedicines
+    if ((widget.selectedProduct
         .map((medicine) => medicine.id)
-        .contains(widget.medicine.id))) {
-      widget.selectedMedicines
-          .removeWhere((medicine) => medicine.id == widget.medicine.id);
+        .contains(widget.product.id))) {
+      widget.selectedProduct
+          .removeWhere((medicine) => medicine.id == widget.product.id);
       widget.notifyChange();
     } else {
-      widget.selectedMedicines.add(Product(
-        productName: widget.medicine.productName,
-        price: widget.medicine.price,
+      widget.selectedProduct.add(Product(
+        productName: widget.product.productName,
+        price: widget.product.price,
         qty: newQty,
-        brandName: widget.medicine.brandName,
-        dateCreated: widget.medicine.dateCreated,
-        id: widget.medicine.id,
-        image: widget.medicine.image,
+        brandName: widget.product.brandName,
+        dateCreated: widget.product.dateCreated,
+        id: widget.product.id,
+        image: widget.product.image,
       ));
       widget.notifyChange();
     }
@@ -115,7 +115,7 @@ class _CartMedicineCardState extends State<CartMedicineCard> {
             ),
             Column(
               children: [
-                showMedImage(widget.medicine.image),
+                showMedImage(widget.product.image),
                 SizedBox(height: 2),
                 //design for add and minus quantity
                 Container(
@@ -140,12 +140,12 @@ class _CartMedicineCardState extends State<CartMedicineCard> {
                         child: Center(
                           child: TextFormField(
                             onChanged: (value) => updateQtyOfSelectedMedicine(
-                                widget.selectedMedicines,
-                                widget.medicine.id ?? '',
+                                widget.selectedProduct,
+                                widget.product.id ?? '',
                                 value),
                             onSaved: (value) => updateQtyOfSelectedMedicine(
-                                widget.selectedMedicines,
-                                widget.medicine.id ?? '',
+                                widget.selectedProduct,
+                                widget.product.id ?? '',
                                 value!),
                             controller: qtyTxtController,
                             textAlign: TextAlign.center,
@@ -208,16 +208,16 @@ class _CartMedicineCardState extends State<CartMedicineCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.medicine.brandName ?? 'No Brand',
+                    widget.product.brandName ?? 'No Brand',
                     style: TextStyles.tsBody1(color: Colors.grey.shade900),
                   ),
                   Text(
-                    widget.medicine.productName,
+                    widget.product.productName,
                     style: TextStyles.tsBody2(color: Colors.black54),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    widget.medicine.priceToCurrency ?? '0',
+                    widget.product.priceToCurrency ?? '0',
                     textAlign: TextAlign.left,
                     softWrap: true,
                     style: TextStyle(

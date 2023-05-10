@@ -32,6 +32,7 @@ import 'package:opmswebstaff/ui/views/add_patient/add_patient_view.dart';
 import 'package:opmswebstaff/ui/views/add_payment/add_payment_view.dart';
 import 'package:opmswebstaff/ui/views/add_prescription/add_prescription_view.dart';
 import 'package:opmswebstaff/ui/views/add_prescription_item/add_prescription_item_view.dart';
+import 'package:opmswebstaff/ui/views/add_product/add_lens/add_lens_view.dart';
 import 'package:opmswebstaff/ui/views/add_product/add_product_view.dart';
 import 'package:opmswebstaff/ui/views/add_service/add_service_view.dart';
 import 'package:opmswebstaff/ui/views/appointment/appointment_view.dart';
@@ -52,15 +53,19 @@ import 'package:opmswebstaff/ui/views/optical_certification/optical_certificatio
 import 'package:opmswebstaff/ui/views/patient_info/patient_info_view.dart';
 import 'package:opmswebstaff/ui/views/patient_optical_chart/patient_optical_chart_view.dart';
 import 'package:opmswebstaff/ui/views/patients/patients_view.dart';
+import 'package:opmswebstaff/ui/views/payment_select_balance_note/payment_select_balance_note_view.dart';
 import 'package:opmswebstaff/ui/views/payment_select_optical_note/payment_select_optical_note_view.dart';
 import 'package:opmswebstaff/ui/views/payment_select_patient/payment_select_patient_view.dart';
 import 'package:opmswebstaff/ui/views/prescription_view/prescription_view.dart';
+import 'package:opmswebstaff/ui/views/product/frame_lens/frame_lens_view.dart';
 import 'package:opmswebstaff/ui/views/product/product_view.dart';
 import 'package:opmswebstaff/ui/views/receipt_view/receipt_view.dart';
 import 'package:opmswebstaff/ui/views/register/register_view.dart';
+import 'package:opmswebstaff/ui/views/select_product_view/select_lens_view/select_lens_view.dart';
 import 'package:opmswebstaff/ui/views/select_product_view/select_product_view.dart';
 import 'package:opmswebstaff/ui/views/service/service_view.dart';
 import 'package:opmswebstaff/ui/views/set_optical_note/set_optical_note_view.dart';
+import 'package:opmswebstaff/ui/views/update_product/update_lens/update_lens.dart';
 import 'package:opmswebstaff/ui/views/update_product/update_product_view.dart';
 import 'package:opmswebstaff/ui/views/update_service/update_service_view.dart';
 import 'package:opmswebstaff/ui/views/update_user_info/setup_user_view.dart';
@@ -94,6 +99,7 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
     MaterialRoute(page: ProductView, name: 'ProductView'),
     MaterialRoute(page: PatientsView, name: 'PatientsView'),
     MaterialRoute(page: ServicesView, name: 'ServicesView'),
+    MaterialRoute(page: FrameLensView, name: 'FrameLensView'),
     MaterialRoute(page: AddPatientView, name: 'AddPatientView'),
     MaterialRoute(
         page: AppointmentSelectPatientView,
@@ -101,6 +107,7 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
     MaterialRoute(page: CreateAppointmentView, name: 'CreateAppointmentView'),
     MaterialRoute(page: AddProductView, name: 'AddProductView'),
     MaterialRoute(page: AddServiceView, name: 'AddServiceView'),
+    MaterialRoute(page: AddLensView, name: 'AddLensView'),
     MaterialRoute(page: PatientInfoView, name: 'PatientInfoView'),
     MaterialRoute(page: MedicalHistoryView, name: 'MedicalHistoryView'),
     MaterialRoute(page: MedHistoryPhotoView, name: 'MedHistoryPhotoView'),
@@ -190,6 +197,21 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
     CustomRoute(
         page: UpdateProductView,
         name: 'UpdateProductViews',
+        transitionsBuilder: TransitionsBuilders.slideBottom,
+        durationInMilliseconds: 300),
+    CustomRoute(
+        page: UpdateLensView,
+        name: 'UpdateLensViews',
+        transitionsBuilder: TransitionsBuilders.slideBottom,
+        durationInMilliseconds: 300),
+    CustomRoute(
+        page: PaymentSelectBalanceNoteView,
+        name: 'PaymentSelectBalanceNoteView',
+        transitionsBuilder: TransitionsBuilders.slideBottom,
+        durationInMilliseconds: 300),
+    CustomRoute(
+        page: SelectLensView,
+        name: 'SelectLensView',
         transitionsBuilder: TransitionsBuilders.slideBottom,
         durationInMilliseconds: 300),
   ],

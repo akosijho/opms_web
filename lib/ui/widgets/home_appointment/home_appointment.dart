@@ -56,7 +56,7 @@ class HomeAppointment extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () {Routes.AppointmentView;},
+                    onTap: () => Routes.AppointmentView,
                     child: Container(
                       height: 22,
                       alignment: Alignment.bottomLeft,

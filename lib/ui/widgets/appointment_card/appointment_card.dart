@@ -83,45 +83,45 @@ class _AppointmentCardState extends State<AppointmentCard> {
         });
   }
 
-  Future<void> updateAppointmentStatus(String appointmentId) async {
-    final appointmentStatus =
-        await bottomSheetService.openBottomSheet(SelectionOption(
-      options: [
-        AppointmentStatus.Completed.name,
-        AppointmentStatus.Cancelled.name,
-        AppointmentStatus.Pending.name,
-        AppointmentStatus.Declined.name,
-      ],
-      title: 'Set Appointment Status',
-    ));
-
-    if (appointmentStatus != null) {
-      // if (await connectivityService.checkConnectivity()) {
-        dialogService.showDefaultLoadingDialog(
-            barrierDismissible: false, willPop: false);
-        await apiService.updateAppointmentStatus(
-            appointmentId: appointmentId, appointmentStatus: appointmentStatus);
-        navigationService.pop();
-        final notification = NotificationModel(
-          user_id: widget.patient.id,
-          notification_title: 'Appointment status: ${appointmentStatus}.',
-          notification_msg: 'Your Appointment on ${widget.appointmentDate}'
-              ' with Doc. ${widget.doctor} was marked: ${appointmentStatus}',
-          notification_type: 'appointment',
-          isRead: false,
-        );
-        await apiService.saveNotification(
-            notification: notification, typeId: widget.appointmentId);
-        snackBarService.showSnackBar(
-            message: 'Appointment status was updated', title: 'Success!');
-      // } else {
-      //   navigationService.pop();
-      //   snackBarService.showSnackBar(
-      //       message: 'Check your network connection and try again',
-      //       title: 'Network Error');
-      // }
-    }
-  }
+  // Future<void> updateAppointmentStatus(String appointmentId) async {
+  //   final appointmentStatus =
+  //       await bottomSheetService.openBottomSheet(SelectionOption(
+  //     options: [
+  //       AppointmentStatus.Completed.name,
+  //       AppointmentStatus.Cancelled.name,
+  //       AppointmentStatus.Pending.name,
+  //       AppointmentStatus.Declined.name,
+  //     ],
+  //     title: 'Set Appointment Status',
+  //   ));
+  //
+  //   if (appointmentStatus != null) {
+  //     // if (await connectivityService.checkConnectivity()) {
+  //       dialogService.showDefaultLoadingDialog(
+  //           barrierDismissible: false, willPop: false);
+  //       await apiService.updateAppointmentStatus(
+  //           appointmentId: appointmentId, appointmentStatus: appointmentStatus);
+  //       navigationService.pop();
+  //       final notification = NotificationModel(
+  //         user_id: widget.patient.id,
+  //         notification_title: 'Appointment status: ${appointmentStatus}.',
+  //         notification_msg: 'Your Appointment on ${widget.appointmentDate}'
+  //             ' with Doc. ${widget.doctor} was marked: ${appointmentStatus}',
+  //         notification_type: 'appointment',
+  //         isRead: false,
+  //       );
+  //       await apiService.saveNotification(
+  //           notification: notification, typeId: widget.appointmentId);
+  //       snackBarService.showSnackBar(
+  //           message: 'Appointment status was updated', title: 'Success!');
+  //     // } else {
+  //     //   navigationService.pop();
+  //     //   snackBarService.showSnackBar(
+  //     //       message: 'Check your network connection and try again',
+  //     //       title: 'Network Error');
+  //     // }
+  //   }
+  // }
   // Future<void> updateAppointmentStatus(String appointmentId) async {
   //   final appointmentStatus = await showSelectionDialog([
   //     AppointmentStatus.Completed.name,
@@ -197,6 +197,57 @@ class _AppointmentCardState extends State<AppointmentCard> {
   //   html.document.body?.append(snackBar);
   //   html.window.setTimeout(() => snackBar.remove(), 3000);
   // }
+
+
+
+  void updateAppointmentStatus(BuildContext context, String appointmentId) async {
+    final appointmentStatus = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Set Appointment Status'),
+          content: SelectionOption(
+            options: [
+              AppointmentStatus.Completed.name,
+              AppointmentStatus.Cancelled.name,
+              AppointmentStatus.Pending.name,
+              AppointmentStatus.Declined.name,
+            ],
+          ),
+        );
+      },
+    );
+
+    if (appointmentStatus != null) {
+      try {
+        dialogService.showDefaultLoadingDialog(
+            barrierDismissible: false, willPop: false);
+        await apiService.updateAppointmentStatus(
+            appointmentId: appointmentId, appointmentStatus: appointmentStatus);
+        navigationService.pop();
+
+        final notification = NotificationModel(
+          user_id: widget.patient.id,
+          notification_title: 'Appointment status: ${appointmentStatus}.',
+          notification_msg: 'Your Appointment on ${widget.appointmentDate}'
+              ' with Doc. ${widget.doctor} was marked: ${appointmentStatus}',
+          notification_type: 'appointment',
+          isRead: false,
+        );
+
+        await apiService.saveNotification(
+            notification: notification, typeId: widget.appointmentId);
+        snackBarService.showSnackBar(
+            message: 'Appointment status was updated', title: 'Success!');
+      } catch (e) {
+        navigationService.pop();
+        snackBarService.showSnackBar(
+            message: 'Check your network connection and try again',
+            title: 'Network Error');
+      }
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -331,7 +382,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                       ),
                       InkWell(
                         onTap: () =>
-                            updateAppointmentStatus(widget.appointmentId),
+                            updateAppointmentStatus(context, widget.appointmentId),
                         child: Row(
                           children: [
                             Text(

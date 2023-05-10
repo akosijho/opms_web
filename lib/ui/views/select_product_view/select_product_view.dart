@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:opmswebstaff/ui/views/select_product_view/select_product_view_model.dart';
+import 'package:opmswebstaff/ui/widgets/cart_product_card/card_product_card.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../constants/styles/palette_color.dart';
 import '../../../constants/styles/text_styles.dart';
-import '../../widgets/cart_medicine_card/card_medicine_card.dart';
 
 class SelectProductView extends StatelessWidget {
   const SelectProductView({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class SelectProductView extends StatelessWidget {
         },
         builder: (context, model, widget) => Scaffold(
               appBar: AppBar(
-                title: Text('Select Optical Note'),
+                title: Text('Select a Frame'),
               ),
               persistentFooterButtons: [
                 Container(
@@ -75,14 +75,14 @@ class SelectProductView extends StatelessWidget {
                             ),
                           ),
                           constraints: BoxConstraints(maxHeight: 43),
-                          hintText: 'Search Medicine...',
+                          hintText: 'Search Frame...',
                         ),
                       ),
                       SizedBox(height: 5),
                       Row(
                         children: [
                           Text(
-                            'Medicine List',
+                            'Frame List',
                             style: TextStyles.tsHeading5(),
                           ),
                           SizedBox(width: 2),
@@ -117,16 +117,16 @@ class SelectProductView extends StatelessWidget {
                                       radius: Radius.circular(40),
                                       child: ListView.separated(
                                         itemBuilder: (context, index) =>
-                                            CartMedicineCard(
+                                            CartProductCard(
                                           key: ObjectKey(index),
                                           notifyChange: () =>
                                               model.notifyListeners(),
-                                          medicine: model.productList[index],
+                                          product: model.productList[index],
                                           isChecked: model
                                               .productExistInSelectedMedicines(
                                                   model
                                                       .productList[index].id!),
-                                          selectedMedicines:
+                                          selectedProduct:
                                               model.selectedProduct,
                                         ),
                                         separatorBuilder: (context, index) =>
@@ -136,7 +136,7 @@ class SelectProductView extends StatelessWidget {
                                         itemCount: model.productList.length,
                                       ),
                                     )
-                                  : Center(child: Text('No Medicine Found...')))
+                                  : Center(child: Text('No Frame Found...')))
                     ],
                   ),
                 ),

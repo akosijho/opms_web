@@ -3,18 +3,22 @@ import 'package:opmswebstaff/constants/font_name/font_name.dart';
 import 'package:opmswebstaff/constants/styles/text_styles.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:opmswebstaff/ui/widgets/patient_card/patient_card.dart';
-import 'package:opmswebstaff/ui/widgets/payment_medicine_card/payment_medicine_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:opmswebstaff/ui/widgets/payment_balance_note_card/payment_balance_note_card.view.dart';
 import 'package:opmswebstaff/ui/widgets/payment_optical_note_card/payment_optical_note_card.dart';
+import 'package:opmswebstaff/ui/widgets/payment_product_card/payment_lens_card.dart';
+import 'package:opmswebstaff/ui/widgets/payment_product_card/payment_product_card.dart';
 import 'package:stacked/stacked.dart';
 import '../../../constants/styles/palette_color.dart';
 import '../../../constants/styles/text_border_styles.dart';
 import '../../../models/patient_model/patient_model.dart';
 import 'add_payment_view_model.dart';
 
+
 class AddPaymentView extends StatelessWidget {
   final Patient patient;
+
   const AddPaymentView({Key? key, required this.patient}) : super(key: key);
 
   @override
@@ -48,44 +52,53 @@ class AddPaymentView extends StatelessWidget {
               ]),
           height: 55,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Total Payment',
-                        style: TextStyles.tsHeading5(),
-                      ),
-                      Text(
-                        '${model.totalAmountFinal}'.toCurrency!,
-                        style: TextStyle(
-                            color: Colors.deepOrangeAccent,
-                            fontSize: 18,
-                            fontFamily: FontNames.sfPro,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              // Expanded(
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(6.0),
+              //     child: Column(
+              //       mainAxisAlignment: MainAxisAlignment.start,
+              //       crossAxisAlignment: CrossAxisAlignment.end,
+              //       children: [
+              //         Text(
+              //           'Total Payment',
+              //           style: TextStyles.tsHeading5(),
+              //         ),
+              //         Text(
+              //           '${model.totalAmountFinal}'.toCurrency!,
+              //           // '${model.depositTxtController.text}'.toCurrency!,
+              //           style: TextStyle(
+              //               color: Colors.deepOrangeAccent,
+              //               fontSize: 18,
+              //               fontFamily: FontNames.sfPro,
+              //               fontWeight: FontWeight.bold),
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
               InkWell(
-                onTap: () {
-                  if (model.addPaymentFormKey.currentState!.validate()){
-                  model.savePaymentInfo(
-                  paymentType: model.paymentTypeTxtController.text,
-                  optometrist: model.optometristTxtController.text,
-                  totalAmountFinal: model.totalAmountFinal,
-                  patientId: patient.id,
-                  opticalNoteSubTotal: model.opticalNoteSubTotal,
-                  productSubTotal: model.productSubTotal,
-                  selectedProduct: model.selectedProducts,
-                  selectedNotes: model.selectedOpticalNotes,
-                  patient_name: patient.fullName,
-                );}},
+                onTap: () =>
+                    model.savePaymentInfo(
+                      paymentType: model.paymentTypeTxtController.text,
+                      optometrist: model.optometristTxtController.text,
+                      totalAmountFinal: model.totalAmountFinal,
+                      deposit: model.depositTxtController.text,
+                      balance: model.balance,
+                      patientId: patient.id,
+                      opticalNoteSubTotal: model.opticalNoteSubTotal,
+                      balanceNoteSubTotal: model.opticalNoteSubTotal,
+                      productSubTotal: model.productSubTotal,
+                      lensSubTotal: model.lensSubTotal,
+                      selectedProduct: model.selectedProduct,
+                      selectedLens: model.selectedLens,
+                      selectedNotes: model.selectedOpticalNotes,
+                      patient_name: patient.fullName,
+                      context: context
+                    ),
+                // await model.addBalanceNote(patientId: patient.id);
+
                 child: Container(
                   height: double.maxFinite,
                   color: Palettes.kcPurpleMain,
@@ -155,8 +168,8 @@ class AddPaymentView extends StatelessWidget {
                             controller: model.optometristTxtController,
                             textInputAction: TextInputAction.next,
                             enabled: false,
-                            validator: (value) =>
-                                model.validatorService.validateDentist(value!),
+                            validator: (value) => model.validatorService
+                                .validateOptometrist(value!),
                             keyboardType: TextInputType.datetime,
                             decoration: InputDecoration(
                                 errorBorder: TextBorderStyles.errorBorder,
@@ -204,7 +217,7 @@ class AddPaymentView extends StatelessWidget {
                         ),
                         SizedBox(height: 5),
                         GestureDetector(
-                          onTap: () => model.selectDate(context),
+                          onTap: () => model.selectDate(model.dateTxtController,context),
                           child: TextFormField(
                             controller: model.dateTxtController,
                             textInputAction: TextInputAction.next,
@@ -281,7 +294,6 @@ class AddPaymentView extends StatelessWidget {
                               'Notes or Services',
                               style: TextStyles.tsButton1(),
                             ),
-
                             ActionChip(
                               label: Text(
                                   0 <= 0 ? 'Select Optical Note' : 'Add more'),
@@ -291,7 +303,7 @@ class AddPaymentView extends StatelessWidget {
                               backgroundColor: Palettes.kcBlueMain1,
                               tooltip: 'Select Optical Note',
                               onPressed: () =>
-                                  model.selectOpticalNote(patient.id),
+                                  model.selectOpticalNote(context, patient.id,),
                             )
                           ],
                         ),
@@ -307,7 +319,7 @@ class AddPaymentView extends StatelessWidget {
                               primary: false,
                               itemBuilder: (context, index) =>
                                   PaymentOpticalNoteCard(
-                                      dentalNote:
+                                      opticalNote:
                                       model.selectedOpticalNotes[index],
                                       patientID: patient.id),
                               separatorBuilder: (context, index) =>
@@ -322,23 +334,65 @@ class AddPaymentView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Product',
+                              'Balance',
                               style: TextStyles.tsButton1(),
                             ),
                             ActionChip(
-                              label:
-                              Text(0 <= 0 ? 'Select Product' : 'Add more'),
+                              label: Text(
+                                  0 <= 0 ? 'Select Balance Note' : 'Add more'),
                               labelPadding: EdgeInsets.symmetric(horizontal: 8),
                               labelStyle:
                               TextStyles.tsBody2(color: Colors.white),
                               backgroundColor: Palettes.kcBlueMain1,
-                              tooltip: 'Select Product',
+                              tooltip: 'Select Balance Note',
                               onPressed: () =>
-                                  model.selectProducts(patient.id),
+                                  model.selectBalanceNote(context, patient.id),
+                            )
+                          ],
+                        ),
+                        Container(
+                          width: double.maxFinite,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,
+                          ),
+                          padding: EdgeInsets.symmetric(vertical: 8),
+                          child: model.selectedBalanceNotes.isNotEmpty
+                              ? ListView.separated(
+                              shrinkWrap: true,
+                              primary: false,
+                              itemBuilder: (context, index) =>
+                                  PaymentBalanceNoteCard(
+                                      balanceNote:
+                                      model.selectedBalanceNotes[index],
+                                      patientID: patient.id),
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: 10),
+                              itemCount: model.selectedBalanceNotes.length)
+                              : SizedBox(
+                              height: 100,
+                              child:
+                              Center(child: Text('No Balance Notes Selected'))),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Frame',
+                              style: TextStyles.tsButton1(),
+                            ),
+                            ActionChip(
+                              label: Text(0 <= 0 ? 'Select Frame' : 'Add more'),
+                              labelPadding: EdgeInsets.symmetric(horizontal: 8),
+                              labelStyle:
+                              TextStyles.tsBody2(color: Colors.white),
+                              backgroundColor: Palettes.kcBlueMain1,
+                              tooltip: 'Select Frame',
+                              onPressed: () =>
+                                  model.selectProduct(context, patient.id),
                             ),
                           ],
                         ),
-                        model.selectedProducts.isNotEmpty
+                        model.selectedProduct.isNotEmpty
                             ? Container(
                           width: double.maxFinite,
                           decoration: BoxDecoration(
@@ -349,42 +403,66 @@ class AddPaymentView extends StatelessWidget {
                               shrinkWrap: true,
                               primary: false,
                               itemBuilder: (context, index) =>
-                                  PaymentMedicineCard(
-                                      medicine:
-                                      model.selectedProducts[index]),
+                                  PaymentProductCard(
+                                      product:
+                                      model.selectedProduct[index]),
                               separatorBuilder: (context, index) =>
                                   SizedBox(height: 4),
-                              itemCount: model.selectedProducts.length),
+                              itemCount: model.selectedProduct.length),
                         )
                             : Container(
                           height: 50,
                           width: double.maxFinite,
                           color: Colors.grey.shade200,
                           alignment: Alignment.center,
-                          child: Text('No Medicine Selected'),
+                          child: Text('No Frame Selected'),
                         ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     Text(
-                        //       'Rx',
-                        //       style: TextStyles.tsButton1(),
-                        //     ),
-                        //
-                        //     ActionChip(
-                        //       label: Text(
-                        //           0 <= 0 ? 'Add RX' : 'Add more'),
-                        //       labelPadding: EdgeInsets.symmetric(horizontal: 8),
-                        //       labelStyle:
-                        //       TextStyles.tsBody2(color: Colors.white),
-                        //       backgroundColor: Palettes.kcBlueMain1,
-                        //       tooltip: 'Add RX',
-                        //       onPressed: () =>
-                        //           // model.addRx(patient.id),
-                        //       AddRxView()
-                        //     )
-                        //   ],
-                        // ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Lens',
+                              style: TextStyles.tsButton1(),
+                            ),
+                            ActionChip(
+                              label: Text(0 <= 0 ? 'Select Lens' : 'Add more'),
+                              labelPadding: EdgeInsets.symmetric(horizontal: 8),
+                              labelStyle:
+                              TextStyles.tsBody2(color: Colors.white),
+                              backgroundColor: Palettes.kcBlueMain1,
+                              tooltip: 'Select Lens',
+                              onPressed: () =>
+                                  model.selectLens(context, patient.id),
+                            ),
+                          ],
+                        ),
+                        model.selectedLens.isNotEmpty
+                            ? Container(
+                          width: double.maxFinite,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,
+                          ),
+                          padding: EdgeInsets.symmetric(vertical: 8),
+                          child: ListView.separated(
+                              shrinkWrap: true,
+                              primary: false,
+                              itemBuilder: (context, index) =>
+                                  PaymentLensCard(
+                                      lens:
+                                      model.selectedLens[index]),
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: 4),
+                              itemCount: model.selectedLens.length),
+                        )
+                            : Container(
+                          height: 50,
+                          width: double.maxFinite,
+                          color: Colors.grey.shade200,
+                          alignment: Alignment.center,
+                          child: Text('No Lens Selected'),
+                        ),
+
                         SizedBox(height: 6),
                         Container(
                           height: 8,
@@ -424,12 +502,57 @@ class AddPaymentView extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      'Product Sub Total:',
+                                      'Balance Note Sub Total:',
+                                      style: TextStyles.tsHeading5(),
+                                    ),
+                                  ),
+                                  Text(
+                                    // '${model.balanceNoteSubTotal.toString().toCurrency}',
+                                    '${model.balanceNoteSubTotal}'.toCurrency!,
+                                    style: TextStyle(
+                                      color: Colors.deepOrangeAccent,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                ],
+                              ),
+                              SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Frame Sub Total:',
                                       style: TextStyles.tsHeading5(),
                                     ),
                                   ),
                                   Text(
                                     '${model.productSubTotal}'.toCurrency!,
+                                    style: TextStyle(
+                                      color: Colors.deepOrangeAccent,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                ],
+                              ),
+                              SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Lens Sub Total:',
+                                      style: TextStyles.tsHeading5(),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${model.lensSubTotal}'.toCurrency!,
                                     style: TextStyle(
                                       color: Colors.deepOrangeAccent,
                                       fontWeight: FontWeight.bold,
@@ -508,6 +631,152 @@ class AddPaymentView extends StatelessWidget {
                                           errorStyle: TextStyle(
                                               color: Colors.red, height: 0),
                                           hintText: 'Set Amount',
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              SizedBox(
+                                height: 60,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Deposit:',
+                                        style: TextStyles.tsHeading5(),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: TextFormField(
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          color: Colors.deepOrangeAccent,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        controller:
+                                        model.depositTxtController,
+                                        onChanged: (value) =>
+                                            model.computeBalance(),
+                                        validator: (value) => model
+                                            .validatorService
+                                            .validatePrice(value!),
+                                        enableInteractiveSelection: false,
+                                        keyboardType: TextInputType.number,
+                                        textInputAction: TextInputAction.done,
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.zero,
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          constraints: BoxConstraints(
+                                              maxHeight: 60, minHeight: 60),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(4),
+                                              borderSide: BorderSide(
+                                                  color:
+                                                  Colors.deepOrangeAccent)),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(4),
+                                            borderSide: BorderSide(
+                                                color: Colors.deepOrangeAccent,
+                                                width: 2),
+                                          ),
+                                          focusedErrorBorder:
+                                          OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(0),
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 2),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(4),
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 2),
+                                          ),
+                                          errorStyle: TextStyle(
+                                              color: Colors.red, height: 0),
+                                          hintText: 'Set Amount',
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              SizedBox(
+                                height: 60,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Balance:',
+                                        style: TextStyles.tsHeading5(),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: TextFormField(
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          color: Colors.deepOrangeAccent,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        enabled:
+
+                                        //   model.dentalNoteSubTotal == 0 &&
+                                        // model.medicineSubTotal == 0,
+                                        model.totalAmountFinal == 0 &&
+                                            model.depositTxtController == 0,
+                                        controller:
+                                        model.balanceTxtController,
+                                        onChanged: (value) =>
+                                            model.onBalanceAmountTextEdit(value),
+                                        // validator: (value) => model
+                                        //     .validatorService
+                                        //     .validatePrice(value!),
+                                        enableInteractiveSelection: false,
+                                        keyboardType: TextInputType.number,
+                                        textInputAction: TextInputAction.done,
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.zero,
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          constraints: BoxConstraints(
+                                              maxHeight: 60, minHeight: 60),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(4),
+                                              borderSide: BorderSide(
+                                                  color:
+                                                  Colors.deepOrangeAccent)),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(4),
+                                            borderSide: BorderSide(
+                                                color: Colors.deepOrangeAccent,
+                                                width: 2),
+                                          ),
+                                          focusedErrorBorder:
+                                          OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(0),
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 2),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(4),
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 2),
+                                          ),
+                                          errorStyle: TextStyle(
+                                              color: Colors.red, height: 0),
+                                          hintText: '0.00',
                                         ),
                                       ),
                                     ),

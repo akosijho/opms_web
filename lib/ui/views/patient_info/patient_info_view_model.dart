@@ -12,7 +12,10 @@ import 'package:opmswebstaff/core/service/url_launcher/url_launcher_service.dart
 import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
 import 'package:opmswebstaff/ui/views/edit_patient/edit_patient_view.dart';
+import 'package:opmswebstaff/ui/views/optical_certification/optical_certification_view.dart';
 import 'package:opmswebstaff/ui/views/patient_optical_chart/patient_optical_chart_view.dart';
+import 'package:opmswebstaff/ui/views/view_patient_appointment/view_patient_appointment_view.dart';
+import 'package:opmswebstaff/ui/views/view_patient_payments/view_patient_payment.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../core/service/api/api_service.dart';
@@ -108,10 +111,22 @@ class PatientInfoViewModel extends BaseViewModel {
     }
   }
 
-  void goToViewPatientAppointmentView({required Patient? patient}) {
-    if (patient != null)
-      navigationService.pushNamed(Routes.ViewPatientAppointment,
-          arguments: ViewPatientAppointmentArguments(patient: patient));
+  // void goToViewPatientAppointmentView({required Patient? patient}) {
+  //   if (patient != null)
+  //     navigationService.pushNamed(Routes.ViewPatientAppointment,
+  //         arguments: ViewPatientAppointmentArguments(patient: patient));
+  // }
+  void goToViewPatientAppointmentView({required Patient? patient, required BuildContext context}) {
+    if (patient != null) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            child:ViewPatientAppointment(patient: patient),
+          );
+        },
+      );
+    }
   }
 
   // void goToViewPatientPaymentsView({required Patient? patient}) {
@@ -119,9 +134,19 @@ class PatientInfoViewModel extends BaseViewModel {
   //     navigationService.pushNamed(Routes.ViewPatientPayment,
   //         arguments: ViewPatientPaymentArguments(patient: patient));
   // }
-  void goToViewPatientPaymentsView({required Patient patient}) {
-    navigationService.pushNamed(Routes.ViewPatientPayment,
-        arguments: ViewPatientPaymentArguments(patient: patient));
+  // void goToViewPatientPaymentsView({required Patient patient}) {
+  //   navigationService.pushNamed(Routes.ViewPatientPayment,
+  //       arguments: ViewPatientPaymentArguments(patient: patient));
+  // }
+  void goToViewPatientPaymentsView({required Patient patient, required BuildContext context}) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: ViewPatientPayment(patient: patient),
+        );
+      },
+    );
   }
 
 
@@ -131,11 +156,25 @@ class PatientInfoViewModel extends BaseViewModel {
           arguments: PrescriptionViewArguments(patient: patient));
   }
 
-  void goToOpticalCertificateView({required Patient? patient}) {
-    if (patient != null)
-      navigationService.pushNamed(Routes.OpticalCertificationView,
-          arguments: OpticalCertificationViewArguments(patient: patient));
+  // void goToOpticalCertificateView({required Patient? patient}) {
+  //   if (patient != null)
+  //     navigationService.pushNamed(Routes.OpticalCertificationView,
+  //         arguments: OpticalCertificationViewArguments(patient: patient));
+  // }
+
+  void goToOpticalCertificateView({required Patient? patient, required BuildContext context}) {
+    if (patient != null) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: OpticalCertificationView(patient: patient),
+          );
+        },
+      );
+    }
   }
+
 
   // void goToUpdatePatient({required Patient? patient}) {
   //   if (patient != null)
@@ -143,21 +182,35 @@ class PatientInfoViewModel extends BaseViewModel {
   //         arguments: EditPatientViewArguments(patient: patient));
   // }
 
+  // void goToUpdatePatient({required Patient? patient, required BuildContext context}) {
+  //   if (patient != null) {
+  //     showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return Container(
+  //             height: 800,
+  //             width: 800,
+  //             child: EditPatientView(patient: patient),
+  //
+  //         );
+  //       },
+  //     );
+  //   }
+  // }
+
   void goToUpdatePatient({required Patient? patient, required BuildContext context}) {
     if (patient != null) {
-      showDialog(
+      showDialog<String>(
         context: context,
         builder: (BuildContext context) {
-          return Container(
-              height: 800,
-              width: 800,
-              child: EditPatientView(patient: patient),
-
+          return Dialog(
+            child: EditPatientView(patient: patient),
           );
         },
       );
     }
   }
+
 
   Future<void> updatePatientImage() async {
     XFile? selectedImage;
