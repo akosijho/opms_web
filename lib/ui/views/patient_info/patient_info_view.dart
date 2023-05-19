@@ -138,7 +138,7 @@ class PatientInfoView extends StatelessWidget {
                                 width: 60,
                                 child: InkWell(
                                   onTap: () =>
-                                      model.goToUpdatePatient(patient: patient, context: context),
+                                      model.goToUpdatePatient(patient,context),
                                   child: Icon(Icons.edit,
                                       color: Colors.grey.shade900),
                                   // style: ElevatedButton.styleFrom(
@@ -158,56 +158,6 @@ class PatientInfoView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // Row(
-                          //   children: [
-                          //     // Expanded(
-                          //     //   child: ElevatedButton.icon(
-                          //     //     onPressed: () => model
-                          //     //         .callPatient(model.patient!.phoneNum),
-                          //     //     label: Text(
-                          //     //       'Call',
-                          //     //       style:
-                          //     //           TextStyles.tsBody3(color: Colors.white),
-                          //     //     ),
-                          //     //     icon: Icon(
-                          //     //       Icons.phone,
-                          //     //       size: 16,
-                          //     //     ),
-                          //     //     style: ElevatedButton.styleFrom(
-                          //     //         primary: Palettes.kcBlueDark),
-                          //     //   ),
-                          //     // ),
-                          //     // SizedBox(width: 8),
-                          //     // Expanded(
-                          //     //     child: ElevatedButton.icon(
-                          //     //   onPressed: () =>
-                          //     //       model.textPatient(model.patient!.phoneNum),
-                          //     //   label: Text(
-                          //     //     'Text',
-                          //     //     style:
-                          //     //         TextStyles.tsBody3(color: Colors.white),
-                          //     //   ),
-                          //     //   icon: Icon(
-                          //     //     Icons.send,
-                          //     //     size: 16,
-                          //     //   ),
-                          //     //   style: ElevatedButton.styleFrom(
-                          //     //       primary: Palettes.kcNeutral1),
-                          //     // )),
-                          //     SizedBox(width: 8),
-                          //     SizedBox(
-                          //       width: 60,
-                          //       child: ElevatedButton(
-                          //         onPressed: () =>
-                          //             model.goToUpdatePatient(patient: patient),
-                          //         child: Icon(Icons.edit,
-                          //             color: Colors.grey.shade900),
-                          //         style: ElevatedButton.styleFrom(
-                          //             primary: Colors.grey.shade300),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
 
                           Row(
                             children: [
@@ -310,75 +260,9 @@ class PatientInfoView extends StatelessWidget {
                             ],
                           ),
                           SizedBox(height: 12),
-                          // SizedBox(
-                          //   height: 30,
-                          //   child: Row(
-                          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //     children: [
-                          //       Text(
-                          //         'Photos',
-                          //         style: TextStyles.tsHeading4(),
-                          //       ),
-                          //       InkWell(
-                          //         onTap: () {},
-                          //         child: SizedBox(
-                          //           width: 100,
-                          //           child: Text(
-                          //             'See All',
-                          //             textAlign: TextAlign.end,
-                          //             style: TextStyle(
-                          //               color: Colors.blue,
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       )
-                          //     ],
-                          //   ),
-                          // ),
-                          // SizedBox(height: 5),
-                          // Container(
-                          //   height: 130,
-                          //   color: Colors.grey.shade200,
-                          //   child: Row(
-                          //     mainAxisAlignment: MainAxisAlignment.center,
-                          //     crossAxisAlignment: CrossAxisAlignment.center,
-                          //     children: [
-                          //       Text('No Photos'),
-                          //       TextButton(
-                          //         onPressed: () {},
-                          //         child: Text('Add Now'),
-                          //         style: TextButton.styleFrom(
-                          //             textStyle: TextStyle(
-                          //           fontSize: 16,
-                          //           fontWeight: FontWeight.w500,
-                          //         )),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
-                          // SizedBox(height: 8),
+
                           Divider(),
-                          // Card(
-                          //   shadowColor: Colors.grey.shade500,
-                          //   child: ListTile(
-                          //     onTap: () => model.goToMedicalHistoryView(
-                          //         patientId: patient.id),
-                          //     leading: Icon(
-                          //       Icons.history,
-                          //       color: Colors.black,
-                          //     ),
-                          //     title: Text(
-                          //       'Medical History',
-                          //       style: TextStyle(
-                          //           fontWeight: FontWeight.bold, fontSize: 17),
-                          //     ),
-                          //     trailing: Icon(
-                          //       Icons.arrow_right,
-                          //       size: 35,
-                          //       color: Colors.blue,
-                          //     ),
-                          //   ),
-                          // ),
+
                           SizedBox(height: 4),
                           Card(
                             shadowColor: Colors.grey.shade500,
@@ -402,27 +286,7 @@ class PatientInfoView extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 4),
-                          // Card(
-                          //   shadowColor: Colors.grey.shade500,
-                          //   child: ListTile(
-                          //     onTap: () =>
-                          //         model.goToPrescriptionView(patient: patient),
-                          //     leading: SvgPicture.asset(
-                          //       'assets/icons/Pills.svg',
-                          //       color: Colors.black,
-                          //     ),
-                          //     title: Text(
-                          //       'Prescription',
-                          //       style: TextStyle(
-                          //           fontWeight: FontWeight.bold, fontSize: 17),
-                          //     ),
-                          //     trailing: Icon(
-                          //       Icons.arrow_right,
-                          //       size: 35,
-                          //       color: Colors.blue,
-                          //     ),
-                          //   ),
-                          // ),
+
                           SizedBox(height: 4),
                           Card(
                             shadowColor: Colors.grey.shade500,

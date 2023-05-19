@@ -11,6 +11,7 @@ import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
 import 'package:opmswebstaff/core/service/toast/toast_service.dart';
 import 'package:opmswebstaff/models/product/product.dart';
+import 'package:opmswebstaff/ui/views/update_product/update_product_view.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;
@@ -120,10 +121,26 @@ class _ProductCardState extends State<ProductCard> {
         break;
     }
   }
-  void updateProduct(Product medicine) {
-    navigationService.pushNamed(Routes.UpdateProductViews,
-        arguments: UpdateProductViewArguments(medicine: medicine));
+  // void updateProduct(Product product) {
+  //   navigationService.pushNamed(Routes.UpdateProductViews,
+  //       arguments: UpdateProductViewArguments(medicine: product));
+  // }
+
+  void updateProduct(Product product) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+              width: 500, // Specify the desired container width
+              height: 500, // Specify the desired container height
+              child: UpdateProductView(medicine: product)
+          ),
+        );
+      },
+    );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -209,11 +226,12 @@ class _ProductCardState extends State<ProductCard> {
       return Align(
         alignment: Alignment.center,
         child: SizedBox(
-          height: 50,
-          width: 50,
+          height: 150,
+          width: 150,
           child: SvgPicture.asset(
             'assets/icons/eyeglass.svg',
             color: Colors.black,
+
           ),
         ),
       );

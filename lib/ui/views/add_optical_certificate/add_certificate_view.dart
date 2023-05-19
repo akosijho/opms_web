@@ -68,7 +68,7 @@ class AddCertificateView extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   enabled: false,
                   validator: (value) =>
-                      model.validatorService.validateProcedureName(value!),
+                      model.validatorService.validateServiceName(value!),
                   keyboardType: TextInputType.datetime,
                   decoration: InputDecoration(
                       errorBorder: TextBorderStyles.errorBorder,

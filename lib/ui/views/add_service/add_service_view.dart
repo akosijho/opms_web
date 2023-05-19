@@ -68,7 +68,7 @@ class _AddServiceViewState extends State<AddServiceView> {
                     TextFormField(
                       controller: procedureName,
                       validator: (value) =>
-                          model.validatorService.validateMedicineName(value!),
+                          model.validatorService.validateProductName(value!),
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         errorBorder: TextBorderStyles.errorBorder,

@@ -17,8 +17,8 @@ abstract class PdfService {
   Future<Uint8List> printOpticalCertificate(
       {required OpticalCertificate opticalCertificate, required Patient patient});
 
-  Future<Uint8List> printOpticalReceipt(
-      {required OpticalReceipt opticalReceipt, required Patient patient});
+  // Future<Uint8List> printOpticalReceipt(
+  //     {required OpticalReceipt opticalReceipt, required Patient patient});
 
   Future<void> savePdfFile2(
       {required String fileName, required Uint8List byteList});

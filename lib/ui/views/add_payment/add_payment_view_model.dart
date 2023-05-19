@@ -110,7 +110,6 @@ class AddPaymentViewModel extends BaseViewModel {
     }
   }
 
-
   // void showSelectPaymentType() async {
   //   selectedPaymentType = await Get.dialog(SelectPaymentType());
   //   paymentTypeTxtController.text = selectedPaymentType;
@@ -134,33 +133,19 @@ class AddPaymentViewModel extends BaseViewModel {
     }
   }
 
-
-  // void selectDate() async {
-  //   final DateTime? date =
-  //   await bottomSheetService.openBottomSheet(SelectionDate(
-  //     title: 'Set Payment Date',
-  //     initialDate: DateTime.now(),
-  //     maxDate: DateTime.now(),
-  //   ));
-  //   if (date != null) {
-  //     selectedPaymentDate = date;
-  //     notifyListeners();
-  //     dateTxtController.text = DateFormat.yMMMd().format(selectedPaymentDate!);
-  //   }
-  // }
-  Future<void> selectDate(TextEditingController textEditingController,
-      BuildContext context) async {
+  Future<void> selectDate(
+      TextEditingController textEditingController, BuildContext context) async {
     DateTime? date = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
-      helpText: 'Select Birth Date',
+      helpText: 'Select Date',
       cancelText: 'CANCEL',
       confirmText: 'SELECT',
       errorFormatText: 'Invalid date format',
       errorInvalidText: 'Invalid date',
-      fieldLabelText: 'Birth date',
+      fieldLabelText: 'date',
       fieldHintText: 'Month/Date/Year',
       builder: (BuildContext context, Widget? child) {
         return Theme(
@@ -182,15 +167,6 @@ class AddPaymentViewModel extends BaseViewModel {
     }
   }
 
-  // void selectOpticalNote(String patientId) async {
-  //   selectedOpticalNotes = await navigationService.pushNamed(
-  //       Routes.PaymentSelectOpticalNoteView,
-  //       arguments:
-  //       PaymentSelectOpticalNoteViewArguments(patientId: patientId)) ??
-  //       [];
-  //   notifyListeners();
-  //   computeOpticalNoteSubTotal();
-  // }
   void selectOpticalNote(BuildContext context, String patientId) async {
     selectedOpticalNotes = await showDialog<List<OpticalNotes>>(
       context: context,
@@ -203,21 +179,13 @@ class AddPaymentViewModel extends BaseViewModel {
           ),
         );
       },
-    ) ?? [];
+    ) ??
+        [];
     notifyListeners();
     computeOpticalNoteSubTotal();
   }
 
 
-  // void selectBalanceNote(String patientId) async {
-  //   selectedBalanceNotes = await navigationService.pushNamed(
-  //       Routes.PaymentSelectBalanceNoteView,
-  //       arguments:
-  //       PaymentSelectBalanceNoteViewArguments(patientId: patientId)) ??
-  //       [];
-  //   notifyListeners();
-  //   computeBalanceNoteSubTotal();
-  // }
   void selectBalanceNote(BuildContext context, String patientId) async {
     selectedBalanceNotes = await showDialog<List<BalanceNotes>>(
       context: context,
@@ -230,18 +198,12 @@ class AddPaymentViewModel extends BaseViewModel {
           ),
         );
       },
-    ) ?? [];
+    ) ??
+        [];
     notifyListeners();
     computeBalanceNoteSubTotal();
   }
 
-
-  // void selectProduct(String patientId) async {
-  //   selectedProduct =
-  //       await navigationService.pushNamed(Routes.SelectProductView) ?? [];
-  //   notifyListeners();
-  //   computeProductSubTotal();
-  // }
 
   void selectProduct(BuildContext context, String patientId) async {
     selectedProduct = await showDialog<List<Product>>(
@@ -255,11 +217,11 @@ class AddPaymentViewModel extends BaseViewModel {
           ),
         );
       },
-    ) ?? [];
+    ) ??
+        [];
     notifyListeners();
     computeProductSubTotal();
   }
-
 
   // void selectLens(String patientId) async {
   //   selectedLens =
@@ -279,11 +241,11 @@ class AddPaymentViewModel extends BaseViewModel {
           ),
         );
       },
-    ) ?? [];
+    ) ??
+        [];
     notifyListeners();
     computeLensSubTotal();
   }
-
 
   // void goToSelectProcedure(String patientId) async {
   //   selectedService =
@@ -295,8 +257,8 @@ class AddPaymentViewModel extends BaseViewModel {
 
   void computeOpticalNoteSubTotal() {
     opticalNoteSubTotal = 0;
-    for (OpticalNotes dentalNote in selectedOpticalNotes) {
-      opticalNoteSubTotal += double.parse(dentalNote.service.price!);
+    for (OpticalNotes opticalNote in selectedOpticalNotes) {
+      opticalNoteSubTotal += double.parse(opticalNote.service.price!);
       notifyListeners();
     }
     computeTotalAmountFinal();
@@ -397,9 +359,9 @@ class AddPaymentViewModel extends BaseViewModel {
   void updateOpticalNotePaidStatusOnDB(
       {List<OpticalNotes>? selectedNotes, required String patientId}) async {
     if (selectedOpticalNotes.isNotEmpty)
-      for (OpticalNotes dentalNote in selectedNotes ?? []) {
+      for (OpticalNotes opticalNote in selectedNotes ?? []) {
         await apiService.updateOpticalANotePaidStatus(
-            patientId: patientId, optical_noteId: dentalNote.id, isPaid: true);
+            patientId: patientId, optical_noteId: opticalNote.id, isPaid: true);
       }
   }
 
@@ -412,24 +374,22 @@ class AddPaymentViewModel extends BaseViewModel {
       }
   }
 
-
-  Future<void> savePaymentInfo({
-    List<OpticalNotes>? selectedNotes,
-    List<Product>? selectedProduct,
-    List<Lens>? selectedLens,
-    required String optometrist,
-    required String patientId,
-    required String patient_name,
-    double? productSubTotal,
-    double? lensSubTotal,
-    double? opticalNoteSubTotal,
-    double? balanceNoteSubTotal,
-    required double totalAmountFinal,
-    required String deposit,
-    double? balance,
-    required String paymentType,
-    required BuildContext context
-  }) async {
+  Future<void> savePaymentInfo(
+      {List<OpticalNotes>? selectedNotes,
+        List<Product>? selectedProduct,
+        List<Lens>? selectedLens,
+        required String optometrist,
+        required String patientId,
+        required String patient_name,
+        double? productSubTotal,
+        double? lensSubTotal,
+        double? opticalNoteSubTotal,
+        double? balanceNoteSubTotal,
+        required double totalAmountFinal,
+        required String deposit,
+        double? balance,
+        required String paymentType,
+        required BuildContext context}) async {
     if (addPaymentFormKey.currentState!.validate()) {
       dialogService.showConfirmDialog(
           onCancel: () => navigationService.pop(),
@@ -463,7 +423,8 @@ class AddPaymentViewModel extends BaseViewModel {
               ),
             );
 
-            final patientReference = FirebaseFirestore.instance.collection('patients');
+            final patientReference =
+            FirebaseFirestore.instance.collection('patients');
             final balanceAmount = await patientReference
                 .doc(patientId)
                 .collection('balance_notes')
@@ -486,67 +447,27 @@ class AddPaymentViewModel extends BaseViewModel {
               //
               // navigationService.popUntilFirstAndPushNamed(Routes.ReceiptView,
               //     arguments: ReceiptViewArguments(payment: paymentRec));
+              // navigationService.popUntilFirstAndPushNamed(Routes.MainBodyView);
 
-              // await showDialog(
-              //   context: context,
-              //   builder: (_) {
-              //         return Center(
-              //           child: Container(
-              //             width: 500,
-              //             height: 600,
-              //             child: ReceiptView(payment: paymentRec,  showAppBar: false),
-              //           ),
-              //         );
-              //       },
-              // );
-
-            await showDialog(
+              showDialog(
                 context: context,
-                builder: (_) => SingleChildScrollView(
-                  child: SizedBox(
-                    width: 500.0,
-                    height: 600.0,
-                    child: AlertDialog(
-                      title: Text('Receipt'),
-                      content: ReceiptView(payment: paymentRec,  showAppBar: false),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            navigationService.popUntilNamed(Routes.MainBodyView);
-                          },
-                          child: Text('Close'),
-                        ),
-                      ],
-                    ),
+                builder: (_) => AlertDialog(
+                  title: Text('Receipt'),
+                  content: Container(
+                    height: 600,
+                    width: 400,
+                    child: ReceiptView(payment: paymentRec, showAppBar: false),
                   ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        navigationService.popAllAndPushNamed(Routes.MainBodyView);
+                      },
+                      child: Text('Close'),
+                    ),
+                  ],
                 ),
               );
-
-              // String? selectedPaymentType = await showDialog<String>(
-              //   context: context,
-              //   builder: (BuildContext context) {
-              //     return Center(
-              //       child: Container(
-              //         width: 500,
-              //         height: 500,
-              //         child: SelectPaymentType(),
-              //       ),
-              //     );
-              //   },
-              // );
-
-              // await showDialog(
-              //   context: context,
-              //   builder: (_) => Container(
-              //     width: 500,
-              //     // height: 500,
-              //         child: ReceiptView(payment: paymentRec),
-              //
-              //   ),
-              // );
-
-
-
               final notification = NotificationModel(
                 user_id: patientId,
                 notification_title:
@@ -572,21 +493,4 @@ class AddPaymentViewModel extends BaseViewModel {
           });
     }
   }
-
-// Future<void> addBalanceNote({
-//   required String patientId,
-// }) async {
-//   final patientReference = FirebaseFirestore.instance.collection('patients');
-//   final balanceAmount =
-//       await patientReference.doc(patientId).collection('balance_notes').doc();
-//   await balanceAmount.set(BalanceNotes(
-//     isPaid: false,
-//     balance: balance.toString(),
-//     date: selectedPaymentDate.toString(),
-//   ).toJson(id: balanceAmount.id));
-//   // navigationService.popRepeated(2);
-//   // toastService.showToast(message: 'Successful: Set RX!');
-//   // debugPrint('RX Added');
-//   // refreshKey.currentState?.show();
-// }
 }

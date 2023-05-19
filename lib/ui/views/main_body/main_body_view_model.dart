@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:opmswebstaff/app/app.locator.dart';
 import 'package:opmswebstaff/app/app.logger.dart';
@@ -23,11 +24,13 @@ import 'package:opmswebstaff/ui/views/home/home_view.dart';
 import 'package:opmswebstaff/ui/views/home/responsive/desktop_view/desktop_body.dart';
 import 'package:opmswebstaff/ui/views/home/responsive/mobile_view/mobile_body.dart';
 import 'package:opmswebstaff/ui/views/home/responsive/responsive_layout.dart';
+import 'package:opmswebstaff/ui/views/patient_report/patient_report_view.dart';
 import 'package:opmswebstaff/ui/views/patients/patients_view.dart';
 import 'package:opmswebstaff/ui/views/payment_select_patient/payment_select_patient_view.dart';
 import 'package:opmswebstaff/ui/views/product/frame_lens/frame_lens_view.dart';
 import 'package:opmswebstaff/ui/views/product/product_view.dart';
 import 'package:opmswebstaff/ui/views/service/service_view.dart';
+import 'package:opmswebstaff/ui/views/user_view/user_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -42,6 +45,7 @@ class MainBodyViewModel extends BaseViewModel {
     ResponsiveLayout(
         desktopBody: MyDesktopBody(),
         mobileBody: MyMobileBody()),
+    // PatientReportView(showAppBar: true),
     AppointmentView(),
     PatientsView(),
     ServicesView(),
@@ -181,8 +185,23 @@ class MainBodyViewModel extends BaseViewModel {
     navigationService.pushNamed(Routes.NotificationView);
   }
 
-  void goToUserView(UserModel user) {
-    navigationService.pushNamed(Routes.UserView,
-        arguments: UserViewArguments(user: user));
+  // void goToUserView(UserModel user) {
+  //   navigationService.pushNamed(Routes.UserView,
+  //       arguments: UserViewArguments(user: user));
+  // }
+
+  void goToUserView(BuildContext context, UserModel user) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 500,
+            height: 700,
+            child: UserView(user: user),
+          ),
+        );
+      },
+    );
   }
 }

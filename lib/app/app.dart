@@ -184,11 +184,11 @@ import '../ui/views/edit_patient/edit_patient_view.dart';
         name: 'ViewOpticalNote',
         transitionsBuilder: TransitionsBuilders.slideBottom,
         durationInMilliseconds: 300),
-    CustomRoute(
-        page: ViewDentalNoteByToothView,
-        name: 'ViewDentalNoteByToothView',
-        transitionsBuilder: TransitionsBuilders.slideBottom,
-        durationInMilliseconds: 300),
+    // CustomRoute(
+    //     page: ViewDentalNoteByToothView,
+    //     name: 'ViewDentalNoteByToothView',
+    //     transitionsBuilder: TransitionsBuilders.slideBottom,
+    //     durationInMilliseconds: 300),
     CustomRoute(
         page: UpdateServiceView,
         name: 'UpdateServiceViews',

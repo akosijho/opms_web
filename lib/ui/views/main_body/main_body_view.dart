@@ -29,7 +29,7 @@ class MainBodyView extends StatelessWidget {
             image: model.currentUser?.image ?? '',
             name: model.currentUser?.fullName ?? '',
             position: model.currentUser?.position ?? '',
-            onTapUser: () => model.goToUserView(model.currentUser!),
+            onTapUser: () => model.goToUserView(context, model.currentUser!),
             onNotificationTap: () => model.goToNotificationView(),
             onLogOutTap: () => model.logOut(),
             hasNotification: model.notificationCount > 0,

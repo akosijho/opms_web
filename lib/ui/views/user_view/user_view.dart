@@ -217,7 +217,7 @@ class _UserViewState extends State<UserView> {
                     ),
                     SizedBox(height: 10),
                     GestureDetector(
-                      onTap: () => model.setBirthDateValue(),
+                      onTap: () => model.setBirthDateValue(model.dateOfBirthController, context),
                       child: TextFormField(
                         controller: model.dateOfBirthController,
                         enabled: false,
@@ -244,7 +244,7 @@ class _UserViewState extends State<UserView> {
                     ),
                     SizedBox(height: 10),
                     GestureDetector(
-                      onTap: () => model.setGenderValue(),
+                      onTap: () => model.setGenderValue(model.genderController, context),
                       child: TextFormField(
                         controller: model.genderController,
                         validator: (value) =>
@@ -271,7 +271,7 @@ class _UserViewState extends State<UserView> {
                     ),
                     SizedBox(height: 10),
                     GestureDetector(
-                      onTap: () => model.setPositionValue(),
+                      onTap: () => model.setPositionValue(model.positionController, context),
                       child: TextFormField(
                         controller: model.positionController,
                         enabled: false,

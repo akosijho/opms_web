@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
+import 'package:opmswebstaff/ui/views/add_payment/add_payment_view.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/app.locator.dart';
@@ -38,8 +40,23 @@ class PaymentSelectPatientViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  void selectPatient(Patient patient) {
-    navigationService.pushNamed(Routes.AddPaymentView,
-        arguments: AddPaymentViewArguments(patient: patient));
+  // void selectPatient(Patient patient) {
+  //   navigationService.pushNamed(Routes.AddPaymentView,
+  //       arguments: AddPaymentViewArguments(patient: patient));
+  // }
+
+  void selectPatient(BuildContext context, Patient patient) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 500,
+            height: 500,
+            child: AddPaymentView(patient: patient,),
+          ),
+        );
+      },
+    );
   }
 }

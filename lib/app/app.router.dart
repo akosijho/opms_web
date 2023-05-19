@@ -65,7 +65,6 @@ import '../ui/views/update_service/update_service_view.dart';
 import '../ui/views/update_user_info/setup_user_view.dart';
 import '../ui/views/user_view/user_view.dart';
 import '../ui/views/verify_email/verify_email_view.dart';
-import '../ui/views/view_dental_notes_by_tooth/view_dental_note_by_tooth_view.dart';
 import '../ui/views/view_optical_note/view_optical_note.dart';
 import '../ui/views/view_patient_appointment/view_patient_appointment_view.dart';
 import '../ui/views/view_patient_payments/view_patient_payment.dart';
@@ -122,8 +121,6 @@ class Routes {
   static const String AddPrescriptionItemView = '/add-prescription-item-view';
   static const String AddCertificateView = '/add-certificate-view';
   static const String ViewOpticalNote = '/view-optical-note';
-  static const String ViewDentalNoteByToothView =
-      '/view-dental-note-by-tooth-view';
   static const String UpdateServiceViews = '/update-service-view';
   static const String UpdateProductViews = '/update-product-view';
   static const String UpdateLensViews = '/update-lens-view';
@@ -178,7 +175,6 @@ class Routes {
     AddPrescriptionItemView,
     AddCertificateView,
     ViewOpticalNote,
-    ViewDentalNoteByToothView,
     UpdateServiceViews,
     UpdateProductViews,
     UpdateLensViews,
@@ -240,7 +236,6 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.AddPrescriptionItemView, page: AddPrescriptionItemView),
     RouteDef(Routes.AddCertificateView, page: AddCertificateView),
     RouteDef(Routes.ViewOpticalNote, page: ViewOpticalNote),
-    RouteDef(Routes.ViewDentalNoteByToothView, page: ViewDentalNoteByToothView),
     RouteDef(Routes.UpdateServiceViews, page: UpdateServiceView),
     RouteDef(Routes.UpdateProductViews, page: UpdateProductView),
     RouteDef(Routes.UpdateLensViews, page: UpdateLensView),
@@ -664,21 +659,6 @@ class StackedRouter extends RouterBase {
         transitionDuration: const Duration(milliseconds: 300),
       );
     },
-    ViewDentalNoteByToothView: (data) {
-      var args =
-          data.getArgs<ViewDentalNoteByToothViewArguments>(nullOk: false);
-      return PageRouteBuilder<dynamic>(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            ViewDentalNoteByToothView(
-          key: args.key,
-          patient: args.patient,
-          selectedTooth: args.selectedTooth,
-        ),
-        settings: data,
-        transitionsBuilder: TransitionsBuilders.slideBottom,
-        transitionDuration: const Duration(milliseconds: 300),
-      );
-    },
     UpdateServiceView: (data) {
       var args = data.getArgs<UpdateServiceViewArguments>(nullOk: false);
       return PageRouteBuilder<dynamic>(
@@ -915,15 +895,6 @@ class ViewOpticalNoteArguments {
   final Key? key;
   final Patient patient;
   ViewOpticalNoteArguments({this.key, required this.patient});
-}
-
-/// ViewDentalNoteByToothView arguments holder class
-class ViewDentalNoteByToothViewArguments {
-  final Key? key;
-  final Patient patient;
-  final String selectedTooth;
-  ViewDentalNoteByToothViewArguments(
-      {this.key, required this.patient, required this.selectedTooth});
 }
 
 /// UpdateServiceView arguments holder class

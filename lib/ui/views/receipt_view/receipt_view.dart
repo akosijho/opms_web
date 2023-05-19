@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:opmswebstaff/constants/styles/palette_color.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:opmswebstaff/ui/views/receipt_view/receipt_view_model.dart';
@@ -22,8 +25,8 @@ class ReceiptView extends StatelessWidget {
         appBar:  showAppBar ? AppBar(
           title: Text('Payment Complete'),
         ) : null,
-        body: Screenshot(
-          controller: model.screenShotController,
+        body: RepaintBoundary(
+          key: model.globalKey,
           child: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
@@ -40,11 +43,16 @@ class ReceiptView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: TextButton.icon(
-                          onPressed: () => model.downloadReceipt(
-                              MediaQuery.of(context).devicePixelRatio,
-                              payment.payment_id),
+                          // onPressed: () => model.downloadReceipt(
+                          //     MediaQuery.of(context).devicePixelRatio,
+                          //     payment.payment_id),
+                          onPressed: () async {
+                            Uint8List? imageData = await model.captureWidget();
+                            File? pdfFile = await model.saveAsPdf(imageData);
+                            model.openPdf(pdfFile);
+                          },
                           icon: Icon(Icons.download),
-                          label: Text('Download image'),
+                          label: Text('Download pdf'),
                           style: TextButton.styleFrom(
                             primary: Colors.white,
                           ),
@@ -337,7 +345,7 @@ class ReceiptView extends StatelessWidget {
                               text: TextSpan(
                                   text: 'Ref. No.: ',
                                   style: TextStyle(
-                                    fontSize: 10,
+                                    // fontSize: 10,
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold),
                                   children: [
@@ -347,6 +355,15 @@ class ReceiptView extends StatelessWidget {
                                             color: Colors.black,
                                             fontWeight: FontWeight.normal))
                                   ])),
+                        ),
+                        SizedBox(height: 20),
+                        Center(
+                          child: Column(
+                            children: [
+                              Text('DR. RICA ANGELIQUE PLAZA'),
+                              Text('SIGNATURE')
+                            ],
+                          ),
                         ),
                         SizedBox(height: 10),
                         Center(

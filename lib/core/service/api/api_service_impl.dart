@@ -12,6 +12,7 @@ import 'package:opmswebstaff/models/medical_history/medical_history.dart';
 import 'package:opmswebstaff/models/notification/notification_model.dart';
 import 'package:opmswebstaff/models/notification_token/notification_token_model.dart';
 import 'package:opmswebstaff/models/optical_notes/optical_notes.dart';
+import 'package:opmswebstaff/models/optical_receipt/optical_receipt.dart';
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
 import 'package:opmswebstaff/models/prescription/prescription.dart';
 import 'package:opmswebstaff/models/product/lens.dart';
@@ -31,6 +32,7 @@ import '../../../models/payment/payment.dart';
 
 class ApiServiceImpl extends ApiService {
   final userReference = FirebaseFirestore.instance.collection('users');
+
   // final connectivityService = locator<ConnectivityService>();
 
   final appointmentReference =
@@ -42,8 +44,7 @@ class ApiServiceImpl extends ApiService {
 
   final medicineReference = FirebaseFirestore.instance.collection('products');
 
-  final procedureReference =
-      FirebaseFirestore.instance.collection('services');
+  final procedureReference = FirebaseFirestore.instance.collection('services');
 
   final paymentReference = FirebaseFirestore.instance.collection('payments');
 
@@ -151,6 +152,7 @@ class ApiServiceImpl extends ApiService {
 
   @override
   Future<List<Patient>> searchPatient(String query) async {
+    query = query.toLowerCase();
     return await patientReference
         .where("searchIndex", arrayContains: query)
         .get()
@@ -373,11 +375,11 @@ class ApiServiceImpl extends ApiService {
       {required String toothId,
       required dynamic patientId,
       required OpticalNotes opticalNotes,
-      required dynamic procedureId}) async {
+      required dynamic serviceId}) async {
     final toothDoc =
         await patientReference.doc(patientId).collection('optical_notes').doc();
     return await toothDoc
-        .set(opticalNotes.toJson(id: toothDoc.id, procedureId: procedureId));
+        .set(opticalNotes.toJson(id: toothDoc.id, serviceId: serviceId));
   }
 
   @override
@@ -403,8 +405,9 @@ class ApiServiceImpl extends ApiService {
             .orderBy("selectedTooth")
             .orderBy('date', descending: true)
             .get()
-            .then((value) =>
-                value.docs.map((e) => OpticalNotes.fromJson(e.data())).toList());
+            .then((value) => value.docs
+                .map((e) => OpticalNotes.fromJson(e.data()))
+                .toList());
       } else {
         return await patientReference
             .doc(patientId)
@@ -413,8 +416,9 @@ class ApiServiceImpl extends ApiService {
             .where('isPaid', isEqualTo: isPaid)
             .orderBy('selectedTooth')
             .get()
-            .then((value) =>
-                value.docs.map((e) => OpticalNotes.fromJson(e.data())).toList());
+            .then((value) => value.docs
+                .map((e) => OpticalNotes.fromJson(e.data()))
+                .toList());
       }
     } else {
       if (isPaid == null) {
@@ -423,8 +427,9 @@ class ApiServiceImpl extends ApiService {
             .collection('optical_notes')
             .where('selectedTooth', isEqualTo: toothId)
             .get()
-            .then((value) =>
-                value.docs.map((e) => OpticalNotes.fromJson(e.data())).toList());
+            .then((value) => value.docs
+                .map((e) => OpticalNotes.fromJson(e.data()))
+                .toList());
       } else {
         return await patientReference
             .doc(patientId)
@@ -432,8 +437,9 @@ class ApiServiceImpl extends ApiService {
             .where('selectedTooth', isEqualTo: toothId)
             .where('isPaid', isEqualTo: isPaid)
             .get()
-            .then((value) =>
-                value.docs.map((e) => OpticalNotes.fromJson(e.data())).toList());
+            .then((value) => value.docs
+                .map((e) => OpticalNotes.fromJson(e.data()))
+                .toList());
       }
     }
   }
@@ -462,9 +468,9 @@ class ApiServiceImpl extends ApiService {
   @override
   Future<QueryResult> addPayment({required Payment payment}) async {
     // if (await connectivityService.checkConnectivity()) {
-      final paymentDoc = await paymentReference.doc();
-      final paymentRes = await paymentDoc.set(payment.toJson(paymentDoc.id));
-      return QueryResult.success(returnValue: paymentDoc.id);
+    final paymentDoc = await paymentReference.doc();
+    final paymentRes = await paymentDoc.set(payment.toJson(paymentDoc.id));
+    return QueryResult.success(returnValue: paymentDoc.id);
     // } else {
     //   return QueryResult.error('Check your network and try again!');
     // }
@@ -494,10 +500,10 @@ class ApiServiceImpl extends ApiService {
   @override
   Future<QueryResult> addExpense({required Expense expense}) async {
     // if (await connectivityService.checkConnectivity()) {
-      final expenseDoc = await expenseReference.doc();
+    final expenseDoc = await expenseReference.doc();
 
-      await expenseDoc.set(expense.toJson(expenseDoc.id));
-      return QueryResult.success();
+    await expenseDoc.set(expense.toJson(expenseDoc.id));
+    return QueryResult.success();
     // } else {
     //   return QueryResult.error('Check your network and try again!');
     // }
@@ -537,8 +543,25 @@ class ApiServiceImpl extends ApiService {
         .get()
         .then((value) =>
             value.docs.map((e) => Payment.fromJson(e.data())).toList());
-
   }
+
+  // Future<List<Payment>> getPaymentByPatient({required patientId}) async {
+  //   try {
+  //     final querySnapshot = await paymentReference
+  //         .where('patient_id', isEqualTo: patientId)
+  //         .orderBy("paymentDate", descending: true)
+  //         .get();
+  //
+  //     final paymentList = querySnapshot.docs
+  //         .map((document) => Payment.fromJson(document.data()))
+  //         .toList();
+  //
+  //     return paymentList;
+  //   } catch (error) {
+  //     // Handle any errors that occur during the database query
+  //     throw Exception('Failed to retrieve payment records: $error');
+  //   }
+  // }
 
   @override
   Future<QueryResult> updateAppointmentStatus(
@@ -546,10 +569,10 @@ class ApiServiceImpl extends ApiService {
       required String appointmentStatus}) async {
     try {
       // if (await connectivityService.checkConnectivity()) {
-        final queryRes = await appointmentReference
-            .doc(appointmentId)
-            .update({'appointment_status': appointmentStatus});
-        return QueryResult.success();
+      final queryRes = await appointmentReference
+          .doc(appointmentId)
+          .update({'appointment_status': appointmentStatus});
+      return QueryResult.success();
       // } else {
       //   return QueryResult.error('Check your network connection and try again');
       // }
@@ -578,12 +601,10 @@ class ApiServiceImpl extends ApiService {
   Future<QueryResult> addPrescription(
       {required Prescription prescription, required patientId}) async {
     // if (await connectivityService.checkConnectivity()) {
-      final prescriptionDoc = await patientReference
-          .doc(patientId)
-          .collection('prescription')
-          .doc();
-      await prescriptionDoc.set(prescription.toJson(id: prescriptionDoc.id));
-      return QueryResult.success();
+    final prescriptionDoc =
+        await patientReference.doc(patientId).collection('prescription').doc();
+    await prescriptionDoc.set(prescription.toJson(id: prescriptionDoc.id));
+    return QueryResult.success();
     // } else {
     //   return QueryResult.error("Check your network connection and try again");
     // }
@@ -613,14 +634,13 @@ class ApiServiceImpl extends ApiService {
       {required OpticalCertificate opticalCertificate,
       required Patient patient}) async {
     // if (await connectivityService.checkConnectivity()) {
-      final certDoc = await patientReference
-          .doc(patient.id)
-          .collection('optical_certificate')
-          .doc();
-      await certDoc.set(opticalCertificate.toJson(
-          id: certDoc.id,
-          dateCreated: FieldValue.serverTimestamp().toString()));
-      return QueryResult.success();
+    final certDoc = await patientReference
+        .doc(patient.id)
+        .collection('optical_certificate')
+        .doc();
+    await certDoc.set(opticalCertificate.toJson(
+        id: certDoc.id, dateCreated: FieldValue.serverTimestamp().toString()));
+    return QueryResult.success();
     // } else {
     //   return QueryResult.error("Check your network connection and try again");
     // }
@@ -649,9 +669,9 @@ class ApiServiceImpl extends ApiService {
   @override
   Future<QueryResult> updatePatientInfo({required Patient patient}) async {
     // if (await connectivityService.checkConnectivity()) {
-      patientReference.doc(patient.id).set(patient.toJson(
-          patientId: patient.id, dateCreated: FieldValue.serverTimestamp()));
-      return QueryResult.success();
+    patientReference.doc(patient.id).set(patient.toJson(
+        patientId: patient.id, dateCreated: FieldValue.serverTimestamp()));
+    return QueryResult.success();
     // } else {
     //   return QueryResult.error('Check your network connection and try again');
     // }
@@ -688,8 +708,8 @@ class ApiServiceImpl extends ApiService {
   Future<QueryResult> updateUserStatus(
       {required String userId, required String status}) async {
     // if (await connectivityService.checkConnectivity()) {
-      await userReference.doc(userId).update({'active_status': status});
-      return QueryResult.success();
+    await userReference.doc(userId).update({'active_status': status});
+    return QueryResult.success();
     // } else {
     //   return QueryResult.error(
     //       'Unable To Update Status. No Internet Connection.');
@@ -699,8 +719,8 @@ class ApiServiceImpl extends ApiService {
   @override
   Future<QueryResult> updateUserInfo({required UserModel user}) async {
     // if (await connectivityService.checkConnectivity()) {
-      await userReference.doc(user.userId).set(user.toJson());
-      return QueryResult.success();
+    await userReference.doc(user.userId).set(user.toJson());
+    return QueryResult.success();
     // } else {
     //   return QueryResult.error(
     //       'Unable To Update Status. No Internet Connection.');
@@ -711,8 +731,8 @@ class ApiServiceImpl extends ApiService {
   Future<QueryResult> updatePatientPhoto(
       {required String image, required String patientID}) async {
     // if (await connectivityService.checkConnectivity()) {
-      await patientReference.doc(patientID).update({'image': image});
-      return QueryResult.success();
+    await patientReference.doc(patientID).update({'image': image});
+    return QueryResult.success();
     // } else {
     //   return QueryResult.error(
     //       'Unable To Update Image. No Internet Connection.');
@@ -723,8 +743,8 @@ class ApiServiceImpl extends ApiService {
   Future<QueryResult> updateUserPhoto(
       {required String image, required String userId}) async {
     // if (await connectivityService.checkConnectivity()) {
-      await userReference.doc(userId).update({'image': image});
-      return QueryResult.success();
+    await userReference.doc(userId).update({'image': image});
+    return QueryResult.success();
     // } else {
     //   return QueryResult.error(
     //       'Unable To Update Image. No Internet Connection.');
@@ -822,13 +842,13 @@ class ApiServiceImpl extends ApiService {
   // }
   Future<QueryResult> updateService(Service procedure) async {
     // if (await connectivityService.checkConnectivity()) {
-      try {
-        await procedureReference.doc(procedure.id).set(procedure.toJson(
-            dateCreated: FieldValue.serverTimestamp(), id: procedure.id));
-        return QueryResult.success();
-      } catch (e) {
-        return QueryResult.error('Failed to update service');
-      }
+    try {
+      await procedureReference.doc(procedure.id).set(procedure.toJson(
+          dateCreated: FieldValue.serverTimestamp(), id: procedure.id));
+      return QueryResult.success();
+    } catch (e) {
+      return QueryResult.error('Failed to update service');
+    }
     // } else {
     //   return QueryResult.error(
     //       'No Internet Connection. Check your connection and try again');
@@ -841,7 +861,7 @@ class ApiServiceImpl extends ApiService {
         .orderBy('dateCreated', descending: true)
         .get()
         .then((value) =>
-        value.docs.map((e) => Product.fromJson(e.data())).toList());
+            value.docs.map((e) => Product.fromJson(e.data())).toList());
   }
 
   @override
@@ -857,13 +877,13 @@ class ApiServiceImpl extends ApiService {
   // }
   Future<QueryResult> updateProduct(Product medicine) async {
     // if (await connectivityService.checkConnectivity()) {
-      try {
-        await medicineReference.doc(medicine.id).set(medicine.toJson(
-            dateCreated: FieldValue.serverTimestamp(), id: medicine.id));
-        return QueryResult.success();
-      } catch (e) {
-        return QueryResult.error('Failed to update product');
-      }
+    try {
+      await medicineReference.doc(medicine.id).set(medicine.toJson(
+          dateCreated: FieldValue.serverTimestamp(), id: medicine.id));
+      return QueryResult.success();
+    } catch (e) {
+      return QueryResult.error('Failed to update product');
+    }
     // } else {
     //   return QueryResult.error(
     //       'No Internet Connection. Check your connection and try again');
@@ -890,17 +910,15 @@ class ApiServiceImpl extends ApiService {
         .orderBy('dateCreated', descending: true)
         .snapshots()
         .map((value) =>
-        value.docs
-            .map((lens) => Lens.fromJson(lens.data()))
-            .toList());
+            value.docs.map((lens) => Lens.fromJson(lens.data())).toList());
   }
 
   @override
   Future<QueryResult> updateLens(Lens lens) async {
     // if (await connectivityService.checkConnectivity()) {
-      lensReference.doc(lens.id).set(lens.toJson(
-          dateCreated: FieldValue.serverTimestamp(), id: lens.id));
-      return QueryResult.success();
+    lensReference.doc(lens.id).set(
+        lens.toJson(dateCreated: FieldValue.serverTimestamp(), id: lens.id));
+    return QueryResult.success();
     // } else {
     //   return QueryResult.error(
     //       'No Internet Connection. Check your connection and try again');
@@ -913,26 +931,27 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<List<BalanceNotes>?> getBalanceList({required patientId, bool? isPaid}) async{
+  Future<List<BalanceNotes>?> getBalanceList(
+      {required patientId, bool? isPaid}) async {
     if (isPaid == null) {
       return await patientReference
           .doc(patientId)
           .collection('balance_notes')
-      // .orderBy("selectedTooth")
+          // .orderBy("selectedTooth")
           .orderBy('date', descending: true)
           .get()
           .then((value) =>
-          value.docs.map((e) => BalanceNotes.fromJson(e.data())).toList());
+              value.docs.map((e) => BalanceNotes.fromJson(e.data())).toList());
     } else {
       return await patientReference
           .doc(patientId)
           .collection('balance_notes')
           .orderBy('date')
           .where('isPaid', isEqualTo: isPaid)
-      // .orderBy('selectedTooth')
+          // .orderBy('selectedTooth')
           .get()
           .then((value) =>
-          value.docs.map((e) => BalanceNotes.fromJson(e.data())).toList());
+              value.docs.map((e) => BalanceNotes.fromJson(e.data())).toList());
     }
     // } else {
     //   return await patientReference
@@ -947,7 +966,10 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<void> updateBalanceAmountField({required patientId, required balance_noteId, required String price}) async{
+  Future<void> updateBalanceAmountField(
+      {required patientId,
+      required balance_noteId,
+      required String price}) async {
     final queryRes = await patientReference
         .doc(patientId)
         .collection('balance_notes')
@@ -956,11 +978,26 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<void> updateBalanceANotePaidStatus({required patientId, required balance_noteId, required bool isPaid}) async{
+  Future<void> updateBalanceANotePaidStatus(
+      {required patientId,
+      required balance_noteId,
+      required bool isPaid}) async {
     final queryRes = await patientReference
         .doc(patientId)
         .collection('balance_notes')
         .doc(balance_noteId)
         .update({'isPaid': isPaid});
+  }
+
+  @override
+  Future<List<OpticalReceipt>> getOpticalRec({required Patient patient}) {
+    return patientReference
+        .doc(patient.id)
+        .collection('optical_certificate')
+        .orderBy('date', descending: true)
+        .get()
+        .then((value) => value.docs
+        .map((e) => OpticalReceipt.fromJson(e.data()))
+        .toList());
   }
 }

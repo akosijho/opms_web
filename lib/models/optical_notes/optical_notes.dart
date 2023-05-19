@@ -46,7 +46,7 @@ class OpticalNotes {
   });
 
   Map<String, dynamic> toJson(
-      {required dynamic id, required dynamic procedureId}) {
+      {required dynamic id, required dynamic serviceId}) {
     return {
       'id': id,
       'selectedTooth': this.sphere,
@@ -64,7 +64,7 @@ class OpticalNotes {
       'tintCL': this.tintCL,
       'service': this
           .service
-          .toJson(dateCreated: DateTime.now().toString(), id: procedureId),
+          .toJson(dateCreated: DateTime.now().toString(), id: serviceId),
       'date': this.date,
       'note': this.note,
       'isPaid': this.isPaid,

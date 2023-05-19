@@ -23,13 +23,13 @@ abstract class ValidatorService {
 
   String? validateAllergies(String value);
 
-  String? validateMedicineName(String value);
+  String? validateProductName(String value);
 
   String? validateBrandName(String value);
 
   String? validatePrice(String value);
 
-  String? validateProcedureName(String value);
+  String? validateServiceName(String value);
 
   String? validateStartTime(String value);
 

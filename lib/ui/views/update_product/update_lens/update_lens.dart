@@ -18,7 +18,7 @@ class UpdateLensView extends StatelessWidget {
       onModelReady: (model) => model.init(lens),
       builder: (context, model, widget) => Scaffold(
         appBar: AppBar(
-          title: Text('Update Product'),
+          title: Text('Update Lens'),
           centerTitle: true,
         ),
         persistentFooterButtons: [
@@ -30,7 +30,7 @@ class UpdateLensView extends StatelessWidget {
                     model.performUpdate(lens.id!);
                   }
                 },
-                child: Text('Save Changes')),
+                child: Text('Save Changes', style: TextStyle(fontSize: 16))),
           )
         ],
         body: model.isBusy
@@ -45,7 +45,7 @@ class UpdateLensView extends StatelessWidget {
               TextFormField(
                 controller: model.productNameTxtController,
                 validator: (value) =>
-                    model.validatorService.validateMedicineName(value!),
+                    model.validatorService.validateProductName(value!),
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   errorBorder: TextBorderStyles.errorBorder,
@@ -78,7 +78,7 @@ class UpdateLensView extends StatelessWidget {
               TextFormField(
                 controller: model.amountTxtController,
                 validator: (value) =>
-                    model.validatorService.validateMedicineName(value!),
+                    model.validatorService.validateProductName(value!),
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(

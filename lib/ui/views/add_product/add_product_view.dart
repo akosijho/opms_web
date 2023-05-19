@@ -45,8 +45,8 @@ class _AddProductViewState extends State<AddProductView> {
               ElevatedButton(
                   onPressed: () {
                     if (addMedicineFormKey.currentState!.validate()) {
-                      model.addMedicine(
-                          medicineName: medicineName.text,
+                      model.addProduct(
+                          productName: medicineName.text,
                           brandName: brandName.text,
                           price: medicinePrice.text);
                     }
@@ -64,52 +64,52 @@ class _AddProductViewState extends State<AddProductView> {
             physics: BouncingScrollPhysics(),
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 150,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade400,
-                      border: Border.all(color: Colors.grey.shade400, width: 4),
-                    ),
-                    child: model.selectedImage == null
-                        ? Align(
-                            alignment: Alignment.center,
-                            child: SizedBox(
-                              height: 50,
-                              width: 50,
-                              child: SvgPicture.asset(
-                                'assets/icons/Camera.svg',
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
-                        : Image.file(
-                            File(model.selectedImage!.path),
-                            fit: BoxFit.cover,
-                          ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => model.selectImage(),
-                    style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    )),
-                    child: Text(
-                      'Add Picture',
-                      style: TextStyles.tsBody3(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              // Column(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Container(
+              //       height: 150,
+              //       width: 150,
+              //       decoration: BoxDecoration(
+              //         color: Colors.grey.shade400,
+              //         border: Border.all(color: Colors.grey.shade400, width: 4),
+              //       ),
+              //       child: model.selectedImage == null
+              //           ? Align(
+              //               alignment: Alignment.center,
+              //               child: SizedBox(
+              //                 height: 50,
+              //                 width: 50,
+              //                 child: SvgPicture.asset(
+              //                   'assets/icons/Camera.svg',
+              //                   color: Colors.white,
+              //                 ),
+              //               ),
+              //             )
+              //           : Image.file(
+              //               File(model.selectedImage!.path),
+              //               fit: BoxFit.cover,
+              //             ),
+              //     ),
+              //     ElevatedButton(
+              //       onPressed: () => model.selectImage(),
+              //       style: ElevatedButton.styleFrom(
+              //           shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(20),
+              //       )),
+              //       child: Text(
+              //         'Add Picture',
+              //         style: TextStyles.tsBody3(
+              //           color: Colors.white,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               TextFormField(
                 controller: medicineName,
                 validator: (value) =>
-                    model.validatorService.validateMedicineName(value!),
+                    model.validatorService.validateProductName(value!),
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   errorBorder: TextBorderStyles.errorBorder,

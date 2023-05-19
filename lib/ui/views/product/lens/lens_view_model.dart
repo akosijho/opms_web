@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:opmswebstaff/app/app.locator.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/models/product/lens.dart';
+import 'package:opmswebstaff/ui/views/add_product/add_lens/add_lens_view.dart';
 import 'package:stacked/stacked.dart';
 
 class LensViewModel extends BaseViewModel {
@@ -44,5 +46,20 @@ class LensViewModel extends BaseViewModel {
       searchMode = true;
       notifyListeners();
     }
+  }
+
+  void goToAddLens(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 500,
+            height: 500,
+            child: AddLensView(),
+          ),
+        );
+      },
+    );
   }
 }

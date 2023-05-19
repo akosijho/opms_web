@@ -134,7 +134,7 @@ class SelectionOptometrist extends StatelessWidget {
     } else {
       if (dentistList!.length <= 0) {
         return Center(
-          child: Text('No Dentist Found...'),
+          child: Text('No Optometrist Found...'),
         );
       } else {
         return ListView.separated(

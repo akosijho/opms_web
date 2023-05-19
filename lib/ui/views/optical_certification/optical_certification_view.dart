@@ -16,7 +16,7 @@ class OpticalCertificationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<OpticalCertification>.reactive(
       viewModelBuilder: () => OpticalCertification(),
-      onModelReady: (model) => model.listenToGetDentalCert(patient: patient),
+      onModelReady: (model) => model.listenToGetOpticalCert(patient: patient),
       builder: (context, model, widget) => Scaffold(
         appBar: AppBar(
           title: Text("Patient's Certification"),

@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:opmswebstaff/app/app.locator.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/models/service/service.dart';
+import 'package:opmswebstaff/ui/views/add_service/add_service_view.dart';
 import 'package:stacked/stacked.dart';
 
 class ServiceViewModel extends BaseViewModel {
@@ -62,6 +64,21 @@ class ServiceViewModel extends BaseViewModel {
         getServices();
       });
     });
+  }
+
+  void goToAddService(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 500,
+            height: 500,
+            child: AddServiceView(),
+          ),
+        );
+      },
+    );
   }
 
   void deleteService() {

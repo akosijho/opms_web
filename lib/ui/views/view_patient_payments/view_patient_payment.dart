@@ -32,7 +32,7 @@ class ViewPatientPayment extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'List Of Patient Records',
+                  "List Of Patient's Records",
                   style: GoogleFonts.roboto(
                       color: Colors.black,
                       fontSize: 18,
@@ -54,9 +54,9 @@ class ViewPatientPayment extends StatelessWidget {
                 shrinkWrap: true,
                 primary: false,
                 itemBuilder: (context, index) => PaymentCard(
-                  payment: model.patientPaymentList[index],
                   onViewReceiptTap: () => model.goToReceipt(index),
                   onViewRxTap: () => model.goToRx(index),
+                  payment: model.patientPaymentList[index],
                 ),
                 separatorBuilder: (context, index) => SizedBox(height: 8),
                 itemCount: model.patientPaymentList.length)

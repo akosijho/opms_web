@@ -5,6 +5,8 @@ import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:opmswebstaff/ui/views/add_expense_item/add_expense_item_view.dart';
+import 'package:opmswebstaff/ui/views/add_expenses/add_expenses_view.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../core/service/api/api_service.dart';
@@ -29,27 +31,67 @@ class AddExpensesViewModel extends BaseViewModel {
   List<ExpenseItem> listOfExpenseItem = [];
   double totalAmount = 0;
 
-  void goToAddExpenseItem() async {
-    final ExpenseItem? item =
-        await navigationService.pushNamed(Routes.AddExpenseItemView);
-    if (item != null) {
-      listOfExpenseItem.add(item);
-      computeTotalAmount();
-      notifyListeners();
-    }
-  }
+  // void goToAddExpenseItem() async {
+  //   final ExpenseItem? item =
+  //       await navigationService.pushNamed(Routes.AddExpenseItemView);
+  //   if (item != null) {
+  //     listOfExpenseItem.add(item);
+  //     computeTotalAmount();
+  //     notifyListeners();
+  //   }
+  // }
 
-  void selectDate() async {
-    final DateTime? date =
-        await bottomSheetService.openBottomSheet(SelectionDate(
-      title: 'Set date',
+  void goToAddExpenseItem(BuildContext context) async {
+    ExpenseItem? item = await showDialog<ExpenseItem>(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 500,
+            height: 500,
+            child: AddExpenseItemView(),
+          ),
+        );
+      },
+    );
+      if (item != null) {
+        listOfExpenseItem.add(item);
+        computeTotalAmount();
+        notifyListeners();
+      }
+    }
+
+  Future<void> selectDate(
+      TextEditingController textEditingController, BuildContext context) async {
+    DateTime? date = await showDatePicker(
+      context: context,
       initialDate: DateTime.now(),
-      maxDate: DateTime.now(),
-    ));
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+      helpText: 'Select Date',
+      cancelText: 'CANCEL',
+      confirmText: 'SELECT',
+      errorFormatText: 'Invalid date format',
+      errorInvalidText: 'Invalid date',
+      fieldLabelText: 'date',
+      fieldHintText: 'Month/Date/Year',
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.blue,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
     if (date != null) {
       selectedExpenseDate = date;
+      textEditingController.text =
+          DateFormat.yMMMd().format(selectedExpenseDate!);
       notifyListeners();
-      dateTxtController.text = DateFormat.yMMMd().format(selectedExpenseDate!);
     }
   }
 
@@ -91,8 +133,8 @@ class AddExpensesViewModel extends BaseViewModel {
         note: noteTextController.text);
     final addExpenseQueryRes = await apiService.addExpense(expense: expense);
     if (addExpenseQueryRes.success) {
-      navigationService.popRepeated(1);
-      // navigationService.pushReplacementNamed(Routes.MainBodyView);
+      // navigationService.popRepeated(1);
+      navigationService.popAllAndPushNamed(Routes.MainBodyView);
       snackBarService.showSnackBar(
           message: 'Clinic Expense Saved', title: 'SUCCESS!');
     } else {

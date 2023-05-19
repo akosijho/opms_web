@@ -1,3 +1,4 @@
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:opmswebstaff/ui/views/edit_patient/edit_patient_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -137,11 +138,13 @@ class _EditPatientViewModelState extends State<EditPatientView> {
                                   color: Palettes.kcNeutral1),
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always,
-                              suffixIcon: Icon(
-                                Icons.arrow_drop_down,
-                                size: 24,
-                                color: Palettes.kcBlueMain1,
-                              )),
+                              suffixIcon: SvgPicture.asset(
+                                'assets/icons/Calendar.svg',
+                                height: 19,
+                                width: 19,
+                                color: Colors.black,
+                              ),
+                          ),
                         ),
                       ),
                       TextFormField(

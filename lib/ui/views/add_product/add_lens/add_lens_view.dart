@@ -50,7 +50,7 @@ class _AddLensViewState extends State<AddLensView> {
                               price: medicinePrice.text);
                         }
                       },
-                      child: Text('Save'))),
+                      child: Text('Save', style: TextStyle(fontSize: 16)))),
             ],
           )
         ],
@@ -105,7 +105,7 @@ class _AddLensViewState extends State<AddLensView> {
               TextFormField(
                 controller: medicineName,
                 validator: (value) =>
-                    model.validatorService.validateMedicineName(value!),
+                    model.validatorService.validateProductName(value!),
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   errorBorder: TextBorderStyles.errorBorder,

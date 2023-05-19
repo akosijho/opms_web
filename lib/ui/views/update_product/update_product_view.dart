@@ -49,7 +49,7 @@ class UpdateProductView extends StatelessWidget {
                     TextFormField(
                       controller: model.productNameTxtController,
                       validator: (value) =>
-                          model.validatorService.validateMedicineName(value!),
+                          model.validatorService.validateProductName(value!),
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         errorBorder: TextBorderStyles.errorBorder,
@@ -82,7 +82,7 @@ class UpdateProductView extends StatelessWidget {
                     TextFormField(
                       controller: model.amountTxtController,
                       validator: (value) =>
-                          model.validatorService.validateMedicineName(value!),
+                          model.validatorService.validateProductName(value!),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(

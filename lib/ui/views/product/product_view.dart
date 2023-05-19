@@ -51,7 +51,8 @@ class _ProductViewState extends State<ProductView> {
             heroTag: null,
             isExtended: model.isScrolledUp,
             onPressed: () =>
-                model.navigationService.pushNamed(Routes.AddProductView),
+                // model.navigationService.pushNamed(Routes.AddProductView),
+            model.goToAddProduct(context),
             label: Text('Add Product'),
             icon: Icon(Icons.add),
           ),
@@ -148,7 +149,7 @@ class _ProductViewState extends State<ProductView> {
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: model.productList.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                        crossAxisCount: 4,
                         crossAxisSpacing: 5,
                         mainAxisSpacing: 5,
                         mainAxisExtent: 250,

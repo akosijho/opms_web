@@ -48,7 +48,8 @@ class _LensViewState extends State<LensView> {
             heroTag: null,
             isExtended: model.isScrolledUp,
             onPressed: () =>
-                model.navigationService.pushNamed(Routes.AddLensView),
+                // model.navigationService.pushNamed(Routes.AddLensView),
+            model.goToAddLens(context),
             label: Text('Add Lens'),
             icon: Icon(Icons.add),
           ),
@@ -145,7 +146,7 @@ class _LensViewState extends State<LensView> {
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: model.lensList.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                        crossAxisCount: 4,
                         crossAxisSpacing: 5,
                         mainAxisSpacing: 5,
                         mainAxisExtent: 250,

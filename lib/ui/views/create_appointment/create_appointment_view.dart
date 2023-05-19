@@ -146,7 +146,7 @@ class _CreateAppointmentViewState extends State<CreateAppointmentView> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             GestureDetector(
-                              onTap: () => model.selectDate(context, dateTxtController),
+                              onTap: () => model.selectDate(dateTxtController, context),
                               child: TextFormField(
                                 controller: dateTxtController,
                                 enabled: false,

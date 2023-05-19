@@ -12,4 +12,7 @@ class TextBorderStyles {
 
   static final focusedBorder = UnderlineInputBorder(
       borderSide: BorderSide(color: Palettes.kcPurpleMain, width: 2));
+
+  static final whiteBorder = UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.white, width: 2));
 }

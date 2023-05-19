@@ -15,6 +15,7 @@ import 'package:opmswebstaff/models/user_model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:opmswebstaff/ui/views/update_user_info/setup_user_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/app.locator.dart';
@@ -45,6 +46,7 @@ class UserViewModel extends BaseViewModel {
   final dateOfBirthController = TextEditingController();
   final genderController = TextEditingController();
   final positionController = TextEditingController();
+  DateTime? selectedBirthDate;
 
   @override
   void dispose() {
@@ -101,40 +103,158 @@ class UserViewModel extends BaseViewModel {
     });
   }
 
-  Future<void> setGenderValue() async {
-    final selectedGender =
-        await bottomSheetService.openBottomSheet(SelectionOption(
-      options: ['Male', 'Female'],
-      title: 'Select your gender',
-    ));
+  // Future<void> setGenderValue() async {
+  //   final selectedGender =
+  //       await bottomSheetService.openBottomSheet(SelectionOption(
+  //     options: ['Male', 'Female'],
+  //     title: 'Select your gender',
+  //   ));
+  //   if (selectedGender != null) {
+  //     genderController.text = selectedGender;
+  //   }
+  // }
+
+  Future<void> setGenderValue(TextEditingController textEditingController,
+      BuildContext context) async {
+    String? selectedGender = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 300,
+          width: 300,
+          child: AlertDialog(
+            title: Text('Select Gender'),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: SetupUserViewModel().genderOptions.map((gender) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop(gender);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                      child: Text(
+                        gender,
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
     if (selectedGender != null) {
-      genderController.text = selectedGender;
-    }
-  }
-
-  Future<void> setBirthDateValue() async {
-    final selectedBirthDate =
-        await bottomSheetService.openBottomSheet(SelectionDate(
-      title: 'Select birth date',
-    ));
-    if (selectedBirthDate != null) {
-      birthDate = selectedBirthDate!;
-      dateOfBirthController.text =
-          DateFormat.yMMMd().format(selectedBirthDate!);
-    }
-  }
-
-  Future<void> setPositionValue() async {
-    String? selectedPosition =
-        await bottomSheetService.openBottomSheet(SelectionOption(
-      options: ['Doctor', "Staff"],
-      title: 'Select your position',
-    ));
-    if (selectedPosition != null) {
-      positionController.text = selectedPosition;
+      textEditingController.text = selectedGender;
       notifyListeners();
     }
   }
+
+
+  // Future<void> setBirthDateValue() async {
+  //   final selectedBirthDate =
+  //       await bottomSheetService.openBottomSheet(SelectionDate(
+  //     title: 'Select birth date',
+  //   ));
+  //   if (selectedBirthDate != null) {
+  //     birthDate = selectedBirthDate!;
+  //     dateOfBirthController.text =
+  //         DateFormat.yMMMd().format(selectedBirthDate!);
+  //   }
+  // }
+
+  Future<void> setBirthDateValue(
+      TextEditingController textEditingController, BuildContext context) async {
+    DateTime? date = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+      helpText: 'Select Date',
+      cancelText: 'CANCEL',
+      confirmText: 'SELECT',
+      errorFormatText: 'Invalid date format',
+      errorInvalidText: 'Invalid date',
+      fieldLabelText: 'date',
+      fieldHintText: 'Month/Date/Year',
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.blue,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (date != null) {
+      selectedBirthDate = date;
+      textEditingController.text =
+          DateFormat.yMMMd().format(selectedBirthDate!);
+      notifyListeners();
+    }
+  }
+
+  // Future<void> setPositionValue() async {
+  //   String? selectedPosition =
+  //       await bottomSheetService.openBottomSheet(SelectionOption(
+  //     options: ['Doctor', "Staff"],
+  //     title: 'Select your position',
+  //   ));
+  //   if (selectedPosition != null) {
+  //     positionController.text = selectedPosition;
+  //     notifyListeners();
+  //   }
+  // }
+
+  Future<void> setPositionValue(TextEditingController textEditingController,
+      BuildContext context) async {
+    String? selectedPosition = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 300,
+          width: 300,
+          child: AlertDialog(
+            title: Text('Select Position'),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: SetupUserViewModel().positionOptions.map((position) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop(position);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                      child: Text(
+                        position,
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    if (selectedPosition != null) {
+      textEditingController.text = selectedPosition;
+      notifyListeners();
+    }
+  }
+
 
   void updateUserInfo() async {
     dialogService.showConfirmDialog(

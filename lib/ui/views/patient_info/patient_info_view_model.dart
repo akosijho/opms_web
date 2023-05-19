@@ -138,8 +138,8 @@ class PatientInfoViewModel extends BaseViewModel {
   //   navigationService.pushNamed(Routes.ViewPatientPayment,
   //       arguments: ViewPatientPaymentArguments(patient: patient));
   // }
-  void goToViewPatientPaymentsView({required Patient patient, required BuildContext context}) {
-    showDialog<String>(
+  void goToViewPatientPaymentsView({required Patient patient, required BuildContext context}) async{
+    await showDialog<String>(
       context: context,
       builder: (BuildContext context) {
         return Dialog(
@@ -182,68 +182,91 @@ class PatientInfoViewModel extends BaseViewModel {
   //         arguments: EditPatientViewArguments(patient: patient));
   // }
 
-  // void goToUpdatePatient({required Patient? patient, required BuildContext context}) {
+
+  // void goToUpdatePatient({required Patient? patient, required BuildContext context}) async {
   //   if (patient != null) {
-  //     showDialog(
+  //    await showDialog(
   //       context: context,
   //       builder: (BuildContext context) {
   //         return Container(
-  //             height: 800,
-  //             width: 800,
-  //             child: EditPatientView(patient: patient),
-  //
+  //           height: 600,
+  //           width: 600,
+  //           child: EditPatientView(patient: patient),
   //         );
   //       },
   //     );
   //   }
   // }
+  // void goToUpdatePatient(Patient patient, BuildContext context) async {
+  //
+  //     // if (patient != null) {
+  //       await showDialog(
+  //         context: context,
+  //         builder: (BuildContext context) {
+  //           return Container(
+  //             height: 600,
+  //             width: 600,
+  //             child: EditPatientView(patient: patient),
+  //           );
+  //         },
+  //       );
+  // }
 
-  void goToUpdatePatient({required Patient? patient, required BuildContext context}) {
-    if (patient != null) {
-      showDialog<String>(
+  void goToUpdatePatient(Patient patient, BuildContext context) async {
+    try {
+      await showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
-            child: EditPatientView(patient: patient),
+            child: Container(
+              height: 600,
+              width: 600,
+              child: EditPatientView(patient: patient),
+            ),
           );
         },
       );
+    } catch (e) {
+      // Handle the exception here
+      print('An error occurred: $e');
     }
   }
 
 
-  Future<void> updatePatientImage() async {
-    XFile? selectedImage;
-    var selectedImageSource =
-        await bottomSheetService.openBottomSheet(SelectionOption(
-      options: ['Gallery', 'Camera'],
-      title: 'Select Image Source',
-    ));
 
-    //Condition to select Image Source
-    if (selectedImageSource == 'Gallery') {
-      selectedImage = await imageSelectorService.selectImageWithGallery();
-    } else if (selectedImageSource == 'Camera') {
-      selectedImage = await imageSelectorService.selectImageWithCamera();
-    }
 
-    if (selectedImage != null) {
-      toastService.showToast(message: 'Image Uploading...');
-      final imageResult = await apiService.uploadPatientProfileImage(
-          imageToUpload: File(selectedImage.path), patientId: patient!.id);
-      if (imageResult.isUploaded) {
-        final qRes = await apiService.updatePatientPhoto(
-            image: imageResult.imageUrl!, patientID: patient!.id);
-        if (qRes.success) {
-          await Future.delayed(Duration(seconds: 2));
-          snackBarService.showSnackBar(
-              message: 'Patient Image Updated', title: 'Success');
-        } else {
-          snackBarService.showSnackBar(
-              message: 'Patient Image Not Updated: ${qRes.errorMessage!}',
-              title: 'Error');
-        }
-      }
-    }
-  }
+  // Future<void> updatePatientImage() async {
+  //   XFile? selectedImage;
+  //   var selectedImageSource =
+  //       await bottomSheetService.openBottomSheet(SelectionOption(
+  //     options: ['Gallery', 'Camera'],
+  //     title: 'Select Image Source',
+  //   ));
+  //
+  //   //Condition to select Image Source
+  //   if (selectedImageSource == 'Gallery') {
+  //     selectedImage = await imageSelectorService.selectImageWithGallery();
+  //   } else if (selectedImageSource == 'Camera') {
+  //     selectedImage = await imageSelectorService.selectImageWithCamera();
+  //   }
+  //
+  //   if (selectedImage != null) {
+  //     toastService.showToast(message: 'Image Uploading...');
+  //     final imageResult = await apiService.uploadPatientProfileImage(
+  //         imageToUpload: File(selectedImage.path), patientId: patient!.id);
+  //     if (imageResult.isUploaded) {
+  //       final qRes = await apiService.updatePatientPhoto(
+  //           image: imageResult.imageUrl!, patientID: patient!.id);
+  //       if (qRes.success) {
+  //         await Future.delayed(Duration(seconds: 2));
+  //         snackBarService.showSnackBar(
+  //             message: 'Patient Image Updated', title: 'Success');
+  //       } else {
+  //         snackBarService.showSnackBar(
+  //             message: 'Patient Image Not Updated: ${qRes.errorMessage!}',
+  //             title: 'Error');
+  //       }
+  //     }
+  //   }
+  // }
 }

@@ -45,7 +45,7 @@ void main() async {
   // await Firebase.initializeApp();
   await GetStorage.init('MyLocalDB');
   // FirebaseAuth auth = FirebaseAuth.instance.currentUser;
-  FirebaseFirestore.instance.settings = Settings(persistenceEnabled: false);
+  FirebaseFirestore.instance.settings = Settings(persistenceEnabled: true);
   // await getAppVersionNumber();
 
   // await getSessionInfo();

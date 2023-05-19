@@ -20,12 +20,13 @@ import '../../../app/app.locator.dart';
 import '../../../app/app.router.dart';
 import '../../widgets/selection_date/selection_date.dart';
 
+
 class SetOpticalNoteViewModel extends BaseViewModel {
   final navigationService = locator<NavigationService>();
   final validatorService = locator<ValidatorService>();
   final bottomSheetService = locator<BottomSheetService>();
-  final procedureTxtController = TextEditingController();
-  final setDentalNoteFormKey = GlobalKey<FormState>();
+  final serviceTxtController = TextEditingController();
+  final setOpticalNoteFormKey = GlobalKey<FormState>();
   final toastService = locator<ToastService>();
   final apiService = locator<ApiService>();
   final dialogService = locator<DialogService>();
@@ -33,7 +34,7 @@ class SetOpticalNoteViewModel extends BaseViewModel {
   Service? selectedService;
   DateTime selectedDate = DateTime.now();
   final dateTextController =
-      TextEditingController(text: DateFormat.yMMMd().format(DateTime.now()));
+  TextEditingController(text: DateFormat.yMMMd().format(DateTime.now()));
   final noteTextController = TextEditingController();
   final sphere = TextEditingController();
   final cylinder = TextEditingController();
@@ -50,29 +51,7 @@ class SetOpticalNoteViewModel extends BaseViewModel {
   final diaCL = TextEditingController();
   final tintCL = TextEditingController();
 
-  // void goToSelectProcedure() async {
-  //   selectedService =
-  //   await navigationService.pushNamed(Routes.SelectionService);
-  //
-  //   procedureTxtController.text = selectedService?.serviceName ?? '';
-  // }
-  // void goToSelectProcedure(BuildContext context) async {
-  //   selectedService = await navigationService.pushNamed(Routes.SelectionService);
-  //   procedureTxtController.text = selectedService?.serviceName ?? '';
-  //
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return Dialog(
-  //         child: Container(
-  //             width: 300,
-  //             height: 400,
-  //             child: SelectionService()
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+
   void goToSelectService(BuildContext context) async {
     // selectedService = await navigationService.pushNamed(Routes.SelectionService);
     // procedureTxtController.text = selectedService?.serviceName ?? '';
@@ -91,24 +70,9 @@ class SetOpticalNoteViewModel extends BaseViewModel {
     if (tempService != null) {
       selectedService = tempService;
       notifyListeners();
-      procedureTxtController.text = selectedService?.serviceName ?? '';
+      serviceTxtController.text = selectedService?.serviceName ?? '';
     }
   }
-
-  // void selectDate() async {
-  //   final DateTime date =
-  //   await bottomSheetService.openBottomSheet(SelectionDate(
-  //     title: 'Set date',
-  //     initialDate: DateTime.now(),
-  //     maxDate: DateTime.now(),
-  //   ));
-  //   if (date != null) {
-  //     selectedDate = date;
-  //     notifyListeners();
-  //     dateTextController.text = DateFormat.yMMMd().format(selectedDate);
-  //   }
-  // }
-
   void selectDate(BuildContext context) async {
     final DateTime? date = await showDialog<DateTime>(
       context: context,
@@ -134,85 +98,90 @@ class SetOpticalNoteViewModel extends BaseViewModel {
     }
   }
 
-  // Future<void> addOpticalNote({
+  // Future<void> addDentalNote({
   //   required String patientId,
+  //   required List<String> selectedTeeth,
   // }) async {
   //   dialogService.showDefaultLoadingDialog(
   //       barrierDismissible: false, willPop: false);
-  //
-  //   final patientReference = FirebaseFirestore.instance.collection('patients');
-  //   final toothDoc =
-  //   await patientReference.doc(patientId).collection('optical_notes').doc();
-  //   await toothDoc.set(OpticalNotes(
-  //     isPaid: false,
-  //     sphere: sphere.text,
-  //     cylinder: cylinder.text,
-  //     axis: axis.text,
-  //     pd: pd.text,
-  //     add: add.text,
-  //     va: va.text,
-  //     sphereCL: sphereCL.text,
-  //     cylinderCL: cylinderCL.text,
-  //     axisCL: axisCL.text,
-  //     bcCL: bcCL.text,
-  //     diaCL: diaCL.text,
-  //     tintCL: tintCL.text,
-  //     service: selectedService!,
-  //     date: selectedDate.toString(),
-  //     note: noteTextController.text,
-  //
-  //   ).toJson(id: toothDoc.id, procedureId: selectedService!.id));
-  //   navigationService.closeOverlay();
-  //   toastService.showToast(message: 'Successful: Set RX!');
-  //   debugPrint('RX Added');
+  //   for (String tooth in selectedTeeth) {
+  //     debugPrint('adding ${tooth}');
+  //     await apiService.addToothDentalNotes(
+  //         toothId: tooth,
+  //         patientId: patientId,
+  //         procedureId: selectedProcedure!.id,
+  //         dentalNotes: DentalNotes(
+  //           isPaid: false,
+  //           selectedTooth: tooth,
+  //           service: selectedProcedure!,
+  //           date: selectedDate.toString(),
+  //           note: noteTextController.text,
+  //         ));
+  //   }
+  //   navigationService.popRepeated(2);
+  //   toastService.showToast(message: 'Successful: Set Tooth Condition!');
+  //   debugPrint('Tooth Condition Added');
   //   refreshKey.currentState?.show();
   // }
+
   Future<void> addOpticalNote({
     required String patientId,
+    // required String sphere,
+    // required String cylinder,
+    // required String axis,
+    // required List<String> selectedTeeth,
   }) async {
-    try {
-      dialogService.showDefaultLoadingDialog(
-        barrierDismissible: false,
-        willPop: false,
-      );
+    dialogService.showDefaultLoadingDialog(
+        barrierDismissible: false, willPop: false);
+    // for (String tooth in selectedTeeth) {
+    //   debugPrint('adding ${tooth}');
+    //   await apiService.addToothDentalNotes(
+    //       toothId: tooth,
+    //       // sphere: sphere,
+    //       // cylinder: cylinder,
+    //       // axis: axis,
+    //       patientId: patientId,
+    //       procedureId: selectedProcedure!.id,
+    //       dentalNotes: DentalNotes(
+    //         isPaid: false,
+    //         selectedTooth: tooth,
+    //         sphere: sphere.text,
+    //         cylinder: cylinder.text,
+    //         axis: axis.text,
+    //         service: selectedProcedure!,
+    //         date: selectedDate.toString(),
+    //         note: noteTextController.text,
+    //
+    //       ));
+    // }
 
-      final patientReference =
-          FirebaseFirestore.instance.collection('patients');
-      final toothDoc = await patientReference
-          .doc(patientId)
-          .collection('optical_notes')
-          .doc();
+    final patientReference = FirebaseFirestore.instance.collection('patients');
+    final toothDoc =
+    await patientReference.doc(patientId).collection('optical_notes').doc();
+    await toothDoc.set(OpticalNotes(
+      isPaid: false,
+      sphere: sphere.text,
+      cylinder: cylinder.text,
+      axis: axis.text,
+      pd: pd.text,
+      add: add.text,
+      va: va.text,
+      sphereCL: sphereCL.text,
+      cylinderCL: cylinderCL.text,
+      axisCL: axisCL.text,
+      bcCL: bcCL.text,
+      diaCL: diaCL.text,
+      tintCL: tintCL.text,
+      service: selectedService!,
+      date: selectedDate.toString(),
+      note: noteTextController.text,
 
-      await toothDoc.set(OpticalNotes(
-        isPaid: false,
-        sphere: sphere.text,
-        cylinder: cylinder.text,
-        axis: axis.text,
-        pd: pd.text,
-        add: add.text,
-        va: va.text,
-        sphereCL: sphereCL.text,
-        cylinderCL: cylinderCL.text,
-        axisCL: axisCL.text,
-        bcCL: bcCL.text,
-        diaCL: diaCL.text,
-        tintCL: tintCL.text,
-        service: selectedService!,
-        date: selectedDate.toString(),
-        note: noteTextController.text,
-      ).toJson(id: toothDoc.id, procedureId: selectedService!.id));
-
-      navigationService.popRepeated(1);
-      fieldsClear();
-      toastService.showToast(message: 'Successful: Set RX!');
-      debugPrint('RX Added');
-      refreshKey.currentState?.show();
-    } catch (e) {
-      debugPrint('Error adding optical note: $e');
-      toastService.showToast(message: 'Error adding optical note');
-    }
+    ).toJson(id: toothDoc.id, serviceId: selectedService!.id));
+    navigationService.popRepeated(2);
+    toastService.showToast(message: 'Successful: Set RX!');
+    debugPrint('RX Added');
+    refreshKey.currentState?.show();
   }
-
   void fieldsClear(){
     sphere.clear();
     cylinder.clear();
@@ -259,5 +228,247 @@ class SetOpticalNoteViewModel extends BaseViewModel {
         );
       },
     );
-  }
+
 }
+}
+// class SetOpticalNoteViewModel extends BaseViewModel {
+//   final navigationService = locator<NavigationService>();
+//   final validatorService = locator<ValidatorService>();
+//   final bottomSheetService = locator<BottomSheetService>();
+//   final procedureTxtController = TextEditingController();
+//   final setDentalNoteFormKey = GlobalKey<FormState>();
+//   final toastService = locator<ToastService>();
+//   final apiService = locator<ApiService>();
+//   final dialogService = locator<DialogService>();
+//
+//   Service? selectedService;
+//   DateTime selectedDate = DateTime.now();
+//   final dateTextController =
+//       TextEditingController(text: DateFormat.yMMMd().format(DateTime.now()));
+//   final noteTextController = TextEditingController();
+//   final sphere = TextEditingController();
+//   final cylinder = TextEditingController();
+//   final axis = TextEditingController();
+//   final pd = TextEditingController();
+//   final add = TextEditingController();
+//   final va = TextEditingController();
+//
+//   //contact lens
+//   final sphereCL = TextEditingController();
+//   final cylinderCL = TextEditingController();
+//   final axisCL = TextEditingController();
+//   final bcCL = TextEditingController();
+//   final diaCL = TextEditingController();
+//   final tintCL = TextEditingController();
+//
+//   // void goToSelectProcedure() async {
+//   //   selectedService =
+//   //   await navigationService.pushNamed(Routes.SelectionService);
+//   //
+//   //   procedureTxtController.text = selectedService?.serviceName ?? '';
+//   // }
+//   // void goToSelectProcedure(BuildContext context) async {
+//   //   selectedService = await navigationService.pushNamed(Routes.SelectionService);
+//   //   procedureTxtController.text = selectedService?.serviceName ?? '';
+//   //
+//   //   showDialog(
+//   //     context: context,
+//   //     builder: (BuildContext context) {
+//   //       return Dialog(
+//   //         child: Container(
+//   //             width: 300,
+//   //             height: 400,
+//   //             child: SelectionService()
+//   //         ),
+//   //       );
+//   //     },
+//   //   );
+//   // }
+//   void goToSelectService(BuildContext context) async {
+//     // selectedService = await navigationService.pushNamed(Routes.SelectionService);
+//     // procedureTxtController.text = selectedService?.serviceName ?? '';
+//     Service? tempService = await showDialog<Service>(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return Center(
+//           child: Container(
+//             width: 500,
+//             height: 500,
+//             child: SelectionService(),
+//           ),
+//         );
+//       },
+//     );
+//     if (tempService != null) {
+//       selectedService = tempService;
+//       notifyListeners();
+//       procedureTxtController.text = selectedService?.serviceName ?? '';
+//     }
+//   }
+//
+//   // void selectDate() async {
+//   //   final DateTime date =
+//   //   await bottomSheetService.openBottomSheet(SelectionDate(
+//   //     title: 'Set date',
+//   //     initialDate: DateTime.now(),
+//   //     maxDate: DateTime.now(),
+//   //   ));
+//   //   if (date != null) {
+//   //     selectedDate = date;
+//   //     notifyListeners();
+//   //     dateTextController.text = DateFormat.yMMMd().format(selectedDate);
+//   //   }
+//   // }
+//
+//   void selectDate(BuildContext context) async {
+//     final DateTime? date = await showDialog<DateTime>(
+//       context: context,
+//       builder: (context) {
+//         return Dialog(
+//           child: Container(
+//             width: 450,
+//             height: 450,
+//             child: SelectionDate(
+//               title: 'Set date',
+//               initialDate: DateTime.now(),
+//               maxDate: DateTime.now(),
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//
+//     if (date != null) {
+//       selectedDate = date;
+//       notifyListeners();
+//       dateTextController.text = DateFormat.yMMMd().format(selectedDate);
+//     }
+//   }
+//
+//   // Future<void> addOpticalNote({
+//   //   required String patientId,
+//   // }) async {
+//   //   dialogService.showDefaultLoadingDialog(
+//   //       barrierDismissible: false, willPop: false);
+//   //
+//   //   final patientReference = FirebaseFirestore.instance.collection('patients');
+//   //   final toothDoc =
+//   //   await patientReference.doc(patientId).collection('optical_notes').doc();
+//   //   await toothDoc.set(OpticalNotes(
+//   //     isPaid: false,
+//   //     sphere: sphere.text,
+//   //     cylinder: cylinder.text,
+//   //     axis: axis.text,
+//   //     pd: pd.text,
+//   //     add: add.text,
+//   //     va: va.text,
+//   //     sphereCL: sphereCL.text,
+//   //     cylinderCL: cylinderCL.text,
+//   //     axisCL: axisCL.text,
+//   //     bcCL: bcCL.text,
+//   //     diaCL: diaCL.text,
+//   //     tintCL: tintCL.text,
+//   //     service: selectedService!,
+//   //     date: selectedDate.toString(),
+//   //     note: noteTextController.text,
+//   //
+//   //   ).toJson(id: toothDoc.id, procedureId: selectedService!.id));
+//   //   navigationService.closeOverlay();
+//   //   toastService.showToast(message: 'Successful: Set RX!');
+//   //   debugPrint('RX Added');
+//   //   refreshKey.currentState?.show();
+//   // }
+//   Future<void> addOpticalNote({
+//     required String patientId,
+//   }) async {
+//     try {
+//       dialogService.showDefaultLoadingDialog(
+//         barrierDismissible: false,
+//         willPop: false,
+//       );
+//
+//       final patientReference =
+//           FirebaseFirestore.instance.collection('patients');
+//       final toothDoc = await patientReference
+//           .doc(patientId)
+//           .collection('optical_notes')
+//           .doc();
+//
+//       await toothDoc.set(OpticalNotes(
+//         isPaid: false,
+//         sphere: sphere.text,
+//         cylinder: cylinder.text,
+//         axis: axis.text,
+//         pd: pd.text,
+//         add: add.text,
+//         va: va.text,
+//         sphereCL: sphereCL.text,
+//         cylinderCL: cylinderCL.text,
+//         axisCL: axisCL.text,
+//         bcCL: bcCL.text,
+//         diaCL: diaCL.text,
+//         tintCL: tintCL.text,
+//         service: selectedService!,
+//         date: selectedDate.toString(),
+//         note: noteTextController.text,
+//       ).toJson(id: toothDoc.id, procedureId: selectedService!.id));
+//
+//       navigationService.popRepeated(1);
+//       fieldsClear();
+//       toastService.showToast(message: 'Successful: Set RX!');
+//       debugPrint('RX Added');
+//       refreshKey.currentState?.show();
+//     } catch (e) {
+//       debugPrint('Error adding optical note: $e');
+//       toastService.showToast(message: 'Error adding optical note');
+//     }
+//   }
+//
+//   void fieldsClear(){
+//     sphere.clear();
+//     cylinder.clear();
+//     axis.clear();
+//     pd.clear();
+//     add.clear();
+//     va.clear();
+//     sphereCL.clear();
+//     cylinderCL.clear();
+//     axisCL.clear();
+//     bcCL.clear();
+//     diaCL.clear();
+//     tintCL.clear();
+//     noteTextController.clear();
+//   }
+//
+//   void goToOpticalNote (BuildContext context, Patient patient) async {
+//     await showDialog<Patient>(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           contentPadding: EdgeInsets.all(16),
+//           content: Container(
+//             width: 700,
+//             height: 700,
+//             child: ViewOpticalNote(patient: patient),
+//           ),
+//         );
+//       },
+//     );
+//   }
+//
+//   void goToAddPayment (BuildContext context, Patient patient) async {
+//     await showDialog<Patient>(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           contentPadding: EdgeInsets.all(16),
+//           content: Container(
+//             width: 700,
+//             height: 700,
+//             child: AddPaymentView(patient: patient),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }

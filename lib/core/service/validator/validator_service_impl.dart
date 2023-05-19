@@ -4,20 +4,40 @@ import 'package:intl/intl.dart';
 
 class ValidatorServiceImpl extends ValidatorService {
   @override
+  // String? validateFirstName(String value) {
+  //   if (value.isEmpty) {
+  //     return 'First name is empty.';
+  //   } else
+  //     return null;
+  // }
   String? validateFirstName(String value) {
     if (value.isEmpty) {
       return 'First name is empty.';
-    } else
-      return null;
+    }
+    if (value.contains(RegExp(r'[0-9]'))) {
+      return 'First name should not contain numbers.';
+    }
+    return null;
   }
 
+
   @override
+  // String? validateLastName(String value) {
+  //   if (value.isEmpty) {
+  //     return 'Last name is empty.';
+  //   } else
+  //     return null;
+  // }
   String? validateLastName(String value) {
     if (value.isEmpty) {
       return 'Last name is empty.';
-    } else
-      return null;
+    }
+    if (value.contains(RegExp(r'[0-9]'))) {
+      return 'Last name should not contain numbers.';
+    }
+    return null;
   }
+
 
   @override
   String? validatePassword(String value) {
@@ -101,14 +121,27 @@ class ValidatorServiceImpl extends ValidatorService {
   }
 
   @override
+  // String? validatePhoneNumber(String value) {
+  //   if (value.isEmpty) {
+  //     return 'Phone number is empty';
+  //   } else if (value.length < 11) {
+  //     return 'Phone number is not valid';
+  //   } else
+  //     return null;
+  // }
   String? validatePhoneNumber(String value) {
     if (value.isEmpty) {
       return 'Phone number is empty';
-    } else if (value.length < 11) {
+    }
+    if (value.length < 11) {
       return 'Phone number is not valid';
-    } else
-      return null;
+    }
+    if (!value.contains(RegExp(r'^[0-9]+$'))) {
+      return 'Phone number should contain only digits';
+    }
+    return null;
   }
+
 
   @override
   String? validateBrandName(String value) {
@@ -119,7 +152,7 @@ class ValidatorServiceImpl extends ValidatorService {
   }
 
   @override
-  String? validateMedicineName(String value) {
+  String? validateProductName(String value) {
     if (value.isEmpty) {
       return 'Medicine name is empty';
     } else
@@ -127,25 +160,46 @@ class ValidatorServiceImpl extends ValidatorService {
   }
 
   @override
+  // String? validatePrice(String value) {
+  //   if (value.isEmpty) {
+  //     return 'Price is empty';
+  //   } else {
+  //     try {
+  //       double val = double.parse(value);
+  //       if (val <= 0) {
+  //         return 'Not A Valid Amount';
+  //       } else {
+  //         return null;
+  //       }
+  //     } catch (e) {
+  //       return 'Not a Valid amount';
+  //     }
+  //   }
+  // }
   String? validatePrice(String value) {
     if (value.isEmpty) {
       return 'Price is empty';
-    } else {
-      try {
-        double val = double.parse(value);
-        if (val <= 0) {
-          return 'Not A Valid Amount';
-        } else {
-          return null;
-        }
-      } catch (e) {
-        return 'Not a Valid amount';
-      }
     }
+
+    if (!value.contains(RegExp(r'^[0-9.]+$'))) {
+      return 'Price should contain only digits';
+    }
+
+    try {
+      double val = double.parse(value);
+      if (val <= 0) {
+        return 'Not a valid amount';
+      }
+    } catch (e) {
+      return 'Not a valid amount';
+    }
+
+    return null;
   }
 
+
   @override
-  String? validateProcedureName(String value) {
+  String? validateServiceName(String value) {
     if (value.isEmpty) {
       return 'Procedure Name is empty';
     } else
@@ -171,7 +225,7 @@ class ValidatorServiceImpl extends ValidatorService {
   @override
   String? validateOptometrist(String value) {
     if (value.isEmpty) {
-      return ' No Dentist Selected';
+      return ' No Optometrist Selected';
     } else
       return null;
   }
@@ -193,22 +247,43 @@ class ValidatorServiceImpl extends ValidatorService {
   }
 
   @override
+  // String? validateQty(String value) {
+  //   if (value.isEmpty) {
+  //     return '';
+  //   } else {
+  //     try {
+  //       int val = int.parse(value);
+  //       if (val <= 0) {
+  //         return '';
+  //       } else {
+  //         return null;
+  //       }
+  //     } catch (e) {
+  //       return '';
+  //     }
+  //   }
+  // }
   String? validateQty(String value) {
     if (value.isEmpty) {
-      return '';
-    } else {
-      try {
-        int val = int.parse(value);
-        if (val <= 0) {
-          return '';
-        } else {
-          return null;
-        }
-      } catch (e) {
-        return '';
-      }
+      return null;
     }
+
+    if (!value.contains(RegExp(r'^[0-9]+$'))) {
+      return 'Quantity should contain only digits';
+    }
+
+    try {
+      int val = int.parse(value);
+      if (val <= 0) {
+        return 'Quantity should be greater than zero';
+      }
+    } catch (e) {
+      return 'Invalid quantity';
+    }
+
+    return null;
   }
+
 
   @override
   String? validateItemName(String value) {

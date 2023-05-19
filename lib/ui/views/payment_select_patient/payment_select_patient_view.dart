@@ -80,15 +80,15 @@ class PaymentSelectPatientView extends StatelessWidget {
                                       'assets/icons/Search.svg',
                                     ),
                                   ),
-                                  suffixIcon: GestureDetector(
-                                    onTap: () {},
-                                    child: Padding(
-                                      padding: EdgeInsets.all(8),
-                                      child: SvgPicture.asset(
-                                        'assets/icons/Filter.svg',
-                                      ),
-                                    ),
-                                  ),
+                                  // suffixIcon: GestureDetector(
+                                  //   onTap: () {},
+                                  //   child: Padding(
+                                  //     padding: EdgeInsets.all(8),
+                                  //     child: SvgPicture.asset(
+                                  //       'assets/icons/Filter.svg',
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   constraints: BoxConstraints(maxHeight: 43),
                                   hintText: 'Search by Last Name, First Name',
                                 ),
@@ -120,7 +120,7 @@ class PaymentSelectPatientView extends StatelessWidget {
                                           color: Colors.white,
                                           child: InkWell(
                                             onTap: () => model.selectPatient(
-                                                model.patientList[index]),
+                                                context, model.patientList[index]),
                                             child: PatientCard(
                                               key: ObjectKey(
                                                   model.patientList[index].id),

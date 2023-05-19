@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:opmswebstaff/app/app.locator.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/models/product/product.dart';
+import 'package:opmswebstaff/ui/views/add_product/add_product_view.dart';
 import 'package:stacked/stacked.dart';
 
 class ProductViewModel extends BaseViewModel {
@@ -60,10 +62,25 @@ class ProductViewModel extends BaseViewModel {
     //  Todo: logic code to delete product
   }
 
-  void searchMedicine(String query) {
+  void searchFrame(String query) {
     if (searchMode == false) {
       searchMode = true;
       notifyListeners();
     }
+  }
+
+  void goToAddProduct(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            width: 500,
+            height: 500,
+            child: AddProductView(),
+          ),
+        );
+      },
+    );
   }
 }

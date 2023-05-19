@@ -24,29 +24,30 @@ class AddProductViewModel extends BaseViewModel {
 
   XFile? selectedImage;
 
-  Future<void> addMedicine(
-      {required String medicineName, String? brandName, String? price}) async {
+  Future<void> addProduct(
+      {required String productName, String? brandName, String? price}) async {
     setBusy(true);
     try {
       dialogService.showDefaultLoadingDialog(barrierDismissible: true);
-      final imageUrl = await uploadMedicineImage(genericName: medicineName);
-      if (imageUrl != null) {
+      // final imageUrl = await uploadMedicineImage(genericName: productName);
+      // if (imageUrl != null) {
         await apiService.addProduct(
             product: Product(
-                productName: medicineName,
+                productName: productName,
                 brandName: brandName,
                 price: price ?? ''),
-            image: imageUrl);
-      }
+            // image: imageUrl
+        );
+      // }
 
       setBusy(false);
       navigationService.closeOverlay();
       navigationService.pop();
-      toastService.showToast(message: 'Medicine Added');
+      toastService.showToast(message: 'Product Added');
     } catch (e) {
       await apiService.addProduct(
         product: Product(
-            productName: medicineName,
+            productName: productName,
             brandName: brandName,
             price: price ?? ''),
       );
@@ -54,45 +55,45 @@ class AddProductViewModel extends BaseViewModel {
       setBusy(false);
       navigationService.closeOverlay();
       navigationService.pop();
-      toastService.showToast(message: 'Medicine Added');
+      toastService.showToast(message: 'Product Added');
     }
   }
 
-  Future<void> selectImage() async {
-    dynamic tempImage;
-    var selectedImageSource =
-        await bottomSheetService.openBottomSheet(SelectionOption(
-      options: SetupUserViewModel().imageSourceOptions,
-      title: 'Select Image Source',
-    ));
+  // Future<void> selectImage() async {
+  //   dynamic tempImage;
+  //   var selectedImageSource =
+  //       await bottomSheetService.openBottomSheet(SelectionOption(
+  //     options: SetupUserViewModel().imageSourceOptions,
+  //     title: 'Select Image Source',
+  //   ));
+  //
+  //   //Condition to select Image Source
+  //   if (selectedImageSource == SetupUserViewModel().imageSourceOptions[0]) {
+  //     tempImage = await SetupUserViewModel()
+  //         .imageSelectorService
+  //         .selectImageWithGallery();
+  //   } else if (selectedImageSource ==
+  //       SetupUserViewModel().imageSourceOptions[1]) {
+  //     tempImage = await SetupUserViewModel()
+  //         .imageSelectorService
+  //         .selectImageWithCamera();
+  //   }
+  //
+  //   if (tempImage != null) {
+  //     selectedImage = tempImage;
+  //
+  //     setBusy(false);
+  //   }
+  //   imageCache.clear();
+  // }
 
-    //Condition to select Image Source
-    if (selectedImageSource == SetupUserViewModel().imageSourceOptions[0]) {
-      tempImage = await SetupUserViewModel()
-          .imageSelectorService
-          .selectImageWithGallery();
-    } else if (selectedImageSource ==
-        SetupUserViewModel().imageSourceOptions[1]) {
-      tempImage = await SetupUserViewModel()
-          .imageSelectorService
-          .selectImageWithCamera();
-    }
-
-    if (tempImage != null) {
-      selectedImage = tempImage;
-
-      setBusy(false);
-    }
-    imageCache.clear();
-  }
-
-  Future<String?> uploadMedicineImage({required String genericName}) async {
-    final uploadResult = await apiService.uploadProductImage(
-        imageToUpload: File(selectedImage!.path), genericName: genericName);
-    if (uploadResult.isUploaded) {
-      return uploadResult.imageUrl!;
-    } else {
-      return null;
-    }
-  }
+  // Future<String?> uploadMedicineImage({required String genericName}) async {
+  //   final uploadResult = await apiService.uploadProductImage(
+  //       imageToUpload: File(selectedImage!.path), genericName: genericName);
+  //   if (uploadResult.isUploaded) {
+  //     return uploadResult.imageUrl!;
+  //   } else {
+  //     return null;
+  //   }
+  // }
 }

@@ -30,7 +30,7 @@ class Expense {
       date: map['date'] as String,
       note: map['note'] as String,
       items: map['items']
-          .map((medicine) => ExpenseItem.fromJson(medicine))
+          .map((product) => ExpenseItem.fromJson(product))
           .toList(),
     );
   }

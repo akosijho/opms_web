@@ -48,7 +48,8 @@ class _ServicesViewState extends State<ServicesView> {
               heroTag: null,
               isExtended: model.isScrolledUp,
               onPressed: () =>
-                  model.navigationService.pushNamed(Routes.AddServiceView),
+                  // model.navigationService.pushNamed(Routes.AddServiceView),
+              model.goToAddService(context),
               label: Text('Add Service'),
               icon: Icon(Icons.add),
             ),

@@ -65,9 +65,10 @@ class AddExpenseView extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  if (model.addExpenseFormKey.currentState!.validate()){
-                  model.performAddingExpense();
-                  }},
+                  if (model.addExpenseFormKey.currentState!.validate()) {
+                    model.performAddingExpense();
+                  }
+                },
                 child: Container(
                   height: double.maxFinite,
                   color: Palettes.kcPurpleMain,
@@ -85,7 +86,8 @@ class AddExpenseView extends StatelessWidget {
         floatingActionButton: Visibility(
           visible: !(MediaQuery.of(context).viewInsets.bottom != 0),
           child: FloatingActionButton.extended(
-              onPressed: model.goToAddExpenseItem, label: Text('Add Item')),
+              onPressed: (){model.goToAddExpenseItem(context);},
+              label: Text('Add Item')),
         ),
         body: Form(
           key: model.addExpenseFormKey,
@@ -95,7 +97,7 @@ class AddExpenseView extends StatelessWidget {
             child: ListView(
               children: [
                 GestureDetector(
-                  onTap: () => model.selectDate(),
+                  onTap: () => model.selectDate(model.dateTxtController,context),
                   child: TextFormField(
                     controller: model.dateTxtController,
                     textInputAction: TextInputAction.next,

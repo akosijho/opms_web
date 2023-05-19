@@ -6,6 +6,7 @@ import 'package:opmswebstaff/enums/appointment_status.dart';
 import 'package:opmswebstaff/extensions/date_format_extension.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:opmswebstaff/models/appointment_model/appointment_model.dart';
+import 'package:opmswebstaff/ui/views/patient_info/patient_info_view.dart';
 import 'package:opmswebstaff/ui/widgets/appointment_card/appointment_card.dart';
 import 'package:opmswebstaff/ui/widgets/custom_shimmer/custom_shimmer.dart';
 import 'package:flutter/material.dart';
@@ -60,26 +61,26 @@ class HomeAppointment extends StatelessWidget {
                     child: Container(
                       height: 22,
                       alignment: Alignment.bottomLeft,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            'View All',
-                            style: TextStyle(
-                                fontFamily: FontNames.gilRoy,
-                                fontWeight: FontWeight.w600,
-                                fontSize: kfsHeading5,
-                                color: Palettes.kcBlueMain2),
-                          ),
-                          SvgPicture.asset(
-                            'assets/icons/arrow-right.svg',
-                            height: 20,
-                            width: 20,
-                            color: Palettes.kcBlueMain1,
-                          ),
-                        ],
-                      ),
+                      // child: Row(
+                      //   crossAxisAlignment: CrossAxisAlignment.end,
+                      //   mainAxisAlignment: MainAxisAlignment.end,
+                      //   children: [
+                      //     Text(
+                      //       'View All',
+                      //       style: TextStyle(
+                      //           fontFamily: FontNames.gilRoy,
+                      //           fontWeight: FontWeight.w600,
+                      //           fontSize: kfsHeading5,
+                      //           color: Palettes.kcBlueMain2),
+                      //     ),
+                      //     SvgPicture.asset(
+                      //       'assets/icons/arrow-right.svg',
+                      //       height: 20,
+                      //       width: 20,
+                      //       color: Palettes.kcBlueMain1,
+                      //     ),
+                      //   ],
+                      // ),
                     ),
                   ),
                   SizedBox(width: 5),
@@ -110,11 +111,25 @@ class HomeAppointment extends StatelessWidget {
                               duration: Duration(milliseconds: 1000),
                               child: AppointmentCard(
                                 key: ObjectKey(myAppointments[i]),
-                                onPatientTap: () => navigationService.pushNamed(
-                                    Routes.PatientInfoView,
-                                    arguments: PatientInfoViewArguments(
-                                        patient: myAppointments[i].patient)),
+                                onPatientTap: () =>
+                                    // navigationService.pushNamed(
+                                    //     Routes.PatientInfoView,
+                                    //     arguments: PatientInfoViewArguments(
+                                    //         patient: myAppointments[i].patient)),
                                 // imageUrl: myAppointments[i].patient.image,
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Center(
+                                      child: Container(
+                                        width: 800,
+                                        height: 800,
+                                        child: PatientInfoView(patient: myAppointments[i].patient),
+                                      ),
+                                    );
+                                  },
+                                ),
+
                                 serviceTitle:
                                     myAppointments[i].services![0].serviceName,
                                 doctor: myAppointments[i].optometrist,

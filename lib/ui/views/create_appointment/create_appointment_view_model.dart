@@ -101,47 +101,79 @@ class CreateAppointmentViewModel extends BaseViewModel {
   //   }
   //   notifyListeners();
   // }
-
-  void selectDate(BuildContext context, TextEditingController controller) async {
-    selectedAppointmentDate = await showDialog(
+  void selectDate(TextEditingController textEditingController,
+      BuildContext context) async {
+    DateTime? selectDate = await showDatePicker(
       context: context,
-      barrierColor: Colors.transparent,
-      builder: (BuildContext context) {
-        return Center(
-          child: Container(
-            width: 450,
-            height: 450,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: SelectionDate(
-              title: 'Set Appointment date',
-              initialDate: DateTime.now(),
-              maxDate: DateTime.utc(DateTime.now().year + 5),
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+      helpText: 'Select Date',
+      cancelText: 'CANCEL',
+      confirmText: 'SELECT',
+      errorFormatText: 'Invalid date format',
+      errorInvalidText: 'Invalid date',
+      fieldLabelText: 'Appointment date',
+      fieldHintText: 'Month/Date/Year',
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.blue,
             ),
           ),
+          child: child!,
         );
       },
     );
-    tempDate = selectedAppointmentDate != null
-        ? selectedAppointmentDate.toString()
-        : tempDate ?? '';
-    selectedAppointmentDate =
-        tempDate?.toDateTime()?.toDateMonthDayOnly() ?? selectedAppointmentDate?.toDateMonthDayOnly();
-    if (selectedAppointmentDate != null) {
-      controller.text = DateFormat.yMMMd().format(selectedAppointmentDate!);
-    }
-    notifyListeners();
-  }
 
+    if (selectDate != null) {
+      selectedAppointmentDate = selectDate;
+      textEditingController.text =
+          DateFormat.yMMMd().format(selectedAppointmentDate!);
+      notifyListeners();
+    }
+  }
+  // void selectDate(BuildContext context, TextEditingController controller) async {
+  //   selectedAppointmentDate = await showDialog(
+  //     context: context,
+  //     barrierColor: Colors.transparent,
+  //     builder: (BuildContext context) {
+  //       return Center(
+  //         child: Container(
+  //           width: 450,
+  //           height: 450,
+  //           decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             borderRadius: BorderRadius.circular(10),
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: Colors.black.withOpacity(0.2),
+  //                 blurRadius: 5,
+  //                 offset: Offset(0, 3),
+  //               ),
+  //             ],
+  //           ),
+  //           child: SelectionDate(
+  //             title: 'Set Appointment date',
+  //             initialDate: DateTime.now(),
+  //             maxDate: DateTime.utc(DateTime.now().year + 5),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  //   tempDate = selectedAppointmentDate != null
+  //       ? selectedAppointmentDate.toString()
+  //       : tempDate ?? '';
+  //   selectedAppointmentDate =
+  //       tempDate?.toDateTime()?.toDateMonthDayOnly() ?? selectedAppointmentDate?.toDateMonthDayOnly();
+  //   if (selectedAppointmentDate != null) {
+  //     controller.text = DateFormat.yMMMd().format(selectedAppointmentDate!);
+  //   }
+  //   notifyListeners();
+  // }
+  //
 
   // void selectStartTime(TextEditingController controller) async {
   //   if (selectedAppointmentDate != null) {

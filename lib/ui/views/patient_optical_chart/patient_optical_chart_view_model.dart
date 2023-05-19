@@ -139,24 +139,24 @@ class PatientOpticalChartViewModel extends BaseViewModel {
     }
   }
 
-  void viewDentalNoteById(
-      {required Patient patient, required String selectedTooth}) {
-    navigationService.pushNamed(Routes.ViewDentalNoteByToothView,
-        arguments: ViewDentalNoteByToothViewArguments(
-            patient: patient, selectedTooth: selectedTooth));
-  }
+  // void viewDentalNoteById(
+  //     {required Patient patient, required String selectedTooth}) {
+  //   navigationService.pushNamed(Routes.ViewDentalNoteByToothView,
+  //       arguments: ViewDentalNoteByToothViewArguments(
+  //           patient: patient, selectedTooth: selectedTooth));
+  // }
 
-  Future<void> getToothWithDentalCondition(
-      {required String patientId, String? toothId}) async {
-    var toothConditionList = await apiService.getDentalConditionList(
-        patientId: patientId, toothId: toothId);
-    for (ToothCondition i in toothConditionList ?? []) {
-      if (!toothWithTransactionHistory.contains(i.selectedTooth)) {
-        toothWithTransactionHistory.add(i.selectedTooth);
-        notifyListeners();
-      }
-    }
-  }
+  // Future<void> getToothWithDentalCondition(
+  //     {required String patientId, String? toothId}) async {
+  //   var toothConditionList = await apiService.getDentalConditionList(
+  //       patientId: patientId, toothId: toothId);
+  //   for (ToothCondition i in toothConditionList ?? []) {
+  //     if (!toothWithTransactionHistory.contains(i.selectedTooth)) {
+  //       toothWithTransactionHistory.add(i.selectedTooth);
+  //       notifyListeners();
+  //     }
+  //   }
+  // }
 
   void listenToPatientChanges({required String patientId}) async {
     apiService.getPatients().listen((event) async {
@@ -167,7 +167,7 @@ class PatientOpticalChartViewModel extends BaseViewModel {
     });
   }
 
-  Future<void> getDentalNotes(
+  Future<void> getOpticalNotes(
       {required String patientId, String? toothId}) async {
     var dentalNotes = await apiService.getOpticalNotesList(
         patientId: patientId, toothId: toothId);
@@ -182,8 +182,8 @@ class PatientOpticalChartViewModel extends BaseViewModel {
 
   Future<void> init(String patientId) async {
     dialogService.showDefaultLoadingDialog();
-    await getDentalNotes(patientId: patientId);
-    await getToothWithDentalCondition(patientId: patientId);
+    await getOpticalNotes(patientId: patientId);
+    // await getToothWithDentalCondition(patientId: patientId);
     navigationService.pop();
     debugPrint(toothWithTransactionHistory.toString());
   }
@@ -210,16 +210,16 @@ class PatientOpticalChartViewModel extends BaseViewModel {
   //           selectedTeeth: selectedTooth, patientId: patientId));
   // }
 
-  void goToSetDentalNote(String patientId) {
+  void goToSetOpticalNote(String patientId) {
     selectedTooth.sort((a, b) => a.toString().compareTo(b.toString()));
     navigationService.pushNamed(Routes.SetOpticalNoteView,
         arguments: SetOpticalNoteViewArguments(
             selectedTeeth: selectedTooth, patientId: patientId));
   }
 
-  void goToSetOpticalNote(String patientId){
-
-  }
+  // void goToSetOpticalNote(String patientId){
+  //
+  // }
 
   // void goToChartLegend() {
   //   navigationService.pushNamed(Routes.DentalChartLegend);

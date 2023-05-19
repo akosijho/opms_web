@@ -9,7 +9,7 @@ import 'package:stacked/stacked.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class ExpensesReportViewModel extends BaseViewModel {
-  //
+
 
   final apiService = locator<ApiService>();
 

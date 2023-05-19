@@ -34,7 +34,7 @@ class OpticalCertification extends BaseViewModel {
     super.dispose();
   }
 
-  void getDentalCertificates({required Patient patient}) async {
+  void getOpticalCertificates({required Patient patient}) async {
     final cert = await apiService.getOpticalCert(patient: patient);
     dialogService.showDefaultLoadingDialog();
     await Future.delayed(Duration(milliseconds: 300));
@@ -44,13 +44,13 @@ class OpticalCertification extends BaseViewModel {
     notifyListeners();
   }
 
-  void listenToGetDentalCert({required Patient patient}) {
+  void listenToGetOpticalCert({required Patient patient}) {
     apiService.listenToOpticalCertChanges(patient: patient).listen((event) {
       certSub?.cancel();
       certSub = apiService
           .listenToOpticalCertChanges(patient: patient)
           .listen((event) {
-        getDentalCertificates(patient: patient);
+        getOpticalCertificates(patient: patient);
       });
     });
   }

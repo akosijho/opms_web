@@ -11,6 +11,7 @@ import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
 import 'package:opmswebstaff/core/service/snack_bar/snack_bar_service.dart';
 import 'package:opmswebstaff/core/service/toast/toast_service.dart';
 import 'package:opmswebstaff/models/product/lens.dart';
+import 'package:opmswebstaff/ui/views/update_product/update_lens/update_lens.dart';
 
 class LensCard extends StatefulWidget {
   final Lens lens;
@@ -73,9 +74,23 @@ class _LensCardState extends State<LensCard> {
         break;
     }
   }
+  // void updateLens(Lens lens) {
+  //   navigationService.pushNamed(Routes.UpdateLensViews,
+  //       arguments: UpdateLensViewArguments(lens: lens));
+  // }
   void updateLens(Lens lens) {
-    navigationService.pushNamed(Routes.UpdateLensViews,
-        arguments: UpdateLensViewArguments(lens: lens));
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+              width: 500, // Specify the desired container width
+              height: 500, // Specify the desired container height
+              child: UpdateLensView(lens: lens)
+          ),
+        );
+      },
+    );
   }
 
   @override

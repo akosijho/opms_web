@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:opmswebstaff/models/service/service.dart';
+import 'package:opmswebstaff/ui/views/update_service/update_service_view.dart';
 
 import '../../../app/app.locator.dart';
 import '../../../constants/styles/palette_color.dart';
@@ -52,9 +53,23 @@ class _ServiceCardState extends State<ServiceCard> {
         });
   }
 
-  void updateProcedure(Service service) {
-    navigationService.pushNamed(Routes.UpdateServiceViews,
-        arguments: UpdateServiceViewArguments(service: service));
+  // void updateProcedure(Service service) {
+  //   navigationService.pushNamed(Routes.UpdateServiceViews,
+  //       arguments: UpdateServiceViewArguments(service: service));
+  // }
+  void updateService(Service service) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            width: 500, // Specify the desired container width
+            height: 500, // Specify the desired container height
+            child: UpdateServiceView(service: service)
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -124,7 +139,7 @@ class _ServiceCardState extends State<ServiceCard> {
           widthSpace: 60,
           color: Colors.transparent,
           onTap: (handler) {
-            this.updateProcedure(widget.service);
+            this.updateService(widget.service);
           },
           content: Container(
             height: 50,

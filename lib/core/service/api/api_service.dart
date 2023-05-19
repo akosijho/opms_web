@@ -9,6 +9,7 @@ import 'package:opmswebstaff/models/notification/notification_model.dart';
 import 'package:opmswebstaff/models/notification_token/notification_token_model.dart';
 import 'package:opmswebstaff/models/optical_certificate/optical_certificate.dart';
 import 'package:opmswebstaff/models/optical_notes/optical_notes.dart';
+import 'package:opmswebstaff/models/optical_receipt/optical_receipt.dart';
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
 import 'package:opmswebstaff/models/prescription/prescription.dart';
 import 'package:opmswebstaff/models/product/lens.dart';
@@ -101,7 +102,7 @@ abstract class ApiService {
       {required String toothId,
       required dynamic patientId,
       required OpticalNotes opticalNotes,
-      required dynamic procedureId});
+      required dynamic serviceId});
 
   Future<List<ToothCondition>?> getDentalConditionList(
       {required dynamic patientId, String? toothId});
@@ -132,7 +133,7 @@ abstract class ApiService {
 
   Future<List<Expense>> getExpenseList({String? date});
 
-  Future<List<Payment>> getPaymentByPatient({dynamic patientId});
+  Future<List<Payment>> getPaymentByPatient({required dynamic patientId});
 
   Future<List<AppointmentModel>> getAppointmentsByPatient({dynamic patientId});
 
@@ -159,6 +160,8 @@ abstract class ApiService {
   Stream listenToOpticalCertChanges({required Patient patient});
 
   Future<List<OpticalCertificate>> getOpticalCert({required Patient patient});
+
+  Future<List<OpticalReceipt>> getOpticalRec({required Patient patient});
 
   Future<QueryResult> updatePatientInfo({required Patient patient});
 

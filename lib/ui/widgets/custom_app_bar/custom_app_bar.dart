@@ -134,17 +134,17 @@ class CustomHomePageAppBar extends StatelessWidget with PreferredSizeWidget {
                     )
               ),
               SizedBox(width: 40),
-              // IconButton(
-              //   onPressed: () => onNotificationTap!(),
-              //   padding: EdgeInsets.zero,
-              //   splashColor: Colors.transparent,
-              //   alignment: Alignment.centerRight,
-              //   icon: SvgPicture.asset(
-              //     hasNotification
-              //         ? 'assets/icons/Notification - Noti.svg'
-              //         : 'assets/icons/Notification-clear.svg',
-              //   ),
-              // ),
+              IconButton(
+                onPressed: () => onNotificationTap!(),
+                padding: EdgeInsets.zero,
+                splashColor: Colors.transparent,
+                alignment: Alignment.centerRight,
+                icon: SvgPicture.asset(
+                  hasNotification
+                      ? 'assets/icons/Notification - Noti.svg'
+                      : 'assets/icons/Notification-clear.svg',
+                ),
+              ),
               //   TextButton.icon(
               //     onPressed: () => model.logout(),
               //     icon: Icon(Icons.logout),
@@ -152,12 +152,21 @@ class CustomHomePageAppBar extends StatelessWidget with PreferredSizeWidget {
               //     style: TextButton.styleFrom(primary: Colors.white),
               //   ),
               SizedBox(width: 20),
-              IconButton(
-                onPressed: () => onLogOutTap != null ? onLogOutTap!() : null,
-                padding: EdgeInsets.zero,
-                icon: SvgPicture.asset(
-                  'assets/icons/Logout.svg',
-                  color: Colors.white,
+              InkWell(
+                onTap:  () => onLogOutTap != null ? onLogOutTap!() : null,
+                child: Row(
+                  children: [
+                    IconButton(
+                      onPressed: () => onLogOutTap != null ? onLogOutTap!() : null,
+                      padding: EdgeInsets.zero,
+                      icon: SvgPicture.asset(
+                        'assets/icons/Logout.svg',
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text('Logout', style: TextStyle(color: Colors.white)),
+                    SizedBox(width: 20)
+                  ],
                 ),
               ),
               // SizedBox(width: 10),
