@@ -34,7 +34,12 @@ class PdfServiceImp extends PdfService {
     final pdf = pw.Document();
     pdf.addPage(
       pw.MultiPage(
-          pageFormat: PdfPageFormat.a6,
+          pageFormat: PdfPageFormat(
+            125 * PdfPageFormat.mm,
+            176 * PdfPageFormat.mm,
+            marginAll: .5 * PdfPageFormat.inch
+          ),
+          
           build: (pw.Context context) => [
                 Container(
                   color: PdfColors.white,
@@ -46,6 +51,9 @@ class PdfServiceImp extends PdfService {
                       Text(
                         'Successfully Recorded the payment of patient',
                         textAlign: TextAlign.center,
+                        style:TextStyle(
+                          fontSize: 10
+                        )
                       ),
                       SizedBox(height: 8),
                       Center(
@@ -58,7 +66,7 @@ class PdfServiceImp extends PdfService {
                           ),
                         ),
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: 12),
                       payment.opticalNote!.isNotEmpty
                           ? Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -135,7 +143,7 @@ class PdfServiceImp extends PdfService {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Frames'),
+                                Text('Frames',style: TextStyle(fontSize: 11)),
                                 ListView.separated(
                                     itemBuilder: (context, index) => Row(
                                           mainAxisAlignment:
@@ -167,10 +175,14 @@ class PdfServiceImp extends PdfService {
                                                   ],
                                                   style: TextStyle(
                                                       color: PdfColors.black,
+                                                      font: Font.ttf(fontData),
                                                       fontSize: 10)),
                                             ),
                                             Text(
-                                                '${computeMedTotal(payment.productList![index])}')
+                                                '${computeMedTotal(payment.productList![index])}', style: TextStyle(
+                                                  font: Font.ttf(fontData),
+                                                  fontSize: 10
+                                                ))
                                           ],
                                         ),
                                     separatorBuilder: (context, index) =>
@@ -216,10 +228,14 @@ class PdfServiceImp extends PdfService {
                                                   ],
                                                   style: TextStyle(
                                                       color: PdfColors.black,
+                                                      font: Font.ttf(fontData),
                                                       fontSize: 10)),
                                             ),
                                             Text(
-                                                '${computeLensTotal(payment.lensList![index])}')
+                                                '${computeLensTotal(payment.lensList![index])}', style: TextStyle(
+                                                  font: Font.ttf(fontData),
+                                                  fontSize: 10
+                                                ))
                                           ],
                                         ),
                                     separatorBuilder: (context, index) =>
@@ -237,36 +253,36 @@ class PdfServiceImp extends PdfService {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Optical Note SubTotal: '),
+                          Text('Optical Note SubTotal: ',style: TextStyle(fontSize: 10)),
                           Text(payment.opticalNoteSubTotal
                               .toString()
-                              .toCurrency!, style: TextStyle(fontSize: 11, font: Font.ttf(fontData))),
+                              .toCurrency!, style: TextStyle(fontSize: 10, font: Font.ttf(fontData))),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Balance Note SubTotal: '),
+                          Text('Balance Note SubTotal: ',style: TextStyle(fontSize: 10)),
                           Text(payment.balanceNoteSubTotal
                               .toString()
-                              .toCurrency!, style: TextStyle(font: Font.ttf(fontData))),
+                              .toCurrency!, style: TextStyle(fontSize: 10, font: Font.ttf(fontData))),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Frame SubTotal: '),
-                          Text(payment.productSubTotal.toString().toCurrency!, style: TextStyle(font: Font.ttf(fontData))),
+                          Text('Frame SubTotal: ',style: TextStyle(fontSize: 10)),
+                          Text(payment.productSubTotal.toString().toCurrency!, style: TextStyle(fontSize: 10, font: Font.ttf(fontData))),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Lens SubTotal: '),
-                          Text(payment.lensSubTotal.toString().toCurrency!, style: TextStyle(font: Font.ttf(fontData))),
+                          Text('Lens SubTotal: ',style: TextStyle(fontSize: 11)),
+                          Text(payment.lensSubTotal.toString().toCurrency!, style: TextStyle(fontSize: 10, font: Font.ttf(fontData))),
                         ],
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 4),
                       Divider(
                         height: 1,
                         color: PdfColors.grey,
@@ -277,23 +293,23 @@ class PdfServiceImp extends PdfService {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Total Amount Due: '),
-                            Text(payment.totalAmount.toString().toCurrency!, style: TextStyle(font: Font.ttf(fontData))),
+                            Text('Total Amount Due: ',style: TextStyle(fontSize: 10)),
+                            Text(payment.totalAmount.toString().toCurrency!, style: TextStyle(fontSize: 10, font: Font.ttf(fontData))),
                           ],
                         ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Deposit: '),
-                          Text(payment.deposit.toString().toCurrency!, style: TextStyle(font: Font.ttf(fontData))),
+                          Text('Deposit: ',style: TextStyle(fontSize: 10)),
+                          Text(payment.deposit.toString().toCurrency!, style: TextStyle(fontSize: 10, font: Font.ttf(fontData))),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Balance: '),
-                          Text(payment.balance.toString().toCurrency!, style: TextStyle(font: Font.ttf(fontData))),
+                          Text('Balance: ',style: TextStyle(fontSize: 10)),
+                          Text(payment.balance.toString().toCurrency!, style: TextStyle(fontSize: 10, font: Font.ttf(fontData))),
                         ],
                       ),
                       Divider(
@@ -301,7 +317,7 @@ class PdfServiceImp extends PdfService {
                         color: PdfColors.grey,
                         thickness: 2,
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 8),
                       Center(
                         child: RichText(
                             text: TextSpan(
@@ -318,7 +334,7 @@ class PdfServiceImp extends PdfService {
                                       fontWeight: FontWeight.normal))
                             ])),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 16),
                       Center(
                         child: Column(
                           children: [
