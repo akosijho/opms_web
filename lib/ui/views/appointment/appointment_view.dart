@@ -26,16 +26,8 @@ class AppointmentView extends StatelessWidget {
       viewModelBuilder: () => AppointmentViewModel(),
       onModelReady: (model) async {
         final dateToday =
-            DateFormat('yyyy-MM-dd').format(DateTime.now()).toDateTime();
-        await model.getDateFromNtp();
-        await model.getAppointmentByDate(dateToday);
-        model.listenToAppointmentChanges();
-
-        if (appointment != null) {
-          model.selectedDate = appointment!.date.toDateTime()!;
-          model.getAppointmentByDate(model.selectedDate);
-          model.notifyListeners();
-        }
+            DateFormat('yyyy-MM-dd 00:00:00.000').format(DateTime.now()).toDateTime();
+            model.getAppointmentByDate(dateToday);
       },
       builder: (context, model, child) => Scaffold(
           appBar: AppBar(

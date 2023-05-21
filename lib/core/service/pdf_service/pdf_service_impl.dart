@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/services.dart';
+import 'package:opmswebstaff/constants/styles/palette_color.dart';
 import 'package:opmswebstaff/core/service/pdf_service/pdf_service.dart';
 import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:opmswebstaff/models/optical_receipt/optical_receipt.dart';
@@ -8,8 +10,11 @@ import 'package:opmswebstaff/models/payment/payment.dart';
 import 'package:opmswebstaff/models/prescription/prescription.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
+import 'package:opmswebstaff/models/product/lens.dart';
+import 'package:opmswebstaff/models/product/product.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'dart:html' as html;
 
@@ -17,6 +22,353 @@ import '../../../models/optical_certificate/optical_certificate.dart';
 import '../../../models/patient_model/patient_model.dart';
 
 class PdfServiceImp extends PdfService {
+  @override
+  Future<Uint8List> printReceipt({required Payment payment}) async {
+    final ByteData image =
+        await rootBundle.load('assets/images/check_green.png');
+    final ByteData logo = await rootBundle.load('assets/icons/logo1.png');
+
+    final ByteData fontData =
+        await rootBundle.load('fonts/SFPro-Regular.ttf');
+
+    final pdf = pw.Document();
+    pdf.addPage(
+      pw.MultiPage(
+          pageFormat: PdfPageFormat.a6,
+          build: (pw.Context context) => [
+                Container(
+                  color: PdfColors.white,
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: ListView(
+                    children: [
+                      pw.Image(pw.MemoryImage(image.buffer.asUint8List()),
+                          width: 20, height: 20),
+                      Text(
+                        'Successfully Recorded the payment of patient',
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 8),
+                      Center(
+                        child: Text(
+                          '${payment.patient_name}',
+                          style: TextStyle(
+                            color: PdfColors.blue,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      payment.opticalNote!.isNotEmpty
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Divider(
+                                  height: 1,
+                                  thickness: 1,
+                                  color: PdfColors.grey,
+                                ),
+                                Text('Optical Service'),
+                                ListView.separated(
+                                    itemBuilder: (context, index) => Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            // RichText(
+                                            //   text: TextSpan(
+                                            //       text: payment
+                                            //           .opticalNote![index]
+                                            //           .service
+                                            //           .serviceName,
+                                            //       // children: [
+                                            //       //   TextSpan(
+                                            //       //     text: ' @tooth#' +
+                                            //       //         payment
+                                            //       //             .dentalNote![
+                                            //       //                 index]
+                                            //       //             .sphere,
+                                            //       //   )
+                                            //       // ],
+                                            //       style: TextStyle(
+                                            //           color: PdfColors.black,
+                                            //           fontSize: 12)),
+                                            // ),
+                                            Text(
+                                                payment.opticalNote![index]
+                                                    .service.serviceName,
+                                                // children: [
+                                                //   TextSpan(
+                                                //     text: ' @tooth#' +
+                                                //         payment
+                                                //             .dentalNote![
+                                                //                 index]
+                                                //             .sphere,
+                                                //   )
+                                                // ],
+                                                style: TextStyle(
+                                                    color: PdfColors.black,
+                                                    fontSize: 12)),
+                                            // Text(payment.opticalNote![index]
+                                            //     .service.price!
+                                            //     .toString()
+                                            //     .toCurrency!),
+                                            Text(payment.opticalNoteSubTotal
+                                                .toString()
+                                                .toCurrency!),
+                                          ],
+                                        ),
+                                    separatorBuilder: (context, index) =>
+                                        Divider(height: 1),
+                                    itemCount: payment.opticalNote!.length),
+                              ],
+                            )
+                          : Container(),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: PdfColors.grey,
+                      ),
+                      SizedBox(height: 4),
+                      payment.productList!.isNotEmpty
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Frames'),
+                                ListView.separated(
+                                    itemBuilder: (context, index) => Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            RichText(
+                                              text: TextSpan(
+                                                  text: payment
+                                                      .productList![index]
+                                                      .brandName,
+                                                  children: [
+                                                    TextSpan(
+                                                        text: ' @' +
+                                                            payment
+                                                                .productList![
+                                                                    index]
+                                                                .price
+                                                                .toString()
+                                                                .toCurrency!,
+                                                        children: [
+                                                          TextSpan(
+                                                              text: '  x' +
+                                                                  payment
+                                                                      .productList![
+                                                                          index]
+                                                                      .qty
+                                                                      .toString())
+                                                        ]),
+                                                  ],
+                                                  style: TextStyle(
+                                                      color: PdfColors.black,
+                                                      fontSize: 10)),
+                                            ),
+                                            Text(
+                                                '${computeMedTotal(payment.productList![index])}')
+                                          ],
+                                        ),
+                                    separatorBuilder: (context, index) =>
+                                        Divider(height: 1),
+                                    itemCount: payment.productList!.length),
+                              ],
+                            )
+                          : Container(),
+                      SizedBox(height: 4),
+                      payment.lensList!.isNotEmpty
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Lens'),
+                                ListView.separated(
+                                    itemBuilder: (context, index) => Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            RichText(
+                                              text: TextSpan(
+                                                  text: payment.lensList![index]
+                                                      .brandName,
+                                                  children: [
+                                                    TextSpan(
+                                                        text: ' @' +
+                                                            payment
+                                                                .lensList![
+                                                                    index]
+                                                                .price
+                                                                .toString()
+                                                                .toCurrency!,
+                                                        children: [
+                                                          TextSpan(
+                                                              text: '  x' +
+                                                                  payment
+                                                                      .lensList![
+                                                                          index]
+                                                                      .qty
+                                                                      .toString())
+                                                        ]),
+                                                  ],
+                                                  style: TextStyle(
+                                                      color: PdfColors.black,
+                                                      fontSize: 10)),
+                                            ),
+                                            Text(
+                                                '${computeLensTotal(payment.lensList![index])}')
+                                          ],
+                                        ),
+                                    separatorBuilder: (context, index) =>
+                                        Divider(height: 1),
+                                    itemCount: payment.lensList!.length),
+                              ],
+                            )
+                          : Container(),
+                      Divider(
+                        height: 1,
+                        color: PdfColors.grey,
+                        thickness: 1,
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Optical Note SubTotal: '),
+                          Text(payment.opticalNoteSubTotal
+                              .toString()
+                              .toCurrency!, style: TextStyle(fontSize: 11, font: Font.ttf(fontData))),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Balance Note SubTotal: '),
+                          Text(payment.balanceNoteSubTotal
+                              .toString()
+                              .toCurrency!, style: TextStyle(font: Font.ttf(fontData))),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Frame SubTotal: '),
+                          Text(payment.productSubTotal.toString().toCurrency!, style: TextStyle(font: Font.ttf(fontData))),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Lens SubTotal: '),
+                          Text(payment.lensSubTotal.toString().toCurrency!, style: TextStyle(font: Font.ttf(fontData))),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Divider(
+                        height: 1,
+                        color: PdfColors.grey,
+                        thickness: 2,
+                      ),
+                      SizedBox(
+                        height: 40,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Total Amount Due: '),
+                            Text(payment.totalAmount.toString().toCurrency!, style: TextStyle(font: Font.ttf(fontData))),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Deposit: '),
+                          Text(payment.deposit.toString().toCurrency!, style: TextStyle(font: Font.ttf(fontData))),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Balance: '),
+                          Text(payment.balance.toString().toCurrency!, style: TextStyle(font: Font.ttf(fontData))),
+                        ],
+                      ),
+                      Divider(
+                        height: 1,
+                        color: PdfColors.grey,
+                        thickness: 2,
+                      ),
+                      SizedBox(height: 10),
+                      Center(
+                        child: RichText(
+                            text: TextSpan(
+                                text: 'Ref. No.: ',
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    color: PdfColors.black,
+                                    fontWeight: FontWeight.bold),
+                                children: [
+                              TextSpan(
+                                  text: payment.payment_id,
+                                  style: TextStyle(
+                                      color: PdfColors.black,
+                                      fontWeight: FontWeight.normal))
+                            ])),
+                      ),
+                      SizedBox(height: 20),
+                      Center(
+                        child: Column(
+                          children: [
+                            Text('DR. RICA ANGELIQUE PLAZA',
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    color: PdfColors.black,
+                                    fontWeight: FontWeight.bold)),
+                            Text('SIGNATURE',
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    color: PdfColors.black,
+                                    fontWeight: FontWeight.bold))
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Center(
+                        child: pw.Image(
+                            pw.MemoryImage(logo.buffer.asUint8List()),
+                            width: 20,
+                            height: 20),
+                      ),
+                      Center(child: Text('EyeChoice Optical Shop',
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    color: PdfColors.black,
+                                    fontWeight: FontWeight.bold))),
+                      SizedBox(height: 8),
+                    ],
+                  ),
+                ),
+              ]),
+    );
+
+    return pdf.save();
+  }
+
+  String computeMedTotal(Product product) {
+    int qty = int.parse(product.qty!);
+    double price = double.parse(product.price!);
+    return (qty * price).toString().toCurrency!;
+  }
+
+  String computeLensTotal(Lens lens) {
+    int qty = int.parse(lens.qty!);
+    double price = double.parse(lens.price!);
+    return (qty * price).toString().toCurrency!;
+  }
+
   @override
   Future<Uint8List> printOpticalCertificate(
       {required OpticalCertificate opticalCertificate,
@@ -290,11 +642,6 @@ class PdfServiceImp extends PdfService {
     return pdf.save();
   }
 
-  @override
-  Future<Uint8List> printReceipt({required Payment payment}) {
-    throw UnimplementedError();
-  }
-
   // Future<void> savePdfFile(
   //     {required String fileName, required Uint8List byteList}) async {
   //   final output = await getExternalStorageDirectory();
@@ -315,7 +662,7 @@ class PdfServiceImp extends PdfService {
   //
 
   @override
-  Future<void> savePdfFile({required Uint8List byteList}) async{
+  Future<void> savePdfFile({required Uint8List byteList}) async {
     final blob = html.Blob([byteList], 'application/pdf');
     final url = html.Url.createObjectUrlFromBlob(blob);
 
@@ -326,12 +673,13 @@ class PdfServiceImp extends PdfService {
   }
 
   @override
-  Future<void> savePdfFile2({required String fileName, required Uint8List byteList}) async {
-      final output = await getExternalStorageDirectory();
-      var filePath = "${output!.path}/$fileName.pdf";
-      final file = File(filePath);
-      await file.writeAsBytes(byteList);
-      await OpenFile.open(filePath);
+  Future<void> savePdfFile2(
+      {required String fileName, required Uint8List byteList}) async {
+    final output = await getExternalStorageDirectory();
+    var filePath = "${output!.path}/$fileName.pdf";
+    final file = File(filePath);
+    await file.writeAsBytes(byteList);
+    await OpenFile.open(filePath);
   }
 
   // @override

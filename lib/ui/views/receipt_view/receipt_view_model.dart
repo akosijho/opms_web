@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'dart:typed_data';
 // import 'dart:ui';
@@ -7,6 +6,7 @@ import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:opmswebstaff/core/service/api/api_service.dart';
 import 'package:opmswebstaff/core/service/dialog/dialog_service.dart';
 import 'package:opmswebstaff/core/service/navigation/navigation_service.dart';
@@ -17,6 +17,7 @@ import 'package:opmswebstaff/extensions/string_extension.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:opmswebstaff/models/optical_receipt/optical_receipt.dart';
 import 'package:opmswebstaff/models/patient_model/patient_model.dart';
+import 'package:opmswebstaff/models/payment/payment.dart';
 import 'package:opmswebstaff/models/product/lens.dart';
 import 'package:opmswebstaff/models/product/product.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -26,8 +27,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pdfWidgets;
 import 'package:open_file/open_file.dart';
-
-
 
 import '../../../app/app.locator.dart';
 
@@ -42,39 +41,60 @@ class ReceiptViewModel extends BaseViewModel {
   final navigationService = locator<NavigationService>();
 
 
+  final Payment payment;
+
   GlobalKey globalKey = GlobalKey();
 
+  ReceiptViewModel(this.payment);
+
   Future<Uint8List?> captureWidget() async {
-    await Future.delayed(Duration(milliseconds: 20)); // Add a small delay
-    RenderRepaintBoundary boundary =
-    globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-    ui.Image? image = await boundary.toImage(pixelRatio: 2.0);
-    if (image != null) {
-      ByteData? byteData =
-      await image.toByteData(format: ui.ImageByteFormat.rawRgba);
-      return byteData!.buffer.asUint8List();
-    }
-    return null;
+    // await Future.delayed(Duration(milliseconds: 20)); // Add a small delay
+    // RenderRepaintBoundary boundary =
+    // globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    // ui.Image? image = await boundary.toImage();
+    // if (image != null) {
+    //   ByteData? byteData =
+    //   await image.toByteData(format: ui.ImageByteFormat.png );
+    //   return byteData!.buffer.asUint8List();
+    // }
+    // return null;
+
+    final boundary =
+        globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    final image = await boundary.toImage(pixelRatio: MediaQuery.of(Get.context!).devicePixelRatio);
+    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    return byteData!.buffer.asUint8List();
   }
 
-  Future<File?> saveAsPdf(Uint8List? imageData) async {
-    if (imageData == null) return null;
+  Future<void> saveAsPdf() async {
+    // if (imageData == null) return null;
 
-    final pdf = pdfWidgets.Document();
+    // final pdf = pdfWidgets.Document();
 
-    final image = pdfWidgets.MemoryImage(imageData);
-    pdf.addPage(pdfWidgets.Page(build: (pdfWidgets.Context context) {
-      return pdfWidgets.Image(image);
-    }));
+    // final image = pdfWidgets.MemoryImage(imageData);
+    // pdf.addPage(pdfWidgets.MultiPage(build: (pdfWidgets.Context context) =>[
+    //    pdfWidgets.Image(image)
+    // ]));
 
-    Directory tempDir = await getTemporaryDirectory();
-    String tempPath = tempDir.path;
-    String pdfPath = '$tempPath/receipt.pdf';
+    // Directory tempDir = await getTemporaryDirectory();
+    // String tempPath = tempDir.path;
+    // String pdfPath = '$tempPath/receipt.pdf';
 
-    File pdfFile = File(pdfPath);
-    await pdfFile.writeAsBytes(await pdf.save());
+    // File pdfFile = File(pdfPath);
+    // await pdfFile.writeAsBytes(await pdf.save());
 
-    return pdfFile;
+    // return pdfFile;j
+    await locator<PdfService>().printReceipt(payment: payment).then((value) {
+      final blob = html.Blob([value], 'application/pdf');
+    final url = html.Url.createObjectUrlFromBlob(blob);
+
+    final anchor = html.document.createElement('a') as html.AnchorElement;
+    anchor.href = url;
+    anchor.target = '_blank';
+    anchor.click();
+    });
+
+    
   }
 
   void openPdf(File? pdfFile) {
@@ -146,7 +166,6 @@ class ReceiptViewModel extends BaseViewModel {
   //     // fileName: patient.fullName + '-Certificate-' + certificate.date,
   //       byteList: pdf);
   // }
-
 
   // void downloadReceipt(double pixelRatio, dynamic refNo) async {
   //   screenShotController

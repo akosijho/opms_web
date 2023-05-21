@@ -20,59 +20,59 @@ class ReceiptView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ReceiptViewModel>.nonReactive(
-      viewModelBuilder: () => ReceiptViewModel(),
+      viewModelBuilder: () => ReceiptViewModel(payment),
       builder: (context, model, widget) => Scaffold(
         appBar:  showAppBar ? AppBar(
           title: Text('Payment Complete'),
         ) : null,
-        body: RepaintBoundary(
-          key: model.globalKey,
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          color: Palettes.kcBlueMain1,
+          alignment: Alignment.center,
           child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            color: Palettes.kcBlueMain1,
-            alignment: Alignment.center,
-            child: Container(
-              width: MediaQuery.of(context).size.width - 20,
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: TextButton.icon(
-                          // onPressed: () => model.downloadReceipt(
-                          //     MediaQuery.of(context).devicePixelRatio,
-                          //     payment.payment_id),
-                          onPressed: () async {
-                            Uint8List? imageData = await model.captureWidget();
-                            File? pdfFile = await model.saveAsPdf(imageData);
-                            model.openPdf(pdfFile);
-                          },
-                          icon: Icon(Icons.download),
-                          label: Text('Download pdf'),
-                          style: TextButton.styleFrom(
-                            primary: Colors.white,
-                          ),
+            width: MediaQuery.of(context).size.width - 20,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: TextButton.icon(
+                        // onPressed: () => model.downloadReceipt(
+                        //     MediaQuery.of(context).devicePixelRatio,
+                        //     payment.payment_id),
+                        onPressed: () async {
+                          // Uint8List? imageData = await model.captureWidget();
+                          await model.saveAsPdf();
+                          // model.openPdf(pdfFile);
+                        },
+                        icon: Icon(Icons.download),
+                        label: Text('Download pdf'),
+                        style: TextButton.styleFrom(
+                          primary: Colors.white,
                         ),
                       ),
-                      // Expanded(
-                      //   child: TextButton.icon(
-                      //     onPressed: () => model.downloadReceipt(
-                      //         MediaQuery.of(context).devicePixelRatio,
-                      //         payment.payment_id),
-                      //     icon: Icon(Icons.download),
-                      //     label: Text('Download pdf'),
-                      //     style: TextButton.styleFrom(
-                      //       primary: Colors.white,
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                  Container(
+                    ),
+                    // Expanded(
+                    //   child: TextButton.icon(
+                    //     onPressed: () => model.downloadReceipt(
+                    //         MediaQuery.of(context).devicePixelRatio,
+                    //         payment.payment_id),
+                    //     icon: Icon(Icons.download),
+                    //     label: Text('Download pdf'),
+                    //     style: TextButton.styleFrom(
+                    //       primary: Colors.white,
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
+                ),
+                RepaintBoundary(
+                  key: model.globalKey,
+                  child: Container(
                     color: Colors.white,
                     padding: EdgeInsets.only(left: 10, right: 10, top: 20),
                     child: ListView(
@@ -143,7 +143,7 @@ class ReceiptView extends StatelessWidget {
                                     Text(payment.opticalNoteSubTotal
                                         .toString()
                                         .toCurrency!),
-
+                
                                   ],
                                 ),
                                 separatorBuilder: (context, index) =>
@@ -378,15 +378,15 @@ class ReceiptView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  ClipPath(
-                    clipper: MultipleRoundedCurveClipper(),
-                    child: Container(
-                      height: 20,
-                      color: Colors.white,
-                    ),
+                ),
+                ClipPath(
+                  clipper: MultipleRoundedCurveClipper(),
+                  child: Container(
+                    height: 20,
+                    color: Colors.white,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
